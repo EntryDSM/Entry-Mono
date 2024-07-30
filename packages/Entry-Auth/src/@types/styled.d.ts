@@ -1,5 +1,5 @@
 import '@emotion/react';
-import { theme } from '@team-entry/design_system';
+import { theme } from '@entrydsm/design-system';
 
 type CustomTheme = typeof theme;
 

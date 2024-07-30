@@ -1,4 +1,5 @@
 {
+  "extends": "../../tsconfig.base.json",
   "compilerOptions": {
     "outDir": "./dist",
     "target": "es5",
@@ -17,7 +18,8 @@
     "isolatedModules": true,
     "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": ["src/*"],
+      "@entrydsm/design-system": ["../EntryDesignSystem/src/index.ts"]
     }
   },
   "include": ["src"]

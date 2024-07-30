@@ -2,7 +2,7 @@ import { useMutation } from 'react-query';
 import { instance } from './axios';
 import { useModal } from '@/hooks/useModal';
 import { SuccessIcon } from '@/assets/success';
-import { Button } from '@team-entry/design_system';
+import { Button } from '@entrydsm/design-system';
 import { useNavigate } from 'react-router';
 
 export interface ResetPwdRequest {

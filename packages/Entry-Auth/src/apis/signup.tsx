@@ -1,7 +1,7 @@
 import { useMutation } from 'react-query';
 import { instance } from './axios';
 import { useModal } from '@/hooks/useModal';
-import { Button, Toast } from '@team-entry/design_system';
+import { Button, Toast } from '@entrydsm/design-system';
 import { setTokens } from '@/utils/cookies';
 import { AuthResponse } from './login';
 import { SuccessIcon } from '@/assets/success';

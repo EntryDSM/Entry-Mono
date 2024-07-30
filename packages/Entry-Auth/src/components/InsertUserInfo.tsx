@@ -1,7 +1,7 @@
 import { useVerifyUserInfo } from '@/apis/verify';
 import { useToken } from '@/hooks/useToken';
 import { SubmitForm } from './SubmitForm';
-import { Button, Input, Text } from '@team-entry/design_system';
+import { Button, Input, Text } from '@entrydsm/design-system';
 import { useForm } from '@/hooks/useForm';
 import { useSignUp } from '@/apis/signup';
 import styled from '@emotion/styled';

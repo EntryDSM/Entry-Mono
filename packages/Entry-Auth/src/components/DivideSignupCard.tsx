@@ -2,7 +2,7 @@
 import React from 'react';
 import SchoolBag from '@/assets/SchoolBag';
 import styled from '@emotion/styled';
-import { Text, Button, theme, VStack } from '@team-entry/design_system';
+import { Text, Button, theme, VStack } from '@entrydsm/design-system';
 
 interface IDivideSignupCard {
   setIsStudent: React.Dispatch<React.SetStateAction<boolean>>;

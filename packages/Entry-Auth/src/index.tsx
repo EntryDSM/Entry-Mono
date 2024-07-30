@@ -1,7 +1,4 @@
-import {
-  CustomToastContainer,
-  StyledProvider,
-} from '@team-entry/design_system';
+// import { CustomToastContainer, StyledProvider } from '@entrydsm/design-system';
 import { createRoot } from 'react-dom/client';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { App } from './App';

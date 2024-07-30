@@ -1,7 +1,7 @@
 import { useOpenPopUp } from '@/apis/popup';
 import { AUTH_URL } from '@/constant/env';
 import styled from '@emotion/styled';
-import { Button, Text } from '@team-entry/design_system';
+import { Button, Text } from '@entrydsm/design-system';
 
 interface Props {
   text: string;

@@ -7,7 +7,7 @@ import { MAIN_URL } from '@/constant/env';
 import { useForm } from '@/hooks/useForm';
 import { isTruthValues } from '@/utils/isTruthValues';
 import styled from '@emotion/styled';
-import { Button, Input } from '@team-entry/design_system';
+import { Button, Input } from '@entrydsm/design-system';
 
 interface ILogin extends RedirectURL {
   isAdmin?: boolean;
@@ -57,15 +57,16 @@ export const Login = ({ redirectURL, isAdmin = false }: ILogin) => {
         <_Button
           kind="contained"
           onClick={() =>
-            (isAdmin
+            isAdmin
               ? adminLogin({
-                adminId: state.phoneNumber,
-                password: state.password,
-              })
+                  adminId: state.phoneNumber,
+                  password: state.password,
+                })
               : userLogin({
-                phoneNumber: state.phoneNumber.replace(/-/g, ''),
-                password: state.password,
-              }))}
+                  phoneNumber: state.phoneNumber.replace(/-/g, ''),
+                  password: state.password,
+                })
+          }
           margin={['top', 45]}
           color={isAdmin ? 'green' : 'orange'}
           disabled={!isTruthValues([state.phoneNumber, state.password])}

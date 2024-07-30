@@ -21,7 +21,7 @@
   "dependencies": {
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
-    "@team-entry/design_system": "^1.1.12",
+    "@entrydsm/design-system": "workspace:^",
     "axios": "^1.2.2",
     "dotenv": "^16.3.1",
     "emotion": "^11.0.0",
