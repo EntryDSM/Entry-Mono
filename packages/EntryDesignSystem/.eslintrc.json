@@ -1,0 +1,89 @@
+{
+    "env": {
+        "browser": true,
+        "es2021": true,
+        "node": true
+    },
+    "extends": [
+        "airbnb",
+        "eslint:recommended",
+        "plugin:react/recommended",
+        "plugin:prettier/recommended",
+        "plugin:@typescript-eslint/recommended",
+        "plugin:storybook/recommended"
+    ],
+    "overrides": [],
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+        "ecmaVersion": "latest",
+        "sourceType": "module"
+    },
+    "plugins": ["react", "@typescript-eslint", "prettier", "react-hooks"],
+    "rules": {
+        "import/no-extraneous-dependencies": [
+            "error",
+            {
+                "devDependencies": ["**/*.stories.*", "**/.storybook/**/*.*"],
+                "peerDependencies": true
+            }
+        ],
+        "react/react-in-jsx-scope": "off",
+        "react/require-default-props": "off",
+        "@typescript-eslint/no-empty-interface": "off",
+        "import/extensions": [
+            0,
+            "ignorePackages",
+            {
+                "": "never",
+                "js": "never",
+                "mjs": "never",
+                "jsx": "never",
+                "ts": "naver",
+                "tsx": "naver"
+            }
+        ],
+        "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx", ".tsx", ".ts"] }],
+        "react/function-component-definition": [
+            2,
+            { "namedComponents": ["arrow-function", "function-declaration"] }
+        ],
+        "react/button-has-type": [0],
+        "react/jsx-props-no-spreading": [
+            2,
+            {
+                "html": "enforce",
+                "custom": "ignore",
+                "explicitSpread": "enforce",
+                "exceptions": []
+            }
+        ],
+        "import/prefer-default-export": [0],
+        "import/no-unresolved": "off",
+        "prettier/prettier": [
+            "error",
+            {
+                "endOfLine": "auto"
+            }
+        ],
+        "no-use-before-define": "off"
+    },
+    "settings": {
+        "import/resolver": {
+            "node": {
+                "extensions": [".js", ".jsx", ".ts", ".tsx"]
+            }
+        }
+    },
+    "ignorePatterns": [
+        "build",
+        ".yarn",
+        ".github",
+        ".husky",
+        ".storybook",
+        ".pnp.cjs",
+        ".pnp.lodar.mjs",
+        "yarn.lock",
+        "lib/*",
+        "bin/*"
+    ]
+}

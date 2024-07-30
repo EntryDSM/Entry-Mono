@@ -1,5 +1,5 @@
 {
-  "name": "entry-auth",
+  "name": "@entrydsm/entry-auth",
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
