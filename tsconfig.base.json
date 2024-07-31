@@ -3,8 +3,7 @@
     "baseUrl": ".",
     "paths": {
       "@entrydsm/auth": ["./packages/Entry-Auth/src/index.tsx"],
-      "@entrydsm/design-system": ["./packages/EntryDesignSystem"],
-      "vite-project": ["./packages/vite-project"]
+      "@entrydsm/design-system": ["./packages/EntryDesignSystem"]
     },
     "target": "es5",
     "module": "esnext",
