@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node select.js",
+    "setEnv": "node copyEnv.js",
     "DSbuild": "yarn workspace @entrydsm/design-system build"
   },
   "workspaces": {
