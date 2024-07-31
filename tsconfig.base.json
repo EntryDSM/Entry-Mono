@@ -2,6 +2,7 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
+      "@entrydsm/admission": ["./packages/Entry-Auth/src/index.tsx"],
       "@entrydsm/auth": ["./packages/Entry-Auth/src/index.tsx"],
       "@entrydsm/design-system": ["./packages/EntryDesignSystem"]
     },
