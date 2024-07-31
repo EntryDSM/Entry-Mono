@@ -3,7 +3,8 @@
   "packageManager": "yarn@4.3.1",
   "private": true,
   "scripts": {
-    "start": "node select.js"
+    "start": "node select.js",
+    "DSbuild": "yarn workspace @entrydsm/design-system build"
   },
   "workspaces": {
     "packages": [
