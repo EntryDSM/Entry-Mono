@@ -2,7 +2,12 @@ import { useEffect } from 'react';
 import styled from '@emotion/styled';
 import { Text } from '@entrydsm/design-system';
 import { GetUserType } from '@/apis/application';
-import { EditUserGraduation, GetUserGraduation } from '@/apis/score';
+import {
+  EditUserBlackExam,
+  EditUserGraduation,
+  GetUserBlackExam,
+  GetUserGraduation,
+} from '@/apis/score';
 import { ISelectGradeElement, IWriteGradeElement } from '@/apis/score/type';
 import ProgressBar from './ProgressBar';
 import GradePreview from './GradePreview';
@@ -47,9 +52,11 @@ const Program = ({ current, setCurrent }: ICurrnettype) => {
   const { data: userGraduation } = GetUserGraduation();
   const { combinedMutations } = useCombineMutation();
   const { mutateAsync } = EditUserGraduation();
+  const isBlackExam = userType?.educationalStatus === 'QUALIFICATION_EXAM';
+  const { data: userBlackExam } = GetUserBlackExam(isBlackExam);
+  const { mutateAsync: editBlackExam } = EditUserBlackExam();
 
   const isGraduate = userType?.educationalStatus === 'GRADUATE';
-  const isBlackExam = userType?.educationalStatus === 'QUALIFICATION_EXAM';
   const isCommon = userType?.applicationType === 'COMMON';
   const gradeCurrent = current - 4;
   const titles = isGraduate
@@ -98,86 +105,112 @@ const Program = ({ current, setCurrent }: ICurrnettype) => {
         ];
 
   useEffect(() => {
-    userGraduation &&
-      (setWriteGradeElement({
-        absenceDayCount: userGraduation.absenceDayCount,
-        lectureAbsenceCount: userGraduation.lectureAbsenceCount,
-        latenessCount: userGraduation.latenessCount,
-        earlyLeaveCount: userGraduation.earlyLeaveCount,
-        volunteerTime: userGraduation.volunteerTime,
-        extraScore: {
-          hasCertificate: userGraduation.extraScore?.hasCertificate || false,
-          hasCompetitionPrize:
-            userGraduation.extraScore?.hasCompetitionPrize || false,
-        },
-      }),
-      setSelectGradeElement({
-        koreanGrade: isGraduate
-          ? userGraduation.koreanGrade.split('')
-          : userGraduation.koreanGrade.split('').slice(1),
-        socialGrade: isGraduate
-          ? userGraduation.koreanGrade.split('')
-          : userGraduation.socialGrade.split('').slice(1),
-        historyGrade: isGraduate
-          ? userGraduation.historyGrade.split('')
-          : userGraduation.historyGrade.split('').slice(1),
-        mathGrade: isGraduate
-          ? userGraduation.koreanGrade.split('')
-          : userGraduation.mathGrade.split('').slice(1),
-        scienceGrade: isGraduate
-          ? userGraduation.scienceGrade.split('')
-          : userGraduation.scienceGrade.split('').slice(1),
-        englishGrade: isGraduate
-          ? userGraduation.englishGrade.split('')
-          : userGraduation.englishGrade.split('').slice(1),
-        techAndHomeGrade: isGraduate
-          ? userGraduation.techAndHomeGrade.split('')
-          : userGraduation.techAndHomeGrade.split('').slice(1),
-      }));
-  }, [userGraduation]);
+    if (isBlackExam) {
+      userBlackExam &&
+        setWriteGradeElement({
+          absenceDayCount: 0,
+          lectureAbsenceCount: 0,
+          latenessCount: 0,
+          earlyLeaveCount: 0,
+          volunteerTime: 0,
+          extraScore: userBlackExam.extraScore,
+        });
+    } else {
+      userGraduation &&
+        (setWriteGradeElement({
+          absenceDayCount: userGraduation.absenceDayCount,
+          lectureAbsenceCount: userGraduation.lectureAbsenceCount,
+          latenessCount: userGraduation.latenessCount,
+          earlyLeaveCount: userGraduation.earlyLeaveCount,
+          volunteerTime: userGraduation.volunteerTime,
+          extraScore: {
+            hasCertificate: userGraduation.extraScore?.hasCertificate,
+            hasCompetitionPrize: userGraduation.extraScore?.hasCompetitionPrize,
+          },
+        }),
+        setSelectGradeElement({
+          koreanGrade: isGraduate
+            ? userGraduation.koreanGrade.split('')
+            : userGraduation.koreanGrade.split('').slice(1),
+          socialGrade: isGraduate
+            ? userGraduation.koreanGrade.split('')
+            : userGraduation.socialGrade.split('').slice(1),
+          historyGrade: isGraduate
+            ? userGraduation.historyGrade.split('')
+            : userGraduation.historyGrade.split('').slice(1),
+          mathGrade: isGraduate
+            ? userGraduation.koreanGrade.split('')
+            : userGraduation.mathGrade.split('').slice(1),
+          scienceGrade: isGraduate
+            ? userGraduation.scienceGrade.split('')
+            : userGraduation.scienceGrade.split('').slice(1),
+          englishGrade: isGraduate
+            ? userGraduation.englishGrade.split('')
+            : userGraduation.englishGrade.split('').slice(1),
+          techAndHomeGrade: isGraduate
+            ? userGraduation.techAndHomeGrade.split('')
+            : userGraduation.techAndHomeGrade.split('').slice(1),
+        }));
+    }
+  }, [userGraduation, userBlackExam]);
 
   const onNextClick = () => {
     combinedMutations(
       [
-        () =>
-          mutateAsync({
-            koreanGrade:
-              (!isGraduate ? 'X' : '') +
-              selectGradeElement.koreanGrade.join(''),
-            socialGrade:
-              (!isGraduate ? 'X' : '') +
-              selectGradeElement.socialGrade.join(''),
-            historyGrade:
-              (!isGraduate ? 'X' : '') +
-              selectGradeElement.historyGrade.join(''),
-            mathGrade:
-              (!isGraduate ? 'X' : '') + selectGradeElement.mathGrade.join(''),
-            scienceGrade:
-              (!isGraduate ? 'X' : '') +
-              selectGradeElement.scienceGrade.join(''),
-            englishGrade:
-              (!isGraduate ? 'X' : '') +
-              selectGradeElement.englishGrade.join(''),
-            techAndHomeGrade:
-              (!isGraduate ? 'X' : '') +
-              selectGradeElement.techAndHomeGrade.join(''),
-            absenceDayCount: Number(writeGradeElement.absenceDayCount),
-            lectureAbsenceCount: Number(writeGradeElement.lectureAbsenceCount),
-            latenessCount: Number(writeGradeElement.latenessCount),
-            earlyLeaveCount: Number(writeGradeElement.earlyLeaveCount),
-            volunteerTime: Number(writeGradeElement.volunteerTime),
-            extraScore: {
-              hasCertificate: writeGradeElement.extraScore.hasCertificate,
-              hasCompetitionPrize:
-                writeGradeElement.extraScore.hasCompetitionPrize,
-            },
-          }),
+        () => {
+          if (isBlackExam) {
+            return editBlackExam({
+              averageScore: Number(userBlackExam?.averageScore),
+              extraScore: {
+                hasCertificate: writeGradeElement?.extraScore.hasCertificate,
+                hasCompetitionPrize:
+                  writeGradeElement?.extraScore.hasCompetitionPrize,
+              },
+            });
+          } else {
+            return mutateAsync({
+              koreanGrade:
+                (!isGraduate ? 'X' : '') +
+                selectGradeElement.koreanGrade.join(''),
+              socialGrade:
+                (!isGraduate ? 'X' : '') +
+                selectGradeElement.socialGrade.join(''),
+              historyGrade:
+                (!isGraduate ? 'X' : '') +
+                selectGradeElement.historyGrade.join(''),
+              mathGrade:
+                (!isGraduate ? 'X' : '') +
+                selectGradeElement.mathGrade.join(''),
+              scienceGrade:
+                (!isGraduate ? 'X' : '') +
+                selectGradeElement.scienceGrade.join(''),
+              englishGrade:
+                (!isGraduate ? 'X' : '') +
+                selectGradeElement.englishGrade.join(''),
+              techAndHomeGrade:
+                (!isGraduate ? 'X' : '') +
+                selectGradeElement.techAndHomeGrade.join(''),
+              absenceDayCount: Number(writeGradeElement.absenceDayCount),
+              lectureAbsenceCount: Number(
+                writeGradeElement.lectureAbsenceCount,
+              ),
+              latenessCount: Number(writeGradeElement.latenessCount),
+              earlyLeaveCount: Number(writeGradeElement.earlyLeaveCount),
+              volunteerTime: Number(writeGradeElement.volunteerTime),
+              extraScore: {
+                hasCertificate: writeGradeElement.extraScore.hasCertificate,
+                hasCompetitionPrize:
+                  writeGradeElement.extraScore.hasCompetitionPrize,
+              },
+            });
+          }
+        },
       ],
       () =>
         setCurrent(
           !isGraduate && gradeCurrent === 3
             ? current + 2
-            : isBlackExam && gradeCurrent === 1
+            : isBlackExam && gradeCurrent === 0
               ? current + 5
               : current + 1,
         ),
@@ -197,19 +230,21 @@ const Program = ({ current, setCurrent }: ICurrnettype) => {
             </Text>
           </Title>
           <GradeWrapper>
-            <GradePreview
-              gradeCurrent={gradeCurrent}
-              selectGradeElement={selectGradeElement}
-              writeGradeElement={writeGradeElement}
-            />
-            {!isGraduate && gradeCurrent < 3 && (
+            {!isBlackExam && (
+              <GradePreview
+                gradeCurrent={gradeCurrent}
+                selectGradeElement={selectGradeElement}
+                writeGradeElement={writeGradeElement}
+              />
+            )}
+            {!isBlackExam && !isGraduate && gradeCurrent < 3 && (
               <AllSelect
                 selectGradeElement={selectGradeElement}
                 setSelectGradeElement={setSelectGradeElement}
                 current={gradeCurrent}
               />
             )}
-            {isGraduate && gradeCurrent < 4 && (
+            {!isBlackExam && isGraduate && gradeCurrent < 4 && (
               <AllSelect
                 selectGradeElement={selectGradeElement}
                 setSelectGradeElement={setSelectGradeElement}

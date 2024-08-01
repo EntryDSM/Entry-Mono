@@ -3,8 +3,8 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Header from './components/Header';
 import NotFound from './pages/NotFound';
 import ApplicationPage from './pages/Application';
-import { MAIN_URL } from './constant/env';
-// import { Cookies } from 'react-cookie';
+import { APPLY_URL, AUTH_URL, MAIN_URL } from './constant/env';
+import { Cookies } from 'react-cookie';
 
 export const Router = () => {
   useEffect(() => {
@@ -18,7 +18,7 @@ export const Router = () => {
 
   useEffect(() => {
     if (!accessToken && !refreshToken) {
-      window.location.href = 'https://auth.entrydsm.hs.kr/login?redirect_url=https://apply.entrydsm.hs.kr';
+      window.location.href = `${AUTH_URL}/login?redirect_url=${APPLY_URL}`;
     }
   }, [accessToken, refreshToken]);
 

@@ -27,7 +27,11 @@ export interface IUserPhoto {
 }
 
 export interface IUserBlackExam {
-  gedAverageScore: string;
+  averageScore: string;
+  extraScore: {
+    hasCertificate: boolean;
+    hasCompetitionPrize: boolean;
+  };
 }
 
 export interface IUserInfo {

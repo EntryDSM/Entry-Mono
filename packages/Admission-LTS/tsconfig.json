@@ -1,5 +1,4 @@
 {
-  "extends": "../../tsconfig.base.json",
   "compilerOptions": {
     "target": "ESNext",
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
@@ -23,7 +22,8 @@
     /* import 절대경로 */
     "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": ["src/*"],
+      "@entrydsm/design-system": ["../EntryDesignSystem/src/index.ts"]
     }
   },
   "include": ["src"],

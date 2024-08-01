@@ -1,9 +1,11 @@
 export interface IPatchUserBlackExam {
   averageScore: number;
+  extraScore: ExtraScore;
 }
 
 export interface IGetUserBlackExam {
   averageScore: string;
+  extraScore: ExtraScore;
 }
 
 export interface IPatchGraduation {

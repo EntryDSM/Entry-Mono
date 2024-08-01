@@ -130,7 +130,7 @@ const UserPreview = ({ current, setCurrent }: ICurrnettype) => {
         isDisabled={false}
         prevClick={
           isBlackExam
-            ? () => setCurrent(current - 6)
+            ? () => setCurrent(current - 5)
             : getUserType?.educationalStatus === 'PROSPECTIVE_GRADUATE'
               ? () => setCurrent(current - 2)
               : () => setCurrent(current - 1)

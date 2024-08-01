@@ -76,7 +76,7 @@ export default Application;
 const _Container = styled.div`
   display: flex;
   justify-content: center;
-  width: 100vw;
+  width: 100%;
 `;
 
 const _Wrapper = styled.div`
