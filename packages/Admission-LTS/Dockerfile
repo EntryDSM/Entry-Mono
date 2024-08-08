@@ -6,10 +6,12 @@ RUN apk add --no-cache libc6-compat
 
 COPY . ./
 
-RUN yarn config set "strict=ssl" false
+# Yarn Link 설정
+RUN yarn config set "strict-ssl" false \
+    && yarn workspaces run link \
+    && yarn link
 
-RUN yarn install
-#  --immutable
+RUN yarn install --immutable
 RUN yarn build
 
 FROM nginx:alpine AS runner
