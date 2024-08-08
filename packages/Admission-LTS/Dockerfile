@@ -6,10 +6,7 @@ RUN apk add --no-cache libc6-compat
 
 COPY . ./
 
-# Yarn Link 설정
-RUN yarn config set "strict-ssl" false \
-    && yarn workspaces run link \
-    && yarn link
+COPY ../EntryDesignSystem ../
 
 RUN yarn install --immutable
 RUN yarn build
