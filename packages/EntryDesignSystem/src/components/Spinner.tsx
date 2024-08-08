@@ -1,4 +1,3 @@
-import React from 'react';
 import styled from '@emotion/styled';
 import { green100, green500, orange100, orange500 } from '../style/color';
 import { marginCssType, marginToCss } from '../utils/margin';
