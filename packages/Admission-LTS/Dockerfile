@@ -37,7 +37,7 @@ WORKDIR /app
 # Linux 호환성 패키지 설치
 RUN apk add --no-cache libc6-compat
 
-# 모노레포 루트에서 package.json과 yarn.lock 파일을 복사
+# 루트의 package.json과 yarn.lock 파일을 복사
 COPY ../../package.json ../../yarn.lock ./
 
 # 모든 워크스페이스의 의존성을 설치
@@ -72,3 +72,4 @@ EXPOSE 3003
 
 # Nginx 시작
 CMD ["nginx", "-g", "daemon off;"]
+
