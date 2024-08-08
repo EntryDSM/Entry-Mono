@@ -6,6 +6,10 @@ RUN apk add --no-cache libc6-compat
 
 COPY . ./
 
+RUN pwd 
+
+RUN ls
+
 COPY ../EntryDesignSystem ../
 
 RUN yarn install --immutable
