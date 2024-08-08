@@ -1,0 +1,7 @@
+config:
+  name: entry-admission-lts
+  service_type: fe
+  port: 3003
+  domain:
+    prod: apply.entrydsm.hs.kr
+    stag: apply-stag.entrydsm.hs.kr
