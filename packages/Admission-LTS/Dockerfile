@@ -42,6 +42,7 @@ COPY package.json yarn.lock ./
 
 # 모든 워크스페이스의 의존성을 설치
 RUN yarn install --immutable
+RUN yarn DSbuild
 
 # 현재 패키지로 이동하여 소스 코드 복사
 WORKDIR /app/packages/Admission-LTS
