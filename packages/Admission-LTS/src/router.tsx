@@ -18,7 +18,7 @@ export const Router = () => {
 
   useEffect(() => {
     if (!accessToken && !refreshToken) {
-      window.location.href = `${AUTH_URL}/login?redirect_url=${APPLY_URL}`;
+      // window.location.href = `${AUTH_URL}/login?redirect_url=${APPLY_URL}`;
     }
   }, [accessToken, refreshToken]);
 
