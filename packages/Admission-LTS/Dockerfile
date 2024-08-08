@@ -7,9 +7,10 @@ RUN apk add --no-cache libc6-compat
 COPY . ./
 RUN yarn cache clean 
 
-RUN yarn set version berry
+# RUN yarn set version berry
 
-RUN yarn install --immutable
+RUN yarn install
+#  --immutable
 RUN yarn build
 
 FROM nginx:alpine AS runner
