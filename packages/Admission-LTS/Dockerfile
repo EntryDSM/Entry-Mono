@@ -46,7 +46,6 @@ RUN yarn DSbuild
 
 # 현재 패키지로 이동하여 소스 코드 복사
 WORKDIR /app/packages/Admission-LTS
-COPY packages/Admission-LTS ./
 
 # 패키지 빌드
 RUN yarn build
