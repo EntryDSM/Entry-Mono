@@ -38,14 +38,14 @@ WORKDIR /app
 RUN apk add --no-cache libc6-compat
 
 # 루트의 package.json과 yarn.lock 파일을 복사
-COPY ../../package.json ../../yarn.lock ./
+COPY package.json yarn.lock ./
 
 # 모든 워크스페이스의 의존성을 설치
 RUN yarn install --immutable
 
 # 현재 패키지로 이동하여 소스 코드 복사
 WORKDIR /app/packages/Admission-LTS
-COPY . .
+COPY packages/Admission-LTS ./
 
 # 패키지 빌드
 RUN yarn build
@@ -72,4 +72,3 @@ EXPOSE 3003
 
 # Nginx 시작
 CMD ["nginx", "-g", "daemon off;"]
-
