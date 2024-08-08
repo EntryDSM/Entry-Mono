@@ -21,3 +21,6 @@ jobs:
         with:
           environment: stag
           access_key: ${{ secrets.ADMISSION_ACCESS_KEY }}
+          base_url: packages/Admission-LTS
+          config_file_path: packages/Admission-LTS/.xquare/config.yaml
+          yarn_workspace: '@entrydsm/admission'
