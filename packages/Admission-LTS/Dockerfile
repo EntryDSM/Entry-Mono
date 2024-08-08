@@ -5,9 +5,8 @@ WORKDIR /app
 RUN apk add --no-cache libc6-compat
 
 COPY . ./
-RUN yarn cache clean 
 
-# RUN yarn set version berry
+RUN yarn config set "strict=ssl" false
 
 RUN yarn install
 #  --immutable
