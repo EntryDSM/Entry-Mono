@@ -19,7 +19,6 @@ import {
   GetUserProfile,
   GetUserType,
 } from '@/apis/application';
-import { EditUserBlackExam, GetUserBlackExam } from '@/apis/score';
 import ApplicationContent from './ApplicationContent';
 import ApplicationFooter from './ApplicationFooter';
 import Modal from '../Modal/Modal';
@@ -27,12 +26,7 @@ import { useModal } from '@/hooks/useModal';
 import { useInput } from '@/hooks/useInput';
 import { useCombineMutation } from '@/hooks/useCombineMutation';
 import { generateNumberArray } from '@/utils/GenerateNumberArray';
-import {
-  ICurrnettype,
-  IUserBlackExam,
-  IUserInfo,
-  IUserPhoto,
-} from '@/interface/type';
+import { ICurrnettype, IUserInfo, IUserPhoto } from '@/interface/type';
 import { dataURLtoFile } from '@/utils/dataURLtoFile';
 
 const UserInfo = ({ current, setCurrent }: ICurrnettype) => {
@@ -56,30 +50,17 @@ const UserInfo = ({ current, setCurrent }: ICurrnettype) => {
     photo: '',
     photoFileName: '',
   });
-  const {
-    form: blackExam,
-    setForm: setBlackExam,
-    onChange: changeBlackExam,
-  } = useInput<IUserBlackExam>({
-    averageScore: '',
-    extraScore: {
-      hasCertificate: false,
-      hasCompetitionPrize: false,
-    },
-  });
 
   const { data: userProfile } = GetUserProfile();
   const { data: getUserInfo } = GetUserInfo();
   const { data: getUserType } = GetUserType();
   const isBlackExam = getUserType?.educationalStatus === 'QUALIFICATION_EXAM';
-  const { data: getUserBlackExam } = GetUserBlackExam(isBlackExam);
 
   const inputRef = useRef<HTMLInputElement>(null);
   const { close, modalState, setModalState } = useModal();
 
   const { mutateAsync: patchUserPhoto } = EditUserPhoto();
   const { mutateAsync: patchUserInfo } = EditUserInfo();
-  const { mutateAsync: patchBlackExam } = EditUserBlackExam();
   const { combinedMutations } = useCombineMutation();
 
   const [imgFile, setImgFile] = useState<File>();
@@ -154,49 +135,24 @@ const UserInfo = ({ current, setCurrent }: ICurrnettype) => {
         photo: getUserInfo.photoPath,
         photoFileName: imgFile!,
       });
-    getUserBlackExam &&
-      setBlackExam({
-        averageScore: getUserBlackExam.averageScore,
-        extraScore: {
-          hasCertificate: getUserBlackExam.extraScore.hasCertificate,
-          hasCompetitionPrize: getUserBlackExam.extraScore.hasCompetitionPrize,
-        },
-      });
-  }, [getUserInfo, getUserBlackExam, imgFile]);
+  }, [getUserInfo, imgFile]);
 
   const isDisabled =
     Object.values(userInfo).some((item) => !!item === false) ||
-    (userPhoto.photo === 'data:image/png;base64,null' &&
-      isBlackExam === !!blackExam.averageScore);
+    userPhoto.photo === 'data:image/png;base64,null';
 
   const onNextClick = () => {
     combinedMutations(
-      isBlackExam
-        ? [
-            () =>
-              patchUserInfo({
-                ...userInfo,
-                applicantTel: userInfo.applicantTel.replace(/-/g, ''),
-                birthDate: userInfo.birthDate.join('-'),
-                parentTel: userInfo.parentTel.replace(/-/g, ''),
-              }),
-            () => patchUserPhoto({ photo: userPhoto.photoFileName as File }),
-            () =>
-              patchBlackExam({
-                averageScore: Number(blackExam.averageScore),
-                extraScore: blackExam.extraScore,
-              }),
-          ]
-        : [
-            () =>
-              patchUserInfo({
-                ...userInfo,
-                applicantTel: userInfo.applicantTel.replace(/-/g, ''),
-                birthDate: userInfo.birthDate.join('-'),
-                parentTel: userInfo.parentTel.replace(/-/g, ''),
-              }),
-            () => patchUserPhoto({ photo: userPhoto.photoFileName as File }),
-          ],
+      [
+        () =>
+          patchUserInfo({
+            ...userInfo,
+            applicantTel: userInfo.applicantTel.replace(/-/g, ''),
+            birthDate: userInfo.birthDate.join('-'),
+            parentTel: userInfo.parentTel.replace(/-/g, ''),
+          }),
+        () => patchUserPhoto({ photo: userPhoto.photoFileName as File }),
+      ],
       isBlackExam
         ? () => setCurrent(current + 2)
         : () => setCurrent(current + 1),
@@ -349,20 +305,6 @@ const UserInfo = ({ current, setCurrent }: ICurrnettype) => {
             disabled={userProfile?.isParent}
           />
         </ApplicationContent>
-
-        {isBlackExam && (
-          <ApplicationContent grid={1} title="검정고시 평균">
-            <Input
-              type="number"
-              placeholder="검정고시 평균"
-              width={230}
-              name="averageScore"
-              value={blackExam.averageScore}
-              onChange={changeBlackExam}
-              unit="점"
-            />
-          </ApplicationContent>
-        )}
 
         <ApplicationContent grid={1} title="주소">
           <VStack margin={[30, 0]} gap={10}>
