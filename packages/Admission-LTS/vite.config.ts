@@ -22,6 +22,7 @@ export default defineConfig({
     host: '0.0.0.0',
     port: 3003,
   },
+  base: './',
   resolve: {
     alias: [
       { find: '@', replacement: '/src' },

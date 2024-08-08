@@ -75,11 +75,15 @@ instance.interceptors.response.use(
                 cookie.remove('accessToken');
                 cookie.remove('refreshToken');
                 cookie.remove('authority');
-                // window.location.replace(`${AUTH_URL}/login?redirect_url=${APPLY_URL}`);
+                window.location.replace(
+                  `${AUTH_URL}/login?redirect_url=${APPLY_URL}`,
+                );
               }
             });
         } else {
-          // window.location.replace(`${AUTH_URL}/login?redirect_url=${APPLY_URL}`);
+          window.location.replace(
+            `${AUTH_URL}/login?redirect_url=${APPLY_URL}`,
+          );
         }
       } else return Promise.reject(error);
     }

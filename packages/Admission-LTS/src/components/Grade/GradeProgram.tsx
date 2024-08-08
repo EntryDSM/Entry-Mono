@@ -125,10 +125,6 @@ const Program = ({ current, setCurrent }: ICurrnettype) => {
           { step: 4, title: '출석 점수 & 봉사 점수' },
         ];
 
-  console.log(blackExamGradeElement);
-  console.log(gradeCurrent);
-  console.log(isBlackExam);
-
   useEffect(() => {
     if (isBlackExam) {
       userBlackExam &&

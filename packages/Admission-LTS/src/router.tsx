@@ -7,10 +7,10 @@ import { APPLY_URL, AUTH_URL, MAIN_URL } from './constant/env';
 import { Cookies } from 'react-cookie';
 
 export const Router = () => {
-  // useEffect(() => {
-  //   alert('원서접수가 마감되었습니다.');
-  //   window.location.href = `${MAIN_URL}`;
-  // }, []);
+  useEffect(() => {
+    alert('원서접수가 마감되었습니다.');
+    window.location.href = `${MAIN_URL}`;
+  }, []);
 
   const cookie = new Cookies();
   const refreshToken = cookie.get('refreshToken');
@@ -18,7 +18,7 @@ export const Router = () => {
 
   useEffect(() => {
     if (!accessToken && !refreshToken) {
-      // window.location.href = `${AUTH_URL}/login?redirect_url=${APPLY_URL}`;
+      window.location.href = `${AUTH_URL}/login?redirect_url=${APPLY_URL}`;
     }
   }, [accessToken, refreshToken]);
 

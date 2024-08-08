@@ -1,7 +1,7 @@
 import { Input } from '@entrydsm/design-system';
 import GradeWraper from '../GradeWraper';
 import { InputType } from '@/interface/type';
-import { IBlackExamGradeElement, IWriteGradeElement } from '@/apis/score/type';
+import { IBlackExamGradeElement } from '@/apis/score/type';
 import { EducationalStatus } from '@/apis/application/types';
 
 interface IWriteGrade {
@@ -17,9 +17,6 @@ interface IWriteGrade {
 const WriteBlackExam = ({
   writeGradeElement,
   changeWriteGradeElement,
-  setWriteGradeElement,
-  isCommon,
-  educationalStatus,
 }: IWriteGrade) => {
   return (
     <>
