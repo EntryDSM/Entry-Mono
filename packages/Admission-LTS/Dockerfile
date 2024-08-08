@@ -1,16 +1,17 @@
 FROM node:20.6-alpine AS builder
 
-WORKDIR /app
+WORKDIR /app/Admission-LTS
 
-RUN apk add --no-cache libc6-compat
+RUN apk add --no-cache libc6-compat git curl unzip
 
-COPY . ./
+ARG BRANCH
+ENV BRANCH=${BRANCH}
 
-RUN pwd 
+RUN curl -L -o ../EntryDesignSystem.zip https://github.com/EntryDSM/Entry-Mono/archive/${BRANCH}.zip && \
+    unzip ../EntryDesignSystem.zip -d ../ && \
+    mv ../Entry-Mono-${BRANCH}/packages/EntryDesignSystem ../EntryDesignSystem
 
-RUN ls
-
-COPY ../EntryDesignSystem ../
+COPY . .
 
 RUN yarn install --immutable
 RUN yarn build

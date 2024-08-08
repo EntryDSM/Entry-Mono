@@ -24,3 +24,5 @@ jobs:
           base_url: packages/Admission-LTS
           config_file_path: packages/Admission-LTS/.xquare/config.yaml
           yarn_workspace: '@entrydsm/admission'
+          buildargs: |
+            BRANCH=develop
