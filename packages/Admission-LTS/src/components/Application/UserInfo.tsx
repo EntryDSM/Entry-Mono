@@ -42,6 +42,7 @@ const UserInfo = ({ current, setCurrent }: ICurrnettype) => {
     birthDate: [(date.getFullYear() - 15).toString(), '01', '01'],
     parentName: '',
     parentTel: '',
+    parentRelation: '',
     streetAddress: '',
     detailAddress: '',
     postalCode: '',
@@ -122,6 +123,7 @@ const UserInfo = ({ current, setCurrent }: ICurrnettype) => {
         applicantName: getUserInfo.applicantName,
         parentName: getUserInfo.parentName,
         parentTel: getUserInfo.parentTel,
+        parentRelation: getUserInfo.parentRelation,
         postalCode: getUserInfo.postalCode,
         detailAddress: getUserInfo.detailAddress,
         sex: getUserInfo.sex,
@@ -277,16 +279,26 @@ const UserInfo = ({ current, setCurrent }: ICurrnettype) => {
           />
         </ApplicationContent>
 
-        <ApplicationContent grid={1} title="보호자명">
-          <Input
-            type="text"
-            placeholder="보호자명"
-            width={230}
-            name="parentName"
-            value={userInfo.parentName}
-            onChange={changeUserInfo}
-            disabled={userProfile?.isParent}
-          />
+        <ApplicationContent grid={2} title="보호자명" gap={30}>
+          <_InputBox>
+            <Input
+              type="text"
+              placeholder="보호자명"
+              width={230}
+              name="parentName"
+              value={userInfo.parentName}
+              onChange={changeUserInfo}
+              disabled={userProfile?.isParent}
+            />
+            <Input
+              type="text"
+              placeholder="관계"
+              width={220}
+              name="parentRelation"
+              value={userInfo.parentRelation}
+              onChange={changeUserInfo}
+            />
+          </_InputBox>
         </ApplicationContent>
 
         <ApplicationContent
@@ -395,4 +407,9 @@ const Img = styled.img`
 
 const _ApplicationImgInput = styled.input`
   display: none;
+`;
+
+const _InputBox = styled.div`
+  display: flex;
+  gap: 30px;
 `;

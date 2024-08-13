@@ -10,6 +10,7 @@ interface ApplicationContentProps {
   placeholder?: string;
   bottomPlaceholder?: string;
   children: ReactNode;
+  gap?: number;
 }
 
 const ApplicationContent = ({
@@ -20,6 +21,7 @@ const ApplicationContent = ({
   placeholder,
   bottomPlaceholder,
   children,
+  gap,
 }: ApplicationContentProps) => {
   return (
     <_ApplicationContent width={width}>
@@ -30,7 +32,7 @@ const ApplicationContent = ({
         >
           {title}
           {required && <_RequiredStar> *</_RequiredStar>}
-        </_ApplicationTitle>
+        </_ApplicationTitle>{' '}
         {children}
       </_ApplicationGridbox>
       <div>

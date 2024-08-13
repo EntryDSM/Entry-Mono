@@ -34,6 +34,7 @@ export interface IUserInfo {
   birthDate: string[];
   parentName: string;
   parentTel: string;
+  parentRelation: string;
   streetAddress: string;
   detailAddress: string;
   postalCode: string;
