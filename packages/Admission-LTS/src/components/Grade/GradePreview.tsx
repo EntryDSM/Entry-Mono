@@ -55,7 +55,7 @@ const GradePreview = ({
 
   return (
     <CurrentGrades>
-      <Text size="body2" color="black" style={{ fontWeight: 700 }}>
+      <Text size="body2" color="realBlack" style={{ fontWeight: 700 }}>
         총:{' '}
         {score.gradeScore +
           score.attendenceScore +
@@ -63,16 +63,16 @@ const GradePreview = ({
           score.extraScore}
         /{score.maxScore}
       </Text>
-      <Text size="body2" color="black" style={{ fontWeight: 500 }}>
+      <Text size="body2" color="realBlack" style={{ fontWeight: 500 }}>
         성적 점수: {score.gradeScore}/{score.maxScore - 30}
       </Text>
-      <Text size="body2" color="black" style={{ fontWeight: 500 }}>
+      <Text size="body2" color="realBlack" style={{ fontWeight: 500 }}>
         출석 점수: {score.attendenceScore}/15
       </Text>
-      <Text size="body2" color="black" style={{ fontWeight: 500 }}>
+      <Text size="body2" color="realBlack" style={{ fontWeight: 500 }}>
         봉사 점수: {score.volunteerScore}/15
       </Text>
-      <Text size="body2" color="black" style={{ fontWeight: 500 }}>
+      <Text size="body2" color="realBlack" style={{ fontWeight: 500 }}>
         가산점 : +{score.extraScore}
       </Text>
     </CurrentGrades>
