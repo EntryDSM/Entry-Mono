@@ -1,0 +1,28 @@
+on:
+  push:
+    branches:
+      - develop
+    paths:
+      - 'packages/Admission-LTS/**'
+
+jobs:
+  build:
+    permissions:
+      id-token: write
+      contents: read
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check Out The Repository
+        uses: actions/checkout@v3
+
+      - name: Deploy to xquare
+        uses: team-xquare/xquare-deployment-action@master
+        with:
+          environment: stag
+          access_key: ${{ secrets.ADMISSION_ACCESS_KEY }}
+          base_url: packages/Admission-LTS
+          config_file_path: packages/Admission-LTS/.xquare/config.yaml
+          yarn_workspace: '@entrydsm/admission'
+          buildargs: |
+            BRANCH=develop

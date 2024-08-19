@@ -1,4 +1,4 @@
-import React, { FunctionComponent, HTMLAttributes } from 'react';
+import { FunctionComponent, HTMLAttributes } from 'react';
 import styled from '@emotion/styled';
 import { marginCssType, marginToCss, marginType } from '../utils/margin';
 import * as C from '../style/color';
