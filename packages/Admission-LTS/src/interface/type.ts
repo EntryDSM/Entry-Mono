@@ -16,7 +16,8 @@ export interface ICurrnettype {
   setCurrent: React.Dispatch<React.SetStateAction<number>>;
 }
 
-export interface IUserTypeParams extends Omit<IPatchUserType, 'graduateDate' | 'educationalStatus'> {
+export interface IUserTypeParams
+  extends Omit<IPatchUserType, 'graduateDate' | 'educationalStatus'> {
   graduateDate: string[];
   educationalStatus: EducationalStatus | '';
 }
@@ -26,14 +27,6 @@ export interface IUserPhoto {
   photoFileName: File | string;
 }
 
-export interface IUserBlackExam {
-  averageScore: string;
-  extraScore: {
-    hasCertificate: boolean;
-    hasCompetitionPrize: boolean;
-  };
-}
-
 export interface IUserInfo {
   applicantName: string;
   applicantTel: string;
@@ -41,6 +34,7 @@ export interface IUserInfo {
   birthDate: string[];
   parentName: string;
   parentTel: string;
+  parentRelation: string;
   streetAddress: string;
   detailAddress: string;
   postalCode: string;

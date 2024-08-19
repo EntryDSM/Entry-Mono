@@ -1,6 +1,6 @@
 {
   "name": "entry-mono",
-  "packageManager": "yarn@4.3.1",
+  "packageManager": "yarn@4.4.0",
   "private": true,
   "scripts": {
     "start": "node select.js",
