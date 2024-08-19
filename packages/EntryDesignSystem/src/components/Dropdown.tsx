@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { black100, black200, black300, black400, black900 } from '../style/color';
 import { marginCssType, marginToCss, marginType } from '../utils/margin';
 import { Icon } from './Icon';
