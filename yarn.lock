@@ -2299,7 +2299,7 @@ __metadata:
     "@emotion/css": "npm:^11.11.0"
     "@emotion/react": "npm:^11.11.0"
     "@emotion/styled": "npm:^11.11.0"
-    "@entrydsm/design-system": "workspace:^"
+    "@entrydsm/design-system": "file:../EntryDesignSystem"
     "@react-pdf/renderer": "npm:^3.1.12"
     "@tanstack/react-query": "npm:^4.29.13"
     "@types/node": "npm:^22.0.0"
@@ -2395,6 +2395,19 @@ __metadata:
     webpack-merge: "npm:^5.8.0"
   languageName: unknown
   linkType: soft
+
+"@entrydsm/design-system@file:../EntryDesignSystem::locator=%40entrydsm%2Fadmission%40workspace%3Apackages%2FAdmission-LTS":
+  version: 1.1.18
+  resolution: "@entrydsm/design-system@file:../EntryDesignSystem#../EntryDesignSystem::hash=b4612e&locator=%40entrydsm%2Fadmission%40workspace%3Apackages%2FAdmission-LTS"
+  dependencies:
+    "@emotion/react": "npm:^11.10.5"
+    "@emotion/styled": "npm:^11.10.5"
+    react: "npm:^18.2.0"
+    react-dom: "npm:^18.2.0"
+    react-toastify: "npm:^9.1.3"
+  checksum: 10c0/33b1829921348efdd795c65c30368472e43042ae060e941f72a34c1642d124a637e307131b511f3dfadcbd59a1112f48f7f7834b8ed918e86c8d9937497b260a
+  languageName: node
+  linkType: hard
 
 "@entrydsm/design-system@workspace:^, @entrydsm/design-system@workspace:packages/EntryDesignSystem":
   version: 0.0.0-use.local
