@@ -24,6 +24,7 @@ const UserMiddleSchool = ({ current, setCurrent }: ICurrnettype) => {
       studentNumber: ['', '', ''],
       schoolCode: '',
       teacherName: '',
+      teacherTel: '',
     });
   const { form: schoolName, setForm: setSchoolName } = useInput('');
 
@@ -55,6 +56,7 @@ const UserMiddleSchool = ({ current, setCurrent }: ICurrnettype) => {
           ? data.schoolCode
           : userMiddleSchool.schoolCode,
         teacherName: data.teacherName,
+        teacherTel: data.teacherTel,
       });
       setSchoolName(data.schoolName);
     }
@@ -112,9 +114,19 @@ const UserMiddleSchool = ({ current, setCurrent }: ICurrnettype) => {
     setUserMiddleSchool((prev) => ({ ...prev, teacherName: old }));
   };
 
-  const isDisabled = Object.values(userMiddleSchool).some(
-    (item) => !!item === false,
-  );
+  const onChangeTeacherTel = (e: InputType) => {
+    const old = e.currentTarget.value;
+    setUserMiddleSchool((prev) => ({ ...prev, teacherTel: old }));
+  };
+
+  useEffect(() => {
+    console.log(userMiddleSchool.teacherTel);
+    console.log(!!userMiddleSchool.studentNumber.join('') === false);
+  }, [userMiddleSchool]);
+
+  const isDisabled =
+    Object.values(userMiddleSchool).some((item) => !!item === false) ||
+    userMiddleSchool.studentNumber.some((item) => !!item === false);
 
   const onNextClick = () => {
     combinedMutations(
@@ -125,6 +137,7 @@ const UserMiddleSchool = ({ current, setCurrent }: ICurrnettype) => {
             gradeNumber: parseInt(userMiddleSchool.studentNumber[0]),
             classNumber: parseInt(userMiddleSchool.studentNumber[1]),
             studentNumber: userMiddleSchool.studentNumber[2],
+            teacherTel: userMiddleSchool.teacherTel.replace(/-/g, ''),
           }),
       ],
       () => setCurrent(current + 1),
@@ -160,6 +173,15 @@ const UserMiddleSchool = ({ current, setCurrent }: ICurrnettype) => {
             value={userMiddleSchool.teacherName}
             width={230}
             onChange={onChangeTeacherName}
+          />
+        </ApplicationContent>
+        <ApplicationContent grid={1} title="교사 연락처">
+          <Input
+            name="teacherTel"
+            type="tel"
+            value={userMiddleSchool.teacherTel}
+            width={230}
+            onChange={onChangeTeacherTel}
           />
         </ApplicationContent>
         <ApplicationContent
