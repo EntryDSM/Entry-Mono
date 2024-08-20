@@ -6,7 +6,12 @@ const questions = [
     type: 'list',
     name: 'file',
     message: 'Whats the project you want to run?:',
-    choices: ['Admission-LTS', 'Entry-Auth', 'EntryDesignSystem'],
+    choices: [
+      'Admission-Admin-LTS',
+      'Admission-LTS',
+      'Entry-Auth',
+      'EntryDesignSystem',
+    ],
   },
 ];
 
@@ -22,6 +27,9 @@ inquirer.prompt(questions).then((answers) => {
   } else if (answers.file === 'Admission-LTS') {
     command = 'yarn';
     args = ['workspace', '@entrydsm/admission', 'run', 'dev'];
+  } else if (answers.file === 'Admission-Admin-LTS') {
+    command = 'yarn';
+    args = ['workspace', '@entrydsm/admin', 'run', 'dev'];
   }
 
   const child = spawn(command, args, { shell: true });
