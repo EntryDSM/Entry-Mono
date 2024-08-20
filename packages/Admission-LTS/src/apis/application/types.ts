@@ -90,6 +90,7 @@ export interface IUserMiddleSchool {
     studentNumber: string;
   };
   teacherName: string;
+  teacherTel: string;
 }
 
 export interface IPatchUserIntroduce {

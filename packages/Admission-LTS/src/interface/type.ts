@@ -45,12 +45,14 @@ export interface IPatchUserMiddleSchool {
   classNumber: number;
   studentNumber: string;
   schoolCode: string;
+  teacherTel: string;
 }
 
 export interface IUserMiddleSchool {
   studentNumber: string[];
   schoolCode: string;
   teacherName: string;
+  teacherTel: string;
 }
 
 export interface IUserMiddleSchoolName {
