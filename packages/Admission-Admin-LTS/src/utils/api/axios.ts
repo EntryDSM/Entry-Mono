@@ -4,7 +4,7 @@ import { ReissueToken } from './user';
 import { ADMIN_URL, AUTH_URL } from '@/constant/env';
 
 export const instance = axios.create({
-  baseURL: import.meta.env.VITE_BASE_URL,
+  baseURL: import.meta.env.VITE_SERVER_URL,
   timeout: 10000,
 });
 
