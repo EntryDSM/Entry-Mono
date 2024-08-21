@@ -17,7 +17,7 @@
     "@entrydsm/design-system": "file:../EntryDesignSystem",
     "@react-pdf/pdfkit": "^3.1.10",
     "@react-pdf/renderer": "^3.4.4",
-    "@tanstack/react-query": "^5.51.24",
+    "@tanstack/react-query": "^4.29.13",
     "axios": "^1.7.4",
     "file-saver": "^2.0.5",
     "html2canvas": "^1.4.1",
