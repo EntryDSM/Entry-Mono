@@ -7,10 +7,12 @@ import { APPLY_URL, AUTH_URL, MAIN_URL } from './constant/env';
 import { Cookies } from 'react-cookie';
 
 export const Router = () => {
-  // useEffect(() => {
-  //   alert('원서접수가 마감되었습니다.');
-  //   window.location.href = `${MAIN_URL}`;
-  // }, []);
+  useEffect(() => {
+    if(!window.location.hostname.includes('stag') && !window.location.hostname.includes('localhost')) {
+      alert('원서접수가 마감되었습니다.');
+      window.location.href = `${MAIN_URL}`;
+    }
+  }, []);
 
   const cookie = new Cookies();
   const refreshToken = cookie.get('refreshToken');

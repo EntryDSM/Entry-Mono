@@ -6,13 +6,13 @@ import { useAuthority } from '@/hooks/useAuthority';
 
 const NewAdmissionPage = () => {
   const note = [
-    '① 등기우편 접수는 제출 마감일 우체국 소인까지 인정',
+    '1. 등기우편 접수는 제출 마감일 우체국 소인까지 인정',
 
-    '② 합격자 등록은 입학동의서 제출로 대신함',
+    '2. 합격자 등록은 입학동의서 제출로 대신함',
 
-    '③ 원서는 전형의 구분과 상관없이 단일 지원이 원칙임',
+    '3. 원서는 전형의 구분과 상관없이 단일 지원이 원칙임',
 
-    '④ 전형 일정은 추후 변경될 수 있음',
+    '4. 전형 일정은 추후 변경될 수 있음',
   ];
   const newStudentSchedule = [
     {
@@ -25,7 +25,11 @@ const NewAdmissionPage = () => {
       schedule: '2024.10.14.(월)~10.17.(목) 17:00',
       location: '본교 접수처 또는 등기우편',
     },
-    { title: '1차 전형 합격자 발표', schedule: '2024.10.21.(월) 15:00', location: '원서접수 사이트' },
+    {
+      title: '1차 전형 합격자 발표',
+      schedule: '2024.10.21.(월) 15:00',
+      location: '원서접수 사이트',
+    },
     {
       title: '2차 전형(심층면접 등)',
       schedule: '2024.10.25.(금) 09:00',
@@ -50,7 +54,8 @@ const NewAdmissionPage = () => {
   const { isAdmin } = useAuthority();
 
   const DownLoad = () => {
-    const pdfUrl = 'https://dsmhs.djsch.kr/boardCnts/fileDown.do?fileSeq=7cc282c62941f5b4e314530b378dc812';
+    const pdfUrl =
+      'https://dsmhs.djsch.kr/boardCnts/fileDown.do?fileSeq=7cc282c62941f5b4e314530b378dc812';
     window.open(pdfUrl);
   };
 
@@ -199,7 +204,8 @@ const _Icon = styled.div<{ isAdmin: boolean }>`
   justify-content: center;
   width: 2rem;
   height: 2rem;
-  background-color: ${({ isAdmin }) => (isAdmin ? theme.color.green500 : theme.color.orange500)};
+  background-color: ${({ isAdmin }) =>
+    isAdmin ? theme.color.green500 : theme.color.orange500};
   border-radius: 50%;
 `;
 

@@ -122,7 +122,6 @@ const GradeProgramPage = () => {
             dsmAlgorithmScore: dsmAlgorithmScore,
             qualificationExamScore: getQualificationExamScore(writeGradeElement),
           };
-
     setScore(newScore);
   }, [current, writeGradeElement, blackexam, gradeStatus, selectGradeElement]);
 
@@ -224,14 +223,14 @@ export default GradeProgramPage;
 const Container = styled.div`
   display: flex;
   justify-content: center;
-  width: 100vw;
+  width: 100%;
 `;
 
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 60rem;
+  width: 64rem;
   margin-top: 5rem;
 `;
 
