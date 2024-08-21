@@ -4,8 +4,11 @@ import { useEffect } from 'react';
 export const Pass = () => {
   const moduleToken = getQueryValues().get('mdl_tkn');
   function request() {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
-    document.form1.submit();
+    const form = document.forms.namedItem('form1');
+    if (form) {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
+      form.submit;
+    }
   }
 
   useEffect(() => {

@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "types": ["node"],
+    "types": ["vite/client", "jest"],
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"]

@@ -3,7 +3,6 @@ import { useVerifyUserInfo } from '@/apis/verify';
 import { AuthTemplate } from '@/components/AuthTemplate';
 import DivideSignup from '@/components/DivideSignup';
 import { InsertUserInfo } from '@/components/InsertUserInfo';
-import { OnAuthorization } from '@/components/OnAuthorization';
 import { useToken } from '@/hooks/useToken';
 import { removeLocalStorageItem } from '@/utils/localstorage';
 import { useEffect, useMemo, useState } from 'react';
