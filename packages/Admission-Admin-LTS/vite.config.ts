@@ -5,14 +5,18 @@ import path from 'path';
 
 export default defineConfig({
   plugins: [react(), tsconfigPaths()],
-  resolve: {
-    alias: {
-      '@': '/src',
-    },
-  },
   base: './',
   server: {
     port: 3001,
+  },
+  resolve: {
+    alias: {
+      '@': path.resolve(process.cwd(), './src'),
+      '@entrydsm/design-system': path.resolve(__dirname, '../EntryDesignSystem/src/index.ts'),
+    },
+  },
+  build: {
+    outDir: 'build',
   },
 });
 

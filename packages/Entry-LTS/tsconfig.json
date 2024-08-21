@@ -20,7 +20,8 @@
     "paths": {
       "@/*": ["./src/*"],
       "@entrydsm/design-system": ["../EntryDesignSystem/src/index.ts"]
-    }
+    },
+    "outDir": "build"
   },
   "typeRoots": ["node_modules/@types", "src/@types"],
   "exclude": ["node_modules", "build", "scripts", "config/webpack", "src/setupTests.ts", "./node_modules/**/*"],

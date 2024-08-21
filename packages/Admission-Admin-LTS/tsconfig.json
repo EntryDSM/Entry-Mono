@@ -21,7 +21,8 @@
       "@/*": ["src/*"],
       "assets/*": ["src/assets/*"],
       "@entrydsm/design-system": ["../EntryDesignSystem/src/index.ts"]
-    }
+    },
+    "outDir": "build"
   },
   "include": ["src"],
   "references": [{ "path": "./tsconfig.node.json" }]
