@@ -94,7 +94,7 @@ export interface ISpecialScoreDistribution {
   // '33-45': number;
   // '20-32': number;
   // '-19': number;
-  application_type: 'MEISTER' | 'SOCIAL';
+  applicationType: 'MEISTER' | 'SOCIAL';
   daejeon: boolean;
 }
 
