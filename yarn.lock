@@ -2462,27 +2462,27 @@ __metadata:
 
 "@entrydsm/design-system@file:../EntryDesignSystem::locator=%40entrydsm%2Fadmin%40workspace%3Apackages%2FAdmission-Admin-LTS":
   version: 1.1.18
-  resolution: "@entrydsm/design-system@file:../EntryDesignSystem#../EntryDesignSystem::hash=382d6e&locator=%40entrydsm%2Fadmin%40workspace%3Apackages%2FAdmission-Admin-LTS"
+  resolution: "@entrydsm/design-system@file:../EntryDesignSystem#../EntryDesignSystem::hash=01baee&locator=%40entrydsm%2Fadmin%40workspace%3Apackages%2FAdmission-Admin-LTS"
   dependencies:
     "@emotion/react": "npm:^11.13.0"
     "@emotion/styled": "npm:^11.13.0"
     react: "npm:^18.3.1"
     react-dom: "npm:^18.3.1"
     react-toastify: "npm:^9.1.3"
-  checksum: 10c0/f7c788365ed480bb98f3af86a0ab3df03588e589e6274e004c1d31a1ff269963c82f2e68bc8fc343ab0548517ec31e1780b61ce8c17a004103241338da1cd10d
+  checksum: 10c0/56b72c481466adc591c9cf522a9b240a0896daf1f36ed86f7386e8ab3dad84d3b2707acc7512a9730625ca73ccab8d440fc38172232ab6e7bcf7b97d23d458d8
   languageName: node
   linkType: hard
 
 "@entrydsm/design-system@file:../EntryDesignSystem::locator=%40entrydsm%2Fadmission%40workspace%3Apackages%2FAdmission-LTS":
   version: 1.1.18
-  resolution: "@entrydsm/design-system@file:../EntryDesignSystem#../EntryDesignSystem::hash=382d6e&locator=%40entrydsm%2Fadmission%40workspace%3Apackages%2FAdmission-LTS"
+  resolution: "@entrydsm/design-system@file:../EntryDesignSystem#../EntryDesignSystem::hash=01baee&locator=%40entrydsm%2Fadmission%40workspace%3Apackages%2FAdmission-LTS"
   dependencies:
     "@emotion/react": "npm:^11.13.0"
     "@emotion/styled": "npm:^11.13.0"
     react: "npm:^18.3.1"
     react-dom: "npm:^18.3.1"
     react-toastify: "npm:^9.1.3"
-  checksum: 10c0/f7c788365ed480bb98f3af86a0ab3df03588e589e6274e004c1d31a1ff269963c82f2e68bc8fc343ab0548517ec31e1780b61ce8c17a004103241338da1cd10d
+  checksum: 10c0/56b72c481466adc591c9cf522a9b240a0896daf1f36ed86f7386e8ab3dad84d3b2707acc7512a9730625ca73ccab8d440fc38172232ab6e7bcf7b97d23d458d8
   languageName: node
   linkType: hard
 
