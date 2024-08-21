@@ -3,7 +3,7 @@ import { instance } from './axios';
 import { useToken } from '@/hooks/useToken';
 
 export const useOpenPopUp = () => {
-  const { setToken, clearToken } = useToken();
+  const { setToken } = useToken();
 
   const openPopUp = useMutation(
     (redirectUrl: string) =>
