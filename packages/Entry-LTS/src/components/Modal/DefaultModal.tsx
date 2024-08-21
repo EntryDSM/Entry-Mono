@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import { Button, Text, theme } from '@entrydsm/design-system';
-import { colorKeyOfType } from '@entrydsm/design-system/build/style/color';
+import { colorKeyOfType } from '@entrydsm/design-system';
 import { ReactNode } from 'react';
 
 interface IDefaultModal {

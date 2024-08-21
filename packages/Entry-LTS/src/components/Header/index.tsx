@@ -260,7 +260,7 @@ const Header = () => {
                       <Link to="/mypage">
                         <Text
                           size="body1"
-                          color={location.pathname.includes('/mypage') ? `${authorityColor}500` : '#494949'}
+                          color={location.pathname.includes('/mypage') ? `${authorityColor}500` : 'black700'}
                         >
                           마이페이지
                         </Text>
