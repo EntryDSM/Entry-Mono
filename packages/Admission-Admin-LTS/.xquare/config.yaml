@@ -1,0 +1,7 @@
+config:
+  name: entry-admission-admin-lts
+  service_type: fe
+  port: 3001
+  domain:
+    prod: admin.entrydsm.hs.kr
+    stag: admin-stag.entrydsm.hs.kr
