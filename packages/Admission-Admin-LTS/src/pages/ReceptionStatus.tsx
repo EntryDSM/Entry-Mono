@@ -100,13 +100,13 @@ function ReceptionStatus() {
               대전
             </Text>
             <Text color="black900" size="title3">
-              일반전형: {+(daejeonCommon / (applicationCountData?.[0]?.count ?? 25)).toFixed(2)} : 1
+              일반전형: {+(daejeonCommon / (applicationCountData?.[1]?.count ?? 25)).toFixed(2)} : 1
             </Text>
             <Text color="black900" size="title3">
-              마이스터 전형: {+(daejeonMeister / (applicationCountData?.[1]?.count ?? 6)).toFixed(2)} : 1
+              마이스터 전형: {+(daejeonMeister / (applicationCountData?.[3]?.count ?? 6)).toFixed(2)} : 1
             </Text>
             <Text color="black900" size="title3">
-              사회통합 전형: {+(daejeonSocial / (applicationCountData?.[4]?.count ?? 1)).toFixed(2)} : 1
+              사회통합 전형: {+(daejeonSocial / (applicationCountData?.[5]?.count ?? 1)).toFixed(2)} : 1
             </Text>
           </_CompetitionRate>
           <_CompetitionRate>
@@ -114,13 +114,13 @@ function ReceptionStatus() {
               전국
             </Text>
             <Text color="black900" size="title3">
-              일반전형: {+(everyCommon / (applicationCountData?.[3]?.count ?? 25)).toFixed(2)} : 1
+              일반전형: {+(everyCommon / (applicationCountData?.[2]?.count ?? 25)).toFixed(2)} : 1
             </Text>
             <Text color="black900" size="title3">
-              마이스터 전형: {+(everyMeister / (applicationCountData?.[2]?.count ?? 6)).toFixed(2)} : 1
+              마이스터 전형: {+(everyMeister / (applicationCountData?.[4]?.count ?? 6)).toFixed(2)} : 1
             </Text>
             <Text color="black900" size="title3">
-              사회통합 전형: {+(everySocial / (applicationCountData?.[5]?.count ?? 1)).toFixed(2)} : 1
+              사회통합 전형: {+(everySocial / (applicationCountData?.[6]?.count ?? 1)).toFixed(2)} : 1
             </Text>
           </_CompetitionRate>
         </div>
@@ -132,20 +132,20 @@ function ReceptionStatus() {
         <CommonScoreCard
           title="일반 전형"
           ranges={['158~170', '145~157', '132~144', '119~131', '106~118', '93-105', '80-92', '-70']}
-          daejeonRanges={staticsScoreData?.[1]}
-          nationWideRanges={staticsScoreData?.[0]}
+          daejeonRanges={staticsScoreData?.[0]}
+          nationWideRanges={staticsScoreData?.[1]}
         />
         <SpecialScoreCard
           title="마이스터 전형"
           ranges={['98-110', '85-97', '72-84', '59-71', '46-58', '33-45', '20-32', '-19']}
-          daejeonRanges={staticsScoreData?.[3]}
-          nationWideRanges={staticsScoreData?.[2]}
+          daejeonRanges={staticsScoreData?.[2]}
+          nationWideRanges={staticsScoreData?.[3]}
         />
         <SpecialScoreCard
           title="사회통합 전형"
           ranges={['98-110', '85-97', '72-84', '59-71', '46-58', '33-45', '20-32', '-19']}
-          daejeonRanges={staticsScoreData?.[5]}
-          nationWideRanges={staticsScoreData?.[4]}
+          daejeonRanges={staticsScoreData?.[4]}
+          nationWideRanges={staticsScoreData?.[5]}
         />
       </div>
     </_Wrapper>
