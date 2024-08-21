@@ -32,7 +32,8 @@ export const getQualificationExamScore = (writeGradeElement: IWriteGradeElement)
 
   const averageScore = totalScore / scores.length;
 
-  return Math.round(averageScore * 10) / 10;
+  // return Math.round(averageScore * 10) / 10;
+  return averageScore
 };
 
 /**성적산출 최고 점수 */
