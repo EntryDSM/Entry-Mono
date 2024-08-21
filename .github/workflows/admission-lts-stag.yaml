@@ -23,6 +23,10 @@ jobs:
           access_key: ${{ secrets.ADMISSION_ACCESS_KEY }}
           base_url: packages/Admission-LTS
           config_file_path: packages/Admission-LTS/.xquare/config.yaml
-          yarn_workspace: '@entrydsm/admission'
           buildargs: |
             BRANCH=develop
+            VITE_MAIN_URL=${{ secrets.STAG_VITE_MAIN_URL }}
+            VITE_AUTH_URL=${{ secrets.STAG_VITE_AUTH_URL }}
+            VITE_APPLY_URL=${{ secrets.STAG_VITE_APPLY_URL }}
+            VITE_ADMIN_URL=${{ secrets.STAG_VITE_ADMIN_URL }}
+            VITE_SERVER_URL=${{ secrets.STAG_VITE_SERVER_URL }}

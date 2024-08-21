@@ -1,0 +1,32 @@
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'packages/Admission-Admin-LTS/**'
+
+jobs:
+  build:
+    permissions:
+      id-token: write
+      contents: read
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check Out The Repository
+        uses: actions/checkout@v3
+
+      - name: Deploy to xquare
+        uses: team-xquare/xquare-deployment-action@master
+        with:
+          environment: prod
+          access_key: ${{ secrets.ADMISSION_ADMIN_ACCESS_KEY }}
+          base_url: packages/Admission-Admin-LTS
+          config_file_path: packages/Admission-Admin-LTS/.xquare/config.yaml
+          buildargs: |
+            BRANCH=main
+            VITE_MAIN_URL=${{ secrets.PROD_VITE_MAIN_URL }}
+            VITE_AUTH_URL=${{ secrets.PROD_VITE_AUTH_URL }}
+            VITE_APPLY_URL=${{ secrets.PROD_VITE_APPLY_URL }}
+            VITE_ADMIN_URL=${{ secrets.PROD_VITE_ADMIN_URL }}
+            VITE_SERVER_URL=${{ secrets.PROD_VITE_SERVER_URL }}
