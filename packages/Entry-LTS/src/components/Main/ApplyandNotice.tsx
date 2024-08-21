@@ -157,11 +157,11 @@ const ApplyandNotice = () => {
           </Link>
         </_Title2>
         <_NoticeBox>
-          <_MainNoticeBox>
+          <_MainNoticeBox onClick={DownLoad}>
             <_MainNotificationIcon>
               <_Img src={Notification} />
             </_MainNotificationIcon>
-            <_MainNotificationText onClick={DownLoad}>
+            <_MainNotificationText>
               신입생 전형 요강 PDF 파일 다운로드
             </_MainNotificationText>
             <_Img src={Download2} />
