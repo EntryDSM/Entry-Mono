@@ -36,7 +36,7 @@ export default defineConfig({
     ],
   },
   build: {
-    outDir: 'dist',
+    outDir: 'build',
     chunkSizeWarningLimit: 3500,
   },
 });
