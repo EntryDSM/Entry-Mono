@@ -26,7 +26,7 @@ const headText = ['접수번호', '이름', '지역', '전형', '원서 도착 �
 const ApplicantsList = () => {
   const [filter, setFilter] = useState<IApplicationListRequest>({
     size: 10,
-    page: 0,
+    offset: 0,
     isDaejeon: false,
     isNationwide: false,
     isSubmitted: false,
@@ -57,7 +57,7 @@ const ApplicantsList = () => {
   const { mutate: admission_ticket_excel } = getAdmissionTicket();
   const { mutate: change_arrived_status } = changeArrivedStatus();
   const { mutate: applicants_check } = getApplicantsCheck();
-  const { data: pdfApplicatnsInfo } = getPdfApplicatnsInfo();
+  // const { data: pdfApplicatnsInfo } = getPdfApplicatnsInfo();
   const { mutate: applicants_code_execl } = getApplicantsCodeExecl();
 
   useEffect(() => {
@@ -99,7 +99,7 @@ const ApplicantsList = () => {
           <Button color="green" onClick={applicants_code_execl}>
             지원자 코드 목록 Excel
           </Button>
-          <PDFDownloadLink
+          {/* <PDFDownloadLink
             document={<Introduce pdfApplicatnsInfo={pdfApplicatnsInfo} />}
             fileName="자기소개서&학업계획서.pdf"
           >
@@ -110,7 +110,7 @@ const ApplicantsList = () => {
             >
               자소서 & 학업계획서 pdf
             </Button>
-          </PDFDownloadLink>
+          </PDFDownloadLink> */}
         </div>
       </Stack>
       <Text color="black900" size="title2" margin={[8, 0, 8, 0]}>

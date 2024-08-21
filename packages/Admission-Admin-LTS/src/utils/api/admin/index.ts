@@ -16,7 +16,7 @@ const router = 'admin';
 /** 지원자 목록 */
 export const getApplicationList = ({
   size,
-  page,
+  offset,
   isDaejeon,
   isNationwide,
   isSubmitted,
@@ -32,7 +32,7 @@ export const getApplicationList = ({
 }: IApplicationListRequest) => {
   const response = async () => {
     const { data } = await instance.get(
-      `${router}/application/applicants?size=${size}&page=${page}&isDaejeon=${isDaejeon}&isNationwide=${isNationwide}&isSubmitted=${isSubmitted}&isNotSubmitted=${isNotSubmitted}&inOfHeadcount=${inOfHeadcount}&outOfHeadcount=${outOfHeadcount}&isCommon=${isCommon}&isMeister=${isMeister}&isSocial=${isSocial}&receiptCode=${receiptCode}&schoolName=${schoolName}&name=${name}`,
+      `${router}/application/applicants?size=${size}&offset=${offset}&isDaejeon=${isDaejeon}&isNationwide=${isNationwide}&isSubmitted=${isSubmitted}&isNotSubmitted=${isNotSubmitted}&inOfHeadcount=${inOfHeadcount}&outOfHeadcount=${outOfHeadcount}&isCommon=${isCommon}&isMeister=${isMeister}&isSocial=${isSocial}&receiptCode=${receiptCode}&schoolName=${schoolName}&name=${name}`,
     );
     return data;
   };
@@ -40,7 +40,7 @@ export const getApplicationList = ({
     [
       'applicationList',
       size,
-      page,
+      offset,
       isDaejeon,
       isNationwide,
       isSubmitted,
@@ -70,7 +70,7 @@ export const getApplicantDetail = (id: string) => {
 /** 유형별 인원 변경 */
 export const editApplicationCount = () => {
   const response = async (params: IApplicationCountRequest) => {
-    const { data } = await instance.post(`${router}/application-count`, params);
+    const { data } = await instance.post(`${router}/application/static/count`, params);
     return data;
   };
 
@@ -84,7 +84,7 @@ export const editApplicationCount = () => {
 /** 유형별 인원 가져오기 */
 export const getApplicationCount = () => {
   const response = async () => {
-    const { data } = await instance.get(`${router}/application-count`);
+    const { data } = await instance.get(`${router}/application/statics/count`);
     return data;
   };
   return useQuery<IApplicationCountRequest[]>(['applicationCount'], response);
