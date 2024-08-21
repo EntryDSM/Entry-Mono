@@ -36,7 +36,7 @@ const developers = [
     id: 2,
     name: '박지민',
     grade: '2학년',
-    role: 'Backend',
+    role: 'Frontend',
     about: '최선을 기대하되 최악에 대비하는 프론트엔드 개발자 박지민입니다',
     github: 'https://github.com/wlalsplus100',
     githubUsername: '@wlalsplus100',
@@ -46,8 +46,9 @@ const developers = [
     id: 3,
     name: '부현수',
     grade: '2학년',
-    role: 'DevOps',
-    about: '고객의 요구사항을 빠르게 수용하며 제품의 성장을 중요시 하는 개발자 부현수입니다',
+    role: 'DevOps & Backend',
+    about:
+      '고객의 요구사항을 빠르게 수용하며 제품의 성장을 중요시 하는 개발자 부현수입니다',
     github: 'https://github.com/HyunSu1768',
     githubUsername: '@HyunSu1768',
     image: aboutImg4,
@@ -57,7 +58,8 @@ const developers = [
     name: '김도경',
     grade: '2학년',
     role: 'Backend',
-    about: '안정적이고 효율적인 서비스를 개발하여 사용자 경험을 향상시키는 것을 목표로 하는 백엔드개발자 김도경입니다',
+    about:
+      '안정적이고 효율적인 서비스를 개발하여 사용자 경험을 향상시키는 것을 목표로 하는 백엔드개발자 김도경입니다',
     github: 'https://github.com/rudeh2926',
     githubUsername: '@rudeh2926',
     image: aboutImg5,
@@ -84,7 +86,10 @@ const DeveloperIntroduce = () => {
 const Card = ({ developer }: { developer: any }) => {
   const [isOpen, setIsOpen] = useState(false);
   return (
-    <CardWrapper onMouseOver={() => setIsOpen(true)} onMouseLeave={() => setIsOpen(false)}>
+    <CardWrapper
+      onMouseOver={() => setIsOpen(true)}
+      onMouseLeave={() => setIsOpen(false)}
+    >
       <Overlay isOpen={isOpen} />
       <span>{developer.grade}</span>
       <BigStar isOpen={isOpen}>
@@ -314,11 +319,13 @@ const BigStar = styled.div<IsOpen>`
   display: flex;
   justify-content: center;
   align-items: center;
-  transform: ${({ isOpen }) => (isOpen ? css`translate(100px, -80px)` : css`translate(0, 0)`)};
+  transform: ${({ isOpen }) =>
+    isOpen ? css`translate(100px, -80px)` : css`translate(0, 0)`};
   transition: 300ms;
 `;
 
 const BigStarAnimationBox = styled.div<IsOpen>`
-  transform: ${({ isOpen }) => (isOpen ? css`rotate(225deg)` : css`rotate(45deg)`)};
+  transform: ${({ isOpen }) =>
+    isOpen ? css`rotate(225deg)` : css`rotate(45deg)`};
   transition: 300ms;
 `;
