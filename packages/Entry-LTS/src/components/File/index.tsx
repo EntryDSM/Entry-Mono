@@ -1,5 +1,5 @@
 import React from 'react';
-import { Icon, Text } from '@team-entry/design_system';
+import { Icon, Text } from '@entrydsm/design-system';
 import * as _ from './style';
 import { useAuthority } from '@/hooks/useAuthority';
 

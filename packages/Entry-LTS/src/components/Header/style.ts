@@ -1,6 +1,6 @@
 import { keyframes } from '@emotion/react';
 import styled from '@emotion/styled';
-import { theme } from '@team-entry/design_system';
+import { theme } from '@entrydsm/design-system';
 import { Link } from 'react-router-dom';
 
 interface ScrollType {

@@ -1,7 +1,7 @@
 import { instance } from '../axios';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { ModalType } from '@/hooks/useModal';
-import { Toast } from '@team-entry/design_system';
+import { Toast } from '@entrydsm/design-system';
 
 interface IGetRoundPassProps {
   setModalState: React.Dispatch<React.SetStateAction<ModalType>>;

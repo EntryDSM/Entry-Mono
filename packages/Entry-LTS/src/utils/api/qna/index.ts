@@ -4,7 +4,7 @@ import { ICreateQna } from './request';
 import { useNavigate } from 'react-router-dom';
 import { AxiosError, AxiosResponse } from 'axios';
 import { IGetMyQnaList, IQnaDetailResponse, IQnaListResponse } from './response';
-import { Toast } from '@team-entry/design_system';
+import { Toast } from '@entrydsm/design-system';
 
 const router = 'question';
 

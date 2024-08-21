@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { theme, Button } from '@team-entry/design_system';
+import { theme, Button } from '@entrydsm/design-system';
 import * as ChannelService from '@channel.io/channel-web-sdk-loader';
 
 const Sixth = () => {

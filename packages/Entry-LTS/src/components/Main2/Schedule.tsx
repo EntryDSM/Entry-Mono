@@ -2,7 +2,7 @@ import { getSchedule } from '@/utils/api/schedule';
 import { scheduleCalculater } from '@/utils/scheduleCalculater';
 import { timeformatter } from '@/utils/timeFormatter';
 import styled from '@emotion/styled';
-import { theme } from '@team-entry/design_system';
+import { theme } from '@entrydsm/design-system';
 import React, { useEffect, useState } from 'react';
 
 type ScheduleType = {

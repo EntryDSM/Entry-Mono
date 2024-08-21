@@ -1,7 +1,7 @@
 import { instance } from '../axios';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { IAllNotice, NoticeType, INoticeDetail, ICreateNotice, IUploadNoticeImage } from './types';
-import { Toast } from '@team-entry/design_system';
+import { Toast } from '@entrydsm/design-system';
 import { AxiosError } from 'axios';
 import { useNavigate } from 'react-router-dom';
 

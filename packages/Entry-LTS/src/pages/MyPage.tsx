@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { Button, Text, theme } from '@team-entry/design_system';
+import { Button, Text, theme } from '@entrydsm/design-system';
 import { Mobile, Pc } from '@/hooks/useResponsive';
 import BoardElement from '@/components/Board/BoardElement';
 import { useModal } from '@/hooks/useModal';

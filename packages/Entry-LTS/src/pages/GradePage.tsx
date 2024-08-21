@@ -1,4 +1,4 @@
-import { Button, Icon, IconType, Text, theme } from '@team-entry/design_system';
+import { Button, Icon, IconType, Text, theme } from '@entrydsm/design-system';
 import styled from '@emotion/styled';
 import { Link, useNavigate } from 'react-router-dom';
 import { Pc } from '@/hooks/useResponsive';

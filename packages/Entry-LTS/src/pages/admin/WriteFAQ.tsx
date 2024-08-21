@@ -1,6 +1,6 @@
 import { ChangeEvent, SetStateAction, useEffect, useState } from 'react';
 import styled from '@emotion/styled';
-import { Button, Input, Radio, Stack, Text, TextAreaProps, Textarea } from '@team-entry/design_system';
+import { Button, Input, Radio, Stack, Text, TextAreaProps, Textarea } from '@entrydsm/design-system';
 import { Mobile, Pc } from '@/hooks/useResponsive';
 import { useInput } from '@/hooks/useInput';
 import { useTextArea } from '@/hooks/useTextArea';

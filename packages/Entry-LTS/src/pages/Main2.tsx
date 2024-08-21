@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { Button, Text } from '@team-entry/design_system';
+import { Button, Text } from '@entrydsm/design-system';
 import MainBgImg from '@/assets/MainBgImg.png';
 import Schedule from '@/components/Main2/Schedule';
 import Faq from '@/components/Main/Faq';

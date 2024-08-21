@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { theme, Text } from '@team-entry/design_system';
+import { theme, Text } from '@entrydsm/design-system';
 
 interface IGradeWrapper {
   title: string;

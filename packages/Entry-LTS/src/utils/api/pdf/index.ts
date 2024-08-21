@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { instance } from '../axios';
 import FileSaver from 'file-saver';
-import { Toast } from '@team-entry/design_system';
+import { Toast } from '@entrydsm/design-system';
 
 const router = 'pdf';
 

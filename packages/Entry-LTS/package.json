@@ -25,7 +25,7 @@
     "@emotion/styled": "^11.10.5",
     "@tanstack/react-query": "^4.28.0",
     "@tanstack/react-query-devtools": "^4.28.0",
-    "@team-entry/design_system": "^1.1.16",
+    "@entrydsm/design-system": "workspace:^",
     "axios": "^1.2.2",
     "dotenv": "^16.0.3",
     "file-saver": "^2.0.5",

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import styled from '@emotion/styled';
-import { Text, theme } from '@team-entry/design_system';
+import { Text, theme } from '@entrydsm/design-system';
 import { Mobile, Pc } from '@/hooks/useResponsive';
 import BoardHeader from '@/components/Board/BoardHeader';
 import BoardElement from '@/components/Board/BoardElement';

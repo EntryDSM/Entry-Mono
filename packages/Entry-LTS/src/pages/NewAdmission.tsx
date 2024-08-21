@@ -1,9 +1,8 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import Download from '@/assets/Download.svg';
-import { Icon, Text, theme } from '@team-entry/design_system';
+import { Icon, Text, theme } from '@entrydsm/design-system';
 import { useAuthority } from '@/hooks/useAuthority';
-import { color, realBlack } from '@team-entry/design_system/build/style/color';
 
 const NewAdmissionPage = () => {
   const note = [
@@ -131,7 +130,7 @@ export default NewAdmissionPage;
 
 const _TableBox = styled.div`
   width: 100%;
-  border-top: 2px solid ${color.orange500};
+  border-top: 2px solid ${theme.color.orange500};
 `;
 
 const _Table = styled.table`
@@ -145,17 +144,17 @@ const _Title = styled.th`
   white-space: nowrap;
   text-align: center;
   padding: 8px 4px;
-  background-color: ${color.black50};
+  background-color: ${theme.color.black50};
   letter-spacing: 4px;
-  border: 1px solid ${color.black100};
+  border: 1px solid ${theme.color.black100};
 `;
 
 const _Th = styled.th`
   white-space: nowrap;
   text-align: center;
   padding: 8px 4px;
-  background-color: ${color.black50};
-  border: 1px solid ${color.black100};
+  background-color: ${theme.color.black50};
+  border: 1px solid ${theme.color.black100};
   vertical-align: middle;
 `;
 
@@ -163,13 +162,13 @@ const _Td = styled.td`
   white-space: nowrap;
   text-align: center;
   padding: 8px 4px;
-  border: 1px solid ${color.black100};
+  border: 1px solid ${theme.color.black100};
 `;
 
 const _DetailsTd = styled.td`
   white-space: nowrap;
   padding: 8px;
-  border: 1px solid ${color.black100};
+  border: 1px solid ${theme.color.black100};
 `;
 
 const _Container = styled.div`

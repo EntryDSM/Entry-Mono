@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import { Button, Text } from '@team-entry/design_system';
+import { Button, Text } from '@entrydsm/design-system';
 import EditBanner from '../../components/EditBanner';
 import BannerImg from '../../assets/ReplaceBanner.svg';
 

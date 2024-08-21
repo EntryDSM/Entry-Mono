@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import { Text, theme } from '@team-entry/design_system';
+import { Text, theme } from '@entrydsm/design-system';
 import { progressState } from '../../constant/main';
 import { useAuthority } from '@/hooks/useAuthority';
 import { ProgressBar } from '@/components/ProgressBar';
@@ -61,8 +61,8 @@ const _ProgressCard = styled.div<ICurrentDate>`
         ? theme.color.green500
         : theme.color.orange500
       : isAdmin
-      ? theme.color.green100
-      : theme.color.orange100};
+        ? theme.color.green100
+        : theme.color.orange100};
 `;
 
 const _ProgressBarWrapper = styled.div`

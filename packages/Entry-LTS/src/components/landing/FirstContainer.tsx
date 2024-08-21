@@ -1,9 +1,9 @@
-import { Button, Text } from '@team-entry/design_system';
+import { Button, Text } from '@entrydsm/design-system';
 import styled from '@emotion/styled';
 import MouseScroll from '../../assets/MouseScroll.svg';
 import LandingBgImg from '../../assets/LandingBgImg.png';
 import ArrowDoubleDown from '@/assets/ArrowDoubleDown.svg';
-import { color } from '@team-entry/design_system/build/style/color';
+import { color } from '@entrydsm/design-system/build/style/color';
 import { Link } from 'react-router-dom';
 import { SERVER_URL } from '@/constant/env';
 // import { useNavigate } from 'react-router-dom';

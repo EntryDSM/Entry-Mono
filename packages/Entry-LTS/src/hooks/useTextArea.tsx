@@ -1,5 +1,5 @@
 import { useCallback, useState } from 'react';
-import { TextAreaProps } from '@team-entry/design_system';
+import { TextAreaProps } from '@entrydsm/design-system';
 
 export const useTextArea = <T,>(initialForm: T) => {
   const [form, setForm] = useState<T>(initialForm);

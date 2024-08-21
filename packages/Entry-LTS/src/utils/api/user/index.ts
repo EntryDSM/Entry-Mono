@@ -1,7 +1,7 @@
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { instance } from '../axios';
 import { IApplyInfoStatusResponse, IAuthorizationResponse } from './response';
-import { Toast } from '@team-entry/design_system';
+import { Toast } from '@entrydsm/design-system';
 import { MAIN_URL } from '@/constant/env';
 
 const router = 'user';

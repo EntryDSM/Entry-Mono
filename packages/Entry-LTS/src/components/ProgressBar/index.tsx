@@ -1,5 +1,5 @@
 import { getSchedule } from '@/utils/api/schedule';
-import { Skeleton, Text } from '@team-entry/design_system';
+import { Skeleton, Text } from '@entrydsm/design-system';
 import * as _ from './style';
 import { useAuthority } from '@/hooks/useAuthority';
 

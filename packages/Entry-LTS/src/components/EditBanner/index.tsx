@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Text } from '@team-entry/design_system';
+import { Button, Text } from '@entrydsm/design-system';
 import * as _ from './style';
 
 interface IEditBanner {

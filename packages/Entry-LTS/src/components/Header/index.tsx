@@ -3,7 +3,7 @@ import LogoOrange from '../../assets/LogoOrange.svg';
 import LogoGreen from '../../assets/LogoGreen.svg';
 import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { Button, Icon, Text } from '@team-entry/design_system';
+import { Button, Icon, Text } from '@entrydsm/design-system';
 import { Mobile, Pc } from '../../hooks/useResponsive';
 import Menu from '@/assets/Menu.svg';
 import { useAuthority } from '@/hooks/useAuthority';

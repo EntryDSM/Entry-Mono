@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import styled from '@emotion/styled';
 import { IBoard } from '@/interfaces/Board';
-import { Button, Icon, Stack, Text, theme } from '@team-entry/design_system';
+import { Button, Icon, Stack, Text, theme } from '@entrydsm/design-system';
 import { Mobile, Pc, isMobile } from '../../hooks/useResponsive';
 import { keyframes } from '@emotion/react';
 import { useAuthority } from '@/hooks/useAuthority';

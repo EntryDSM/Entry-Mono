@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import { Icon, IconType, Text } from '@team-entry/design_system';
+import { Icon, IconType, Text } from '@entrydsm/design-system';
 import { useAuthority } from '@/hooks/useAuthority';
 
 interface IShorcutButtonProps {
