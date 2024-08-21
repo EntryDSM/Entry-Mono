@@ -10,7 +10,7 @@ export interface IApplyInfoStatusResponse {
   name: string;
   submitted: boolean;
   printed_arrived: boolean;
-  application_type: ApplicationType;
+  applicationType: ApplicationType;
   self_introduce: string;
   study_plan: string;
   receipt_code: number;

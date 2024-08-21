@@ -77,9 +77,9 @@ const MyPage = () => {
           </Text>
           <_Line />
           <Text color="black900" size="body3">
-            {data?.application_type === 'COMMON' && '일반 전형'}
-            {data?.application_type === 'MEISTER' && '마이스터 전형'}
-            {data?.application_type === 'SOCIAL' && '사회통합 전형'}
+            {data?.applicationType === 'COMMON' && '일반 전형'}
+            {data?.applicationType === 'MEISTER' && '마이스터 전형'}
+            {data?.applicationType === 'SOCIAL' && '사회통합 전형'}
           </Text>
           <Text color="black900" size="title2" margin={['top', 4]}>
             지원서 제출 {data?.submitted ? '완료' : '미완료'}

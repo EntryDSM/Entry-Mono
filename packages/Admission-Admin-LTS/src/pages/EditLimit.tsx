@@ -23,17 +23,17 @@ function EditLimit() {
 
   useEffect(() => {
     data?.map((res) => {
-      switch (res.application_type) {
+      switch (res.applicationType) {
         case 'COMMON':
-          return res.is_daejeon
+          return res.isDaejeon
             ? setForm((prev) => ({ ...prev, commonDaejeon: String(res.count) }))
             : setForm((prev) => ({ ...prev, commonNationWide: String(res.count) }));
         case 'MEISTER':
-          return res.is_daejeon
+          return res.isDaejeon
             ? setForm((prev) => ({ ...prev, meisterDajeon: String(res.count) }))
             : setForm((prev) => ({ ...prev, meisterNationWide: String(res.count) }));
         case 'SOCIAL':
-          return res.is_daejeon
+          return res.isDaejeon
             ? setForm((prev) => ({ ...prev, socialDaejeon: String(res.count) }))
             : setForm((prev) => ({ ...prev, socialNationWide: String(res.count) }));
       }
@@ -46,12 +46,12 @@ function EditLimit() {
   const saveLimit = () => {
     combinedMutations(
       [
-        () => mutateAsync({ application_type: 'COMMON', is_daejeon: true, count: +form.commonDaejeon }),
-        () => mutateAsync({ application_type: 'COMMON', is_daejeon: false, count: +form.commonNationWide }),
-        () => mutateAsync({ application_type: 'MEISTER', is_daejeon: true, count: +form.meisterDajeon }),
-        () => mutateAsync({ application_type: 'MEISTER', is_daejeon: false, count: +form.meisterNationWide }),
-        () => mutateAsync({ application_type: 'SOCIAL', is_daejeon: true, count: +form.socialDaejeon }),
-        () => mutateAsync({ application_type: 'SOCIAL', is_daejeon: false, count: +form.socialNationWide }),
+        () => mutateAsync({ applicationType: 'COMMON', isDaejeon: true, count: +form.commonDaejeon }),
+        () => mutateAsync({ applicationType: 'COMMON', isDaejeon: false, count: +form.commonNationWide }),
+        () => mutateAsync({ applicationType: 'MEISTER', isDaejeon: true, count: +form.meisterDajeon }),
+        () => mutateAsync({ applicationType: 'MEISTER', isDaejeon: false, count: +form.meisterNationWide }),
+        () => mutateAsync({ applicationType: 'SOCIAL', isDaejeon: true, count: +form.socialDaejeon }),
+        () => mutateAsync({ applicationType: 'SOCIAL', isDaejeon: false, count: +form.socialNationWide }),
       ],
       () => {
         queryClient.invalidateQueries(['applicationCount']);
