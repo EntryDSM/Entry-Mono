@@ -53,7 +53,7 @@ const CustomerPage = () => {
           isCustomer
           link={isAdmin ? 'writeFAQ' : 'write'}
         />
-        <Text margin={[-16, 0, 30, 0]} color={'inherit'} size={'body1'}>
+        <Text margin={[-16, 0, 30, 0]} color={'realBlack'} size={'body1'}>
           답변 내용은 2025학년도 신입생 전형에 적용되는 내용입니다
         </Text>
         {searchParams.get('type') === 'faq' ? (
