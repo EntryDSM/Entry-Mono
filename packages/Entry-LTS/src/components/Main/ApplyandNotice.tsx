@@ -179,6 +179,7 @@ const ApplyandNotice = () => {
                     title={notice.title}
                     createdAt={notice.createdAt}
                     id={notice.id}
+                    key={index}
                   />
                 );
               },
