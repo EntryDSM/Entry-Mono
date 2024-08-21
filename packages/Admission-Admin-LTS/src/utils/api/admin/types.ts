@@ -2,7 +2,7 @@ import { ApplicationType, EducationStatusType, HeadCountType } from '@/interface
 
 export interface IApplicationListRequest {
   size: number;
-  page: number;
+  offset: number;
   isDaejeon: boolean;
   isNationwide: boolean;
   isSubmitted: boolean;
