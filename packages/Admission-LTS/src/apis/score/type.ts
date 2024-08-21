@@ -1,10 +1,20 @@
 export interface IPatchUserBlackExam {
-  averageScore: number;
+  koreanGrade: number;
+  socialGrade: number;
+  englishGrade: number;
+  mathGrade: number;
+  scienceGrade: number;
+  electivesGrade: number;
   extraScore: ExtraScore;
 }
 
 export interface IGetUserBlackExam {
-  averageScore: string;
+  koreanGrade: number;
+  socialGrade: number;
+  englishGrade: number;
+  mathGrade: number;
+  scienceGrade: number;
+  electivesGrade: number;
   extraScore: ExtraScore;
 }
 
@@ -44,6 +54,15 @@ export interface IWriteGradeElement {
   latenessCount: number;
   earlyLeaveCount: number;
   extraScore: ExtraScore;
+}
+
+export interface IBlackExamGradeElement {
+  koreanGrade: number;
+  socialGrade: number;
+  englishGrade: number;
+  mathGrade: number;
+  scienceGrade: number;
+  electivesGrade: number;
 }
 
 export type ExtraScore = {

@@ -4,7 +4,7 @@ import { ReissueToken } from './user';
 import { APPLY_URL, AUTH_URL, COOKIE_DOMAIN } from '@/constant/env';
 
 export const instance = axios.create({
-  baseURL: import.meta.env.VITE_BASE_URL,
+  baseURL: import.meta.env.VITE_SERVER_URL,
   timeout: 10000,
 });
 
@@ -55,9 +55,13 @@ instance.interceptors.response.use(
                 sameSite: 'none',
                 domain: COOKIE_DOMAIN,
               });
-              cookie.set('authority', authority == 'admin' ? 'admin' : 'user', { path: '/' });
+              cookie.set('authority', authority == 'admin' ? 'admin' : 'user', {
+                path: '/',
+              });
               if (originalRequest) {
-                if (originalRequest.headers) originalRequest.headers['Authorization'] = `Bearer ${res?.accessToken}`;
+                if (originalRequest.headers)
+                  originalRequest.headers['Authorization'] =
+                    `Bearer ${res?.accessToken}`;
                 return axios(originalRequest);
               }
             })
@@ -71,11 +75,15 @@ instance.interceptors.response.use(
                 cookie.remove('accessToken');
                 cookie.remove('refreshToken');
                 cookie.remove('authority');
-                window.location.replace(`${AUTH_URL}/login?redirect_url=${APPLY_URL}`);
+                window.location.replace(
+                  `${AUTH_URL}/login?redirect_url=${APPLY_URL}`,
+                );
               }
             });
         } else {
-          window.location.replace(`${AUTH_URL}/login?redirect_url=${APPLY_URL}`);
+          window.location.replace(
+            `${AUTH_URL}/login?redirect_url=${APPLY_URL}`,
+          );
         }
       } else return Promise.reject(error);
     }

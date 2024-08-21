@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 import { CSSProperties, HTMLAttributes, ReactNode } from 'react';
-import { colorKeyOfType } from 'style/color';
-import { fontKeyOfType } from 'style/font';
+import { colorKeyOfType } from '../style/color';
+import { fontKeyOfType } from '../style/font';
 import { marginCssType, marginToCss } from '../utils/margin';
 import { theme } from '../style/index';
 

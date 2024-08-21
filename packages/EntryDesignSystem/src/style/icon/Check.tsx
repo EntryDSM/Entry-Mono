@@ -1,5 +1,3 @@
-import React from 'react';
-
 const check = () => {
     return (
         <svg

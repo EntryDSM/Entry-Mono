@@ -1,4 +1,7 @@
-export type EducationalStatus = 'PROSPECTIVE_GRADUATE' | 'GRADUATE' | 'QUALIFICATION_EXAM';
+export type EducationalStatus =
+  | 'PROSPECTIVE_GRADUATE'
+  | 'GRADUATE'
+  | 'QUALIFICATION_EXAM';
 
 export type ApplicationType = 'COMMON' | 'MEISTER' | 'SOCIAL';
 
@@ -44,6 +47,7 @@ export interface IGetUserInfo {
   applicantTel: string;
   parentName: string;
   parentTel: string;
+  parentRelation: string;
   streetAddress: string;
   postalCode: string;
   detailAddress: string;
@@ -86,6 +90,7 @@ export interface IUserMiddleSchool {
     studentNumber: string;
   };
   teacherName: string;
+  teacherTel: string;
 }
 
 export interface IPatchUserIntroduce {

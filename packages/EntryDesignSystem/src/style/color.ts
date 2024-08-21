@@ -38,6 +38,7 @@ export const color = {
     focus: '#006EFF',
     realBlack: '#000000',
     realWhite: '#FFFFFF',
+    inherit: 'inherit',
 } as const;
 
 export const {
@@ -76,6 +77,7 @@ export const {
     focus,
     realBlack,
     realWhite,
+    inherit,
 } = color;
 
 export type colorKeyOfType = keyof typeof color;

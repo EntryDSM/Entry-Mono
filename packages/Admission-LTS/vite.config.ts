@@ -2,7 +2,7 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import tsconfigPaths from 'vite-tsconfig-paths';
 import reactRefresh from '@vitejs/plugin-react-refresh';
-import { ViteFaviconsPlugin } from 'vite-plugin-favicon';
+// import { ViteFaviconsPlugin } from 'vite-plugin-favicon';
 import path from 'path';
 
 // https://vitejs.dev/config/
@@ -11,17 +11,18 @@ export default defineConfig({
     react(),
     tsconfigPaths(),
     reactRefresh(),
-    ViteFaviconsPlugin({
-      logo: 'public/logo.svg',
-      favicons: {
-        path: '/',
-      },
-    }),
+    // ViteFaviconsPlugin({
+    //   logo: 'public/logo.svg',
+    //   favicons: {
+    //     path: '/',
+    //   },
+    // }),
   ],
   server: {
     host: '0.0.0.0',
     port: 3003,
   },
+  base: './',
   resolve: {
     alias: [
       { find: '@', replacement: '/src' },
@@ -33,5 +34,9 @@ export default defineConfig({
         ),
       },
     ],
+  },
+  build: {
+    outDir: 'build',
+    chunkSizeWarningLimit: 3500,
   },
 });
