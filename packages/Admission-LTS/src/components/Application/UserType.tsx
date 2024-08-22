@@ -157,7 +157,7 @@ const UserType = ({ current, setCurrent }: ICurrnettype) => {
                 graduateDate: [year, userType.graduateDate[1]],
               })
             }
-            options={generateNumberArray(2010, date.getFullYear() + 1)}
+            options={generateNumberArray(2020, date.getFullYear() + 1)}
             unit="년"
           />
           <Dropdown
