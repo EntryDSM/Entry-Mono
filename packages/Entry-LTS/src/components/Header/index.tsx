@@ -313,11 +313,7 @@ const Header = () => {
                           color={
                             location.pathname.includes('/mypage')
                               ? `${authorityColor}500`
-                              : (location.pathname !== '/main' &&
-                                    location.pathname !== '/') ||
-                                  scrollY >= 1
-                                ? 'realBlack'
-                                : 'realWhite'
+                              : 'inherit'
                           }
                         >
                           마이페이지
