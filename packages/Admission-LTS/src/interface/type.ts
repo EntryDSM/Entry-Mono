@@ -20,6 +20,7 @@ export interface IUserTypeParams
   extends Omit<IPatchUserType, 'graduateDate' | 'educationalStatus'> {
   graduateDate: string[];
   educationalStatus: EducationalStatus | '';
+  veteransNumber?: number;
 }
 
 export interface IUserPhoto {
