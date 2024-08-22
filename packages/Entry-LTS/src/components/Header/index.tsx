@@ -328,7 +328,7 @@ const Header = () => {
                         color="inherit"
                         style={{ fontSize: '22px' }}
                       >
-                        {data.name}
+                        {data && data.name}
                       </Text>
                     </>
                   )}

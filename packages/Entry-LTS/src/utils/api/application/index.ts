@@ -2,11 +2,11 @@ import { useQuery } from '@tanstack/react-query';
 import { instance } from '../axios';
 import { IGetUserInfo } from './type';
 
-const router = 'application';
+// const router = 'application';
 
 export const getUserInfo = (isLogin?: boolean) => {
   const response = async () => {
-    const { data } = await instance.get<IGetUserInfo>(`${router}/users/info`);
+    const { data } = await instance.get<IGetUserInfo>(`/user/info`);
     return data;
   };
   return useQuery(['userInfo'], response, {
