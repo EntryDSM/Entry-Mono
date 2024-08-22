@@ -1,6 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { instance } from '../axios';
-import { Toast } from '@team-entry/design_system';
+import { Toast } from '@entrydsm/design-system';
 import { ICreateReply } from './type';
 
 const router = 'admin';

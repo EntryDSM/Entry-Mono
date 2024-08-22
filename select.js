@@ -21,16 +21,16 @@ inquirer.prompt(questions).then((answers) => {
 
   if (answers.file === 'Entry-Auth') {
     command = 'yarn';
-    args = ['workspace', '@entrydsm/auth', 'run', 'dev'];
+    args = ['workspace', '@entrydsm/auth', 'run', 'start'];
   } else if (answers.file === 'EntryDesignSystem') {
     command = 'yarn';
     args = ['workspace', '@entrydsm/design-system', 'run', 'start'];
   } else if (answers.file === 'Admission-LTS') {
     command = 'yarn';
-    args = ['workspace', '@entrydsm/admission', 'run', 'dev'];
+    args = ['workspace', '@entrydsm/admission', 'run', 'start'];
   } else if (answers.file === 'Admission-Admin-LTS') {
     command = 'yarn';
-    args = ['workspace', '@entrydsm/admin', 'run', 'dev'];
+    args = ['workspace', '@entrydsm/admin', 'run', 'start'];
   } else if (answers.file === 'Entry-LTS') {
     command = 'yarn';
     args = ['workspace', '@entrydsm/main', 'run', 'start'];

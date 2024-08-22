@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import styled from '@emotion/styled';
 import { IBoard } from '@/interfaces/Board';
-import { Button, Icon, Stack, Text, theme } from '@team-entry/design_system';
+import { Button, Icon, Stack, Text, theme } from '@entrydsm/design-system';
 import { Mobile, Pc, isMobile } from '../../hooks/useResponsive';
 import { keyframes } from '@emotion/react';
 import { useAuthority } from '@/hooks/useAuthority';
@@ -37,26 +37,46 @@ const BoardElement = (props: IBoard) => {
 
   return (
     <>
-      <_ElementContainer onClick={() => isOpen && setClicked(!clicked)} isPinned={isPinned}>
+      <_ElementContainer
+        onClick={() => isOpen && setClicked(!clicked)}
+        isPinned={isPinned}
+      >
         <Div
           style={{
-            maxWidth: 600,
-            width: isMobile() && searchParams.get('type') != 'faq' ? '70%' : '0%',
+            maxWidth: 700,
+            // width: isMobile() && searchParams.get('type') != 'faq' ? '70%' : '0%',
+            width: '100%',
           }}
         >
           <Pc>
-            <Text style={{ whiteSpace: 'nowrap' }} align="center" color="black700" size="body1" width={100}>
+            <Text
+              style={{ whiteSpace: 'nowrap' }}
+              align="center"
+              color="black700"
+              size="body1"
+              width={100}
+            >
               {isNumber ? boardNumber : faqTypeToKorean[faq_type]}
             </Text>
             <Div style={{ marginLeft: 20 }}>
-              {!isPublic && <Icon color={`${authorityColor}500`} size={18} margin={[0, 5, 0, 0]} icon="LockKey" />}
+              {!isPublic && (
+                <Icon
+                  color={`${authorityColor}500`}
+                  size={18}
+                  margin={[0, 5, 0, 0]}
+                  icon="LockKey"
+                />
+              )}
               <Text
                 color="black800"
                 size="body3"
                 textOverflow="ellipsis"
                 whiteSpace="nowrap"
-                style={{ overflow: searchParams.get('type') != 'faq' ? 'hidden' : 'visible' }}
-                width={400}
+                style={{
+                  overflow:
+                    searchParams.get('type') != 'faq' ? 'hidden' : 'visible',
+                }}
+                width={500}
                 display="flex"
               >
                 {isPinned && (
@@ -70,7 +90,12 @@ const BoardElement = (props: IBoard) => {
           </Pc>
           <Mobile>
             {!isNumber && (
-              <Text color="black700" size="body3" margin={['right', 20]} whiteSpace="nowrap">
+              <Text
+                color="black700"
+                size="body3"
+                margin={['right', 20]}
+                whiteSpace="nowrap"
+              >
                 {faqTypeToKorean[faq_type]}
               </Text>
             )}
@@ -79,7 +104,10 @@ const BoardElement = (props: IBoard) => {
               size="body5"
               textOverflow="ellipsis"
               whiteSpace="pre-line"
-              style={{ overflow: searchParams.get('type') != 'faq' ? 'hidden' : 'visible' }}
+              style={{
+                overflow:
+                  searchParams.get('type') != 'faq' ? 'hidden' : 'visible',
+              }}
             >
               {title}
             </Text>
@@ -90,18 +118,33 @@ const BoardElement = (props: IBoard) => {
             <>
               <Pc>
                 {isReplied ? (
-                  <Text align="center" color={`${authorityColor}500`} size="body5" width={100}>
+                  <Text
+                    align="center"
+                    color={`${authorityColor}500`}
+                    size="body5"
+                    width={100}
+                  >
                     완료
                   </Text>
                 ) : (
-                  <Text align="center" color="black500" size="body5" width={100}>
+                  <Text
+                    align="center"
+                    color="black500"
+                    size="body5"
+                    width={100}
+                  >
                     대기중
                   </Text>
                 )}
               </Pc>
               <Mobile>
                 {isReplied ? (
-                  <Text align="center" color={`${authorityColor}500`} size="body5" width={90}>
+                  <Text
+                    align="center"
+                    color={`${authorityColor}500`}
+                    size="body5"
+                    width={90}
+                  >
                     완료
                   </Text>
                 ) : (
@@ -146,9 +189,6 @@ const BoardElement = (props: IBoard) => {
                 <Text color="black600" size="body4">
                   {content}
                 </Text>
-                <Text color="black400" size="body5">
-                  {createdAt?.slice(0, 10)}
-                </Text>
               </_Answer>
               {isAdmin && (
                 <_EditAnswerButtons>
@@ -161,7 +201,11 @@ const BoardElement = (props: IBoard) => {
                   >
                     삭제
                   </Button>
-                  <Button onClick={() => navigate(`/customer/writeFAQ/${boardId}`)}>수정</Button>
+                  <Button
+                    onClick={() => navigate(`/customer/writeFAQ/${boardId}`)}
+                  >
+                    수정
+                  </Button>
                 </_EditAnswerButtons>
               )}
             </_AnswerPart>
@@ -175,13 +219,17 @@ const BoardElement = (props: IBoard) => {
                 <Text color="black600" size="body5">
                   {content}
                 </Text>
-                <Text color="black400" size="body3">
+                {/* <Text color="black400" size="body3">
                   {createdAt?.slice(0, 10)}
-                </Text>
+                </Text> */}
               </_Answer>
               {isAdmin && (
                 <_EditAnswerButtons>
-                  <Button color="delete" kind="delete" onClick={() => console.log('삭제')}>
+                  <Button
+                    color="delete"
+                    kind="delete"
+                    onClick={() => console.log('삭제')}
+                  >
                     삭제
                   </Button>
                   <Button onClick={() => console.log('삭제')}>수정</Button>
@@ -239,9 +287,9 @@ const _AnswerPart = styled.div`
 
 const _Answer = styled.div`
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: space-between;
+  /* flex-direction: column; */
+  align-items: center;
+  justify-content: start;
   height: 14rem;
   margin-left: 20px;
   padding: 20px 0px;

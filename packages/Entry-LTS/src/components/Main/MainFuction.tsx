@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
-import { Button, Icon, IconType, Text, Toast } from '@team-entry/design_system';
+import { Button, Icon, IconType, Text, Toast } from '@entrydsm/design-system';
 import Banner from '../../assets/Banner.svg';
 import AdminBanner from '../../assets/AdminBanner.svg';
 import Progress from './Progress';

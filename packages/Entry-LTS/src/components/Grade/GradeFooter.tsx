@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction } from 'react';
 import styled from '@emotion/styled';
-import { Button, Text, theme } from '@team-entry/design_system';
+import { Button, Text, theme } from '@entrydsm/design-system';
 import { GradeStatusType } from '@/interfaces/grade';
 import { useModal } from '@/hooks/useModal';
 import { MAIN_URL } from '@/constant/env';
@@ -82,7 +82,7 @@ const GradeFooter = ({
               <_ScoreBox>
                 <Text size="header3" color="orange900">
                   {gradeStatus === 'qualificationExam'
-                    ? qualificationExamScore * 34 + dsmAlgorithmScore
+                    ? ((qualificationExamScore * 34) + dsmAlgorithmScore).toFixed(3)
                     : ((gradeScore * 175) / 100 + maxScore + dsmAlgorithmScore).toFixed(3)}
                 </Text>
                 <Text color="black400" size="title3">
@@ -97,7 +97,7 @@ const GradeFooter = ({
               <_ScoreBox>
                 <Text size="header3" color="orange900">
                   {gradeStatus === 'qualificationExam'
-                    ? qualificationExamScore * 22 + dsmAlgorithmScore + certificateScore
+                    ? ((qualificationExamScore * 22) + dsmAlgorithmScore + certificateScore).toFixed(3)
                     : (gradeScore + maxScore + dsmAlgorithmScore + certificateScore).toFixed(3)}
                 </Text>
                 <Text color="black400" size="title3">
@@ -112,7 +112,7 @@ const GradeFooter = ({
               <_ScoreBox>
                 <Text size="header3" color="orange900">
                   {gradeStatus === 'qualificationExam'
-                    ? qualificationExamScore * 22 + dsmAlgorithmScore + certificateScore
+                    ? ((qualificationExamScore * 22) + dsmAlgorithmScore + certificateScore).toFixed(3)
                     : (gradeScore + maxScore + dsmAlgorithmScore + certificateScore).toFixed(3)}
                 </Text>
                 <Text color="black400" size="title3">

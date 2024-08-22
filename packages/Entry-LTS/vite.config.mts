@@ -30,6 +30,7 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': path.resolve(process.cwd(), './src'),
+      '@entrydsm/design-system': path.resolve(__dirname, '../EntryDesignSystem/src/index.ts'),
     },
   },
   build: {

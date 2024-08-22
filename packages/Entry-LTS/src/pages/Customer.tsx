@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import styled from '@emotion/styled';
-import { Text, theme } from '@team-entry/design_system';
+import { Text, theme } from '@entrydsm/design-system';
 import { Mobile, Pc } from '@/hooks/useResponsive';
 import BoardHeader from '@/components/Board/BoardHeader';
 import BoardElement from '@/components/Board/BoardElement';
@@ -15,12 +15,12 @@ import { FaqType } from '@/utils/api/faq/types';
 const CustomerPage = () => {
   const [category, setCategory] = useState<FaqType>('');
   const categories: Record<string, FaqType> = {
-    전체: '',
+    '전체': '',
     '입학 문의': 'ADMISSION',
-    진로: 'COURSE',
+    '진로': 'COURSE',
     '학교 생활': 'SCHOOL_LIFE',
-    기숙사: 'DORMITORY',
-    기타: 'OTHER',
+    '기숙사': 'DORMITORY',
+    '기타': 'OTHER',
   };
 
   const { isAdmin, authorityColor } = useAuthority();
@@ -53,10 +53,18 @@ const CustomerPage = () => {
           isCustomer
           link={isAdmin ? 'writeFAQ' : 'write'}
         />
-
+        <Text margin={[-16, 0, 30, 0]} color={'realBlack'} size={'body1'}>
+          답변 내용은 2025학년도 신입생 전형에 적용되는 내용입니다
+        </Text>
         {searchParams.get('type') === 'faq' ? (
           <>
-            <BoardHeader isNumber isTopBorder={false} isComment isWriteDay isWriter />
+            <BoardHeader
+              isNumber
+              isTopBorder={false}
+              isComment
+              isWriteDay
+              isWriter
+            />
             {/* {getAllQna?.questions?.slice(0 + current * 10, current * 10 + 10).map((qna, idx) => {
               return (
                 <Link to={`/customer/${qna.id}`} key={qna.id}>
@@ -85,7 +93,11 @@ const CustomerPage = () => {
                   <>
                     <Pc>
                       <Text
-                        color={res[1] === category ? `${authorityColor}500` : `${authorityColor}100`}
+                        color={
+                          res[1] === category
+                            ? `${authorityColor}500`
+                            : `${authorityColor}100`
+                        }
                         size="title2"
                         cursor="pointer"
                         onClick={() => {
@@ -98,7 +110,11 @@ const CustomerPage = () => {
                     </Pc>
                     <Mobile>
                       <Text
-                        color={res[1] === category ? `${authorityColor}500` : `${authorityColor}100`}
+                        color={
+                          res[1] === category
+                            ? `${authorityColor}500`
+                            : `${authorityColor}100`
+                        }
                         size="body3"
                         cursor="pointer"
                         onClick={() => {
@@ -109,7 +125,9 @@ const CustomerPage = () => {
                         {res[0]}
                       </Text>
                     </Mobile>
-                    {res[0] !== '기타' && <_Circle authorityColor={authorityColor} />}
+                    {res[0] !== '기타' && (
+                      <_Circle authorityColor={authorityColor} />
+                    )}
                   </>
                 );
               })}
@@ -185,6 +203,7 @@ const _Categories = styled.div`
 const _Circle = styled.div<{ authorityColor: AuthorityColorType }>`
   width: 4px;
   height: 4px;
-  background-color: ${({ authorityColor }) => theme.color[`${authorityColor}100`]};
+  background-color: ${({ authorityColor }) =>
+    theme.color[`${authorityColor}100`]};
   border-radius: 50px;
 `;

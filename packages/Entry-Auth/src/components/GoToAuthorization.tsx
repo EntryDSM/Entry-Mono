@@ -1,7 +1,7 @@
 import { useOpenPopUp } from '@/apis/popup';
 import { AUTH_URL } from '@/constant/env';
 import styled from '@emotion/styled';
-import { Button, Text } from '@entrydsm/design-system';
+import { Button, Text } from '@team-entry/design_system';
 
 interface Props {
   text: string;
@@ -31,6 +31,6 @@ export const GoToAuthorization = ({ text }: Props) => {
 };
 
 const _Button = styled(Button)`
-  width: 100%;
+  width: 100% !important;
   margin-top: 33px;
 `;

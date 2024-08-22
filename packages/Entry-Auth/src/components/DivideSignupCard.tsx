@@ -1,8 +1,7 @@
 /* eslint-disable object-curly-newline */
 import React from 'react';
-import SchoolBag from '@/assets/SchoolBag';
 import styled from '@emotion/styled';
-import { Text, Button, theme, VStack } from '@entrydsm/design-system';
+import { Text, Button, VStack } from '@team-entry/design_system';
 
 interface IDivideSignupCard {
   setIsStudent: React.Dispatch<React.SetStateAction<boolean>>;
@@ -42,21 +41,21 @@ const _Wrapper = styled.div`
   height: 100%;
 `;
 
-const _Container = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  width: 145px;
-`;
+// const _Container = styled.div`
+//   display: flex;
+//   align-items: center;
+//   gap: 12px;
+//   width: 145px;
+// `;
 
-const _IconWrapper = styled.div`
-  width: 48px;
-  height: 48px;
-  padding: 12px;
-  background-color: ${theme.color.orange500};
-  border-radius: 50%;
-`;
+// const _IconWrapper = styled.div`
+//   width: 48px;
+//   height: 48px;
+//   padding: 12px;
+//   background-color: ${theme.color.orange500};
+//   border-radius: 50%;
+// `;
 
-const _SelectButton = styled(Button)`
-  width: 120px;
-`;
+// const _SelectButton = styled(Button)`
+//   width: 120px;
+// `;

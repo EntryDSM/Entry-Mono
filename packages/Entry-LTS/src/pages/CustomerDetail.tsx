@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
-import { Button, Input, Spinner, Stack, Text, Textarea, Toast, theme } from '@team-entry/design_system';
+import { Button, Input, Spinner, Stack, Text, Textarea, Toast, theme } from '@entrydsm/design-system';
 import { Mobile, Pc } from '@/hooks/useResponsive';
 import { GetQnaDetail } from '@/utils/api/qna';
 import { useAuthority } from '@/hooks/useAuthority';

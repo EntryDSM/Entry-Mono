@@ -1,19 +1,18 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import Download from '@/assets/Download.svg';
-import { Icon, Text, theme } from '@team-entry/design_system';
+import { Icon, Text, theme } from '@entrydsm/design-system';
 import { useAuthority } from '@/hooks/useAuthority';
-import { color, realBlack } from '@team-entry/design_system/build/style/color';
 
 const NewAdmissionPage = () => {
   const note = [
-    '① 등기우편 접수는 제출 마감일 우체국 소인까지 인정',
+    '1. 등기우편 접수는 제출 마감일 우체국 소인까지 인정',
 
-    '② 합격자 등록은 입학동의서 제출로 대신함',
+    '2. 합격자 등록은 입학동의서 제출로 대신함',
 
-    '③ 원서는 전형의 구분과 상관없이 단일 지원이 원칙임',
+    '3. 원서는 전형의 구분과 상관없이 단일 지원이 원칙임',
 
-    '④ 전형 일정은 추후 변경될 수 있음',
+    '4. 전형 일정은 추후 변경될 수 있음',
   ];
   const newStudentSchedule = [
     {
@@ -26,7 +25,11 @@ const NewAdmissionPage = () => {
       schedule: '2024.10.14.(월)~10.17.(목) 17:00',
       location: '본교 접수처 또는 등기우편',
     },
-    { title: '1차 전형 합격자 발표', schedule: '2024.10.21.(월) 15:00', location: '원서접수 사이트' },
+    {
+      title: '1차 전형 합격자 발표',
+      schedule: '2024.10.21.(월) 15:00',
+      location: '원서접수 사이트',
+    },
     {
       title: '2차 전형(심층면접 등)',
       schedule: '2024.10.25.(금) 09:00',
@@ -51,7 +54,8 @@ const NewAdmissionPage = () => {
   const { isAdmin } = useAuthority();
 
   const DownLoad = () => {
-    const pdfUrl = 'https://dsmhs.djsch.kr/boardCnts/fileDown.do?fileSeq=7cc282c62941f5b4e314530b378dc812';
+    const pdfUrl =
+      'https://dsmhs.djsch.kr/boardCnts/fileDown.do?fileSeq=7cc282c62941f5b4e314530b378dc812';
     window.open(pdfUrl);
   };
 
@@ -131,7 +135,7 @@ export default NewAdmissionPage;
 
 const _TableBox = styled.div`
   width: 100%;
-  border-top: 2px solid ${color.orange500};
+  border-top: 2px solid ${theme.color.orange500};
 `;
 
 const _Table = styled.table`
@@ -145,17 +149,17 @@ const _Title = styled.th`
   white-space: nowrap;
   text-align: center;
   padding: 8px 4px;
-  background-color: ${color.black50};
+  background-color: ${theme.color.black50};
   letter-spacing: 4px;
-  border: 1px solid ${color.black100};
+  border: 1px solid ${theme.color.black100};
 `;
 
 const _Th = styled.th`
   white-space: nowrap;
   text-align: center;
   padding: 8px 4px;
-  background-color: ${color.black50};
-  border: 1px solid ${color.black100};
+  background-color: ${theme.color.black50};
+  border: 1px solid ${theme.color.black100};
   vertical-align: middle;
 `;
 
@@ -163,13 +167,13 @@ const _Td = styled.td`
   white-space: nowrap;
   text-align: center;
   padding: 8px 4px;
-  border: 1px solid ${color.black100};
+  border: 1px solid ${theme.color.black100};
 `;
 
 const _DetailsTd = styled.td`
   white-space: nowrap;
   padding: 8px;
-  border: 1px solid ${color.black100};
+  border: 1px solid ${theme.color.black100};
 `;
 
 const _Container = styled.div`
@@ -200,7 +204,8 @@ const _Icon = styled.div<{ isAdmin: boolean }>`
   justify-content: center;
   width: 2rem;
   height: 2rem;
-  background-color: ${({ isAdmin }) => (isAdmin ? theme.color.green500 : theme.color.orange500)};
+  background-color: ${({ isAdmin }) =>
+    isAdmin ? theme.color.green500 : theme.color.orange500};
   border-radius: 50%;
 `;
 

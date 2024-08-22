@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { theme } from '@team-entry/design_system';
+import { theme } from '@entrydsm/design-system';
 
 export const _File = styled.div`
   display: flex;

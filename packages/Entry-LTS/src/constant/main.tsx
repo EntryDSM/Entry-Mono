@@ -1,6 +1,6 @@
 import { useAuthority } from '@/hooks/useAuthority';
 import styled from '@emotion/styled';
-import { theme } from '@team-entry/design_system';
+import { theme } from '@entrydsm/design-system';
 import React from 'react';
 
 interface ICurrentDate {

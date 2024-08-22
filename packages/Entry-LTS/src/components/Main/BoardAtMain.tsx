@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { Text } from '@team-entry/design_system';
+import { Text } from '@entrydsm/design-system';
 import Arrow from '../../assets/BoardArrow.svg';
 import { Link } from 'react-router-dom';
 import { GetAllNotice } from '@/utils/api/notice';

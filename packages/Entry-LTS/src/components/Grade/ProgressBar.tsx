@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { Text, theme } from '@team-entry/design_system';
+import { Text, theme } from '@entrydsm/design-system';
 import { GradeStatusType } from '@/interfaces/grade';
 
 interface IProgressBarProps {

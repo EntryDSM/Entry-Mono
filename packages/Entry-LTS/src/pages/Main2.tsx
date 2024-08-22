@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { Button, Text } from '@team-entry/design_system';
+import { Button, Text } from '@entrydsm/design-system';
 import MainBgImg from '@/assets/MainBgImg.png';
 import Schedule from '@/components/Main2/Schedule';
 import Faq from '@/components/Main/Faq';
@@ -16,7 +16,8 @@ const Main2 = () => {
         <_TopContainer>
           <div>
             <_Title>
-              <span style={{ color: '#FF9900' }}>대덕소프트웨어마이스터고</span>는 지금,
+              <span style={{ color: '#FF9900' }}>대덕소프트웨어마이스터고</span>
+              는 지금,
               <br />
               IT 업계를 선도할 미래 인재를 모집하고 있어요
             </_Title>
@@ -70,7 +71,7 @@ const _TopContainer = styled.div`
   justify-content: center;
   align-items: center;
   gap: 166px;
-  > div:nth-child(1) {
+  > div:nth-of-type(1) {
     width: 94%;
     max-width: 1180px;
     gap: 70px;

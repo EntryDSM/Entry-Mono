@@ -1,26 +1,14 @@
 {
-  "extends": "../../tsconfig.base.json",
   "compilerOptions": {
-    "outDir": "./dist",
-    "target": "es5",
-    "module": "esnext",
-    "jsx": "react-jsx",
-    "noImplicitAny": true,
-    "allowSyntheticDefaultImports": true,
-    "lib": ["dom", "dom.iterable", "esnext"],
-    "allowJs": true,
-    "skipLibCheck": true,
-    "esModuleInterop": true,
-    "strict": true,
-    "forceConsistentCasingInFileNames": true,
-    "moduleResolution": "node",
-    "resolveJsonModule": true,
-    "isolatedModules": true,
+    "types": ["vite/client", "jest"],
     "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"],
-      "@entrydsm/design-system": ["../EntryDesignSystem/src/index.ts"]
+      "@/*": ["src/*"]
     }
   },
-  "include": ["src"]
+  "files": [],
+  "references": [
+    { "path": "./tsconfig.app.json" },
+    { "path": "./tsconfig.node.json" }
+  ]
 }

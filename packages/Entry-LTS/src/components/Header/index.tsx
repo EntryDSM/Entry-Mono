@@ -3,7 +3,7 @@ import LogoOrange from '../../assets/LogoOrange.svg';
 import LogoGreen from '../../assets/LogoGreen.svg';
 import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { Button, Icon, Text } from '@team-entry/design_system';
+import { Button, Icon, Text } from '@entrydsm/design-system';
 import { Mobile, Pc } from '../../hooks/useResponsive';
 import Menu from '@/assets/Menu.svg';
 import { useAuthority } from '@/hooks/useAuthority';
@@ -116,7 +116,11 @@ const Header = () => {
   return (
     <>
       <_._Wrapper
-        scroll={location.pathname === '/main' || location.pathname === '/' ? scrollY : 1}
+        scroll={
+          location.pathname === '/main' || location.pathname === '/'
+            ? scrollY
+            : 1
+        }
         onClick={() => {
           isDropdownOpen && setIsDropdownOpen(false);
         }}
@@ -126,7 +130,10 @@ const Header = () => {
             <_._MenuIcon onClick={closeMenu} src={Menu} alt="" />
             {isOpen && (
               <_._Background onClick={closeMenu}>
-                <_._Menu onClick={(e) => e.stopPropagation()} visibility={visibility}>
+                <_._Menu
+                  onClick={(e) => e.stopPropagation()}
+                  visibility={visibility}
+                >
                   {menuList.map((list, idx) => {
                     return (
                       <Link key={idx} to={list.url}>
@@ -144,7 +151,9 @@ const Header = () => {
                   {isLogin ? (
                     <>
                       <Link to="/mypage">
-                        <_._MenuElement color="black">마이페이지</_._MenuElement>
+                        <_._MenuElement color="black">
+                          마이페이지
+                        </_._MenuElement>
                       </Link>
                       <_._MenuElement color="red" onClick={Logout}>
                         로그아웃
@@ -166,14 +175,30 @@ const Header = () => {
               <img
                 src={isAdmin ? LogoGreen : LogoOrange}
                 alt=""
-                style={{ width: '35px', height: '48px', marginRight: 12, cursor: 'pointer' }}
+                style={{
+                  width: '35px',
+                  height: '48px',
+                  marginRight: 12,
+                  cursor: 'pointer',
+                }}
               />
-              {(location.pathname !== '/main' && location.pathname !== '/') || scrollY >= 1 ? (
-                <_._Text fontColor="#000" fontSize={18} fontWeight={500} className="logoText">
+              {(location.pathname !== '/main' && location.pathname !== '/') ||
+              scrollY >= 1 ? (
+                <_._Text
+                  fontColor="#000"
+                  fontSize={18}
+                  fontWeight={500}
+                  className="logoText"
+                >
                   EntryDSM
                 </_._Text>
               ) : (
-                <_._Text fontColor="fff" fontSize={18} fontWeight={500} className="logoText">
+                <_._Text
+                  fontColor="fff"
+                  fontSize={18}
+                  fontWeight={500}
+                  className="logoText"
+                >
                   EntryDSM
                 </_._Text>
               )}
@@ -184,7 +209,14 @@ const Header = () => {
                   const { name, url } = res;
                   return (
                     <Link key={index} to={url}>
-                      <Text size="body1" color={location.pathname.includes(url) ? `${authorityColor}500` : 'inherit'}>
+                      <Text
+                        size="body1"
+                        color={
+                          location.pathname.includes(url)
+                            ? `${authorityColor}500`
+                            : 'inherit'
+                        }
+                      >
                         {name}
                       </Text>
                     </Link>
@@ -212,7 +244,11 @@ const Header = () => {
                     <div>
                       <Text
                         size="body1"
-                        color={location.pathname.includes('/about') ? `${authorityColor}500` : 'inherit'}
+                        color={
+                          location.pathname.includes('/about')
+                            ? `${authorityColor}500`
+                            : 'inherit'
+                        }
                       >
                         About
                       </Text>
@@ -220,7 +256,9 @@ const Header = () => {
                         cursor="pointer"
                         icon="DownArrow"
                         color={
-                          (location.pathname !== '/main' && location.pathname !== '/') || scrollY >= 1
+                          (location.pathname !== '/main' &&
+                            location.pathname !== '/') ||
+                          scrollY >= 1
                             ? 'realBlack'
                             : 'realWhite'
                         }
@@ -234,14 +272,22 @@ const Header = () => {
                       >
                         <_._DropdownMenu>
                           <Link to="/about">
-                            <Text size="body1" color="inherit" className="modalText">
+                            <Text
+                              size="body1"
+                              color="inherit"
+                              className="modalText"
+                            >
                               팀 소개
                             </Text>
                           </Link>
                         </_._DropdownMenu>
                         <_._DropdownMenu>
                           <Link to="/">
-                            <Text size="body1" color="inherit" className="modalText">
+                            <Text
+                              size="body1"
+                              color="inherit"
+                              className="modalText"
+                            >
                               학교 소개
                             </Text>
                           </Link>
@@ -251,7 +297,11 @@ const Header = () => {
                   </_._DropdownWrapper>
                   {isAdmin ? (
                     <Link to={ADMIN_URL}>
-                      <Button color={authorityColor} kind="contained" onClick={onClick}>
+                      <Button
+                        color={authorityColor}
+                        kind="contained"
+                        onClick={onClick}
+                      >
                         입학전형 관리자 페이지로
                       </Button>
                     </Link>
@@ -260,13 +310,25 @@ const Header = () => {
                       <Link to="/mypage">
                         <Text
                           size="body1"
-                          color={location.pathname.includes('/mypage') ? `${authorityColor}500` : '#494949'}
+                          color={
+                            location.pathname.includes('/mypage')
+                              ? `${authorityColor}500`
+                              : (location.pathname !== '/main' &&
+                                    location.pathname !== '/') ||
+                                  scrollY >= 1
+                                ? 'realBlack'
+                                : 'realWhite'
+                          }
                         >
                           마이페이지
                         </Text>
                       </Link>
-                      <Text size="body1" color="inherit" style={{ fontSize: '22px' }}>
-                        김이름
+                      <Text
+                        size="body1"
+                        color="inherit"
+                        style={{ fontSize: '22px' }}
+                      >
+                        {data && data.name}
                       </Text>
                     </>
                   )}
@@ -290,7 +352,11 @@ const Header = () => {
                     <div>
                       <Text
                         size="body1"
-                        color={location.pathname.includes('/about') ? `${authorityColor}500` : 'inherit'}
+                        color={
+                          location.pathname.includes('/about')
+                            ? `${authorityColor}500`
+                            : 'inherit'
+                        }
                       >
                         About
                       </Text>
@@ -298,7 +364,9 @@ const Header = () => {
                         cursor="pointer"
                         icon="DownArrow"
                         color={
-                          (location.pathname !== '/main' && location.pathname !== '/') || scrollY >= 1
+                          (location.pathname !== '/main' &&
+                            location.pathname !== '/') ||
+                          scrollY >= 1
                             ? 'realBlack'
                             : 'realWhite'
                         }
@@ -312,14 +380,22 @@ const Header = () => {
                       >
                         <_._DropdownMenu>
                           <Link to="/about">
-                            <Text size="body1" color="inherit" className="modalText">
+                            <Text
+                              size="body1"
+                              color="inherit"
+                              className="modalText"
+                            >
                               팀 소개
                             </Text>
                           </Link>
                         </_._DropdownMenu>
                         <_._DropdownMenu>
                           <Link to="/">
-                            <Text size="body1" color="inherit" className="modalText">
+                            <Text
+                              size="body1"
+                              color="inherit"
+                              className="modalText"
+                            >
                               학교 소개
                             </Text>
                           </Link>
@@ -327,7 +403,12 @@ const Header = () => {
                       </_._DropdownMenus>
                     )}
                   </_._DropdownWrapper>
-                  <Button color={authorityColor} kind="contained" onClick={onClick} disabled>
+                  <Button
+                    color={authorityColor}
+                    kind="contained"
+                    onClick={onClick}
+                    disabled
+                  >
                     로그인
                   </Button>
                 </div>

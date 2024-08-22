@@ -1,6 +1,6 @@
 import { keyframes } from '@emotion/react';
 import styled from '@emotion/styled';
-import { Text } from '@team-entry/design_system';
+import { Text } from '@entrydsm/design-system';
 import Wave from '../../assets/wave';
 
 const WhatIsEntry = () => {

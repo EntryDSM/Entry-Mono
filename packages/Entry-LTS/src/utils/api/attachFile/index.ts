@@ -1,6 +1,6 @@
 import { useMutation } from '@tanstack/react-query';
 import { instance } from '../axios';
-import { Toast } from '@team-entry/design_system';
+import { Toast } from '@entrydsm/design-system';
 
 export const UploadAttachFile = () => {
   const response = async (params: File[]) => {

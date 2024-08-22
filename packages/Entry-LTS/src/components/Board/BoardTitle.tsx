@@ -1,7 +1,7 @@
 import { SetStateAction } from 'react';
 import { Link } from 'react-router-dom';
 import styled from '@emotion/styled';
-import { Button, Text, theme } from '@team-entry/design_system';
+import { Button, Text, theme } from '@entrydsm/design-system';
 import { Mobile, Pc } from '../../hooks/useResponsive';
 import { useAuthority } from '@/hooks/useAuthority';
 
@@ -18,7 +18,17 @@ interface IBoardTitle {
 }
 
 const BoardTitle = (props: IBoardTitle) => {
-  const { click, setClick, title, subTitle, button1, button2, button3, isCustomer, link } = props;
+  const {
+    click,
+    setClick,
+    title,
+    subTitle,
+    button1,
+    button2,
+    button3,
+    isCustomer,
+    link,
+  } = props;
   const { isAdmin, authorityColor } = useAuthority();
   const onClick = () => {
     console.log('clicked!');
@@ -50,12 +60,20 @@ const BoardTitle = (props: IBoardTitle) => {
       <_Buttons>
         <_ButtonWrapper>
           {button1 && (
-            <Button onClick={() => setClick(false)} color={authorityColor} kind={click ? 'outlined' : 'contained'}>
+            <Button
+              onClick={() => setClick(false)}
+              color={authorityColor}
+              kind={click ? 'outlined' : 'contained'}
+            >
               {button1}
             </Button>
           )}
           {button2 && (
-            <Button onClick={() => setClick(true)} color={authorityColor} kind={click ? 'contained' : 'outlined'}>
+            <Button
+              onClick={() => setClick(true)}
+              color={authorityColor}
+              kind={click ? 'contained' : 'outlined'}
+            >
               {button2}
             </Button>
           )}

@@ -3,7 +3,7 @@ import { ReissueToken } from './user';
 import { getCookies, removeCookies, removeTokens, setCookies, setTokens } from '@/utils/cookies';
 import { AUTH_URL, SERVER_URL } from '@/constant/env';
 import { useNavigate } from 'react-router-dom';
-import { Toast } from '@team-entry/design_system';
+import { Toast } from '@entrydsm/design-system';
 import process from 'process';
 
 export const instance = axios.create({

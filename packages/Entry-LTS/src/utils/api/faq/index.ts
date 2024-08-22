@@ -1,7 +1,7 @@
 import { instance } from '../axios';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { FaqType, ICreateFaq, IGetFaq, IFaqDetail } from './types';
-import { Toast } from '@team-entry/design_system';
+import { Toast } from '@entrydsm/design-system';
 import { useNavigate } from 'react-router-dom';
 
 const router = 'faq';

@@ -1,7 +1,7 @@
 import { useAuthority } from '@/hooks/useAuthority';
 import { Mobile, Pc } from '@/hooks/useResponsive';
 import styled from '@emotion/styled';
-import { Text } from '@team-entry/design_system';
+import { Text } from '@entrydsm/design-system';
 import React from 'react';
 
 interface PropsType {

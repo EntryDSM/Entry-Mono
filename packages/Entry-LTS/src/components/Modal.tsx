@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import { ReactNode } from 'react';
-import { Icon, theme } from '@team-entry/design_system';
+import { Icon, theme } from '@entrydsm/design-system';
 
 const Modal = ({ children, onClose, close = true }: { children: ReactNode; onClose: () => void; close?: boolean }) => {
   return (

@@ -1,4 +1,4 @@
-import { Input, theme } from '@team-entry/design_system';
+import { Input, theme } from '@entrydsm/design-system';
 import GradeWraper from '../GradeWraper';
 import { GradeStatusType, IWriteGradeElement } from '@/interfaces/grade';
 import styled from '@emotion/styled';
@@ -33,7 +33,6 @@ const WriteAttendence = ({
       ...prev,
       dsm_algorithm_award: checked,
     }));
-    console.log(writeGradeElement.dsm_algorithm_award);
   }, [checked, setWriteGradeElement]);
 
   useEffect(() => {
@@ -41,7 +40,6 @@ const WriteAttendence = ({
       ...prev,
       certificate: checked2,
     }));
-    console.log(writeGradeElement.certificate);
   }, [checked2, setWriteGradeElement]);
 
   return (

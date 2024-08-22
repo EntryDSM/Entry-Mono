@@ -1,4 +1,4 @@
-import { Text } from '@team-entry/design_system';
+import { Text } from '@entrydsm/design-system';
 import styled from '@emotion/styled';
 import GraphImg from '../../assets/Graph.svg';
 import AwardImg from '../../assets/Awards.svg';

@@ -3,7 +3,7 @@ import { instance } from './axios';
 import { setCookies, setTokens } from '@/utils/cookies';
 import { COOKIE_DOMAIN } from '@/constant/env';
 import { AxiosError } from 'axios';
-import { Toast } from '@entrydsm/design-system';
+import { Toast } from '@team-entry/design_system';
 
 export interface RedirectURL {
   redirectURL: string;

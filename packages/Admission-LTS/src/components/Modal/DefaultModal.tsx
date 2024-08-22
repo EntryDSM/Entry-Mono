@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
 import styled from '@emotion/styled';
 import { Button, Text, theme, Input } from '@entrydsm/design-system';
-import { colorKeyOfType } from '@entrydsm/design-system/build/style/color';
+import { colorKeyOfType } from '@entrydsm/design-system';
 import { useInput } from '../../hooks/useInput';
 
 interface IDefaultModal {

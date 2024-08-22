@@ -1,15 +1,19 @@
 import styled from '@emotion/styled';
-import { Button, Text, theme } from '@team-entry/design_system';
+import { Button, Text, theme } from '@entrydsm/design-system';
 import { Mobile, Pc } from '@/hooks/useResponsive';
 import BoardElement from '@/components/Board/BoardElement';
 import { useModal } from '@/hooks/useModal';
 import CancelModal from '@/components/Modal/CancelModal';
-import { ApplyInfoStatus, DeleteUserInfo, DeleteUserPdf } from '@/utils/api/user';
+import {
+  ApplyInfoStatus,
+  DeleteUserInfo,
+  DeleteUserPdf,
+} from '@/utils/api/user';
 import { AUTH_URL } from '@/constant/env';
 import { DownloadPdf } from '@/utils/api/pdf';
 import { GetFirstRoundPass, GetSecondRoundPass } from '@/utils/api/pass';
 import BoardHeader from '@/components/Board/BoardHeader';
-import { GetMyQna } from '@/utils/api/qna';
+// import { GetMyQna } from '@/utils/api/qna';
 import { Link } from 'react-router-dom';
 import DefaultModal from '@/components/Modal/DefaultModal';
 import { getSchedule } from '@/utils/api/schedule';
@@ -22,8 +26,11 @@ const MyPage = () => {
   const onDownloadPdf = DownloadPdf();
 
   const { mutate: getFirstRound } = GetFirstRoundPass({ setModalState, open });
-  const { mutate: getSecondRound } = GetSecondRoundPass({ setModalState, open });
-  const { data: myQnaList } = GetMyQna();
+  const { mutate: getSecondRound } = GetSecondRoundPass({
+    setModalState,
+    open,
+  });
+  // const { data: myQnaList } = GetMyQna();
 
   // const openSignOutModal = () => {
   //   setModalState('SIGN_OUT');
@@ -45,7 +52,10 @@ const MyPage = () => {
                 {data?.name} 지원자님
               </Text>
               <Text color="black500" size="body1">
-                {data?.phoneNumber.replace(/^(\d{2,3})(\d{3,4})(\d{4})$/, `$1-$2-$3`)}
+                {data?.phoneNumber.replace(
+                  /^(\d{2,3})(\d{3,4})(\d{4})$/,
+                  `$1-$2-$3`,
+                )}
               </Text>
             </Pc>
             <Mobile>
@@ -53,7 +63,10 @@ const MyPage = () => {
                 {data?.name} 지원자님
               </Text>
               <Text color="black500" size="body3">
-                {data?.phoneNumber.replace(/^(\d{2,3})(\d{3,4})(\d{4})$/, `$1-$2-$3`)}
+                {data?.phoneNumber.replace(
+                  /^(\d{2,3})(\d{3,4})(\d{4})$/,
+                  `$1-$2-$3`,
+                )}
               </Text>
             </Mobile>
           </_UserInfo>
@@ -77,9 +90,9 @@ const MyPage = () => {
           </Text>
           <_Line />
           <Text color="black900" size="body3">
-            {data?.application_type === 'COMMON' && '일반 전형'}
-            {data?.application_type === 'MEISTER' && '마이스터 전형'}
-            {data?.application_type === 'SOCIAL' && '사회통합 전형'}
+            {data?.applicationType === 'COMMON' && '일반 전형'}
+            {data?.applicationType === 'MEISTER' && '마이스터 전형'}
+            {data?.applicationType === 'SOCIAL' && '사회통합 전형'}
           </Text>
           <Text color="black900" size="title2" margin={['top', 4]}>
             지원서 제출 {data?.submitted ? '완료' : '미완료'}
@@ -88,12 +101,16 @@ const MyPage = () => {
             서류 도착 여부
           </Text>
           <Text color="black900" size="title2" margin={['top', 4]}>
-            서류가 학교에 {data?.printed_arrived ? '도착하였습니다' : '도착하지 않았습니다'}
+            서류가 학교에{' '}
+            {data?.printed_arrived ? '도착하였습니다' : '도착하지 않았습니다'}
           </Text>
           <_ApplyButtons>
             <Pc>
               <Button onClick={onDownloadPdf}>원서 다운로드</Button>
-              <Button disabled={currentDate < secondAnnouncementDate} onClick={getSecondRound}>
+              <Button
+                disabled={currentDate < secondAnnouncementDate}
+                onClick={getSecondRound}
+              >
                 발표 결과 확인
               </Button>
               {/* <Button color="delete" kind="delete" onClick={openCancelSubmitModal}>
@@ -106,7 +123,7 @@ const MyPage = () => {
           </_ApplyButtons>
         </_Apply>
 
-        <_BoarderTitle>
+        {/* <_BoarderTitle>
           <Pc>
             <Text margin={['left', 16]} color="black700" size="body1">
               내가 작성한 질문
@@ -117,9 +134,15 @@ const MyPage = () => {
               내가 작성한 질문
             </Text>
           </Mobile>
-        </_BoarderTitle>
-        <div style={{ width: '100%' }}>
-          <BoardHeader isNumber={true} isTopBorder={false} isComment={true} isWriteDay={true} isWriter={true} />
+        </_BoarderTitle> */}
+        {/* <div style={{ width: '100%' }}>
+          <BoardHeader
+            isNumber={true}
+            isTopBorder={false}
+            isComment={true}
+            isWriteDay={true}
+            isWriter={true}
+          />
           {myQnaList?.questions?.map((qna, idx) => {
             return (
               <Link to={`/customer/${qna.id}`}>
@@ -139,7 +162,7 @@ const MyPage = () => {
               </Link>
             );
           })}
-        </div>
+        </div> */}
       </_Wrapper>
 
       {modalState === 'CANCEL_SUBMIT' && (
