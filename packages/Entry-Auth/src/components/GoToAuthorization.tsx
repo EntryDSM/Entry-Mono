@@ -31,6 +31,6 @@ export const GoToAuthorization = ({ text }: Props) => {
 };
 
 const _Button = styled(Button)`
-  width: 100%;
+  width: 100% !important;
   margin-top: 33px;
 `;
