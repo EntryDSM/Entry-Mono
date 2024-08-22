@@ -48,7 +48,6 @@ server {\
 
 COPY --from=builder /Entry-Mono-${BRANCH}/packages/Entry-LTS/build /usr/share/nginx/html
 
-# 3000포트 열기
 EXPOSE 3002
 # Nginx 시작
 CMD ["nginx", "-g", "daemon off;"]
