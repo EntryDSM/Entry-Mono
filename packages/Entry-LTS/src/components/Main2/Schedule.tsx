@@ -18,7 +18,10 @@ const Schedule = () => {
     if (data?.schedules) {
       const formatData = {
         scheduleName: scheduleCalculater(data?.schedules[0].type),
-        scheduleTime: timeformatter(data.schedules[0].date, data.schedules[4].date),
+        scheduleTime: timeformatter(
+          data.schedules[0].date,
+          data.schedules[4].date,
+        ),
       };
       const formatDatas = data?.schedules
         ?.filter((_, i) => i !== 4 && i !== 0)
@@ -45,9 +48,9 @@ const Schedule = () => {
         })}
       </_ProgressProvider>
       <_TextProvider>
-        {schedules?.map((schedule) => {
+        {schedules?.map((schedule, index) => {
           return (
-            <div>
+            <div key={index}>
               {schedule.scheduleName}
               <span>{schedule.scheduleTime}</span>
             </div>

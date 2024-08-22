@@ -9,7 +9,12 @@ import { Link, useNavigate } from 'react-router-dom';
 import { GetAllNotice } from '@/utils/api/notice';
 import { INotice, NoticeType } from '@/utils/api/notice/types';
 
-const name = ['1차 입학설명회', '2차 입학설명회', '3차 입학설명회', '4차 입학설명회'];
+const name = [
+  '1차 입학설명회',
+  '2차 입학설명회',
+  '3차 입학설명회',
+  '4차 입학설명회',
+];
 const dates = ['2024.05.11', '2024.07.13', '2024.08.24', '2024.09.28'];
 const urls = ['', 'https://www.youtube.com/watch?v=frqGg4d7fXk'];
 const BriefingSessionLink =
@@ -37,6 +42,12 @@ const ApplyandNotice = () => {
     setLatestNoticeIndex(latestIndex);
   }, [nowDate]);
 
+  const DownLoad = () => {
+    const pdfUrl =
+      'https://dsmhs.djsch.kr/boardCnts/fileDown.do?fileSeq=7cc282c62941f5b4e314530b378dc812';
+    window.open(pdfUrl);
+  };
+
   interface PropsType {
     sessionName?: string;
     current?: any;
@@ -46,10 +57,20 @@ const ApplyandNotice = () => {
 
   const SessionBox = ({ sessionName, current, date }: PropsType) => {
     return (
-      <_DateBox style={{ backgroundColor: `${latestNoticeIndex + 1 == current ? '#FFF2EA' : '#f8f8f8'}` }}>
+      <_DateBox
+        style={{
+          backgroundColor: `${latestNoticeIndex + 1 == current ? '#FFF2EA' : '#f8f8f8'}`,
+        }}
+      >
         <_TextBox>
           <_SessionName>{sessionName}</_SessionName>
-          <_Date style={{ color: `${latestNoticeIndex + 1 == current ? '#FF9154' : '#969696'}` }}>{date}</_Date>
+          <_Date
+            style={{
+              color: `${latestNoticeIndex + 1 == current ? '#FF9154' : '#969696'}`,
+            }}
+          >
+            {date}
+          </_Date>
         </_TextBox>
         {latestNoticeIndex + 1 == current ? (
           <_ApplyButton
@@ -77,7 +98,11 @@ const ApplyandNotice = () => {
       </_DateBox>
     );
   };
-  const NoticeBox = ({ title, createdAt, id }: Omit<INotice, 'type' | 'isPinned'>) => {
+  const NoticeBox = ({
+    title,
+    createdAt,
+    id,
+  }: Omit<INotice, 'type' | 'isPinned'>) => {
     return (
       <_Notice
         onClick={() => {
@@ -104,13 +129,22 @@ const ApplyandNotice = () => {
             <_Line />
             <_Point
               style={{
-                top: latestNoticeIndex !== null && latestNoticeIndex < 3 ? 48 + (latestNoticeIndex + 1) * 104 : 48,
+                top:
+                  latestNoticeIndex !== null && latestNoticeIndex < 3
+                    ? 48 + (latestNoticeIndex + 1) * 104
+                    : 48,
               }}
             />
           </_LineBox>
           <_DateContainer>
             {name.map((i, j) => (
-              <SessionBox key={j} date={dates[j]} sessionName={i} current={j} even={true} />
+              <SessionBox
+                key={j}
+                date={dates[j]}
+                sessionName={i}
+                current={j}
+                even={true}
+              />
             ))}
           </_DateContainer>
         </_ApplyBox>
@@ -123,19 +157,33 @@ const ApplyandNotice = () => {
           </Link>
         </_Title2>
         <_NoticeBox>
-          <_MainNoticeBox>
+          <_MainNoticeBox onClick={DownLoad}>
             <_MainNotificationIcon>
               <_Img src={Notification} />
             </_MainNotificationIcon>
-            <_MainNotificationText>신입생 전형 요강 PDF 파일 다운로드</_MainNotificationText>
+            <_MainNotificationText>
+              신입생 전형 요강 PDF 파일 다운로드
+            </_MainNotificationText>
             <_Img src={Download2} />
           </_MainNoticeBox>
           {data?.notices?.length > 0 &&
-            data?.notices.map((notice: { title: string; createdAt: string; id: string }, index: number) => {
-              if (index >= 4) return;
+            data?.notices.map(
+              (
+                notice: { title: string; createdAt: string; id: string },
+                index: number,
+              ) => {
+                if (index >= 4) return;
 
-              return <NoticeBox title={notice.title} createdAt={notice.createdAt} id={notice.id} />;
-            })}
+                return (
+                  <NoticeBox
+                    title={notice.title}
+                    createdAt={notice.createdAt}
+                    id={notice.id}
+                    key={index}
+                  />
+                );
+              },
+            )}
         </_NoticeBox>
       </_NoticeContainer>
     </_Wrapper>
@@ -280,7 +328,12 @@ const _ApplyBox = styled.div`
 const _Line = styled.div`
   width: 4px;
   height: 100%;
-  background: linear-gradient(180deg, #f8f8f8 -26.61%, #e7e6eb 50.19%, #f8f8f8 130.12%);
+  background: linear-gradient(
+    180deg,
+    #f8f8f8 -26.61%,
+    #e7e6eb 50.19%,
+    #f8f8f8 130.12%
+  );
 `;
 
 const _DateContainer = styled.div`
