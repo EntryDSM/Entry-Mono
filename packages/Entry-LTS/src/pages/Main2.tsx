@@ -10,6 +10,14 @@ import { scheduleStatusCalculater } from '@/utils/scheduleCalculater';
 const Main2 = () => {
   const { data } = getSchedule();
 
+  const isOpen = () => {
+    const currentDate = new Date();
+    const startDate = new Date(data?.schedules[0]?.date ?? '');
+    const endDate = new Date(data?.schedules[4]?.date ?? '');
+
+    return !(currentDate >= startDate && currentDate <= endDate);
+  };
+
   return (
     <_Wrapper>
       <_TopContainerWrapper>
@@ -31,7 +39,7 @@ const Main2 = () => {
               onClick={() => {
                 console.log('click!!');
               }}
-              disabled={true}
+              disabled={isOpen()}
             >
               지원하기
             </Button>
