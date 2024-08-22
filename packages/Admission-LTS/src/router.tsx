@@ -8,7 +8,16 @@ import { Cookies } from 'react-cookie';
 
 export const Router = () => {
   useEffect(() => {
-    if(!window.location.hostname.includes('stag') && !window.location.hostname.includes('localhost')) {
+    if (
+      window.location.href === 'https://apply-stag.entrydsm.hs.kr/' ||
+      window.location.href === 'https://apply-stag.entrydsm.hs.kr'
+    )
+      return;
+
+    if (
+      !window.location.hostname.includes('stag') &&
+      !window.location.hostname.includes('localhost')
+    ) {
       alert('원서접수가 마감되었습니다.');
       window.location.href = `${MAIN_URL}`;
     }
