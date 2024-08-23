@@ -9,8 +9,8 @@ export const useOpenPopUp = () => {
     (redirectUrl: string) =>
       // eslint-disable-next-line
       instance.post<string>('/user/verify/popup', {
-        redirectUrl,
-        // redirectUrl: 'https://auth-stag.entrydsm.hs.kr/login/verify',
+        // redirectUrl,
+        redirectUrl: 'https://auth-stag.entrydsm.hs.kr/sign-up/verify',
       }),
     {
       onSuccess: (res) => {
