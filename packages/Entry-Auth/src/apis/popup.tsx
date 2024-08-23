@@ -6,12 +6,10 @@ export const useOpenPopUp = () => {
   const { setToken } = useToken();
 
   const openPopUp = useMutation(
-    //redirectUrl: string
-    () =>
+    (redirectUrl: string) =>
       // eslint-disable-next-line
       instance.post<string>('/user/verify/popup', {
-        // redirectUrl,
-        redirectUrl: 'https://auth-stag.entrydsm.hs.kr/sign-up/verify',
+        redirectUrl,
       }),
     {
       onSuccess: (res) => {
