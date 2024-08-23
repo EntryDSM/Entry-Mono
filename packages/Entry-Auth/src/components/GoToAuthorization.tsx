@@ -10,7 +10,8 @@ interface Props {
 export const GoToAuthorization = ({ text }: Props) => {
   const { openPopUp } = useOpenPopUp();
   const goToAuthorization = () => {
-    openPopUp.mutate(`${AUTH_URL}/verify`);
+    openPopUp.mutate();
+    // `${AUTH_URL}/verify`
   };
 
   return (
