@@ -64,13 +64,20 @@ export const getApplicantDetail = (id: string) => {
     const { data } = await instance.get(`${router}/application/${id}`);
     return data;
   };
-  return useQuery<IApplicationDetailResponse>(['applicationList', id], resposne, { enabled: !!id });
+  return useQuery<IApplicationDetailResponse>(
+    ['applicationList', id],
+    resposne,
+    { enabled: !!id },
+  );
 };
 
 /** 유형별 인원 변경 */
 export const editApplicationCount = () => {
   const response = async (params: IApplicationCountRequest) => {
-    const { data } = await instance.post(`${router}/application/static/count`, params);
+    const { data } = await instance.post(
+      `${router}/application/static/count`,
+      params,
+    );
     return data;
   };
 
@@ -161,10 +168,13 @@ export const changeArrivedStatus = () => {
 /** 수험표 엑셀 출력 */
 export const getAdmissionTicket = () => {
   const response = async () => {
-    const { data } = await instance.get(`${router}/excel/admission-ticket`, {
-      responseType: 'blob',
-      timeout: 40000,
-    });
+    const { data } = await instance.get(
+      `${router}/application/excel/admission-ticket`,
+      {
+        responseType: 'blob',
+        timeout: 40000,
+      },
+    );
     return data;
   };
 
@@ -215,9 +225,12 @@ export const getPdfApplicatnsInfo = () => {
 /** 지원자 코드 목록 엑셀 출력 */
 export const getApplicantsCodeExecl = () => {
   const response = async () => {
-    const { data } = await instance.get(`${router}/application/excel/applicants/code`, {
-      responseType: 'blob',
-    });
+    const { data } = await instance.get(
+      `${router}/application/excel/applicants/code`,
+      {
+        responseType: 'blob',
+      },
+    );
     return data;
   };
 
@@ -230,6 +243,7 @@ export const getApplicantsCodeExecl = () => {
         `지원자코드_${date.getMonth() + 1}월${date.getDate()}일_${date.getHours()}시${date.getMinutes()}분`,
       );
     },
-    onError: () => Toast('지원자 코드 목록 엑셀 출력에 실패하였습니다.', { type: 'error' }),
+    onError: () =>
+      Toast('지원자 코드 목록 엑셀 출력에 실패하였습니다.', { type: 'error' }),
   });
 };
