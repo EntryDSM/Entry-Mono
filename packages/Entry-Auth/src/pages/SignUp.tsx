@@ -1,25 +1,24 @@
 import { RedirectURL } from '@/apis/login';
-// import { useVerifyUserInfo } from '@/apis/verify';
+import { useVerifyUserInfo } from '@/apis/verify';
 import { AuthTemplate } from '@/components/AuthTemplate';
 import DivideSignup from '@/components/DivideSignup';
 import { InsertUserInfo } from '@/components/InsertUserInfo';
 import { useToken } from '@/hooks/useToken';
-// import { removeLocalStorageItem } from '@/utils/localstorage';
-import { useMemo, useState } from 'react';
-// useEffect
+import { removeLocalStorageItem } from '@/utils/localstorage';
+import { useEffect, useMemo, useState } from 'react';
+
 export const SignUp = ({ redirectURL }: RedirectURL) => {
   const { token } = useToken();
-  // const { getUserData } = useVerifyUserInfo(token.mdl_tkn);
+  const { getUserData } = useVerifyUserInfo(token.mdl_tkn);
   const [isStudent, setIsStudent] = useState(false);
 
-  // useEffect(() => {
-  //   removeLocalStorageItem('isVerified');
-  // }, []);
+  useEffect(() => {
+    removeLocalStorageItem('isVerified');
+  }, []);
 
   const RenderedComponent = useMemo(() => {
     let component;
-    // if (getUserData.data?.data) {
-    if (false) {
+    if (getUserData.data) {
       component = (
         <InsertUserInfo isStudent={isStudent} redirectURL={redirectURL} />
       );
@@ -31,7 +30,6 @@ export const SignUp = ({ redirectURL }: RedirectURL) => {
       component = <DivideSignup setIsStudent={setIsStudent} />;
     }
     return component;
-  }, [redirectURL, token.mdl_tkn, isStudent]);
-  // getUserData.data?.data,
+  }, [redirectURL, token.mdl_tkn, isStudent, getUserData.data]);
   return <AuthTemplate title="회원가입">{RenderedComponent}</AuthTemplate>;
 };
