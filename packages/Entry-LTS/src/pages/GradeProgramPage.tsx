@@ -7,7 +7,11 @@ import { subject } from '@/constant/grade';
 import AllSelect from '@/components/Grade/SelectGrade/AllSelect';
 import GradePreview from '@/components/Grade/GradePreview';
 import ProgressBar from '@/components/Grade/ProgressBar';
-import { GradeStatusType, ISelectGradeElement, IWriteGradeElement } from '@/interfaces/grade';
+import {
+  GradeStatusType,
+  ISelectGradeElement,
+  IWriteGradeElement,
+} from '@/interfaces/grade';
 import SelectGrade from '@/components/Grade/SelectGrade/SelectGrade';
 import WriteAttendence from '@/components/Grade/WriteInfo/WriteAttendence';
 import GradeFooter from '@/components/Grade/GradeFooter';
@@ -23,7 +27,11 @@ import { MAIN_URL } from '@/constant/env';
 
 const GradeProgramPage = () => {
   const [current, setCurrent] = useState(0);
-  const { form: blackexam, onChange: changeBlackexam, setForm: setBlackexam } = useInput({ score: 0 });
+  const {
+    form: blackexam,
+    onChange: changeBlackexam,
+    setForm: setBlackexam,
+  } = useInput({ score: 0 });
   const [searchParams] = useSearchParams();
   const gradeStatus = searchParams.get('gradeStatus');
   const [score, setScore] = useState({
@@ -38,15 +46,16 @@ const GradeProgramPage = () => {
 
   const handleBlackexamSubmit = () => {};
 
-  const { form: selectGradeElement, setForm: setSelectGradeElement } = useInput<ISelectGradeElement>({
-    korean_grade: ['X', 'X', 'X', 'X'],
-    social_grade: ['X', 'X', 'X', 'X'],
-    history_grade: ['X', 'X', 'X', 'X'],
-    math_grade: ['X', 'X', 'X', 'X'],
-    science_grade: ['X', 'X', 'X', 'X'],
-    english_grade: ['X', 'X', 'X', 'X'],
-    tech_and_home_grade: ['X', 'X', 'X', 'X'],
-  });
+  const { form: selectGradeElement, setForm: setSelectGradeElement } =
+    useInput<ISelectGradeElement>({
+      korean_grade: ['X', 'X', 'X', 'X'],
+      social_grade: ['X', 'X', 'X', 'X'],
+      history_grade: ['X', 'X', 'X', 'X'],
+      math_grade: ['X', 'X', 'X', 'X'],
+      science_grade: ['X', 'X', 'X', 'X'],
+      english_grade: ['X', 'X', 'X', 'X'],
+      tech_and_home_grade: ['X', 'X', 'X', 'X'],
+    });
 
   const {
     form: writeGradeElement,
@@ -75,17 +84,45 @@ const GradeProgramPage = () => {
   const titles =
     gradeStatus === 'graduate'
       ? [
-          { step: 1, title: '3학년 2학기', subTitle: '과목이 없는 경우 X로 기입하세요' },
-          { step: 2, title: '3학년 1학기', subTitle: '과목이 없는 경우 X로 기입하세요' },
-          { step: 3, title: '2학년 2학기(직전학기)', subTitle: '과목이 없는 경우 X로 기입하세요' },
-          { step: 4, title: '2학년 1학기(직전 전학기)', subTitle: '과목이 없는 경우 X로 기입하세요' },
+          {
+            step: 1,
+            title: '3학년 2학기',
+            subTitle: '과목이 없는 경우 X로 기입하세요',
+          },
+          {
+            step: 2,
+            title: '3학년 1학기',
+            subTitle: '과목이 없는 경우 X로 기입하세요',
+          },
+          {
+            step: 3,
+            title: '2학년 2학기(직전학기)',
+            subTitle: '과목이 없는 경우 X로 기입하세요',
+          },
+          {
+            step: 4,
+            title: '2학년 1학기(직전 전학기)',
+            subTitle: '과목이 없는 경우 X로 기입하세요',
+          },
           { step: 5, title: '출석 점수 & 봉사 점수', subTitle: '' },
         ]
       : gradeStatus === 'prospectiveGraduate'
         ? [
-            { step: 1, title: '3학년 1학기', subTitle: '과목이 없는 경우 X로 기입하세요' },
-            { step: 2, title: '직전 학기', subTitle: '과목이 없는 경우 X로 기입하세요' },
-            { step: 3, title: '직전전 학기', subTitle: '과목이 없는 경우 X로 기입하세요' },
+            {
+              step: 1,
+              title: '3학년 1학기',
+              subTitle: '과목이 없는 경우 X로 기입하세요',
+            },
+            {
+              step: 2,
+              title: '직전 학기',
+              subTitle: '과목이 없는 경우 X로 기입하세요',
+            },
+            {
+              step: 3,
+              title: '직전전 학기',
+              subTitle: '과목이 없는 경우 X로 기입하세요',
+            },
             { step: 4, title: '출석 점수 & 봉사 점수', subTitle: '' },
           ]
         : [
@@ -101,26 +138,48 @@ const GradeProgramPage = () => {
   }, [gradeStatus]);
 
   useEffect(() => {
-    const { dsmAlgorithmScore, certificateScore } = getBonusScore(writeGradeElement);
+    const { dsmAlgorithmScore, certificateScore } =
+      getBonusScore(writeGradeElement);
     const newScore =
       gradeStatus === 'qualificationExam'
         ? {
-            gradeScore: Math.min(140, Math.max(0, Math.round(((blackexam.score - 50) / 50) * 80 * 10) / 10)),
+            gradeScore: Math.min(
+              140,
+              Math.max(
+                0,
+                Math.round(((blackexam.score - 50) / 50) * 80 * 10) / 10,
+              ),
+            ),
             attendenceScore: 15,
-            volunteerScore: Math.min(15, Math.max(0, Math.round(((blackexam.score - 40) / 60) * 15 * 10) / 10)),
+            volunteerScore: Math.min(
+              15,
+              Math.max(
+                0,
+                Math.round(((blackexam.score - 40) / 60) * 15 * 10) / 10,
+              ),
+            ),
             maxScore: getMaxScore(),
             certificateScore: certificateScore,
             dsmAlgorithmScore: dsmAlgorithmScore,
-            qualificationExamScore: getQualificationExamScore(writeGradeElement),
+            qualificationExamScore:
+              getQualificationExamScore(writeGradeElement),
           }
         : {
-            gradeScore: getSelectGradeScore(current, selectGradeElement, isGraduate),
-            attendenceScore: current === titles.length - 1 ? getAttendenceScore(writeGradeElement) : 0,
+            gradeScore: getSelectGradeScore(
+              current,
+              selectGradeElement,
+              isGraduate,
+            ),
+            attendenceScore:
+              current === titles.length - 1
+                ? getAttendenceScore(writeGradeElement)
+                : 0,
             volunteerScore: getVoluntterScore(writeGradeElement.volunteer_time),
             maxScore: getMaxScore(),
             certificateScore: certificateScore,
             dsmAlgorithmScore: dsmAlgorithmScore,
-            qualificationExamScore: getQualificationExamScore(writeGradeElement),
+            qualificationExamScore:
+              getQualificationExamScore(writeGradeElement),
           };
     setScore(newScore);
   }, [current, writeGradeElement, blackexam, gradeStatus, selectGradeElement]);
@@ -158,7 +217,10 @@ const GradeProgramPage = () => {
               </GradeWrapper>
             )}
           </Header>
-          <ProgressBar step={titles[current].step} gradeStatus={gradeStatus as GradeStatusType} />
+          <ProgressBar
+            step={titles[current].step}
+            gradeStatus={gradeStatus as GradeStatusType}
+          />
           <_Selects>
             {current < titles.length - 1 && (
               <>
@@ -207,8 +269,16 @@ const GradeProgramPage = () => {
           setCurrent={setCurrent}
           maxScore={score.volunteerScore + score.attendenceScore}
           gradeScore={score.gradeScore}
-          onClick={() => (gradeStatus === 'qualificationExam' ? handleBlackexamSubmit() : handleSubmit())}
-          onSubmit={() => (gradeStatus === 'qualificationExam' ? handleBlackexamSubmit() : handleSubmit())}
+          onClick={() =>
+            gradeStatus === 'qualificationExam'
+              ? handleBlackexamSubmit()
+              : handleSubmit()
+          }
+          onSubmit={() =>
+            gradeStatus === 'qualificationExam'
+              ? handleBlackexamSubmit()
+              : handleSubmit()
+          }
           length={titles.length - 1}
           certificateScore={score.certificateScore}
           dsmAlgorithmScore={score.dsmAlgorithmScore}
