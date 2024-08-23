@@ -17,11 +17,13 @@ import BoardHeader from '@/components/Board/BoardHeader';
 import { Link } from 'react-router-dom';
 import DefaultModal from '@/components/Modal/DefaultModal';
 import { getSchedule } from '@/utils/api/schedule';
+import { getDocumentInfo, getUserInfo } from '@/utils/api/application';
 
 const MyPage = () => {
   const { Modal, open, close, setModalState, modalState } = useModal();
   const { mutate: deleteUserInfo } = DeleteUserInfo();
   const { data } = ApplyInfoStatus();
+  const { data: documentInfo } = getDocumentInfo();
   const { mutate: deleteUserPdf } = DeleteUserPdf(data?.receipt_code);
   const onDownloadPdf = DownloadPdf();
 
@@ -49,10 +51,10 @@ const MyPage = () => {
           <_UserInfo>
             <Pc>
               <Text color="realBlack" size="header1">
-                {data?.name} 지원자님
+                {documentInfo?.name} 지원자님
               </Text>
               <Text color="black500" size="body1">
-                {data?.phoneNumber.replace(
+                {documentInfo?.phoneNumber.replace(
                   /^(\d{2,3})(\d{3,4})(\d{4})$/,
                   `$1-$2-$3`,
                 )}
@@ -60,10 +62,10 @@ const MyPage = () => {
             </Pc>
             <Mobile>
               <Text color="realBlack" size="body3">
-                {data?.name} 지원자님
+                {documentInfo?.name} 지원자님
               </Text>
               <Text color="black500" size="body3">
-                {data?.phoneNumber.replace(
+                {documentInfo?.phoneNumber.replace(
                   /^(\d{2,3})(\d{3,4})(\d{4})$/,
                   `$1-$2-$3`,
                 )}
@@ -90,19 +92,21 @@ const MyPage = () => {
           </Text>
           <_Line />
           <Text color="black900" size="body3">
-            {data?.applicationType === 'COMMON' && '일반 전형'}
-            {data?.applicationType === 'MEISTER' && '마이스터 전형'}
-            {data?.applicationType === 'SOCIAL' && '사회통합 전형'}
+            {documentInfo?.applicationType === 'COMMON' && '일반 전형'}
+            {documentInfo?.applicationType === 'MEISTER' && '마이스터 전형'}
+            {documentInfo?.applicationType === 'SOCIAL' && '사회통합 전형'}
           </Text>
           <Text color="black900" size="title2" margin={['top', 4]}>
-            지원서 제출 {data?.submitted ? '완료' : '미완료'}
+            지원서 제출 {documentInfo?.isSubmitted ? '완료' : '미완료'}
           </Text>
           <Text color="black900" size="body3" margin={['top', 25]}>
             서류 도착 여부
           </Text>
           <Text color="black900" size="title2" margin={['top', 4]}>
             서류가 학교에{' '}
-            {data?.printed_arrived ? '도착하였습니다' : '도착하지 않았습니다'}
+            {documentInfo?.isPrintedArrived
+              ? '도착하였습니다'
+              : '도착하지 않았습니다'}
           </Text>
           <_ApplyButtons>
             <Pc>
