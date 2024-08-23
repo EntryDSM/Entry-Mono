@@ -10,6 +10,7 @@ export const useOpenPopUp = () => {
       // eslint-disable-next-line
       instance.post<string>('/user/verify/popup', {
         redirectUrl,
+        // redirectUrl: 'https://auth-stag.entrydsm.hs.kr/login/verify',
       }),
     {
       onSuccess: (res) => {
@@ -28,11 +29,18 @@ export const useOpenPopUp = () => {
         const height = 700;
         const left = window.screenX + (window.outerWidth - width) / 2;
         const top = window.screenY + (window.outerHeight - height) / 2;
-        window.open(
+        // window.open(
+        //   `/pass?mdl_tkn=${mdl_tknValue}`,
+        //   'popup',
+        //   `resizable=no,width=${width},height=${height},left=${left},top=${top}}`,
+        // );
+        const popupWindow = window.open(
           `/pass?mdl_tkn=${mdl_tknValue}`,
           'popup',
-          `resizable=no,width=${width},height=${height},left=${left},top=${top}}`,
+          `resizable=no,width=${width},height=${height},left=${left},top=${top}`,
         );
+        popupWindow?.document.write(res.data);
+        popupWindow?.document.close();
       },
     },
   );
