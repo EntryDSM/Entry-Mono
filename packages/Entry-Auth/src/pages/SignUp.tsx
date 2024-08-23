@@ -1,5 +1,5 @@
 import { RedirectURL } from '@/apis/login';
-import { useVerifyUserInfo } from '@/apis/verify';
+// import { useVerifyUserInfo } from '@/apis/verify';
 import { AuthTemplate } from '@/components/AuthTemplate';
 import DivideSignup from '@/components/DivideSignup';
 import { InsertUserInfo } from '@/components/InsertUserInfo';
@@ -9,7 +9,7 @@ import { useMemo, useState } from 'react';
 // useEffect
 export const SignUp = ({ redirectURL }: RedirectURL) => {
   const { token } = useToken();
-  const { getUserData } = useVerifyUserInfo(token.mdl_tkn);
+  // const { getUserData } = useVerifyUserInfo(token.mdl_tkn);
   const [isStudent, setIsStudent] = useState(false);
 
   // useEffect(() => {
@@ -18,7 +18,8 @@ export const SignUp = ({ redirectURL }: RedirectURL) => {
 
   const RenderedComponent = useMemo(() => {
     let component;
-    if (getUserData.data?.data) {
+    // if (getUserData.data?.data) {
+    if (false) {
       component = (
         <InsertUserInfo isStudent={isStudent} redirectURL={redirectURL} />
       );
