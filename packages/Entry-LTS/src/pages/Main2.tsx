@@ -6,9 +6,13 @@ import Faq from '@/components/Main/Faq';
 import ApplyandNotice from '@/components/Main/ApplyandNotice';
 import { getSchedule } from '@/utils/api/schedule';
 import { scheduleStatusCalculater } from '@/utils/scheduleCalculater';
+import { useNavigate } from 'react-router-dom';
+import { APPLY_URL } from '@/constant/env';
 
 const Main2 = () => {
   const { data } = getSchedule();
+
+  const navigate = useNavigate();
 
   const isOpen = () => {
     const currentDate = new Date();
@@ -37,7 +41,9 @@ const Main2 = () => {
               color="orange"
               isBig={true}
               onClick={() => {
-                console.log('click!!');
+                if (isOpen()) {
+                  window.location.href = `${APPLY_URL}`;
+                }
               }}
               disabled={isOpen()}
             >
