@@ -4,17 +4,17 @@ import { AuthTemplate } from '@/components/AuthTemplate';
 import DivideSignup from '@/components/DivideSignup';
 import { InsertUserInfo } from '@/components/InsertUserInfo';
 import { useToken } from '@/hooks/useToken';
-import { removeLocalStorageItem } from '@/utils/localstorage';
-import { useEffect, useMemo, useState } from 'react';
-
+// import { removeLocalStorageItem } from '@/utils/localstorage';
+import { useMemo, useState } from 'react';
+// useEffect
 export const SignUp = ({ redirectURL }: RedirectURL) => {
   const { token } = useToken();
   const { getUserData } = useVerifyUserInfo(token.mdl_tkn);
   const [isStudent, setIsStudent] = useState(false);
 
-  useEffect(() => {
-    removeLocalStorageItem('isVerified');
-  }, []);
+  // useEffect(() => {
+  //   removeLocalStorageItem('isVerified');
+  // }, []);
 
   const RenderedComponent = useMemo(() => {
     let component;
