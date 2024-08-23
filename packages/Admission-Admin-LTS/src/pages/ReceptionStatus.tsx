@@ -2,12 +2,15 @@ import styled from '@emotion/styled';
 import { Text, VStack, theme } from '@entrydsm/design-system';
 import { CommonScoreCard } from '@/components/CommonScoreCard';
 import { SpecialScoreCard } from '@/components/SpecialScoreCard';
-import { getApplicationCount, getStaticCounts, getStaticsScore } from '@/utils/api/admin';
+import {
+  getApplicationCount,
+  getStaticCounts,
+  getStaticsScore,
+} from '@/utils/api/admin';
 
 function ReceptionStatus() {
   const { data: staticsScoreData } = getStaticsScore();
   const { data: staticCountsData } = getStaticCounts();
-  const { data: applicationCountData } = getApplicationCount();
 
   const everyCommon = staticCountsData?.[0]?.count ?? 0;
   const daejeonCommon = staticCountsData?.[1]?.count ?? 0;
@@ -15,14 +18,23 @@ function ReceptionStatus() {
   const daejeonMeister = staticCountsData?.[3]?.count ?? 0;
   const everySocial = staticCountsData?.[4]?.count ?? 0;
   const daejeonSocial = staticCountsData?.[5]?.count ?? 0;
-  const allReception = everyCommon + everyMeister + everySocial + daejeonCommon + daejeonMeister + daejeonSocial;
+  const allReception =
+    everyCommon +
+    everyMeister +
+    everySocial +
+    daejeonCommon +
+    daejeonMeister +
+    daejeonSocial;
 
-  const allCommon = (applicationCountData?.[0]?.count ?? 25) + (applicationCountData?.[1]?.count ?? 25);
-  const allMeister = (applicationCountData?.[3]?.count ?? 6) + (applicationCountData?.[2]?.count ?? 6);
-  const allSocial = (applicationCountData?.[4]?.count ?? 1) + (applicationCountData?.[5]?.count ?? 1);
+  const allCommon = 50;
+  const allMeister = 12;
+  const allSocial = 2;
 
   const commonPercent = +((everyCommon + daejeonCommon) / allCommon).toFixed(2);
-  const meisterPercent = +((everyMeister + daejeonMeister) / allMeister).toFixed(2);
+  const meisterPercent = +(
+    (everyMeister + daejeonMeister) /
+    allMeister
+  ).toFixed(2);
   const socialPercent = +((everySocial + daejeonSocial) / allSocial).toFixed(2);
 
   return (
@@ -53,7 +65,11 @@ function ReceptionStatus() {
           일반
         </Text>
         <_Application percent={commonPercent * 100}>
-          <_ApplicationText margin={[0, 0, 0, 12]} color="realWhite" size="body1">
+          <_ApplicationText
+            margin={[0, 0, 0, 12]}
+            color="realWhite"
+            size="body1"
+          >
             {`${everyCommon + daejeonCommon}명 (총 ${allCommon}명)`}
           </_ApplicationText>
         </_Application>
@@ -67,7 +83,11 @@ function ReceptionStatus() {
           마이스터
         </Text>
         <_Application percent={meisterPercent * 100}>
-          <_ApplicationText margin={[0, 0, 0, 12]} color="realWhite" size="body1">
+          <_ApplicationText
+            margin={[0, 0, 0, 12]}
+            color="realWhite"
+            size="body1"
+          >
             {`${everyMeister + daejeonMeister}명 (총 ${allMeister}명)`}
           </_ApplicationText>
         </_Application>
@@ -81,7 +101,11 @@ function ReceptionStatus() {
           사회통합
         </Text>
         <_Application percent={socialPercent * 100}>
-          <_ApplicationText margin={[0, 0, 0, 12]} color="realWhite" size="body1">
+          <_ApplicationText
+            margin={[0, 0, 0, 12]}
+            color="realWhite"
+            size="body1"
+          >
             {`${everySocial + daejeonSocial}명 (총 ${allSocial}명)`}
           </_ApplicationText>
         </_Application>
@@ -100,13 +124,13 @@ function ReceptionStatus() {
               대전
             </Text>
             <Text color="black900" size="title3">
-              일반전형: {+(daejeonCommon / (applicationCountData?.[1]?.count ?? 25)).toFixed(2)} : 1
+              일반전형: {+(daejeonCommon / 25).toFixed(2)} : 1
             </Text>
             <Text color="black900" size="title3">
-              마이스터 전형: {+(daejeonMeister / (applicationCountData?.[3]?.count ?? 6)).toFixed(2)} : 1
+              마이스터 전형: {+(daejeonMeister / 6).toFixed(2)} : 1
             </Text>
             <Text color="black900" size="title3">
-              사회통합 전형: {+(daejeonSocial / (applicationCountData?.[5]?.count ?? 1)).toFixed(2)} : 1
+              사회통합 전형: {+(daejeonSocial / 1).toFixed(2)} : 1
             </Text>
           </_CompetitionRate>
           <_CompetitionRate>
@@ -114,13 +138,13 @@ function ReceptionStatus() {
               전국
             </Text>
             <Text color="black900" size="title3">
-              일반전형: {+(everyCommon / (applicationCountData?.[2]?.count ?? 25)).toFixed(2)} : 1
+              일반전형: {+(everyCommon / 25).toFixed(2)} : 1
             </Text>
             <Text color="black900" size="title3">
-              마이스터 전형: {+(everyMeister / (applicationCountData?.[4]?.count ?? 6)).toFixed(2)} : 1
+              마이스터 전형: {+(everyMeister / 6).toFixed(2)} : 1
             </Text>
             <Text color="black900" size="title3">
-              사회통합 전형: {+(everySocial / (applicationCountData?.[6]?.count ?? 1)).toFixed(2)} : 1
+              사회통합 전형: {+(everySocial / 1).toFixed(2)} : 1
             </Text>
           </_CompetitionRate>
         </div>
@@ -131,19 +155,46 @@ function ReceptionStatus() {
       <div style={{ display: 'flex', gap: 20, width: '100%' }}>
         <CommonScoreCard
           title="일반 전형"
-          ranges={['158~170', '145~157', '132~144', '119~131', '106~118', '93-105', '80-92', '-70']}
+          ranges={[
+            '158~170',
+            '145~157',
+            '132~144',
+            '119~131',
+            '106~118',
+            '93-105',
+            '80-92',
+            '-70',
+          ]}
           daejeonRanges={staticsScoreData?.[0]}
           nationWideRanges={staticsScoreData?.[1]}
         />
         <SpecialScoreCard
           title="마이스터 전형"
-          ranges={['98-110', '85-97', '72-84', '59-71', '46-58', '33-45', '20-32', '-19']}
+          ranges={[
+            '98-110',
+            '85-97',
+            '72-84',
+            '59-71',
+            '46-58',
+            '33-45',
+            '20-32',
+            '-19',
+          ]}
           daejeonRanges={staticsScoreData?.[2]}
           nationWideRanges={staticsScoreData?.[3]}
         />
         <SpecialScoreCard
           title="사회통합 전형"
-          ranges={['98-110', '85-97', '72-84', '59-71', '46-58', '33-45', '20-32', '-19']}
+          ranges={[
+            '98-110',
+            '85-97',
+            '72-84',
+            '59-71',
+            '46-58',
+            '33-45',
+            '20-32',
+            '-19',
+          ]}
           daejeonRanges={staticsScoreData?.[4]}
           nationWideRanges={staticsScoreData?.[5]}
         />

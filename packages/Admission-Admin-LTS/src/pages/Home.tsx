@@ -27,7 +27,6 @@ interface IShotcutType {
 const Home = () => {
   const { data: staticsScoreData } = getStaticsScore();
   const { data: staticCountsData } = getStaticCounts();
-  const { data: applicationCountData } = getApplicationCount();
 
   const everyCommon = staticCountsData?.[0].count ?? 0;
   const daejeonCommon = staticCountsData?.[1].count ?? 0;
@@ -43,15 +42,9 @@ const Home = () => {
     daejeonMeister +
     daejeonSocial;
 
-  const allCommon =
-    (applicationCountData?.[0]?.count ?? 25) +
-    (applicationCountData?.[1]?.count ?? 25);
-  const allMeister =
-    (applicationCountData?.[3]?.count ?? 6) +
-    (applicationCountData?.[2]?.count ?? 6);
-  const allSocial =
-    (applicationCountData?.[4]?.count ?? 1) +
-    (applicationCountData?.[5]?.count ?? 1);
+  const allCommon = 50;
+  const allMeister = 12;
+  const allSocial = 2;
 
   const commonPercent = +((everyCommon + daejeonCommon) / allCommon).toFixed(2);
   const meisterPercent = +(
