@@ -13,7 +13,7 @@ export const GoToAuthorization = ({ text }: Props) => {
   console.log(AUTH_URL);
 
   const goToAuthorization = () => {
-    openPopUp.mutate(`https://auth-stag.entrydsm.hs.kr/verify`);
+    openPopUp.mutate(`https://auth-stag.entrydsm.hs.kr/sign-up/verify`);
   };
 
   return (
