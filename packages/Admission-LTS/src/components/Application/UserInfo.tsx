@@ -10,6 +10,7 @@ import {
   Text,
   VStack,
   theme,
+  Skeleton,
 } from '@entrydsm/design-system';
 import DaumPostCode from 'react-daum-postcode';
 import {
@@ -52,9 +53,10 @@ const UserInfo = ({ current, setCurrent }: ICurrnettype) => {
     photoFileName: '',
   });
 
-  const { data: userProfile } = GetUserProfile();
-  const { data: getUserInfo } = GetUserInfo();
-  const { data: getUserType } = GetUserType();
+  const { data: userProfile, isLoading: isUserProfileLoading } =
+    GetUserProfile();
+  const { data: getUserInfo, isLoading: isUserInfoLoading } = GetUserInfo();
+  const { data: getUserType, isLoading: isUserTypeLoading } = GetUserType();
   const isBlackExam = getUserType?.educationalStatus === 'QUALIFICATION_EXAM';
 
   const inputRef = useRef<HTMLInputElement>(null);
@@ -141,7 +143,9 @@ const UserInfo = ({ current, setCurrent }: ICurrnettype) => {
 
   const isDisabled =
     Object.values(userInfo).some((item) => !!item === false) ||
-    userPhoto.photo === 'data:image/png;base64,null';
+    userPhoto.photo === 'data:image/png;base64,null' ||
+    isBlackExam === null ||
+    isBlackExam === undefined;
 
   const onNextClick = () => {
     combinedMutations(
@@ -167,7 +171,13 @@ const UserInfo = ({ current, setCurrent }: ICurrnettype) => {
         <ApplicationContent title="증명사진" grid={1}>
           <Stack align="center" gap={20}>
             <_ApplicationImg onClick={handleImage}>
-              {userPhoto.photo !== 'data:image/png;base64,null' ? (
+              {isUserProfileLoading ? (
+                <Skeleton
+                  width={200}
+                  height={250}
+                  isLoaded={isUserProfileLoading}
+                />
+              ) : userPhoto.photo !== 'data:image/png;base64,null' ? (
                 <Img src={userPhoto.photo} alt="사진을 다시 입력해주세요" />
               ) : (
                 <Text color="black700" size="body3">
@@ -189,77 +199,102 @@ const UserInfo = ({ current, setCurrent }: ICurrnettype) => {
         </ApplicationContent>
 
         <ApplicationContent grid={1} title="이름">
-          <Input
-            type="text"
-            placeholder="이름"
-            width={230}
-            name="applicantName"
-            value={userInfo.applicantName}
-            onChange={changeUserInfo}
-            disabled={!userProfile?.isParent}
-          />
+          {isUserInfoLoading ? (
+            <Skeleton width={230} height={42} isLoaded={isUserInfoLoading} />
+          ) : (
+            <Input
+              type="text"
+              placeholder="이름"
+              width={230}
+              name="applicantName"
+              value={userInfo.applicantName}
+              onChange={changeUserInfo}
+              disabled={!userProfile?.isParent}
+            />
+          )}
         </ApplicationContent>
 
         <ApplicationContent grid={2} title="성별">
-          <Radio
-            label="남자"
-            name="sex"
-            value="MALE"
-            onClick={changeUserInfo}
-            checked={userInfo.sex === 'MALE'}
-          />
-          <Radio
-            label="여자"
-            name="sex"
-            value="FEMALE"
-            onClick={changeUserInfo}
-            checked={userInfo.sex === 'FEMALE'}
-          />
+          {isUserInfoLoading ? (
+            <Skeleton width={340} height={26} isLoaded={isUserInfoLoading} />
+          ) : (
+            <>
+              <Radio
+                label="남자"
+                name="sex"
+                value="MALE"
+                onClick={changeUserInfo}
+                checked={userInfo.sex === 'MALE'}
+              />
+              <Radio
+                label="여자"
+                name="sex"
+                value="FEMALE"
+                onClick={changeUserInfo}
+                checked={userInfo.sex === 'FEMALE'}
+              />
+            </>
+          )}
         </ApplicationContent>
+
         <ApplicationContent grid={3} title="생년월일">
-          <Dropdown
-            className="birthDate"
-            width={85}
-            value={userInfo.birthDate[0]}
-            onChange={(year) =>
-              setUserInfo({
-                ...userInfo,
-                birthDate: [year, userInfo.birthDate[1], userInfo.birthDate[2]],
-              })
-            }
-            options={generateNumberArray(2000, date.getFullYear())}
-            unit="년"
-          />
-          <Dropdown
-            className="birthDate"
-            width={85}
-            value={userInfo.birthDate[1]}
-            onChange={(month) =>
-              setUserInfo({
-                ...userInfo,
-                birthDate: [
-                  userInfo.birthDate[0],
-                  month,
-                  userInfo.birthDate[2],
-                ],
-              })
-            }
-            options={generateNumberArray(1, 12)}
-            unit="월"
-          />
-          <Dropdown
-            className="birthDate"
-            width={85}
-            value={userInfo.birthDate[2]}
-            onChange={(date) =>
-              setUserInfo({
-                ...userInfo,
-                birthDate: [userInfo.birthDate[0], userInfo.birthDate[1], date],
-              })
-            }
-            options={generateNumberArray(1, 31)}
-            unit="일"
-          />
+          {isUserInfoLoading ? (
+            <Skeleton width={510} height={42} isLoaded={isUserInfoLoading} />
+          ) : (
+            <>
+              <Dropdown
+                className="birthDate"
+                width={85}
+                value={userInfo.birthDate[0]}
+                onChange={(year) =>
+                  setUserInfo({
+                    ...userInfo,
+                    birthDate: [
+                      year,
+                      userInfo.birthDate[1],
+                      userInfo.birthDate[2],
+                    ],
+                  })
+                }
+                options={generateNumberArray(2000, date.getFullYear())}
+                unit="년"
+              />
+              <Dropdown
+                className="birthDate"
+                width={85}
+                value={userInfo.birthDate[1]}
+                onChange={(month) =>
+                  setUserInfo({
+                    ...userInfo,
+                    birthDate: [
+                      userInfo.birthDate[0],
+                      month,
+                      userInfo.birthDate[2],
+                    ],
+                  })
+                }
+                options={generateNumberArray(1, 12)}
+                unit="월"
+              />
+              <Dropdown
+                className="birthDate"
+                width={85}
+                value={userInfo.birthDate[2]}
+                onChange={(date) =>
+                  setUserInfo({
+                    ...userInfo,
+                    birthDate: [
+                      userInfo.birthDate[0],
+                      userInfo.birthDate[1],
+                      date,
+                    ],
+                  })
+                }
+                options={generateNumberArray(1, 31)}
+                unit="일"
+              />
+            </>
+          )}
         </ApplicationContent>
 
         <ApplicationContent
@@ -267,37 +302,49 @@ const UserInfo = ({ current, setCurrent }: ICurrnettype) => {
           title="본인 연락처"
           placeholder="‘-’ 문자를 제외한 숫자만 입력해주세요"
         >
-          <Input
-            type="tel"
-            placeholder="본인 연락처"
-            width={230}
-            name="applicantTel"
-            maxLength={13}
-            value={userInfo.applicantTel}
-            onChange={changeUserInfo}
-            disabled={!userProfile?.isParent}
-          />
+          {isUserInfoLoading ? (
+            <Skeleton width={230} height={42} isLoaded={isUserInfoLoading} />
+          ) : (
+            <Input
+              type="tel"
+              placeholder="본인 연락처"
+              width={230}
+              name="applicantTel"
+              maxLength={13}
+              value={userInfo.applicantTel}
+              onChange={changeUserInfo}
+              disabled={!userProfile?.isParent}
+            />
+          )}
         </ApplicationContent>
 
         <ApplicationContent grid={2} title="보호자명" gap={30}>
           <_InputBox>
-            <Input
-              type="text"
-              placeholder="보호자명"
-              width={230}
-              name="parentName"
-              value={userInfo.parentName}
-              onChange={changeUserInfo}
-              disabled={userProfile?.isParent}
-            />
-            <Input
-              type="text"
-              placeholder="관계"
-              width={220}
-              name="parentRelation"
-              value={userInfo.parentRelation}
-              onChange={changeUserInfo}
-            />
+            {isUserInfoLoading ? (
+              <Skeleton width={230} height={42} isLoaded={isUserInfoLoading} />
+            ) : (
+              <Input
+                type="text"
+                placeholder="보호자명"
+                width={230}
+                name="parentName"
+                value={userInfo.parentName}
+                onChange={changeUserInfo}
+                disabled={userProfile?.isParent}
+              />
+            )}
+            {isUserInfoLoading ? (
+              <Skeleton width={220} height={42} isLoaded={isUserInfoLoading} />
+            ) : (
+              <Input
+                type="text"
+                placeholder="관계"
+                width={220}
+                name="parentRelation"
+                value={userInfo.parentRelation}
+                onChange={changeUserInfo}
+              />
+            )}
           </_InputBox>
         </ApplicationContent>
 
@@ -306,37 +353,57 @@ const UserInfo = ({ current, setCurrent }: ICurrnettype) => {
           title="보호자 연락처"
           placeholder="‘-’ 문자를 제외한 숫자만 입력해주세요"
         >
-          <Input
-            type="tel"
-            placeholder="보호자 연락처"
-            width={230}
-            maxLength={13}
-            name="parentTel"
-            value={userInfo.parentTel}
-            onChange={changeUserInfo}
-            disabled={userProfile?.isParent}
-          />
+          {isUserInfoLoading ? (
+            <Skeleton width={230} height={42} isLoaded={isUserInfoLoading} />
+          ) : (
+            <Input
+              type="tel"
+              placeholder="보호자 연락처"
+              width={230}
+              maxLength={13}
+              name="parentTel"
+              value={userInfo.parentTel}
+              onChange={changeUserInfo}
+              disabled={userProfile?.isParent}
+            />
+          )}
         </ApplicationContent>
 
         <ApplicationContent grid={1} title="주소">
           <VStack margin={[30, 0]} gap={10}>
             <HStack gap={20}>
-              <Input
-                name="postalCode"
-                type="text"
-                width={125}
-                placeholder="우편번호"
-                value={userInfo.postalCode}
-                disabled
-              />
-              <Input
-                name="address"
-                type="text"
-                width={240}
-                placeholder="기본주소"
-                value={userInfo.streetAddress}
-                disabled
-              />
+              {isUserInfoLoading ? (
+                <Skeleton
+                  width={125}
+                  height={42}
+                  isLoaded={isUserInfoLoading}
+                />
+              ) : (
+                <Input
+                  name="postalCode"
+                  type="text"
+                  width={125}
+                  placeholder="우편번호"
+                  value={userInfo.postalCode}
+                  disabled
+                />
+              )}
+              {isUserInfoLoading ? (
+                <Skeleton
+                  width={240}
+                  height={42}
+                  isLoaded={isUserInfoLoading}
+                />
+              ) : (
+                <Input
+                  name="address"
+                  type="text"
+                  width={240}
+                  placeholder="기본주소"
+                  value={userInfo.streetAddress}
+                  disabled
+                />
+              )}
               <Button
                 kind="outlined"
                 onClick={() => {
@@ -347,14 +414,22 @@ const UserInfo = ({ current, setCurrent }: ICurrnettype) => {
               </Button>
             </HStack>
             <HStack gap={20}>
-              <Input
-                name="detailAddress"
-                type="text"
-                width={485}
-                placeholder="상세주소"
-                onChange={changeUserInfo}
-                value={userInfo.detailAddress}
-              />
+              {isUserInfoLoading ? (
+                <Skeleton
+                  width={485}
+                  height={42}
+                  isLoaded={isUserInfoLoading}
+                />
+              ) : (
+                <Input
+                  name="detailAddress"
+                  type="text"
+                  width={485}
+                  placeholder="상세주소"
+                  onChange={changeUserInfo}
+                  value={userInfo.detailAddress}
+                />
+              )}
             </HStack>
           </VStack>
         </ApplicationContent>
