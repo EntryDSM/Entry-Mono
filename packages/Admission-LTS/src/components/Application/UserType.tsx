@@ -39,15 +39,15 @@ const UserType = ({
     veteransNumber: undefined,
   });
 
-  const { data, isSuccess } = GetUserType();
+  const { data, isLoading } = GetUserType();
   const { mutateAsync: editUserType } = EditUserType();
   const { mutateAsync: editGraduationType } = PatchGraduationType();
 
   useEffect(() => {
-    if (isSuccess) {
+    if (!isLoading) {
       handlerFunction();
     }
-  }, [isSuccess]);
+  }, [isLoading]);
 
   useEffect(() => {
     data &&
