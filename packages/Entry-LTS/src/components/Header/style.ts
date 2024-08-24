@@ -17,7 +17,8 @@ export const _Wrapper = styled.div<ScrollType>`
   z-index: 100;
   top: 0;
   left: 0;
-  border-bottom: 1px solid ${({ scroll }) => (scroll ? '#e6e6e6' : 'transparent')};
+  border-bottom: 1px solid
+    ${({ scroll }) => (scroll ? '#e6e6e6' : 'transparent')};
   transition: 0.5s;
   &:hover {
     background-color: white;
@@ -56,7 +57,11 @@ export const _Texts = styled.div`
   gap: 20px;
 `;
 
-export const _Text = styled.div<{ fontSize: number; fontWeight: number; fontColor?: string }>`
+export const _Text = styled.div<{
+  fontSize: number;
+  fontWeight: number;
+  fontColor?: string;
+}>`
   color: ${(props) => (props.fontColor ? `#${props.fontColor}` : '#000')};
   font-size: ${(props) => props.fontSize}px;
   font-weight: ${(props) => props.fontWeight};
@@ -106,7 +111,8 @@ export const _MenuElement = styled.div<{ color?: 'red' | 'black' }>`
   justify-content: flex-start;
   align-items: center;
   border-top: 1px solid ${theme.color.black100};
-  color: ${({ color }) => (color === 'red' ? theme.color.error : theme.color.black700)};
+  color: ${({ color }) =>
+    color === 'red' ? theme.color.error : theme.color.black700};
   ${theme.font.body3};
 `;
 

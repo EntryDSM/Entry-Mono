@@ -6,10 +6,10 @@ const ProgressBar = () => {
   const { data, isLoading } = getSchedule();
   const currentDate = new Date();
   const startDate = new Date(data?.schedules[0]?.date ?? '');
-  const endDate = new Date(data?.schedules[1]?.date ?? '');
-  const firstAnnouncementDate = new Date(data?.schedules[2]?.date ?? '');
-  const interviewDate = new Date(data?.schedules[3]?.date ?? '');
-  const secondAnnouncementDate = new Date(data?.schedules[4]?.date ?? '');
+  const endDate = new Date(data?.schedules[4]?.date ?? '');
+  const firstAnnouncementDate = new Date(data?.schedules[1]?.date ?? '');
+  const interviewDate = new Date(data?.schedules[2]?.date ?? '');
+  const secondAnnouncementDate = new Date(data?.schedules[3]?.date ?? '');
 
   if (isLoading) {
     return <></>;
@@ -29,7 +29,8 @@ const ProgressBar = () => {
         .getMinutes()
         .toString()
         .padStart(2, '0')}`,
-      condition: firstAnnouncementDate <= currentDate && currentDate < interviewDate,
+      condition:
+        firstAnnouncementDate <= currentDate && currentDate < interviewDate,
     },
     {
       title: '2차 전형',
@@ -37,7 +38,8 @@ const ProgressBar = () => {
         .getMinutes()
         .toString()
         .padStart(2, '0')}`,
-      condition: interviewDate <= currentDate && currentDate <= secondAnnouncementDate,
+      condition:
+        interviewDate <= currentDate && currentDate <= secondAnnouncementDate,
     },
     {
       title: '2차 발표',
@@ -47,7 +49,9 @@ const ProgressBar = () => {
         .getMinutes()
         .toString()
         .padStart(2, '0')}`,
-      condition: secondAnnouncementDate <= currentDate && currentDate.getDate() <= secondAnnouncementDate.getDate() + 3,
+      condition:
+        secondAnnouncementDate <= currentDate &&
+        currentDate.getDate() <= secondAnnouncementDate.getDate() + 3,
     },
   ];
 
@@ -58,48 +62,71 @@ const ProgressBar = () => {
     {
       element: (
         <_._ProgressCircle
-          now={startDate <= currentDate && currentDate.getDate() <= secondAnnouncementDate.getDate() + 3}
+          now={
+            startDate <= currentDate &&
+            currentDate.getDate() <= secondAnnouncementDate.getDate() + 3
+          }
         />
       ),
     },
     {
       element: (
-        <_._ProgressStep now={endDate < currentDate && currentDate.getDate() <= secondAnnouncementDate.getDate() + 3} />
+        <_._ProgressStep
+          now={
+            endDate < currentDate &&
+            currentDate.getDate() <= secondAnnouncementDate.getDate() + 3
+          }
+        />
       ),
     },
 
     {
       element: (
         <_._ProgressCircle
-          now={firstAnnouncementDate <= currentDate && currentDate.getDate() <= secondAnnouncementDate.getDate() + 3}
+          now={
+            firstAnnouncementDate <= currentDate &&
+            currentDate.getDate() <= secondAnnouncementDate.getDate() + 3
+          }
         />
       ),
     },
     {
       element: (
         <_._ProgressStep
-          now={interviewDate <= currentDate && currentDate.getDate() <= secondAnnouncementDate.getDate() + 3}
+          now={
+            interviewDate <= currentDate &&
+            currentDate.getDate() <= secondAnnouncementDate.getDate() + 3
+          }
         />
       ),
     },
     {
       element: (
         <_._ProgressCircle
-          now={interviewDate <= currentDate && currentDate.getDate() <= secondAnnouncementDate.getDate() + 3}
+          now={
+            interviewDate <= currentDate &&
+            currentDate.getDate() <= secondAnnouncementDate.getDate() + 3
+          }
         />
       ),
     },
     {
       element: (
         <_._ProgressStep
-          now={secondAnnouncementDate <= currentDate && currentDate.getDate() <= secondAnnouncementDate.getDate() + 3}
+          now={
+            secondAnnouncementDate <= currentDate &&
+            currentDate.getDate() <= secondAnnouncementDate.getDate() + 3
+          }
         />
       ),
     },
     {
       element: (
         <_._ProgressCircle
-          now={secondAnnouncementDate <= currentDate && currentDate.getDate() <= secondAnnouncementDate.getDate() + 3}
+          now={
+            secondAnnouncementDate <= currentDate &&
+            currentDate.getDate() <= secondAnnouncementDate.getDate() + 3
+          }
         />
       ),
     },

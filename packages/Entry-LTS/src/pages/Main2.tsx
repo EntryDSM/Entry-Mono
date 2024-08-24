@@ -6,9 +6,21 @@ import Faq from '@/components/Main/Faq';
 import ApplyandNotice from '@/components/Main/ApplyandNotice';
 import { getSchedule } from '@/utils/api/schedule';
 import { scheduleStatusCalculater } from '@/utils/scheduleCalculater';
+import { useNavigate } from 'react-router-dom';
+import { APPLY_URL } from '@/constant/env';
 
 const Main2 = () => {
   const { data } = getSchedule();
+
+  const navigate = useNavigate();
+
+  const isOpen = () => {
+    const currentDate = new Date();
+    const startDate = new Date(data?.schedules[0]?.date ?? '');
+    const endDate = new Date(data?.schedules[4]?.date ?? '');
+
+    return !(currentDate >= startDate && currentDate <= endDate);
+  };
 
   return (
     <_Wrapper>
@@ -16,7 +28,8 @@ const Main2 = () => {
         <_TopContainer>
           <div>
             <_Title>
-              <span style={{ color: '#FF9900' }}>대덕소프트웨어마이스터고</span>는 지금,
+              <span style={{ color: '#FF9900' }}>대덕소프트웨어마이스터고</span>
+              는 지금,
               <br />
               IT 업계를 선도할 미래 인재를 모집하고 있어요
             </_Title>
@@ -28,9 +41,11 @@ const Main2 = () => {
               color="orange"
               isBig={true}
               onClick={() => {
-                console.log('click!!');
+                if (isOpen()) {
+                  window.location.href = `${APPLY_URL}`;
+                }
               }}
-              disabled={true}
+              disabled={isOpen()}
             >
               지원하기
             </Button>
@@ -70,7 +85,7 @@ const _TopContainer = styled.div`
   justify-content: center;
   align-items: center;
   gap: 166px;
-  > div:nth-child(1) {
+  > div:nth-of-type(1) {
     width: 94%;
     max-width: 1180px;
     gap: 70px;

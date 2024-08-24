@@ -26,6 +26,7 @@ export interface IGetUSerType {
   isDaejeon: boolean;
   isOutOfHeadcount: boolean;
   graduatedDate: string;
+  veteransNumber: number;
 }
 
 export interface IPatchUserType {
@@ -33,6 +34,7 @@ export interface IPatchUserType {
   isDaejeon: string | undefined;
   applicationRemark: ApplicationRemark | null;
   isOutOfHeadcount: boolean;
+  veteransNumber?: number;
 }
 
 export interface IPatchGraduationType {

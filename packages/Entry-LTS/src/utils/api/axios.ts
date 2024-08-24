@@ -1,6 +1,12 @@
 import axios, { AxiosError } from 'axios';
 import { ReissueToken } from './user';
-import { getCookies, removeCookies, removeTokens, setCookies, setTokens } from '@/utils/cookies';
+import {
+  getCookies,
+  removeCookies,
+  removeTokens,
+  setCookies,
+  setTokens,
+} from '@/utils/cookies';
 import { AUTH_URL, SERVER_URL } from '@/constant/env';
 import { useNavigate } from 'react-router-dom';
 import { Toast } from '@entrydsm/design-system';
@@ -47,22 +53,26 @@ instance.interceptors.response.use(
             .then((res) => {
               setTokens(res.accessToken, res.refreshToken);
               setCookies('authority', authority === 'admin' ? 'admin' : 'user');
-              if (originalRequest?.headers) originalRequest.headers['Authorization'] = `Bearer ${res.accessToken}`;
+              if (originalRequest?.headers)
+                originalRequest.headers['Authorization'] =
+                  `Bearer ${res.accessToken}`;
               return axios(originalRequest);
             })
             .catch((res: AxiosError<AxiosError>) => {
               if (+res?.response?.data.code >= 500) {
-                return Toast('서버 에러 잠시 뒤 시도해 주세요', { type: 'error' });
+                return Toast('서버 에러 잠시 뒤 시도해 주세요', {
+                  type: 'error',
+                });
               }
               removeTokens();
               removeCookies('authority');
-              // if (res?.response?.data.message !== 'Expired Token') {
-              //   window.location.href = `/login`;
-              // }
+              if (res?.response?.data.message !== 'Expired Token') {
+                window.location.href = import.meta.env.VITE_AUTH_URL;
+              }
             });
         } else {
           removeTokens();
-          // window.location.href = '/';
+          window.location.href = import.meta.env.VITE_AUTH_URL;
         }
       } else return Promise.reject(error);
     }

@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import styled from '@emotion/styled';
-import { Radio, theme, Dropdown } from '@entrydsm/design-system';
+import { Radio, theme, Dropdown, Input } from '@entrydsm/design-system';
 import {
   EditUserType,
   GetUserType,
@@ -28,6 +28,7 @@ const UserType = ({ current, setCurrent }: ICurrnettype) => {
     graduateDate: [(date.getFullYear() + 1).toString(), '01'],
     applicationRemark: null,
     isOutOfHeadcount: false,
+    veteransNumber: undefined,
   });
 
   const { data } = GetUserType();
@@ -45,6 +46,7 @@ const UserType = ({ current, setCurrent }: ICurrnettype) => {
           userType.graduateDate,
         applicationRemark: data.applicationRemark || '',
         isOutOfHeadcount: data.isOutOfHeadcount,
+        veteransNumber: data.veteransNumber,
       });
   }, [data]);
 
@@ -59,6 +61,7 @@ const UserType = ({ current, setCurrent }: ICurrnettype) => {
             isDaejeon: userType.isDaejeon,
             isOutOfHeadcount: false,
             applicationRemark: userType.applicationRemark || null,
+            veteransNumber: userType.veteransNumber,
           }),
         () =>
           editGraduationType({
@@ -157,7 +160,7 @@ const UserType = ({ current, setCurrent }: ICurrnettype) => {
                 graduateDate: [year, userType.graduateDate[1]],
               })
             }
-            options={generateNumberArray(2010, date.getFullYear() + 1)}
+            options={generateNumberArray(2020, date.getFullYear() + 1)}
             unit="년"
           />
           <Dropdown
@@ -197,6 +200,19 @@ const UserType = ({ current, setCurrent }: ICurrnettype) => {
             checked={userType.applicationRemark === 'PRIVILEGED_ADMISSION'}
           />
         </ApplicationContent>
+        {userType.applicationRemark === 'NATIONAL_MERIT' && (
+          <ApplicationContent grid={1} title="보훈번호" required={false}>
+            <Input
+              type="veteransNumber"
+              width={230}
+              name="veteransNumber"
+              placeholder="보훈번호"
+              maxLength={8}
+              onChange={changeUserType}
+              value={userType.veteransNumber}
+            />
+          </ApplicationContent>
+        )}
       </_ApplicationWrapper>
       <ApplicationFooter
         current={current}

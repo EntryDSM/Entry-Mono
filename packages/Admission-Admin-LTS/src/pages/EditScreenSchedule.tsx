@@ -4,11 +4,22 @@ import ProgressBar from '../components/ProgressBar';
 import { generateNumberArray } from '@/utils/GenerateNumberArray';
 import { useDropDown } from '@/hooks/useDropDown';
 import { editSchedule, getSchedule } from '@/utils/api/schedule';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
-const scheduleType = ['START_DATE', 'FIRST_ANNOUNCEMENT', 'INTERVIEW', 'SECOND_ANNOUNCEMENT', 'END_DATE'];
+const scheduleType = [
+  'START_DATE',
+  'FIRST_ANNOUNCEMENT',
+  'INTERVIEW',
+  'SECOND_ANNOUNCEMENT',
+  'END_DATE',
+];
 
-const screenScheduleProgress = ['원서 제출', '1차 발표', '심층 면접', '최종발표'];
+const screenScheduleProgress = [
+  '원서 제출',
+  '1차 발표',
+  '심층 면접',
+  '최종발표',
+];
 
 const EditScreenSchedule = () => {
   const { mutate } = editSchedule();
@@ -31,6 +42,8 @@ const EditScreenSchedule = () => {
     setForm: setEndDropDown,
   } = useDropDown([['01월', '01일', '00시', '00분']]);
 
+  const [cancleFlag, setCancleFlag] = useState(false);
+
   const dropDownOption = (index: number) => {
     switch (index) {
       case 0:
@@ -49,10 +62,10 @@ const EditScreenSchedule = () => {
   useEffect(() => {
     if (data) {
       const startDate = new Date(data?.schedules[0]?.date ?? '');
-      const endDate = new Date(data?.schedules[1]?.date ?? '');
-      const firstAnnouncementDate = new Date(data?.schedules[2]?.date ?? '');
-      const interviewDate = new Date(data?.schedules[3]?.date ?? '');
-      const secondAnnouncementDate = new Date(data?.schedules[4]?.date ?? '');
+      const endDate = new Date(data?.schedules[4]?.date ?? '');
+      const firstAnnouncementDate = new Date(data?.schedules[1]?.date ?? '');
+      const interviewDate = new Date(data?.schedules[2]?.date ?? '');
+      const secondAnnouncementDate = new Date(data?.schedules[3]?.date ?? '');
 
       setStartDropDown(() => [
         [
@@ -89,7 +102,7 @@ const EditScreenSchedule = () => {
         ],
       ]);
     }
-  }, [data]);
+  }, [data, cancleFlag]);
 
   return (
     <_Wrapper>
@@ -147,7 +160,9 @@ const EditScreenSchedule = () => {
                     return (
                       <Dropdown
                         width={80}
-                        onChange={(value) => onChangeEndDropDown([typeIdx, dateIdx], value)}
+                        onChange={(value) =>
+                          onChangeEndDropDown([typeIdx, dateIdx], value)
+                        }
                         options={dropDownOption(dateIdx)}
                         value={res}
                       />
@@ -204,7 +219,13 @@ const EditScreenSchedule = () => {
         >
           저장
         </Button>
-        <Button color="green" kind="outlined" onClick={() => {}}>
+        <Button
+          color="green"
+          kind="outlined"
+          onClick={() => {
+            setCancleFlag(!cancleFlag);
+          }}
+        >
           취소
         </Button>
       </_Buttons>

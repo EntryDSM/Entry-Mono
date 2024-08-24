@@ -89,5 +89,5 @@ export const Login = ({ redirectURL, isAdmin = false }: ILogin) => {
 };
 
 const _Button = styled(Button)`
-  width: 100%;
+  width: 100% !important;
 `;
