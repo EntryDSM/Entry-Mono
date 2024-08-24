@@ -41,7 +41,7 @@ const Main2 = () => {
               color="orange"
               isBig={true}
               onClick={() => {
-                if (isOpen()) {
+                if (!isOpen()) {
                   window.location.href = `${APPLY_URL}`;
                 }
               }}
