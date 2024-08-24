@@ -29,13 +29,11 @@ RUN yarn install
 WORKDIR /Entry-Mono-${BRANCH}/packages/Entry-Auth
 RUN yarn build
 
-# 실행 단계
 FROM nginx:alpine AS runner
 
 ARG BRANCH
 ENV BRANCH=${BRANCH}
 
-# Nginx 설정
 RUN echo "\
 server {\
     listen 3000;\
@@ -48,7 +46,5 @@ server {\
 
 COPY --from=builder /Entry-Mono-${BRANCH}/packages/Entry-Auth/build /usr/share/nginx/html
 
-# 3000포트 열기
 EXPOSE 3000
-# Nginx 시작
 CMD ["nginx", "-g", "daemon off;"]
