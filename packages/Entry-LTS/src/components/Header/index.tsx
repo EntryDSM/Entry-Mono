@@ -42,7 +42,7 @@ const menuList: IHeaderList[] = [
   { name: '전형요강', url: '/admission' },
   { name: '공지사항', url: '/notice' },
   { name: '자주묻는질문', url: '/customer' },
-  { name: '성적산출', url: '/grade' },
+  // { name: '성적산출', url: '/grade' },
 ];
 
 const Header = () => {
@@ -148,7 +148,7 @@ const Header = () => {
                       </Link>
                     );
                   })}
-                  {isLogin ? (
+                  {/* {isLogin ? (
                     <>
                       <Link to="/mypage">
                         <_._MenuElement color="black">
@@ -165,7 +165,7 @@ const Header = () => {
                         로그인
                       </_._MenuElement>
                     </>
-                  )}
+                  )} */}
                 </_._Menu>
               </_._Background>
             )}
