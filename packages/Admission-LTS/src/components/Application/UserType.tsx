@@ -15,7 +15,15 @@ import { generateNumberArray } from '@/utils/GenerateNumberArray';
 import { ICurrnettype, IUserTypeParams } from '@/interface/type';
 import { EducationalStatus } from '@/apis/application/types';
 
-const UserType = ({ current, setCurrent }: ICurrnettype) => {
+interface ICurrentTypePageProps extends ICurrnettype {
+  handlerFunction: () => void;
+}
+
+const UserType = ({
+  current,
+  setCurrent,
+  handlerFunction,
+}: ICurrentTypePageProps) => {
   const date = new Date();
   const {
     form: userType,
@@ -31,9 +39,15 @@ const UserType = ({ current, setCurrent }: ICurrnettype) => {
     veteransNumber: undefined,
   });
 
-  const { data } = GetUserType();
+  const { data, isSuccess } = GetUserType();
   const { mutateAsync: editUserType } = EditUserType();
   const { mutateAsync: editGraduationType } = PatchGraduationType();
+
+  useEffect(() => {
+    if (isSuccess) {
+      handlerFunction();
+    }
+  }, [isSuccess]);
 
   useEffect(() => {
     data &&
