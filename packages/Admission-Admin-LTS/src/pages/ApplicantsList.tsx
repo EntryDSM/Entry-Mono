@@ -1,6 +1,14 @@
 import React, { useEffect, useRef, useState } from 'react';
 import styled from '@emotion/styled';
-import { Button, Checkbox, Input, Stack, Text, theme } from '@entrydsm/design-system';
+import {
+  Button,
+  Checkbox,
+  Input,
+  Stack,
+  Text,
+  theme,
+  Spinner,
+} from '@entrydsm/design-system';
 import {
   changeArrivedStatus,
   getAdmissionTicket,
@@ -10,7 +18,10 @@ import {
   getApplicationListExcel,
   getPdfApplicatnsInfo,
 } from '@/utils/api/admin';
-import { IApplicationListRequest, IGetPdfApplicatnsInfoResponse } from '@/utils/api/admin/types';
+import {
+  IApplicationListRequest,
+  IGetPdfApplicatnsInfoResponse,
+} from '@/utils/api/admin/types';
 import { applicationTypeToKorean } from '@/utils/translate';
 import PageNation from '@/components/PageNation';
 import { SideBar } from '@/components/SideBar';
@@ -21,7 +32,14 @@ import { usePDF } from 'react-to-pdf';
 import { PDFDownloadLink, Document, Page, View } from '@react-pdf/renderer';
 import { saveAs } from 'file-saver';
 
-const headText = ['접수번호', '이름', '지역', '전형', '원서 도착 상태', '최종제출'];
+const headText = [
+  '접수번호',
+  '이름',
+  '지역',
+  '전형',
+  '원서 도착 상태',
+  '최종제출',
+];
 
 const ApplicantsList = () => {
   const [filter, setFilter] = useState<IApplicationListRequest>({
@@ -53,12 +71,16 @@ const ApplicantsList = () => {
   const targetRef = useRef<HTMLDivElement>(null);
 
   const { data: application_list, isLoading } = getApplicationList(filter);
-  const { mutate: application_list_excel } = getApplicationListExcel();
-  const { mutate: admission_ticket_excel } = getAdmissionTicket();
+  const { mutate: application_list_excel, isLoading: isListDownloadLoading } =
+    getApplicationListExcel();
+  const { mutate: admission_ticket_excel, isLoading: isTicketDownloadLoading } =
+    getAdmissionTicket();
   const { mutate: change_arrived_status } = changeArrivedStatus();
-  const { mutate: applicants_check } = getApplicantsCheck();
+  const { mutate: applicants_check, isLoading: isCheckDownloadLoading } =
+    getApplicantsCheck();
   // const { data: pdfApplicatnsInfo } = getPdfApplicatnsInfo();
-  const { mutate: applicants_code_execl } = getApplicantsCodeExecl();
+  const { mutate: applicants_code_execl, isLoading: isCodeDownloadLoading } =
+    getApplicantsCodeExecl();
 
   useEffect(() => {
     setFilter((prev) => ({ ...prev, page }));
@@ -82,22 +104,44 @@ const ApplicantsList = () => {
         <div
           style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(3, minmax(100px, auto))',
+            gridTemplateColumns: 'repeat(2, minmax(100px, auto))',
             gap: '20px',
-            width: '600px',
+            width: '500px',
           }}
         >
-          <Button color="green" onClick={applicants_check}>
-            지원자 검증 목록
+          <Button
+            color="green"
+            onClick={applicants_check}
+            disabled={isCheckDownloadLoading}
+          >
+            {isCheckDownloadLoading
+              ? '지원자 검증 목록 출력중...'
+              : '지원자 검증 목록 출력'}
           </Button>
-          <Button color="green" onClick={admission_ticket_excel}>
-            수험표
+          <Button
+            color="green"
+            onClick={admission_ticket_excel}
+            disabled={isTicketDownloadLoading}
+          >
+            {isTicketDownloadLoading ? '수험표 출력 중...' : '수험표 출력'}
           </Button>
-          <Button color="green" onClick={application_list_excel}>
-            지원자 목록 Excel
+          <Button
+            color="green"
+            onClick={application_list_excel}
+            disabled={isListDownloadLoading}
+          >
+            {isListDownloadLoading
+              ? '지원자 목록 출력 중...'
+              : '지원자 목록 출력'}
           </Button>
-          <Button color="green" onClick={applicants_code_execl}>
-            지원자 코드 목록 Excel
+          <Button
+            color="green"
+            onClick={applicants_code_execl}
+            disabled={isCodeDownloadLoading}
+          >
+            {isCodeDownloadLoading
+              ? '지원자 코드 목록 출력 중...'
+              : '지원자 코드 목록 출력'}
           </Button>
           {/* <PDFDownloadLink
             document={<Introduce pdfApplicatnsInfo={pdfApplicatnsInfo} />}
@@ -234,7 +278,13 @@ const ApplicantsList = () => {
       >
         <StudentInfo receiptCode={receiptCode} />
       </SideBar>
-      {!isLoading && <PageNation pageNum={application_list?.total_pages || 0} current={page} setCurrent={setPage} />}
+      {!isLoading && (
+        <PageNation
+          pageNum={application_list?.total_pages || 0}
+          current={page}
+          setCurrent={setPage}
+        />
+      )}
       {/* <Introduce pdfApplicatnsInfo={pdfApplicatnsInfo}></Introduce> */}
 
       {/* {pdfApplicatnsInfo && pdfApplicatnsInfo.map((item) => <ApplicantsInfoPDF {...item}></ApplicantsInfoPDF>)} */}
@@ -271,7 +321,11 @@ const styles = {
   },
 };
 
-const Introduce = ({ pdfApplicatnsInfo }: { pdfApplicatnsInfo?: IGetPdfApplicatnsInfoResponse[] }) => {
+const Introduce = ({
+  pdfApplicatnsInfo,
+}: {
+  pdfApplicatnsInfo?: IGetPdfApplicatnsInfoResponse[];
+}) => {
   return (
     <Document>
       {pdfApplicatnsInfo &&
@@ -325,6 +379,7 @@ const _TBody = styled.div<{ isClicked: boolean }>`
   border-bottom: 1px solid ${theme.color.black100};
   padding: 20.5px 20px;
   &:hover {
-    background-color: ${({ isClicked }) => (isClicked ? '#EFEFEF' : theme.color.green100)};
+    background-color: ${({ isClicked }) =>
+      isClicked ? '#EFEFEF' : theme.color.green100};
   }
 `;
