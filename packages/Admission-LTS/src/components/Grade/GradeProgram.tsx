@@ -24,6 +24,7 @@ import { useInput } from '@/hooks/useInput';
 import { useCombineMutation } from '@/hooks/useCombineMutation';
 import { ICurrnettype } from '@/interface/type';
 import WriteBlackExam from './WriteInfo/WriteBlackExam';
+import { Background } from '../Common/Background';
 
 const Program = ({ current, setCurrent }: ICurrnettype) => {
   const { form: selectGradeElement, setForm: setSelectGradeElement } =
@@ -255,9 +256,9 @@ const Program = ({ current, setCurrent }: ICurrnettype) => {
   return (
     <>
       {isLoading && (
-        <_Background>
+        <Background>
           <Spinner color="orange" />
-        </_Background>
+        </Background>
       )}
       <_Wrapper>
         <Header>
@@ -399,19 +400,4 @@ const GradeWrapper = styled.div`
 const _Selects = styled.div`
   margin-top: 0.7rem;
   margin-bottom: 1rem;
-`;
-
-const _Background = styled.div`
-  width: 100%;
-  height: 100vh;
-  overflow: hidden;
-  top: 0;
-  left: 0;
-  position: fixed;
-  background-color: rgba(0, 0, 0, 0.3);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  z-index: 101;
 `;
