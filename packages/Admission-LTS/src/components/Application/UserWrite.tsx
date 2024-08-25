@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import styled from '@emotion/styled';
-import { Textarea } from '@entrydsm/design-system';
+import { Textarea, Skeleton } from '@entrydsm/design-system';
 import { useQueryClient } from '@tanstack/react-query';
 import {
   EditUserIntroduce,
