@@ -196,9 +196,12 @@ export const getAdmissionTicket = () => {
 /** 지원자 검증 목록 엑셀 출력 */
 export const getApplicantsCheck = () => {
   const response = async () => {
-    const { data } = await instance.get(`${router}/excel/applicants/check`, {
-      responseType: 'blob',
-    });
+    const { data } = await instance.get(
+      `${router}/application/excel/applicants/check-list`,
+      {
+        responseType: 'blob',
+      },
+    );
     return data;
   };
 
