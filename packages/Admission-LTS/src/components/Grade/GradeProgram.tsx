@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import styled from '@emotion/styled';
-import { Text } from '@entrydsm/design-system';
+import { Text, Spinner } from '@entrydsm/design-system';
 import { GetUserType } from '@/apis/application';
 import {
   EditUserBlackExam,
@@ -67,7 +67,7 @@ const Program = ({ current, setCurrent }: ICurrnettype) => {
   });
 
   const { data: userType } = GetUserType();
-  const { data: userGraduation } = GetUserGraduation();
+  const { data: userGraduation, isLoading } = GetUserGraduation();
   const { combinedMutations } = useCombineMutation();
   const { mutateAsync } = EditUserGraduation();
   const isBlackExam = userType?.educationalStatus === 'QUALIFICATION_EXAM';
@@ -254,6 +254,11 @@ const Program = ({ current, setCurrent }: ICurrnettype) => {
 
   return (
     <>
+      {isLoading && (
+        <_Background>
+          <Spinner color="orange" />
+        </_Background>
+      )}
       <_Wrapper>
         <Header>
           <Title>
@@ -394,4 +399,19 @@ const GradeWrapper = styled.div`
 const _Selects = styled.div`
   margin-top: 0.7rem;
   margin-bottom: 1rem;
+`;
+
+const _Background = styled.div`
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  top: 0;
+  left: 0;
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  z-index: 101;
 `;
