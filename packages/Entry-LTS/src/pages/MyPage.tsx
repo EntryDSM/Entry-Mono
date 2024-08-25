@@ -25,7 +25,7 @@ const MyPage = () => {
   const { data } = ApplyInfoStatus();
   const { data: documentInfo } = getDocumentInfo();
   const { mutate: deleteUserPdf } = DeleteUserPdf(data?.receipt_code);
-  const onDownloadPdf = DownloadPdf();
+  const { onDownloadPdf, isLoading: isPdfDownloadLoading } = DownloadPdf();
 
   const { mutate: getFirstRound } = GetFirstRoundPass({ setModalState, open });
   const { mutate: getSecondRound } = GetSecondRoundPass({
@@ -110,7 +110,9 @@ const MyPage = () => {
           </Text>
           <_ApplyButtons>
             <Pc>
-              <Button onClick={onDownloadPdf}>원서 다운로드</Button>
+              <Button onClick={onDownloadPdf} disabled={isPdfDownloadLoading}>
+                {isPdfDownloadLoading ? '원서 다운로드 중...' : '원서 다운로드'}
+              </Button>
               <Button
                 disabled={currentDate < secondAnnouncementDate}
                 onClick={getSecondRound}

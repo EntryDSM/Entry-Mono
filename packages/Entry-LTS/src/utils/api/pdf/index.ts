@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import { instance } from '../axios';
 import FileSaver from 'file-saver';
 import { Toast } from '@entrydsm/design-system';
@@ -12,7 +12,7 @@ export const GetPdfPreview = () => {
       responseType: 'arraybuffer',
       headers: {
         'Content-Type': 'application/json',
-        Accept: 'application/pdf',
+        'Accept': 'application/pdf',
       },
     });
     return data;
@@ -21,15 +21,26 @@ export const GetPdfPreview = () => {
 };
 
 export const DownloadPdf = () => {
-  const fetcher = async () => {
-    try {
+  const mutation = useMutation(
+    async () => {
       const { data } = await instance.get(`${router}/preview`, {
         responseType: 'blob',
       });
       FileSaver.saveAs(data, `입학원서 미리보기.pdf`);
-    } catch (e) {
-      Toast('입학원서 pdf 다운로드를 실패하였습니다.', { type: 'error' });
-    }
+    },
+    {
+      onError: () => {
+        Toast('입학원서 pdf 다운로드를 실패하였습니다.', { type: 'error' });
+      },
+    },
+  );
+
+  const onDownloadPdf = () => {
+    mutation.mutate();
   };
-  return fetcher;
+
+  return {
+    onDownloadPdf,
+    isLoading: mutation.isLoading,
+  };
 };
