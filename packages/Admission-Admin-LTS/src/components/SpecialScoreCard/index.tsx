@@ -1,15 +1,41 @@
 import styled from '@emotion/styled';
 import { Text, theme } from '@entrydsm/design-system';
-import { ISpecialScoreDistribution } from '@/utils/api/admin/types';
+// import { ISpecialScoreDistribution } from '@/utils/api/admin/types';
+
+interface IScoreDistribution {
+  isDaejeon: boolean;
+  applicationType: 'COMMON' | 'MEISTER' | 'SOCIAL';
+  totalScore: number[];
+}
 
 export interface IPropsType {
   title: string;
   ranges: string[];
-  daejeonRanges?: ISpecialScoreDistribution;
-  nationWideRanges?: ISpecialScoreDistribution;
+  daejeonData?: IScoreDistribution;
+  nationWideData?: IScoreDistribution;
 }
 
-export function SpecialScoreCard({ title, ranges, daejeonRanges, nationWideRanges }: IPropsType) {
+export function SpecialScoreCard({
+  title,
+  ranges,
+  daejeonData,
+  nationWideData,
+}: IPropsType) {
+  const getScoreForRange = (
+    data: IScoreDistribution | undefined,
+    index: number,
+  ) => {
+    return data && Array.isArray(data.totalScore)
+      ? data.totalScore[index] || 0
+      : 0;
+  };
+
+  const calculateTotal = (data: IScoreDistribution | undefined) => {
+    return data && Array.isArray(data.totalScore)
+      ? data.totalScore.reduce((acc, cur) => acc + cur, 0)
+      : 0;
+  };
+
   return (
     <_ScoreStatus>
       <Text color="black900" size="title2">
@@ -18,8 +44,8 @@ export function SpecialScoreCard({ title, ranges, daejeonRanges, nationWideRange
 
       <_Boxs>
         <_Box>
-          {ranges.map((range) => (
-            <Text color="black900" size="title3" width={90}>
+          {ranges.map((range, index) => (
+            <Text key={index} color="black900" size="title3" width={90}>
               {range}:
             </Text>
           ))}
@@ -31,68 +57,26 @@ export function SpecialScoreCard({ title, ranges, daejeonRanges, nationWideRange
           <Text color="black900" size="title1">
             대전
           </Text>
+          {ranges.map((_, index) => (
+            <Text key={index} color="black900" size="title2">
+              {getScoreForRange(daejeonData, index)}
+            </Text>
+          ))}
           <Text color="black900" size="title2">
-            {daejeonRanges?.firstRate}
-          </Text>
-          <Text color="black900" size="title2">
-            {daejeonRanges?.secondRate}
-          </Text>
-          <Text color="black900" size="title2">
-            {daejeonRanges?.thirdRate}
-          </Text>
-          <Text color="black900" size="title2">
-            {daejeonRanges?.fourthRate}
-          </Text>
-          <Text color="black900" size="title2">
-            {daejeonRanges?.fifthRate}
-          </Text>
-          <Text color="black900" size="title2">
-            {daejeonRanges?.sixthRate}
-          </Text>
-          <Text color="black900" size="title2">
-            {daejeonRanges?.seventhRate}
-          </Text>
-          <Text color="black900" size="title2">
-            {daejeonRanges?.eighthRate}
-          </Text>
-          <Text color="black900" size="title2">
-            {daejeonRanges
-              ? Object.values(daejeonRanges).reduce((acc, cur) => (acc += typeof cur == 'number' ? cur : 0), 0)
-              : 0}
+            {calculateTotal(daejeonData)}
           </Text>
         </_Box>
         <_Box>
           <Text color="black900" size="title1">
             전국
           </Text>
-          <Text color="black900" size="title2">
-            {nationWideRanges?.firstRate}
-          </Text>
-          <Text color="black900" size="title2">
-            {nationWideRanges?.secondRate}
-          </Text>
-          <Text color="black900" size="title2">
-            {nationWideRanges?.thirdRate}
-          </Text>
-          <Text color="black900" size="title2">
-            {nationWideRanges?.fourthRate}
-          </Text>
-          <Text color="black900" size="title2">
-            {nationWideRanges?.fifthRate}
-          </Text>
-          <Text color="black900" size="title2">
-            {nationWideRanges?.sixthRate}
-          </Text>
-          <Text color="black900" size="title2">
-            {nationWideRanges?.seventhRate}
-          </Text>
-          <Text color="black900" size="title2">
-            {nationWideRanges?.eighthRate}
-          </Text>
+          {ranges.map((_, index) => (
+            <Text key={index} color="black900" size="title2">
+              {getScoreForRange(nationWideData, index)}
+            </Text>
+          ))}
           <Text color="black900" size="title2" width={90}>
-            {nationWideRanges
-              ? Object.values(nationWideRanges).reduce((acc, cur) => (acc += typeof cur == 'number' ? cur : 0), 0)
-              : 0}
+            {calculateTotal(nationWideData)}
           </Text>
         </_Box>
       </_Boxs>

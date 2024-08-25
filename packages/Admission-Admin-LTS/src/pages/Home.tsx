@@ -191,51 +191,58 @@ const Home = () => {
         전형 및 지역별 점수 현황
       </Text>
       <div style={{ display: 'flex', gap: 20, width: '100%' }}>
-        {/* 170~160 , 159 ~ 150 , 149~140 , 139~130, 129~120, 119~110, 109~100, 99~90, 89~80, 79~70, 70~ */}
         <CommonScoreCard
           title="일반 전형"
           ranges={[
-            '158~170',
-            '145~157',
-            '132~144',
-            '119~131',
-            '106~118',
-            '93-105',
-            '80-92',
-            '-70',
+            '170+ ',
+            '161~170',
+            '151~160',
+            '141~150',
+            '131~140',
+            '121~130',
+            '111~120',
+            '101~110',
+            '91~100',
+            '81~90',
+            '71~80',
+            '61~70',
+            '51~60',
+            '0~50',
           ]}
-          daejeonRanges={staticsScoreData?.[0]}
-          nationWideRanges={staticsScoreData?.[1]}
+          daejeonData={staticsScoreData?.[0]}
+          nationWideData={staticsScoreData?.[1]}
         />
         <SpecialScoreCard
           title="마이스터 전형"
           ranges={[
-            '98-110',
-            '85-97',
-            '72-84',
-            '59-71',
-            '46-58',
-            '33-45',
-            '20-32',
-            '-19',
+            '110+ ',
+            '101-110',
+            '91-100',
+            '81-90',
+            '71-80',
+            '61-70',
+            '51-60',
+            '41-50',
+            '0~40',
           ]}
-          daejeonRanges={staticsScoreData?.[2]}
-          nationWideRanges={staticsScoreData?.[3]}
+          daejeonData={staticsScoreData?.[2]}
+          nationWideData={staticsScoreData?.[3]}
         />
         <SpecialScoreCard
           title="사회통합 전형"
           ranges={[
-            '98-110',
-            '85-97',
-            '72-84',
-            '59-71',
-            '46-58',
-            '33-45',
-            '20-32',
-            '-19',
+            '110+ ',
+            '101-110',
+            '91-100',
+            '81-90',
+            '71-80',
+            '61-70',
+            '51-60',
+            '41-50',
+            '0~40',
           ]}
-          daejeonRanges={staticsScoreData?.[4]}
-          nationWideRanges={staticsScoreData?.[5]}
+          daejeonData={staticsScoreData?.[4]}
+          nationWideData={staticsScoreData?.[5]}
         />
       </div>
     </_Wrapper>

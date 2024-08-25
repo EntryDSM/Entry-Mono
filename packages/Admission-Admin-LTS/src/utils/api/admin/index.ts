@@ -104,7 +104,7 @@ export const getStaticsScore = () => {
     return data;
   };
 
-  return useQuery<IGetScoreStatisticsResponse>(['staticsScore'], response);
+  return useQuery<IGetScoreStatisticsResponse[]>(['staticsScore'], response);
 };
 
 /** 접수 현황 집계(지원자) */
