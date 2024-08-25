@@ -10,6 +10,7 @@ import { useAuthority } from '@/hooks/useAuthority';
 import { getCookies, removeCookies, removeTokens } from '@/utils/cookies';
 import { ADMIN_URL, AUTH_URL, COOKIE_DOMAIN } from '@/constant/env';
 import { getUserInfo } from '@/utils/api/application';
+import { getSchedule } from '@/utils/api/schedule';
 
 type THeader =
   | '문의사항'
@@ -58,7 +59,16 @@ const Header = () => {
   const navigate = useNavigate();
   const authority = getCookies('authority');
   const { data } = getUserInfo(isLogin && authority != 'admin');
+  const { data: scheduleData } = getSchedule();
   const [scrollY, setScrollY] = useState<number>(window.scrollY);
+
+  const isLoginOpen = () => {
+    const currentDate = new Date();
+    const startDate = new Date(scheduleData?.schedules[0]?.date ?? '');
+    const endDate = new Date(scheduleData?.schedules[4]?.date ?? '');
+
+    return !(currentDate >= startDate && currentDate <= endDate);
+  };
 
   useEffect(() => {
     const handleScrollEvent = () => {
@@ -403,7 +413,7 @@ const Header = () => {
                     color={authorityColor}
                     kind="contained"
                     onClick={onClick}
-                    disabled
+                    disabled={isLoginOpen()}
                   >
                     로그인
                   </Button>
