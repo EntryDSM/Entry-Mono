@@ -1,7 +1,14 @@
 import { useEffect, useState } from 'react';
 import { AxiosResponse } from 'axios';
 import styled from '@emotion/styled';
-import { Button, Input, Stack, Text, theme } from '@entrydsm/design-system';
+import {
+  Button,
+  Input,
+  Stack,
+  Text,
+  theme,
+  Skeleton,
+} from '@entrydsm/design-system';
 import { instance } from '@/apis/axios';
 import { EditAdditionalInfo, GetAdditionalInfo } from '@/apis/application';
 import ApplicationContent from './ApplicationContent';
@@ -35,7 +42,7 @@ const UserMiddleSchool = ({ current, setCurrent }: ICurrnettype) => {
   const { setModalState, modalState, close } = useModal();
   const { combinedMutations } = useCombineMutation();
 
-  const { data } = GetAdditionalInfo();
+  const { data, isLoading } = GetAdditionalInfo();
   const { mutateAsync } = EditAdditionalInfo();
 
   useEffect(() => {
@@ -148,14 +155,18 @@ const UserMiddleSchool = ({ current, setCurrent }: ICurrnettype) => {
     <>
       <_ApplicationWrapper>
         <ApplicationContent grid={2} title="중학교 이름">
-          <Input
-            type="text"
-            placeholder="중학교 이름"
-            name="name"
-            value={schoolName}
-            width={230}
-            disabled
-          />
+          {isLoading ? (
+            <Skeleton width={230} height={42} isLoaded={isLoading} />
+          ) : (
+            <Input
+              type="text"
+              placeholder="중학교 이름"
+              name="name"
+              value={schoolName}
+              width={230}
+              disabled
+            />
+          )}
           <Stack margin={['left', 20]} width={70}>
             <Button
               color="black"
@@ -167,55 +178,75 @@ const UserMiddleSchool = ({ current, setCurrent }: ICurrnettype) => {
           </Stack>
         </ApplicationContent>
         <ApplicationContent grid={1} title="중학교 교사 성명">
-          <Input
-            name="teacherName"
-            type="text"
-            value={userMiddleSchool.teacherName}
-            width={230}
-            onChange={onChangeTeacherName}
-          />
+          {isLoading ? (
+            <Skeleton width={230} height={42} isLoaded={isLoading} />
+          ) : (
+            <Input
+              name="teacherName"
+              type="text"
+              value={userMiddleSchool.teacherName}
+              width={230}
+              onChange={onChangeTeacherName}
+            />
+          )}
         </ApplicationContent>
         <ApplicationContent grid={1} title="교사 연락처">
-          <Input
-            name="teacherTel"
-            type="tel"
-            value={userMiddleSchool.teacherTel}
-            width={230}
-            onChange={onChangeTeacherTel}
-          />
+          {isLoading ? (
+            <Skeleton width={230} height={42} isLoaded={isLoading} />
+          ) : (
+            <Input
+              name="teacherTel"
+              type="tel"
+              value={userMiddleSchool.teacherTel}
+              width={230}
+              onChange={onChangeTeacherTel}
+            />
+          )}
         </ApplicationContent>
         <ApplicationContent
           grid={3}
           title="중학교 학번"
           placeholder="반, 번호는 최대 2자리수 까지 입력 가능합니다."
         >
-          <Input
-            type="number"
-            value={userMiddleSchool.studentNumber[0]}
-            onChange={(e) => onChangeStudentNumber(e, 0, 1)}
-            placeholder="학년"
-            width={120}
-            unit="학년"
-            maxLength={1}
-          />
-          <Input
-            type="number"
-            value={userMiddleSchool.studentNumber[1]}
-            onChange={(e) => onChangeStudentNumber(e, 1, 2)}
-            placeholder="반"
-            width={120}
-            unit="반"
-            maxLength={2}
-          />
-          <Input
-            type="number"
-            value={userMiddleSchool.studentNumber[2]}
-            onChange={(e) => onChangeStudentNumber(e, 2, 2)}
-            placeholder="번호"
-            width={120}
-            unit="번호"
-            maxLength={2}
-          />
+          {isLoading ? (
+            <Skeleton width={120} height={42} isLoaded={isLoading} />
+          ) : (
+            <Input
+              type="number"
+              value={userMiddleSchool.studentNumber[0]}
+              onChange={(e) => onChangeStudentNumber(e, 0, 1)}
+              placeholder="학년"
+              width={120}
+              unit="학년"
+              maxLength={1}
+            />
+          )}
+          {isLoading ? (
+            <Skeleton width={120} height={42} isLoaded={isLoading} />
+          ) : (
+            <Input
+              type="number"
+              value={userMiddleSchool.studentNumber[1]}
+              onChange={(e) => onChangeStudentNumber(e, 1, 2)}
+              placeholder="반"
+              width={120}
+              unit="반"
+              maxLength={2}
+            />
+          )}
+          {isLoading ? (
+            <Skeleton width={120} height={42} isLoaded={isLoading} />
+          ) : (
+            <Input
+              type="number"
+              value={userMiddleSchool.studentNumber[2]}
+              onChange={(e) => onChangeStudentNumber(e, 2, 2)}
+              placeholder="번호"
+              width={120}
+              unit="번호"
+              maxLength={2}
+            />
+          )}
         </ApplicationContent>
 
         {modalState === 'SEARCH_SCHOOL' && (

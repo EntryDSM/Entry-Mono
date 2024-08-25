@@ -28,8 +28,10 @@ const UserWrite = ({ current, setCurrent }: ICurrnettype) => {
   const { mutateAsync: editUserIntroduce } = EditUserIntroduce();
   const { mutateAsync: editUserPlan } = EditUserPlan();
   const { combinedMutations } = useCombineMutation();
-  const { data: getUserIntroduce } = GetUserIntroduce();
-  const { data: getUserStudyPlan } = GetUserStudyPlan();
+  const { data: getUserIntroduce, isLoading: isIntroduceLoading } =
+    GetUserIntroduce();
+  const { data: getUserStudyPlan, isLoading: isStudyLoading } =
+    GetUserStudyPlan();
   const { data: getUserType } = GetUserType();
 
   const isBlackExam = getUserType?.educationalStatus == 'QUALIFICATION_EXAM';
@@ -71,24 +73,32 @@ const UserWrite = ({ current, setCurrent }: ICurrnettype) => {
   return (
     <>
       <_Wrapper>
-        <Textarea
-          placeholder="내용을 입력해주세요"
-          label="자기소개서"
-          maxLength={1600}
-          width="100%"
-          name="userIntroduce"
-          value={userWrite.userIntroduce}
-          onChange={changeUserWrite}
-        />
-        <Textarea
-          placeholder="내용을 입력해주세요"
-          label="학업계획서"
-          maxLength={1600}
-          width="100%"
-          name="userPlan"
-          value={userWrite.userPlan}
-          onChange={changeUserWrite}
-        />
+        {isIntroduceLoading ? (
+          <Skeleton width={960} height={300} isLoaded={isIntroduceLoading} />
+        ) : (
+          <Textarea
+            placeholder="내용을 입력해주세요"
+            label="자기소개서"
+            maxLength={1600}
+            width="100%"
+            name="userIntroduce"
+            value={userWrite.userIntroduce}
+            onChange={changeUserWrite}
+          />
+        )}
+        {isStudyLoading ? (
+          <Skeleton width={960} height={300} isLoaded={isStudyLoading} />
+        ) : (
+          <Textarea
+            placeholder="내용을 입력해주세요"
+            label="학업계획서"
+            maxLength={1600}
+            width="100%"
+            name="userPlan"
+            value={userWrite.userPlan}
+            onChange={changeUserWrite}
+          />
+        )}
       </_Wrapper>
       <ApplicationFooter
         current={current}
