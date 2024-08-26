@@ -55,9 +55,6 @@ const ProgressBar = () => {
     },
   ];
 
-  console.log(currentDate >= startDate);
-  console.log(currentDate, endDate);
-
   const progressBar = [
     {
       element: (
