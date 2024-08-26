@@ -1,6 +1,12 @@
 import { instance } from '../axios';
 import { useMutation, useQuery } from '@tanstack/react-query';
-import { IAllNotice, NoticeType, INoticeDetail, ICreateNotice, IUploadNoticeImage } from './types';
+import {
+  IAllNotice,
+  NoticeType,
+  INoticeDetail,
+  ICreateNotice,
+  IUploadNoticeImage,
+} from './types';
 import { Toast } from '@entrydsm/design-system';
 import { AxiosError } from 'axios';
 import { useNavigate } from 'react-router-dom';
@@ -9,7 +15,9 @@ const router = 'notice';
 
 export const GetAllNotice = (type: NoticeType) => {
   const response = async () => {
-    const { data } = await instance.get<IAllNotice>(`${router}${type ? `?type=${type}` : ''}`);
+    const { data } = await instance.get<IAllNotice>(
+      `${router}${type ? `?type=${type}` : ''}`,
+    );
     return data;
   };
   return useQuery(['notice', type], response);
@@ -89,9 +97,15 @@ export const CreateNotice = () => {
   });
 };
 
-export const UpdateNotice = () => {
+export const UpdateNotice = (noticeId: string) => {
+  const navigate = useNavigate();
   const response = async (body: ICreateNotice) => {
-    return instance.patch(`${router}`, body);
+    return instance.patch(`${router}/${noticeId}`, body);
   };
-  return useMutation(response, {});
+  return useMutation(response, {
+    onSuccess: () => {
+      Toast('성공', { type: 'success' });
+      navigate('/notice');
+    },
+  });
 };

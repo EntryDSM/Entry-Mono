@@ -23,6 +23,8 @@ export interface INoticeDetail {
   createdAt: string;
   type: NoticeType;
   imageURL: string;
+  imageName: string;
+  isPinned: boolean;
   attachFiles: IAttachFiles[];
 }
 

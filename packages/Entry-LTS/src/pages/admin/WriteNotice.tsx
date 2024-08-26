@@ -1,28 +1,77 @@
 import { useEffect, useRef, useState } from 'react';
 import styled from '@emotion/styled';
-import { Button, Input, Radio, Switch, Text, Textarea } from '@entrydsm/design-system';
+import {
+  Button,
+  Input,
+  Radio,
+  Switch,
+  Text,
+  Textarea,
+} from '@entrydsm/design-system';
 import { Mobile, Pc } from '@/hooks/useResponsive';
 import { useInput } from '@/hooks/useInput';
 import File from '@/components/File';
-import { CreateNotice, UploadNoticeImage } from '@/utils/api/notice';
+import {
+  CreateNotice,
+  GetNoticeDetail,
+  UpdateNotice,
+  UploadNoticeImage,
+} from '@/utils/api/notice';
 import { ICreateNotice } from '@/utils/api/notice/types';
 import { UploadAttachFile } from '@/utils/api/attachFile';
+import { useParams } from 'react-router-dom';
+import axios from 'axios';
+import { urlToFile } from '@/utils/urlToFile';
 
 const WriteNotice = () => {
   const [switchCheck, setSwitchCheck] = useState(false);
-  const { form: inputValue, onChange: setInputValue } = useInput<ICreateNotice>({
+  const { id: noticeId } = useParams();
+  const mode = noticeId ? 'edit' : 'write';
+  const {
+    form: inputValue,
+    onChange: setInputValue,
+    setForm: setInputForm,
+  } = useInput<ICreateNotice>({
     title: '',
     content: '',
     type: 'NOTICE',
     isPinned: false,
   });
+  const { data } = GetNoticeDetail(noticeId);
   const { mutate: createNotice } = CreateNotice();
+  const { mutate: updateNotice } = UpdateNotice(noticeId);
   const { mutate: uploadNoticeImage } = UploadNoticeImage();
   const { mutate: uploadAttachFile } = UploadAttachFile();
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
   const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
   const inputImageRef = useRef<HTMLInputElement>();
   const inputFileRef = useRef<HTMLInputElement>();
+
+  useEffect(() => {
+    if (mode === 'edit') {
+      setInputForm({
+        title: data?.title,
+        content: data?.content,
+        type: data?.type,
+        isPinned: data?.isPinned,
+      });
+      setSwitchCheck(data?.isPinned);
+      if (data?.imageURL) {
+        urlToFile(data.imageURL, data.imageName).then((image) => {
+          setSelectedImage(image);
+        });
+      }
+      if (data?.attachFiles) {
+        data.attachFiles.forEach((attachFile) => {
+          urlToFile(attachFile.attachFileUrl, attachFile.attachFileName).then(
+            (file) => {
+              setSelectedFiles((prev) => [...prev, file]);
+            },
+          );
+        });
+      }
+    }
+  }, [data]);
 
   const onCreateNotice = () => {
     if (selectedImage) {
@@ -33,20 +82,41 @@ const WriteNotice = () => {
             if (selectedFiles.length > 0) {
               uploadAttachFile(selectedFiles, {
                 onSuccess: (fileResponse) => {
-                  createNotice({
-                    ...inputValue,
-                    isPinned: switchCheck,
-                    fileName: imageResponse.data.fileName,
-                    attachFileName: fileResponse.data.map((file) => file.fileName),
-                  });
+                  if (mode === 'write') {
+                    createNotice({
+                      ...inputValue,
+                      isPinned: switchCheck,
+                      fileName: imageResponse.data.fileName,
+                      attachFileName: fileResponse.data.map(
+                        (file) => file.fileName,
+                      ),
+                    });
+                  } else if (mode === 'edit') {
+                    updateNotice({
+                      ...inputValue,
+                      isPinned: switchCheck,
+                      fileName: imageResponse.data.fileName,
+                      attachFileName: fileResponse.data.map(
+                        (file) => file.fileName,
+                      ),
+                    });
+                  }
                 },
               });
             } else {
-              createNotice({
-                ...inputValue,
-                isPinned: switchCheck,
-                fileName: imageResponse.data.fileName,
-              });
+              if (mode === 'write') {
+                createNotice({
+                  ...inputValue,
+                  isPinned: switchCheck,
+                  fileName: imageResponse.data.fileName,
+                });
+              } else if (mode === 'edit') {
+                updateNotice({
+                  ...inputValue,
+                  isPinned: switchCheck,
+                  fileName: imageResponse.data.fileName,
+                });
+              }
             }
           },
         },
@@ -54,18 +124,33 @@ const WriteNotice = () => {
     } else if (selectedFiles.length > 0) {
       uploadAttachFile(selectedFiles, {
         onSuccess: (fileResponse) => {
-          createNotice({
-            ...inputValue,
-            isPinned: switchCheck,
-            attachFileName: fileResponse.data.map((file) => file.fileName),
-          });
+          if (mode === 'write') {
+            createNotice({
+              ...inputValue,
+              isPinned: switchCheck,
+              attachFileName: fileResponse.data.map((file) => file.fileName),
+            });
+          } else if (mode === 'edit') {
+            updateNotice({
+              ...inputValue,
+              isPinned: switchCheck,
+              attachFileName: fileResponse.data.map((file) => file.fileName),
+            });
+          }
         },
       });
     } else {
-      createNotice({
-        ...inputValue,
-        isPinned: switchCheck,
-      });
+      if (mode === 'write') {
+        createNotice({
+          ...inputValue,
+          isPinned: switchCheck,
+        });
+      } else if (mode === 'edit') {
+        updateNotice({
+          ...inputValue,
+          isPinned: switchCheck,
+        });
+      }
     }
   };
 
@@ -109,7 +194,11 @@ const WriteNotice = () => {
         <_NoticeInputs>
           <_SwitchWrapper>
             글 고정
-            <Switch color="green" isClick={switchCheck} onClick={() => setSwitchCheck((prev) => !prev)} />
+            <Switch
+              color="green"
+              isClick={switchCheck}
+              onClick={() => setSwitchCheck((prev) => !prev)}
+            />
           </_SwitchWrapper>
           <_RadioWrapper>
             <Radio

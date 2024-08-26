@@ -30,7 +30,13 @@ const NoticeDetail = () => {
             {data?.createdAt.slice(0, 10)}
           </Text>
           <_Line />
-          {data?.imageURL && <img src={data?.imageURL} alt="notice" style={{ marginBottom: '20px' }} />}
+          {data?.imageURL && (
+            <img
+              src={data?.imageURL}
+              alt="notice"
+              style={{ marginBottom: '20px' }}
+            />
+          )}
           <Text color="black600" size="body2">
             {data?.content}
           </Text>
@@ -41,7 +47,13 @@ const NoticeDetail = () => {
               </Text>
               <VStack gap={5}>
                 {data.attachFiles.map((file, index) => {
-                  return <File key={index} name={file.attachFileName} url={file.attachFileUrl} />;
+                  return (
+                    <File
+                      key={index}
+                      name={file.attachFileName}
+                      url={file.attachFileUrl}
+                    />
+                  );
                 })}
               </VStack>
             </_FileTitle>
@@ -86,7 +98,9 @@ const NoticeDetail = () => {
               >
                 삭제
               </Button>
-              <Button onClick={() => navigate('/notice/write')}>수정</Button>
+              <Button onClick={() => navigate(`/notice/write/${noticeId}`)}>
+                수정
+              </Button>
             </_AdminButtons>
           )}
         </_ButtonFooter>
@@ -176,6 +190,7 @@ const _Icon = styled.div<{ isAdmin: boolean }>`
   justify-content: center;
   width: 2rem;
   height: 2rem;
-  background-color: ${({ isAdmin }) => (isAdmin ? theme.color.green500 : theme.color.orange500)};
+  background-color: ${({ isAdmin }) =>
+    isAdmin ? theme.color.green500 : theme.color.orange500};
   border-radius: 50%;
 `;
