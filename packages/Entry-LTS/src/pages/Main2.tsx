@@ -11,7 +11,7 @@ import { APPLY_URL } from '@/constant/env';
 import { useAuthority } from '@/hooks/useAuthority';
 import { getCookies } from '@/utils/cookies';
 import { useEffect, useState } from 'react';
-import { SubmitPdf } from '@/utils/api/application';
+import { ApplyStatus } from '@/utils/api/application';
 
 const Main2 = () => {
   const [isFinalSubmitted, setIsFinalSubmitted] = useState(false);
@@ -19,18 +19,18 @@ const Main2 = () => {
   const { isAdmin, authorityColor } = useAuthority();
   const accessToken = getCookies('accessToken');
 
-  const { mutateAsync: submitPdf } = SubmitPdf();
+  const { mutateAsync: applyStatus } = ApplyStatus();
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log(isFinalSubmitted);
     const checkFinalSubmission = async () => {
-      const result = await submitPdf();
+      const result = await applyStatus();
+      console.log('Mutation result:', result);
       setIsFinalSubmitted(result);
     };
 
     checkFinalSubmission();
-  }, [submitPdf]);
+  }, [applyStatus]);
 
   const isOpen = () => {
     const currentDate = new Date();
