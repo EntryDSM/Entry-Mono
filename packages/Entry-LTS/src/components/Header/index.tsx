@@ -280,8 +280,8 @@ const Header = () => {
                         onMouseOver={() => setIsDropdownHover(true)}
                         onMouseLeave={() => setIsDropdownHover(false)}
                       >
-                        <_._DropdownMenu>
-                          <Link to="/about">
+                        <Link to="/about" style={{ width: '100%' }}>
+                          <_._DropdownMenu>
                             <Text
                               size="body1"
                               color="inherit"
@@ -289,10 +289,10 @@ const Header = () => {
                             >
                               팀 소개
                             </Text>
-                          </Link>
-                        </_._DropdownMenu>
-                        <_._DropdownMenu>
-                          <Link to="/">
+                          </_._DropdownMenu>
+                        </Link>
+                        <Link to="/" style={{ width: '100%' }}>
+                          <_._DropdownMenu>
                             <Text
                               size="body1"
                               color="inherit"
@@ -300,8 +300,8 @@ const Header = () => {
                             >
                               학교 소개
                             </Text>
-                          </Link>
-                        </_._DropdownMenu>
+                          </_._DropdownMenu>
+                        </Link>
                       </_._DropdownMenus>
                     )}
                   </_._DropdownWrapper>
@@ -384,8 +384,8 @@ const Header = () => {
                         onMouseOver={() => setIsDropdownHover(true)}
                         onMouseLeave={() => setIsDropdownHover(false)}
                       >
-                        <_._DropdownMenu>
-                          <Link to="/about">
+                        <Link to="/about">
+                          <_._DropdownMenu>
                             <Text
                               size="body1"
                               color="inherit"
@@ -393,10 +393,10 @@ const Header = () => {
                             >
                               팀 소개
                             </Text>
-                          </Link>
-                        </_._DropdownMenu>
-                        <_._DropdownMenu>
-                          <Link to="/">
+                          </_._DropdownMenu>
+                        </Link>
+                        <Link to="/">
+                          <_._DropdownMenu>
                             <Text
                               size="body1"
                               color="inherit"
@@ -404,8 +404,8 @@ const Header = () => {
                             >
                               학교 소개
                             </Text>
-                          </Link>
-                        </_._DropdownMenu>
+                          </_._DropdownMenu>
+                        </Link>
                       </_._DropdownMenus>
                     )}
                   </_._DropdownWrapper>
