@@ -42,9 +42,9 @@ instance.interceptors.response.use(
       const authority = getCookies('authority');
 
       if (
-        error.response.data?.message === 'Invalid Token' ||
-        error.response.data?.message === 'Expired Token' ||
-        error.response.data?.message === 'User Not Found'
+        error.response.data?.status === 401 ||
+        error.response.data?.status === 403 ||
+        error.response.data?.status === 404
       ) {
         const originalRequest = config;
 
