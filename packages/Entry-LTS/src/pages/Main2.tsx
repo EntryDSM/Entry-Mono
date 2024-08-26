@@ -8,11 +8,13 @@ import { getSchedule } from '@/utils/api/schedule';
 import { scheduleStatusCalculater } from '@/utils/scheduleCalculater';
 import { useNavigate } from 'react-router-dom';
 import { APPLY_URL } from '@/constant/env';
+import { useAuthority } from '@/hooks/useAuthority';
+import { getCookies } from '@/utils/cookies';
 
 const Main2 = () => {
   const { data } = getSchedule();
-
-  const navigate = useNavigate();
+  const { isAdmin, authorityColor } = useAuthority();
+  const accessToken = getCookies('accessToken');
 
   const isOpen = () => {
     const currentDate = new Date();
@@ -38,14 +40,14 @@ const Main2 = () => {
               {scheduleStatusCalculater(data?.currentStatus)}
             </Text>
             <Button
-              color="orange"
+              color={authorityColor}
               isBig={true}
               onClick={() => {
                 if (!isOpen()) {
                   window.location.href = `${APPLY_URL}`;
                 }
               }}
-              disabled={isOpen()}
+              disabled={isOpen() || isAdmin || !accessToken}
             >
               지원하기
             </Button>
