@@ -10,11 +10,26 @@ import { useNavigate } from 'react-router-dom';
 import { APPLY_URL } from '@/constant/env';
 import { useAuthority } from '@/hooks/useAuthority';
 import { getCookies } from '@/utils/cookies';
+import { useEffect, useState } from 'react';
+import { SubmitPdf } from '@/utils/api/application';
 
 const Main2 = () => {
+  const [isFinalSubmitted, setIsFinalSubmitted] = useState(false);
   const { data } = getSchedule();
   const { isAdmin, authorityColor } = useAuthority();
   const accessToken = getCookies('accessToken');
+
+  const { mutateAsync: submitPdf } = SubmitPdf();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const checkFinalSubmission = async () => {
+      const result = await submitPdf();
+      setIsFinalSubmitted(result);
+    };
+
+    checkFinalSubmission();
+  }, [submitPdf]);
 
   const isOpen = () => {
     const currentDate = new Date();
@@ -37,7 +52,9 @@ const Main2 = () => {
             </_Title>
             <_Line />
             <Text size={'header1'} color={'realWhite'}>
-              {scheduleStatusCalculater(data?.currentStatus)}
+              {isFinalSubmitted
+                ? '최종제출이 완료된 상태입니다'
+                : scheduleStatusCalculater(data?.currentStatus)}
             </Text>
             <Button
               color={authorityColor}
@@ -47,7 +64,7 @@ const Main2 = () => {
                   window.location.href = `${APPLY_URL}`;
                 }
               }}
-              disabled={isOpen() || isAdmin || !accessToken}
+              disabled={isOpen() || isAdmin || !accessToken || isFinalSubmitted}
             >
               지원하기
             </Button>
