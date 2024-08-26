@@ -23,6 +23,7 @@ const Main2 = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    console.log(isFinalSubmitted);
     const checkFinalSubmission = async () => {
       const result = await submitPdf();
       setIsFinalSubmitted(result);

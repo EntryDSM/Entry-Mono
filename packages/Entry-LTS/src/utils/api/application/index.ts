@@ -5,7 +5,7 @@ import { useModal } from '@/hooks/useModal';
 import { isAxiosError } from 'axios';
 import { Toast } from '@entrydsm/design-system';
 
-const router = 'application/final-submit';
+const router = 'application';
 
 export const getUserInfo = (isLogin?: boolean) => {
   const response = async () => {
@@ -19,19 +19,25 @@ export const getUserInfo = (isLogin?: boolean) => {
 
 export const getDocumentInfo = () => {
   const response = async () => {
-    const { data } =
-      await instance.get<IGetDocumentInfo>(`/application/status`);
+    const { data } = await instance.get<IGetDocumentInfo>(`${router}/status`);
     return data;
   };
   return useQuery(['getDocument'], response);
 };
 
-/** 최종제출 */
+// export const getApply = () => {
+//   const response = async () => {
+//     const { data } = await instance.post(`${router}/status`);
+//     return data;
+//   };
+//   return useMutation(response);
+// };
+
 export const SubmitPdf = () => {
   const response = async () => {
     try {
-      const result = await instance.post(router);
-      if (result.status === 204) {
+      const result = await instance.post(`${router}/status`);
+      if (result.status === 405) {
         return true;
       }
       return false;
