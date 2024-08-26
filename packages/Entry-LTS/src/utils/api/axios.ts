@@ -43,8 +43,7 @@ instance.interceptors.response.use(
 
       if (
         error.response.data?.status === 401 ||
-        error.response.data?.status === 403 ||
-        error.response.data?.status === 404
+        error.response.data?.status === 403
       ) {
         const originalRequest = config;
 
