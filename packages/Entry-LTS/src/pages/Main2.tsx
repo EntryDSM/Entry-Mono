@@ -11,13 +11,14 @@ import { APPLY_URL } from '@/constant/env';
 import { useAuthority } from '@/hooks/useAuthority';
 import { getCookies } from '@/utils/cookies';
 import { useEffect, useState } from 'react';
-import { ApplyStatus } from '@/utils/api/application';
+import { ApplyStatus, getDocumentInfo } from '@/utils/api/application';
 
 const Main2 = () => {
   const [isFinalSubmitted, setIsFinalSubmitted] = useState(false);
   const { data } = getSchedule();
   const { isAdmin, authorityColor } = useAuthority();
   const accessToken = getCookies('accessToken');
+  const { data: documentInfo } = getDocumentInfo();
 
   const { mutateAsync: applyStatus } = ApplyStatus();
   const navigate = useNavigate();
@@ -53,7 +54,7 @@ const Main2 = () => {
             </_Title>
             <_Line />
             <Text size={'header1'} color={'realWhite'}>
-              {isFinalSubmitted
+              {documentInfo?.isSubmitted
                 ? '최종제출이 완료된 상태입니다'
                 : scheduleStatusCalculater(data?.currentStatus)}
             </Text>
@@ -65,7 +66,9 @@ const Main2 = () => {
                   window.location.href = `${APPLY_URL}`;
                 }
               }}
-              disabled={isOpen() || isAdmin || !accessToken || isFinalSubmitted}
+              disabled={
+                isOpen() || isAdmin || !accessToken || documentInfo?.isSubmitted
+              }
             >
               지원하기
             </Button>
