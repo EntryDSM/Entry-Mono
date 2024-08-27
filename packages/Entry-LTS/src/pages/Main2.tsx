@@ -26,7 +26,7 @@ const Main2 = () => {
     const checkFinalSubmission = async () => {
       const result = await applyStatus();
       console.log('Mutation result:', result);
-      setIsFinalSubmitted(result);
+      setIsFinalSubmitted(!result);
     };
 
     checkFinalSubmission();
@@ -65,9 +65,7 @@ const Main2 = () => {
                   window.location.href = `${APPLY_URL}`;
                 }
               }}
-              disabled={
-                isOpen() || isAdmin || !accessToken || !isFinalSubmitted
-              }
+              disabled={isOpen() || isAdmin || !accessToken || isFinalSubmitted}
             >
               지원하기
             </Button>
