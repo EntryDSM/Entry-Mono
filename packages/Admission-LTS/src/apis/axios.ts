@@ -37,7 +37,8 @@ instance.interceptors.response.use(
         error.response.data.message === 'Invalid Token' ||
         error.response.data.message === 'Expired Token' ||
         error.response.data.message === 'User Not Found' ||
-        error.response.data.message === '잘못된 토큰이 유효하지 않습니다'
+        error.response.data.message === '잘못된 토큰이 유효하지 않습니다' ||
+        error.response.status === 403
       ) {
         const originalRequest = config;
         if (refreshToken) {
