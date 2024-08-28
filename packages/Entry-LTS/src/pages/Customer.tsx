@@ -31,12 +31,21 @@ const CustomerPage = () => {
 
   const [searchParams, setSearchParams] = useSearchParams();
   const [current, setCurrent] = useState(0);
+  const [isOpen, setIsOpen] = useState<number>(-1);
 
   const setType = (current: boolean) => {
     current ? searchParams.set('type', 'faq') : searchParams.set('type', 'qna');
     setCurrent(0);
 
     setSearchParams(searchParams);
+  };
+
+  const setOpen = (index: number) => {
+    if (index === isOpen) {
+      setIsOpen(-1);
+    } else {
+      setIsOpen(index);
+    }
   };
 
   return (
@@ -102,6 +111,7 @@ const CustomerPage = () => {
                         cursor="pointer"
                         onClick={() => {
                           setCategory(res[1]);
+                          setOpen(-1);
                           setCurrent(0);
                         }}
                       >
@@ -138,6 +148,7 @@ const CustomerPage = () => {
                 .slice(0 + current * 10, current * 10 + 10)
                 .map((faq, index) => (
                   <BoardElement
+                    index={index}
                     key={index}
                     content={faq.content}
                     createdAt={faq.createdAt}
@@ -145,9 +156,10 @@ const CustomerPage = () => {
                     faq_type={faq.faqType}
                     isNumber={false}
                     isTopBorder={true}
-                    isOpen={true}
+                    isOpen={isOpen === index}
                     isPublic
                     boardId={faq.id}
+                    setOpen={setOpen}
                   />
                 ))}
           </>
@@ -164,6 +176,7 @@ const CustomerPage = () => {
               )}
               current={current}
               setCurrent={setCurrent}
+              setOpen={setOpen}
             />
           )
         }

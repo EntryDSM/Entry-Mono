@@ -13,6 +13,7 @@ import Megaphone from '@/assets/Megaphone';
 
 const BoardElement = (props: IBoard) => {
   const {
+    index,
     isNumber,
     isComment,
     isWriteDay,
@@ -28,8 +29,8 @@ const BoardElement = (props: IBoard) => {
     faq_type,
     createdAt,
     isPinned,
+    setOpen,
   } = props;
-  const [clicked, setClicked] = useState(false);
   const { isAdmin, authorityColor } = useAuthority();
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
@@ -38,7 +39,9 @@ const BoardElement = (props: IBoard) => {
   return (
     <>
       <_ElementContainer
-        onClick={() => isOpen && setClicked(!clicked)}
+        onClick={() => {
+          setOpen(index);
+        }}
         isPinned={isPinned}
       >
         <Div
@@ -178,7 +181,7 @@ const BoardElement = (props: IBoard) => {
           )}
         </Div>
       </_ElementContainer>
-      {isOpen && clicked && (
+      {isOpen && (
         <>
           <Pc>
             <_AnswerPart style={{ height: '14rem' }}>

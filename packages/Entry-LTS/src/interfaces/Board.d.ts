@@ -1,6 +1,7 @@
 import { FaqType } from '@/utils/api/faq/types';
 
 export interface IBoard {
+  index?: number;
   title?: string;
   boardNumber?: number;
   isPublic?: boolean;
@@ -17,4 +18,5 @@ export interface IBoard {
   faq_type?: FaqType;
   boardId?: string;
   isPinned?: boolean;
+  setOpen?: (number) => void;
 }
