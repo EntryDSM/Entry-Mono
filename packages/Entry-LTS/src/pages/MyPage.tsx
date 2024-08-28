@@ -14,10 +14,12 @@ import { DownloadPdf } from '@/utils/api/pdf';
 import { GetFirstRoundPass, GetSecondRoundPass } from '@/utils/api/pass';
 import BoardHeader from '@/components/Board/BoardHeader';
 // import { GetMyQna } from '@/utils/api/qna';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import DefaultModal from '@/components/Modal/DefaultModal';
 import { getSchedule } from '@/utils/api/schedule';
 import { getDocumentInfo, getUserInfo } from '@/utils/api/application';
+import { removeCookies, setCookies } from '@/utils/cookies';
+import { useState } from 'react';
 
 const MyPage = () => {
   const { Modal, open, close, setModalState, modalState } = useModal();
@@ -26,6 +28,10 @@ const MyPage = () => {
   const { data: documentInfo } = getDocumentInfo();
   const { mutate: deleteUserPdf } = DeleteUserPdf(data?.receipt_code);
   const { onDownloadPdf, isLoading: isPdfDownloadLoading } = DownloadPdf();
+
+  const [isLogout, setIsLogout] = useState<boolean>();
+
+  const navigate = useNavigate();
 
   const { mutate: getFirstRound } = GetFirstRoundPass({ setModalState, open });
   const { mutate: getSecondRound } = GetSecondRoundPass({
@@ -80,9 +86,31 @@ const MyPage = () => {
             >
               비밀번호 변경
             </Button>
-            {/* <Button color="delete" kind="delete" onClick={openSignOutModal}>
-              회원 탈퇴
-            </Button> */}
+            <Button
+              color="delete"
+              kind="contained"
+              onClick={() => {
+                setModalState('LOGOUT');
+                open();
+              }}
+            >
+              로그아웃
+            </Button>
+            {modalState === 'LOGOUT' && (
+              <Modal>
+                <CancelModal
+                  title="로그아웃"
+                  subTitle="정말 로그아웃 하시겠습니까?"
+                  button={<div style={{ width: 200 }}>로그아웃</div>}
+                  onClick={() => {
+                    removeCookies('accessToken');
+                    removeCookies('refreshToken');
+                    removeCookies('authority');
+                    navigate('/main');
+                  }}
+                />
+              </Modal>
+            )}
           </_UserButtons>
         </_User>
 
@@ -119,9 +147,6 @@ const MyPage = () => {
               >
                 발표 결과 확인
               </Button>
-              {/* <Button color="delete" kind="delete" onClick={openCancelSubmitModal}>
-                원서 최종제출 취소
-              </Button> */}
             </Pc>
             <Mobile>
               <Button onClick={getSecondRound}>발표 결과 확인</Button>

@@ -5,6 +5,7 @@ export type ModalType =
   | ''
   | 'CANCEL_SUBMIT'
   | 'SIGN_OUT'
+  | 'LOGOUT'
   | 'SUBMIT_GRADE'
   | 'START_NOTICE'
   | 'PASSED_ROUND'
