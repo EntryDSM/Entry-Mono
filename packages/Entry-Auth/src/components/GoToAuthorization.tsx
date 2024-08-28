@@ -15,8 +15,8 @@ export const GoToAuthorization = ({ text }: Props) => {
   };
 
   return (
-    <>
-      <Text color="#000000" size="18" align="center" margin={['top', 33]}>
+    <_Box>
+      <Text color="#000000" size="body2" align="center" margin={['top', 32]}>
         {text}
       </Text>
       <_Button
@@ -27,11 +27,17 @@ export const GoToAuthorization = ({ text }: Props) => {
       >
         본인 인증
       </_Button>
-    </>
+    </_Box>
   );
 };
 
 const _Button = styled(Button)`
   width: 100% !important;
-  margin-top: 33px;
+`;
+
+const _Box = styled.div`
+  width: 100%;
+  gap: 24px;
+  display: flex;
+  flex-direction: column;
 `;

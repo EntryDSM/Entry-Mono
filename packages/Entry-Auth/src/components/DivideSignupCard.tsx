@@ -12,8 +12,7 @@ const DivideSignupCard = ({ setIsStudent, setIsClick }: IDivideSignupCard) => {
   return (
     <_Wrapper>
       <Text size="body2" color="black600" align="center">
-        {'학생 본인 명의로 '}
-        Entry에 가입합니다
+        학생 본인 명의로 Entry에 가입합니다
       </Text>
       <VStack width={300}>
         <Button
