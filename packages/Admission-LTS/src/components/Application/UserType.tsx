@@ -161,7 +161,7 @@ const UserType = ({
           title={
             (userType.educationalStatus &&
               applicationTypeDateText[userType.educationalStatus]) ||
-            ''
+            '졸업/졸업예정 연월'
           }
         >
           <Dropdown
