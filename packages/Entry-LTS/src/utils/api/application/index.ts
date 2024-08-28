@@ -24,34 +24,3 @@ export const getDocumentInfo = () => {
   };
   return useQuery(['getDocument'], response);
 };
-
-export const getApply = () => {
-  const response = async () => {
-    const { data } = await instance.post(`${router}/status`);
-    return data;
-  };
-  return useMutation(response);
-};
-
-export const ApplyStatus = () => {
-  const response = async () => {
-    try {
-      const result = await instance.post(`${router}/status`);
-      console.log('ApplyStatus response:', result.status);
-      if (result.status === 405) {
-        return true;
-      }
-      return false;
-    } catch (e) {
-      if (isAxiosError(e)) {
-        console.error('Axios error:', e.response?.status);
-        if (e.response?.status === 405) {
-          return true;
-        }
-      }
-      return false;
-    }
-  };
-
-  return useMutation(response);
-};

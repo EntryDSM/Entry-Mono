@@ -10,28 +10,15 @@ import { useNavigate } from 'react-router-dom';
 import { APPLY_URL } from '@/constant/env';
 import { useAuthority } from '@/hooks/useAuthority';
 import { getCookies } from '@/utils/cookies';
-import { useEffect, useState } from 'react';
-import { ApplyStatus, getDocumentInfo } from '@/utils/api/application';
+import { getDocumentInfo } from '@/utils/api/application';
 
 const Main2 = () => {
-  const [isFinalSubmitted, setIsFinalSubmitted] = useState(false);
   const { data } = getSchedule();
   const { isAdmin, authorityColor } = useAuthority();
   const accessToken = getCookies('accessToken');
   const { data: documentInfo } = getDocumentInfo();
 
-  const { mutateAsync: applyStatus } = ApplyStatus();
   const navigate = useNavigate();
-
-  useEffect(() => {
-    const checkFinalSubmission = async () => {
-      const result = await applyStatus();
-      console.log('Mutation result:', result);
-      setIsFinalSubmitted(!result);
-    };
-
-    checkFinalSubmission();
-  }, [applyStatus]);
 
   const isOpen = () => {
     const currentDate = new Date();

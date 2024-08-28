@@ -343,7 +343,7 @@ const Program = ({ current, setCurrent }: ICurrnettype) => {
               educationalStatus={userType.educationalStatus}
             />
           )}
-          {isBlackExam && titles[gradeCurrent].step === 1 && (
+          {/* {isBlackExam && titles[gradeCurrent].step === 2 && (
             <WriteBlackExam
               writeGradeElement={blackExamGradeElement}
               changeWriteGradeElement={changeBlackExamGradeElement}
@@ -360,7 +360,7 @@ const Program = ({ current, setCurrent }: ICurrnettype) => {
               isCommon={isCommon}
               educationalStatus={userType.educationalStatus}
             />
-          )}
+          )} */}
         </_Selects>
       </_Wrapper>
       <ApplicationFooter
