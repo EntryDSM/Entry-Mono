@@ -83,13 +83,14 @@ const _TopContainerWrapper = styled.div`
   background-position: center;
   width: 100%;
   height: 100vh;
+  display: flex;
+  padding: 64px 0;
 `;
 
 const _TopContainer = styled.div`
   width: 100%;
   height: 100%;
   padding-top: 70px;
-  background-color: rgba(0, 0, 0, 0.8);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -119,7 +120,7 @@ const _Title = styled.div`
 `;
 
 const _Line = styled.div`
-  width: 400px;
+  width: 30%;
   height: 1px;
   background-color: white;
 `;
