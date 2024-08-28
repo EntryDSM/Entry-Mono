@@ -12,6 +12,7 @@ import UserMiddleSchool from '@/components/Application/UserMiddleShool';
 import Modal from '@/components/Modal/Modal';
 import DefaultModal from '@/components/Modal/DefaultModal';
 import { useModal } from '@/hooks/useModal';
+import { Spinner } from '@entrydsm/design-system';
 
 const titles = [
   '지원자 전형 구분',
@@ -64,6 +65,7 @@ const Application = () => {
       </_Wrapper>
       {modalState === 'ADMISSION' && !!refresh_token && (
         <Modal onClose={() => {}}>
+          {isLoaded && <Spinner color="orange" />}
           {!isLoaded && (
             <DefaultModal
               color="black900"
