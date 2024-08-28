@@ -190,7 +190,11 @@ const UserMiddleSchool = ({ current, setCurrent }: ICurrnettype) => {
             />
           )}
         </ApplicationContent>
-        <ApplicationContent grid={1} title="교사 연락처">
+        <ApplicationContent
+          grid={1}
+          title="추천 교사 연락처"
+          placeholder="‘-’ 문자를 제외한 숫자만 입력해주세요"
+        >
           {isLoading ? (
             <Skeleton width={230} height={42} isLoaded={isLoading} />
           ) : (
@@ -214,7 +218,11 @@ const UserMiddleSchool = ({ current, setCurrent }: ICurrnettype) => {
             <Input
               type="number"
               value={userMiddleSchool.studentNumber[0]}
-              onChange={(e) => onChangeStudentNumber(e, 0, 1)}
+              onChange={(e) => {
+                if (Number(e.target.value) <= 3) {
+                  onChangeStudentNumber(e, 0, 1);
+                }
+              }}
               placeholder="학년"
               width={120}
               unit="학년"
