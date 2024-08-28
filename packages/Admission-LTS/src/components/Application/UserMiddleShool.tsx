@@ -10,7 +10,11 @@ import {
   Skeleton,
 } from '@entrydsm/design-system';
 import { instance } from '@/apis/axios';
-import { EditAdditionalInfo, GetAdditionalInfo } from '@/apis/application';
+import {
+  EditAdditionalInfo,
+  GetAdditionalInfo,
+  GetUserType,
+} from '@/apis/application';
 import ApplicationContent from './ApplicationContent';
 import ApplicationFooter from './ApplicationFooter';
 import Modal from '../Modal/Modal';
@@ -42,8 +46,14 @@ const UserMiddleSchool = ({ current, setCurrent }: ICurrnettype) => {
   const { setModalState, modalState, close } = useModal();
   const { combinedMutations } = useCombineMutation();
 
+  const { data: isBlackExam } = GetUserType();
   const { data, isLoading } = GetAdditionalInfo();
   const { mutateAsync } = EditAdditionalInfo();
+
+  useEffect(() => {
+    isBlackExam?.educationalStatus === 'QUALIFICATION_EXAM' &&
+      setCurrent((current) => current + 1);
+  }, [isBlackExam]);
 
   useEffect(() => {
     if (!!data) {

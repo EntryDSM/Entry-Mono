@@ -18,7 +18,6 @@ import {
   EditUserPhoto,
   GetUserInfo,
   GetUserProfile,
-  GetUserType,
 } from '@/apis/application';
 import ApplicationContent from './ApplicationContent';
 import ApplicationFooter from './ApplicationFooter';
@@ -56,8 +55,6 @@ const UserInfo = ({ current, setCurrent }: ICurrnettype) => {
   const { data: userProfile, isLoading: isUserProfileLoading } =
     GetUserProfile();
   const { data: getUserInfo, isLoading: isUserInfoLoading } = GetUserInfo();
-  const { data: getUserType } = GetUserType();
-  const isBlackExam = getUserType?.educationalStatus === 'QUALIFICATION_EXAM';
 
   const inputRef = useRef<HTMLInputElement>(null);
   const { close, modalState, setModalState } = useModal();
@@ -143,9 +140,7 @@ const UserInfo = ({ current, setCurrent }: ICurrnettype) => {
 
   const isDisabled =
     Object.values(userInfo).some((item) => !!item === false) ||
-    userPhoto.photo === 'data:image/png;base64,null' ||
-    isBlackExam === null ||
-    isBlackExam === undefined;
+    userPhoto.photo === 'data:image/png;base64,null';
 
   const onNextClick = () => {
     combinedMutations(
@@ -159,9 +154,7 @@ const UserInfo = ({ current, setCurrent }: ICurrnettype) => {
           }),
         () => patchUserPhoto({ photo: userPhoto.photoFileName as File }),
       ],
-      isBlackExam
-        ? () => setCurrent(current + 2)
-        : () => setCurrent(current + 1),
+      () => setCurrent(current + 1),
     );
   };
 

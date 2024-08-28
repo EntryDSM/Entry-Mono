@@ -44,7 +44,12 @@ export const PatchGraduationType = () => {
   const response = async (param: IPatchGraduationType) => {
     return instance.patch(`${router}/graduation/type`, param);
   };
-  return useMutation(response);
+  const queryClient = useQueryClient();
+  return useMutation(response, {
+    onSuccess: () => {
+      queryClient.invalidateQueries(['userType']);
+    },
+  });
 };
 
 /** 전형 구분 조회 */
