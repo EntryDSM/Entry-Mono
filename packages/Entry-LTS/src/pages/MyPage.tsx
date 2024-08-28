@@ -149,7 +149,15 @@ const MyPage = () => {
               </Button>
             </Pc>
             <Mobile>
-              <Button onClick={getSecondRound}>발표 결과 확인</Button>
+              <Button onClick={onDownloadPdf} disabled={isPdfDownloadLoading}>
+                {isPdfDownloadLoading ? '원서 다운로드 중...' : '원서 다운로드'}
+              </Button>
+              <Button
+                disabled={currentDate < secondAnnouncementDate}
+                onClick={getSecondRound}
+              >
+                발표 결과 확인
+              </Button>
             </Mobile>
           </_ApplyButtons>
         </_Apply>
