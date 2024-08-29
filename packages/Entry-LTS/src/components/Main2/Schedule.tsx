@@ -69,7 +69,7 @@ const Schedule = () => {
 export default Schedule;
 
 const _Wrapper = styled.div`
-  width: 1180px;
+  width: 100%;
   max-width: 94%;
   display: flex;
   flex-direction: column;
@@ -131,6 +131,7 @@ const _MobileText = styled.div`
   color: white;
   font-size: 24px;
   font-weight: 700;
+  width: 100%;
 
   @media (max-width: 699px) {
     display: block;

@@ -284,7 +284,7 @@ const _NoticeContainer = styled.div`
   flex-direction: column;
   gap: 36px;
   width: 100%;
-  min-width: 480px;
+  min-width: 400px;
 `;
 
 const _NoticeBox = styled.div`

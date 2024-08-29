@@ -32,7 +32,7 @@ const Main2 = () => {
     <_Wrapper>
       <_TopContainerWrapper>
         <_TopContainer>
-          <div>
+          <_Box>
             <_Title>
               <span style={{ color: '#FF9900' }}>대덕소프트웨어마이스터고</span>
               는 지금,
@@ -40,26 +40,31 @@ const Main2 = () => {
               IT 업계를 선도할 미래 인재를 모집하고 있어요
             </_Title>
             <_Line />
-            <Text size={'header1'} color={'realWhite'}>
-              {documentInfo?.isSubmitted
-                ? '최종제출이 완료된 상태입니다'
-                : scheduleStatusCalculater(data?.currentStatus)}
-            </Text>
-            <Button
-              color={authorityColor}
-              isBig={true}
-              onClick={() => {
-                if (!isOpen()) {
-                  window.location.href = `${APPLY_URL}`;
+            <_SubmitBox>
+              <Text size={'header1'} color={'realWhite'}>
+                {documentInfo?.isSubmitted
+                  ? '최종제출이 완료된 상태입니다'
+                  : scheduleStatusCalculater(data?.currentStatus)}
+              </Text>
+              <Button
+                color={authorityColor}
+                isBig={true}
+                onClick={() => {
+                  if (!isOpen()) {
+                    window.location.href = `${APPLY_URL}`;
+                  }
+                }}
+                disabled={
+                  isOpen() ||
+                  isAdmin ||
+                  !accessToken ||
+                  documentInfo?.isSubmitted
                 }
-              }}
-              disabled={
-                isOpen() || isAdmin || !accessToken || documentInfo?.isSubmitted
-              }
-            >
-              지원하기
-            </Button>
-          </div>
+              >
+                지원하기
+              </Button>
+            </_SubmitBox>
+          </_Box>
           <Schedule />
         </_TopContainer>
       </_TopContainerWrapper>
@@ -95,7 +100,8 @@ const _TopContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 166px;
+  justify-content: space-between;
+  gap: 24px;
   > div:nth-of-type(1) {
     width: 94%;
     max-width: 1180px;
@@ -123,6 +129,19 @@ const _Line = styled.div`
   width: 30%;
   height: 1px;
   background-color: white;
+`;
+
+const _Box = styled.div`
+  width: 100;
+  display: flex;
+  flex-direction: column;
+  gap: 64px;
+`;
+
+const _SubmitBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 `;
 
 const _FaqWrapper = styled.div`
