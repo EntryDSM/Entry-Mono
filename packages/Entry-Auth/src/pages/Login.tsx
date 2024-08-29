@@ -8,52 +8,19 @@ import { useForm } from '@/hooks/useForm';
 import { isTruthValues } from '@/utils/isTruthValues';
 import styled from '@emotion/styled';
 import { Button, Input } from '@team-entry/design_system';
-import { useEffect } from 'react';
 
 interface ILogin extends RedirectURL {
   isAdmin?: boolean;
 }
 
 export const Login = ({ redirectURL, isAdmin = false }: ILogin) => {
-  const { state, onChangeInputValue, setState } = useForm({
+  const { state, onChangeInputValue } = useForm({
     phoneNumber: '',
     password: '',
   });
 
   const { mutate: userLogin } = useLogin(redirectURL);
   const { mutate: adminLogin } = useAdminLogin();
-
-  const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-
-    const formattedValue =
-      name === 'phoneNumber'
-        ? value
-            .replace(/[^0-9]/g, '')
-            .replace(/^(\d{3})(\d{4})(\d{4})$/, `$1-$2-$3`)
-        : value;
-
-    setState((prevState) => ({
-      ...prevState,
-      [name]: formattedValue,
-    }));
-  };
-
-  const isButtonDisabled = !isTruthValues([state.phoneNumber, state.password]);
-
-  useEffect(() => {
-    if (state.phoneNumber) {
-      const formattedPhoneNumber = state.phoneNumber
-        .replace(/[^0-9]/g, '')
-        .replace(/^(\d{3})(\d{4})(\d{4})$/, `$1-$2-$3`);
-      if (formattedPhoneNumber !== state.phoneNumber) {
-        setState((prevState) => ({
-          ...prevState,
-          phoneNumber: formattedPhoneNumber,
-        }));
-      }
-    }
-  }, [state.phoneNumber, setState]);
 
   return (
     <SubmitForm>
@@ -72,11 +39,7 @@ export const Login = ({ redirectURL, isAdmin = false }: ILogin) => {
           type={isAdmin ? 'text' : 'tel'}
           placeholder={isAdmin ? '아이디' : '전화번호'}
           name="phoneNumber"
-          onChange={(e) => {
-            onChangeInputValue(e);
-            handleInput(e);
-          }}
-          onInput={handleInput}
+          onChange={onChangeInputValue}
           value={state.phoneNumber}
           maxLength={13}
         />
@@ -89,11 +52,7 @@ export const Login = ({ redirectURL, isAdmin = false }: ILogin) => {
           type="password"
           placeholder="비밀번호"
           name="password"
-          onChange={(e) => {
-            onChangeInputValue(e);
-            handleInput(e);
-          }}
-          onInput={handleInput}
+          onChange={onChangeInputValue}
           value={state.password}
           maxLength={32}
         />
@@ -112,7 +71,7 @@ export const Login = ({ redirectURL, isAdmin = false }: ILogin) => {
           }
           margin={['top', 45]}
           color={isAdmin ? 'green' : 'orange'}
-          disabled={isButtonDisabled}
+          disabled={!isTruthValues([state.phoneNumber, state.password])}
         >
           로그인
         </_Button>
