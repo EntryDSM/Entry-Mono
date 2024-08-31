@@ -8,47 +8,19 @@ import { useForm } from '@/hooks/useForm';
 import { isTruthValues } from '@/utils/isTruthValues';
 import styled from '@emotion/styled';
 import { Button, Input } from '@team-entry/design_system';
-import { useState, useEffect } from 'react';
 
 interface ILogin extends RedirectURL {
   isAdmin?: boolean;
 }
 
 export const Login = ({ redirectURL, isAdmin = false }: ILogin) => {
-  const { state, setState, onChangeInputValue } = useForm({
+  const { state, onChangeInputValue } = useForm({
     phoneNumber: '',
     password: '',
   });
 
-  const [isFormValid, setIsFormValid] = useState(false);
-
   const { mutate: userLogin } = useLogin(redirectURL);
   const { mutate: adminLogin } = useAdminLogin();
-
-  useEffect(() => {
-    setIsFormValid(isTruthValues([state.phoneNumber, state.password]));
-  }, [state.phoneNumber, state.password]);
-
-  const handleInput = (e: React.FormEvent<HTMLInputElement>) => {
-    const { name, value } = e.currentTarget;
-    if (value !== state[name as keyof typeof state]) {
-      setState((prev) => ({ ...prev, [name]: value }));
-    }
-  };
-
-  const handleLogin = () => {
-    if (isAdmin) {
-      adminLogin({
-        adminId: state.phoneNumber,
-        password: state.password,
-      });
-    } else {
-      userLogin({
-        phoneNumber: state.phoneNumber.replace(/-/g, ''),
-        password: state.password,
-      });
-    }
-  };
 
   return (
     <SubmitForm>
@@ -68,7 +40,6 @@ export const Login = ({ redirectURL, isAdmin = false }: ILogin) => {
           placeholder={isAdmin ? '아이디' : '전화번호'}
           name="phoneNumber"
           onChange={onChangeInputValue}
-          onInput={handleInput}
           value={state.phoneNumber}
           maxLength={13}
         />
@@ -82,16 +53,25 @@ export const Login = ({ redirectURL, isAdmin = false }: ILogin) => {
           placeholder="비밀번호"
           name="password"
           onChange={onChangeInputValue}
-          onInput={handleInput}
           value={state.password}
           maxLength={32}
         />
         <_Button
           kind="contained"
-          onClick={handleLogin}
+          onClick={() =>
+            isAdmin
+              ? adminLogin({
+                  adminId: state.phoneNumber,
+                  password: state.password,
+                })
+              : userLogin({
+                  phoneNumber: state.phoneNumber.replace(/-/g, ''),
+                  password: state.password,
+                })
+          }
           margin={['top', 45]}
           color={isAdmin ? 'green' : 'orange'}
-          disabled={!isFormValid}
+          disabled={!isTruthValues([state.phoneNumber, state.password])}
         >
           로그인
         </_Button>
