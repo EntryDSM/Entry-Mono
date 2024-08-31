@@ -158,6 +158,32 @@ const UserInfo = ({ current, setCurrent }: ICurrnettype) => {
     );
   };
 
+  const formatPhoneNumber = (value: string) => {
+    const cleaned = value.replace(/\D/g, '');
+    const match = cleaned.match(/^(\d{3})(\d{4})(\d{4})$/);
+    if (match) {
+      return `${match[1]}-${match[2]}-${match[3]}`;
+    }
+    return cleaned;
+  };
+
+  const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+
+    if (name === 'parentTel' || name === 'applicantTel') {
+      const formattedValue = formatPhoneNumber(value);
+      setUserInfo((prevState) => ({
+        ...prevState,
+        [name]: formattedValue,
+      }));
+    } else {
+      setUserInfo((prevState) => ({
+        ...prevState,
+        [name]: value,
+      }));
+    }
+  };
+
   return (
     <>
       <_ApplicationWrapper>
@@ -299,13 +325,13 @@ const UserInfo = ({ current, setCurrent }: ICurrnettype) => {
             <Skeleton width={230} height={42} isLoaded={isUserInfoLoading} />
           ) : (
             <Input
-              type="tel"
+              type="text"
               placeholder="본인 연락처"
               width={230}
               name="applicantTel"
               maxLength={13}
               value={userInfo.applicantTel}
-              onChange={changeUserInfo}
+              onChange={handleInput}
               disabled={!userProfile?.isParent}
             />
           )}
@@ -350,13 +376,13 @@ const UserInfo = ({ current, setCurrent }: ICurrnettype) => {
             <Skeleton width={230} height={42} isLoaded={isUserInfoLoading} />
           ) : (
             <Input
-              type="tel"
+              type="text"
               placeholder="보호자 연락처"
               width={230}
               maxLength={13}
               name="parentTel"
               value={userInfo.parentTel}
-              onChange={changeUserInfo}
+              onChange={handleInput}
               disabled={userProfile?.isParent}
             />
           )}
