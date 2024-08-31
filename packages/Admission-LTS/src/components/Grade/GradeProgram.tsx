@@ -183,7 +183,7 @@ const Program = ({ current, setCurrent }: ICurrnettype) => {
             : userGraduation.techAndHomeGrade.split('').slice(1),
         }));
     }
-  }, [userGraduation]);
+  }, [userGraduation, userBlackExam]);
 
   const onNextClick = () => {
     combinedMutations(
