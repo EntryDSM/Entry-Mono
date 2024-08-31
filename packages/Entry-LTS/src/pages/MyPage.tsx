@@ -141,7 +141,10 @@ const MyPage = () => {
           </Text>
           <_ApplyButtons>
             <Pc>
-              <Button onClick={onDownloadPdf} disabled={isPdfDownloadLoading}>
+              <Button
+                onClick={onDownloadPdf}
+                disabled={isPdfDownloadLoading || !documentInfo?.isSubmitted}
+              >
                 {isPdfDownloadLoading ? '원서 다운로드 중...' : '원서 다운로드'}
               </Button>
               <Button
