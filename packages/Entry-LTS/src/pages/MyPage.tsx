@@ -103,10 +103,13 @@ const MyPage = () => {
                   subTitle="정말 로그아웃 하시겠습니까?"
                   button={<div style={{ width: 200 }}>로그아웃</div>}
                   onClick={() => {
-                    removeCookies('accessToken');
-                    removeCookies('refreshToken');
-                    removeCookies('authority');
-                    navigate('/main');
+                    Promise.allSettled([
+                      removeCookies('accessToken'),
+                      removeCookies('refreshToken'),
+                      removeCookies('authority'),
+                    ]).then(() => {
+                      navigate('/main');
+                    });
                   }}
                 />
               </Modal>
