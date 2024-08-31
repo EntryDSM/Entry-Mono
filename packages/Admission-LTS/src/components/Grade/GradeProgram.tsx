@@ -64,7 +64,7 @@ const Program = ({ current, setCurrent }: ICurrnettype) => {
     englishGrade: 0,
     mathGrade: 0,
     scienceGrade: 0,
-    electivesGrade: 0,
+    optGrade: 0,
   });
 
   const { data: userType } = GetUserType();
@@ -134,7 +134,7 @@ const Program = ({ current, setCurrent }: ICurrnettype) => {
           mathGrade: userBlackExam.mathGrade,
           socialGrade: userBlackExam.socialGrade,
           scienceGrade: userBlackExam.scienceGrade,
-          electivesGrade: userBlackExam.electivesGrade,
+          optGrade: userBlackExam.optGrade,
           englishGrade: userBlackExam.englishGrade,
         });
       userBlackExam &&
@@ -196,7 +196,7 @@ const Program = ({ current, setCurrent }: ICurrnettype) => {
               mathGrade: blackExamGradeElement.mathGrade,
               socialGrade: blackExamGradeElement.socialGrade,
               scienceGrade: blackExamGradeElement.scienceGrade,
-              electivesGrade: blackExamGradeElement.electivesGrade,
+              optGrade: blackExamGradeElement.optGrade,
               extraScore: {
                 hasCertificate: writeGradeElement?.extraScore.hasCertificate,
                 hasCompetitionPrize:

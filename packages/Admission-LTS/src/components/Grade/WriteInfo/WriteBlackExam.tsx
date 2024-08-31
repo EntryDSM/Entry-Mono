@@ -79,9 +79,9 @@ const WriteBlackExam = ({
         <Input
           type="number"
           width={230}
-          name="electivesGrade"
+          name="optGrade"
           placeholder="검정고시 점수"
-          value={writeGradeElement.electivesGrade}
+          value={writeGradeElement.optGrade}
           onChange={changeWriteGradeElement}
           unit="점"
         />
