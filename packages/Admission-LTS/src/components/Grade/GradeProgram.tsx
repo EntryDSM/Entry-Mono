@@ -23,6 +23,7 @@ import { subject } from '@/constant/grade';
 import { useInput } from '@/hooks/useInput';
 import { useCombineMutation } from '@/hooks/useCombineMutation';
 import { ICurrnettype } from '@/interface/type';
+import WriteBlackExam from './WriteInfo/WriteBlackExam';
 import { Background } from '../Common/Background';
 
 const Program = ({ current, setCurrent }: ICurrnettype) => {
@@ -53,15 +54,18 @@ const Program = ({ current, setCurrent }: ICurrnettype) => {
     },
   });
 
-  const { form: blackExamGradeElement, setForm: setBlackExamGradeElement } =
-    useInput<IBlackExamGradeElement>({
-      koreanGrade: 0,
-      socialGrade: 0,
-      englishGrade: 0,
-      mathGrade: 0,
-      scienceGrade: 0,
-      electivesGrade: 0,
-    });
+  const {
+    form: blackExamGradeElement,
+    setForm: setBlackExamGradeElement,
+    onChange: changeBlackExamGradeElement,
+  } = useInput<IBlackExamGradeElement>({
+    koreanGrade: 0,
+    socialGrade: 0,
+    englishGrade: 0,
+    mathGrade: 0,
+    scienceGrade: 0,
+    electivesGrade: 0,
+  });
 
   const { data: userType } = GetUserType();
   const { data: userGraduation, isLoading } = GetUserGraduation();
@@ -339,7 +343,7 @@ const Program = ({ current, setCurrent }: ICurrnettype) => {
               educationalStatus={userType.educationalStatus}
             />
           )}
-          {/* {isBlackExam && titles[gradeCurrent].step === 2 && (
+          {isBlackExam && titles[gradeCurrent].step === 1 && (
             <WriteBlackExam
               writeGradeElement={blackExamGradeElement}
               changeWriteGradeElement={changeBlackExamGradeElement}
@@ -356,7 +360,7 @@ const Program = ({ current, setCurrent }: ICurrnettype) => {
               isCommon={isCommon}
               educationalStatus={userType.educationalStatus}
             />
-          )} */}
+          )}
         </_Selects>
       </_Wrapper>
       <ApplicationFooter
