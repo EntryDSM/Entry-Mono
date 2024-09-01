@@ -47,7 +47,8 @@ const MyPage = () => {
 
   // 발표일
   const { data: schedule, isLoading } = getSchedule();
-  const secondAnnouncementDate = new Date(schedule?.schedules[4]?.date ?? '');
+
+  const secondAnnouncementDate = new Date(schedule?.schedules[3]?.date ?? '');
   const currentDate = new Date();
 
   return (
