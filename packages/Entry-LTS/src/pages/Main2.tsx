@@ -11,12 +11,14 @@ import { APPLY_URL } from '@/constant/env';
 import { useAuthority } from '@/hooks/useAuthority';
 import { getCookies } from '@/utils/cookies';
 import { getDocumentInfo } from '@/utils/api/application';
+import { useEffect, useState } from 'react';
 
 const Main2 = () => {
   const { data } = getSchedule();
   const { isAdmin, authorityColor } = useAuthority();
   const accessToken = getCookies('accessToken');
-  const { data: documentInfo } = getDocumentInfo();
+  const [isLogin, setIsLogin] = useState(!!getCookies('accessToken'));
+  const { data: documentInfo } = getDocumentInfo(isLogin);
 
   const navigate = useNavigate();
 
@@ -27,6 +29,10 @@ const Main2 = () => {
 
     return !(currentDate >= startDate && currentDate <= endDate);
   };
+
+  useEffect(() => {
+    setIsLogin(!!getCookies('accessToken'));
+  }, [getCookies('accessToken')]);
 
   return (
     <_Wrapper>

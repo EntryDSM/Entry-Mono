@@ -17,10 +17,12 @@ export const getUserInfo = (isLogin?: boolean) => {
   });
 };
 
-export const getDocumentInfo = () => {
+export const getDocumentInfo = (isLogin?: boolean) => {
   const response = async () => {
     const { data } = await instance.get<IGetDocumentInfo>(`${router}/status`);
     return data;
   };
-  return useQuery(['getDocument'], response);
+  return useQuery(['getDocument'], response, {
+    enabled: isLogin,
+  });
 };
