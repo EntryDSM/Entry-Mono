@@ -46,7 +46,7 @@ export const Input: React.FC<InputType> = ({
     useEffect(() => {
         setVeteransNumber(
             String(value)
-                .slice(0, 9)
+                .slice(0, 10)
                 .replace(/[^0-9]/g, '')
                 .replace(/^(\d{2})(\d{6})$/, '$1-$2'),
         );
