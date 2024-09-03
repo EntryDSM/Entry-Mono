@@ -84,6 +84,12 @@ const UserType = ({
     ]).then(() => setCurrent(current + 1));
   };
 
+  const { veteransNumber, isOutOfHeadcount, ...requireType } = userType;
+  console.log(requireType);
+  const isDisabled = Object.values(requireType).some(
+    (item) => !!item === false,
+  );
+
   return (
     <>
       <_ApplicationWrapper>
@@ -192,9 +198,9 @@ const UserType = ({
           <Radio
             label="해당없음"
             name="applicationRemark"
-            value=""
+            value="NOTTING"
             onClick={changeUserType}
-            checked={userType.applicationRemark === ''}
+            checked={userType.applicationRemark === 'NOTTING'}
           />
           <Radio
             label="국가 유공자"
@@ -227,7 +233,7 @@ const UserType = ({
       </_ApplicationWrapper>
       <ApplicationFooter
         current={current}
-        isDisabled={false}
+        isDisabled={isDisabled}
         nextClick={onNextClick}
       />
     </>

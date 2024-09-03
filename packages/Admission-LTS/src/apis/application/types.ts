@@ -17,6 +17,7 @@ export type ApplicationRemark =
   | 'PRIVILEGED_ADMISSION'
   | 'NATIONAL_MERIT'
   | 'PROTECTED_CHILDREN'
+  | 'NOTTING'
   | '';
 
 export interface IGetUSerType {

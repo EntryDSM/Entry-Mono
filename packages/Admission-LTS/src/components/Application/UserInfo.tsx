@@ -140,7 +140,7 @@ const UserInfo = ({ current, setCurrent }: ICurrnettype) => {
 
   const isDisabled =
     Object.values(userInfo).some((item) => !!item === false) ||
-    userPhoto.photo === 'data:image/png;base64,null';
+    userPhoto.photo === '';
 
   const onNextClick = (mode: 'Before' | 'After') => {
     combinedMutations(
