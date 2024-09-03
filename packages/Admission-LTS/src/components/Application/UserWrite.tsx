@@ -34,7 +34,7 @@ const UserWrite = ({ current, setCurrent }: ICurrnettype) => {
     GetUserStudyPlan();
   const { data: getUserType } = GetUserType();
 
-  const isBlackExam = getUserType?.educationalStatus == 'QUALIFICATION_EXAM';
+  // const isBlackExam = getUserType?.educationalStatus == 'QUALIFICATION_EXAM';
 
   useEffect(() => {
     getUserIntroduce &&
