@@ -38,7 +38,7 @@ export const Input: React.FC<InputType> = ({
     useEffect(() => {
         setTelephoneNumber(
             String(value)
-                .slice(0, 12)
+                .slice(0, 13)
                 .replace(/[^0-9]/g, '')
                 .replace(/^(\d{2,3})(\d{3,4})(\d{4})$/, `$1-$2-$3`),
         );
@@ -46,7 +46,7 @@ export const Input: React.FC<InputType> = ({
     useEffect(() => {
         setVeteransNumber(
             String(value)
-                .slice(0, 10)
+                .slice(0, 9)
                 .replace(/[^0-9]/g, '')
                 .replace(/^(\d{2})(\d{6})$/, '$1-$2'),
         );
