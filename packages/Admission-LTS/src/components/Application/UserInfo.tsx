@@ -142,7 +142,7 @@ const UserInfo = ({ current, setCurrent }: ICurrnettype) => {
     Object.values(userInfo).some((item) => !!item === false) ||
     userPhoto.photo === 'data:image/png;base64,null';
 
-  const onNextClick = () => {
+  const onNextClick = (mode: 'Before' | 'After') => {
     combinedMutations(
       [
         () =>
@@ -154,7 +154,7 @@ const UserInfo = ({ current, setCurrent }: ICurrnettype) => {
           }),
         () => patchUserPhoto({ photo: userPhoto.photoFileName as File }),
       ],
-      () => setCurrent(current + 1),
+      () => setCurrent(mode === 'Before' ? current - 1 : current + 1),
     );
   };
 
@@ -461,7 +461,7 @@ const UserInfo = ({ current, setCurrent }: ICurrnettype) => {
       <ApplicationFooter
         current={current}
         isDisabled={isDisabled}
-        prevClick={() => setCurrent(0)}
+        prevClick={onNextClick}
         nextClick={onNextClick}
       />
     </>

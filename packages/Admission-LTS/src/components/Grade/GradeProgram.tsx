@@ -185,7 +185,7 @@ const Program = ({ current, setCurrent }: ICurrnettype) => {
     }
   }, [userGraduation, userBlackExam]);
 
-  const onNextClick = () => {
+  const onNextClick = (mode: 'Before' | 'After') => {
     combinedMutations(
       [
         () => {
@@ -244,11 +244,13 @@ const Program = ({ current, setCurrent }: ICurrnettype) => {
       ],
       () =>
         setCurrent(
-          !isGraduate && gradeCurrent === 3
-            ? current + 2
-            : isBlackExam && gradeCurrent === 0
-              ? current + 5
-              : current + 1,
+          mode === 'Before'
+            ? current - 1
+            : !isGraduate && gradeCurrent === 3
+              ? current + 2
+              : isBlackExam && gradeCurrent === 0
+                ? current + 5
+                : current + 1,
         ),
     );
   };
@@ -366,7 +368,7 @@ const Program = ({ current, setCurrent }: ICurrnettype) => {
       <ApplicationFooter
         current={current}
         isDisabled={false}
-        prevClick={() => setCurrent(current - 1)}
+        prevClick={onNextClick}
         nextClick={onNextClick}
       />
     </>

@@ -7,8 +7,8 @@ export type InputType =
 export interface IApplicationFooterProps {
   current: number;
   isDisabled: boolean;
-  prevClick?: () => void;
-  nextClick?: () => void;
+  prevClick?: (mode: 'Before' | 'After') => void;
+  nextClick?: (mode: 'Before' | 'After') => void;
 }
 
 export interface ICurrnettype {
