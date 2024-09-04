@@ -44,7 +44,12 @@ export const PatchGraduationType = () => {
   const response = async (param: IPatchGraduationType) => {
     return instance.patch(`${router}/graduation/type`, param);
   };
-  return useMutation(response);
+  const queryClient = useQueryClient();
+  return useMutation(response, {
+    onSuccess: () => {
+      queryClient.invalidateQueries(['userType']);
+    },
+  });
 };
 
 /** 전형 구분 조회 */
@@ -205,7 +210,7 @@ export const SubmitPdf = () => {
           case 'Application process is not completed':
             message = '완료되지 않은 부분이 존재합니다.';
             break;
-          case 'Already submit application.':
+          case '이미 최종제출이 되어있습니다.':
             message = '이미 제출된 원서입니다.';
             setModalState('ERROR');
             break;

@@ -23,7 +23,7 @@ export const Router = () => {
         />
         <Route path="/sign-up" element={<SignUp redirectURL={redirectURL} />} />
         <Route path="/change-pwd" element={<ChangePwd />} />
-        <Route path="/verify" element={<Verify />} />
+        <Route path="/sign-up/verify" element={<Verify />} />
         <Route path="/pass" element={<Pass />} />
       </Routes>
     </BrowserRouter>

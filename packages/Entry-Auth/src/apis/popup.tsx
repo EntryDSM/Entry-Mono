@@ -3,7 +3,7 @@ import { instance } from './axios';
 import { useToken } from '@/hooks/useToken';
 
 export const useOpenPopUp = () => {
-  const { setToken, clearToken } = useToken();
+  const { setToken } = useToken();
 
   const openPopUp = useMutation(
     (redirectUrl: string) =>
@@ -28,11 +28,18 @@ export const useOpenPopUp = () => {
         const height = 700;
         const left = window.screenX + (window.outerWidth - width) / 2;
         const top = window.screenY + (window.outerHeight - height) / 2;
-        window.open(
+        // window.open(
+        //   `/pass?mdl_tkn=${mdl_tknValue}`,
+        //   'popup',
+        //   `resizable=no,width=${width},height=${height},left=${left},top=${top}}`,
+        // );
+        const popupWindow = window.open(
           `/pass?mdl_tkn=${mdl_tknValue}`,
           'popup',
-          `resizable=no,width=${width},height=${height},left=${left},top=${top}}`,
+          `resizable=no,width=${width},height=${height},left=${left},top=${top}`,
         );
+        popupWindow?.document.write(res.data);
+        popupWindow?.document.close();
       },
     },
   );

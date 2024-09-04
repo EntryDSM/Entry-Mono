@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import styled from '@emotion/styled';
-import { Radio, theme, Dropdown } from '@entrydsm/design-system';
+import { Radio, theme, Dropdown, Input } from '@entrydsm/design-system';
 import {
   EditUserType,
   GetUserType,
@@ -15,7 +15,15 @@ import { generateNumberArray } from '@/utils/GenerateNumberArray';
 import { ICurrnettype, IUserTypeParams } from '@/interface/type';
 import { EducationalStatus } from '@/apis/application/types';
 
-const UserType = ({ current, setCurrent }: ICurrnettype) => {
+interface ICurrentTypePageProps extends ICurrnettype {
+  handlerFunction: () => void;
+}
+
+const UserType = ({
+  current,
+  setCurrent,
+  handlerFunction,
+}: ICurrentTypePageProps) => {
   const date = new Date();
   const {
     form: userType,
@@ -28,11 +36,18 @@ const UserType = ({ current, setCurrent }: ICurrnettype) => {
     graduateDate: [(date.getFullYear() + 1).toString(), '01'],
     applicationRemark: null,
     isOutOfHeadcount: false,
+    veteransNumber: undefined,
   });
 
-  const { data } = GetUserType();
+  const { data, isLoading } = GetUserType();
   const { mutateAsync: editUserType } = EditUserType();
   const { mutateAsync: editGraduationType } = PatchGraduationType();
+
+  useEffect(() => {
+    if (!isLoading) {
+      handlerFunction();
+    }
+  }, [isLoading]);
 
   useEffect(() => {
     data &&
@@ -45,30 +60,35 @@ const UserType = ({ current, setCurrent }: ICurrnettype) => {
           userType.graduateDate,
         applicationRemark: data.applicationRemark || '',
         isOutOfHeadcount: data.isOutOfHeadcount,
+        veteransNumber: data.veteransNumber,
       });
   }, [data]);
 
   const { combinedMutations } = useCombineMutation();
 
   const onNextClick = () => {
-    combinedMutations(
-      [
-        () =>
-          editUserType({
-            applicationType: userType.applicationType,
-            isDaejeon: userType.isDaejeon,
-            isOutOfHeadcount: false,
-            applicationRemark: userType.applicationRemark || null,
-          }),
-        () =>
-          editGraduationType({
-            educationalStatus: userType.educationalStatus as EducationalStatus,
-            graduateDate: userType.graduateDate.join('-'),
-          }),
-      ],
-      () => setCurrent(current + 1),
-    );
+    combinedMutations([
+      () =>
+        editUserType({
+          applicationType: userType.applicationType,
+          isDaejeon: userType.isDaejeon,
+          isOutOfHeadcount: false,
+          applicationRemark: userType.applicationRemark || null,
+          veteransNumber: userType.veteransNumber,
+        }),
+      () =>
+        editGraduationType({
+          educationalStatus: userType.educationalStatus as EducationalStatus,
+          graduateDate: userType.graduateDate.join('-'),
+        }),
+    ]).then(() => setCurrent(current + 1));
   };
+
+  const { veteransNumber, isOutOfHeadcount, ...requireType } = userType;
+  console.log(requireType);
+  const isDisabled = Object.values(requireType).some(
+    (item) => !!item === false,
+  );
 
   return (
     <>
@@ -144,7 +164,7 @@ const UserType = ({ current, setCurrent }: ICurrnettype) => {
           title={
             (userType.educationalStatus &&
               applicationTypeDateText[userType.educationalStatus]) ||
-            ''
+            '졸업/졸업예정 연월'
           }
         >
           <Dropdown
@@ -157,7 +177,7 @@ const UserType = ({ current, setCurrent }: ICurrnettype) => {
                 graduateDate: [year, userType.graduateDate[1]],
               })
             }
-            options={generateNumberArray(2010, date.getFullYear() + 1)}
+            options={generateNumberArray(2020, date.getFullYear() + 1)}
             unit="년"
           />
           <Dropdown
@@ -178,9 +198,9 @@ const UserType = ({ current, setCurrent }: ICurrnettype) => {
           <Radio
             label="해당없음"
             name="applicationRemark"
-            value=""
+            value="NOTTING"
             onClick={changeUserType}
-            checked={userType.applicationRemark === ''}
+            checked={userType.applicationRemark === 'NOTTING'}
           />
           <Radio
             label="국가 유공자"
@@ -197,10 +217,23 @@ const UserType = ({ current, setCurrent }: ICurrnettype) => {
             checked={userType.applicationRemark === 'PRIVILEGED_ADMISSION'}
           />
         </ApplicationContent>
+        {userType.applicationRemark === 'NATIONAL_MERIT' && (
+          <ApplicationContent grid={1} title="보훈번호" required={false}>
+            <Input
+              type="veteransNumber"
+              width={230}
+              name="veteransNumber"
+              placeholder="보훈번호"
+              maxLength={8}
+              onChange={changeUserType}
+              value={userType.veteransNumber}
+            />
+          </ApplicationContent>
+        )}
       </_ApplicationWrapper>
       <ApplicationFooter
         current={current}
-        isDisabled={false}
+        isDisabled={isDisabled}
         nextClick={onNextClick}
       />
     </>

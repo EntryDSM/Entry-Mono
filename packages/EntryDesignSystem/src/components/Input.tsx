@@ -7,7 +7,7 @@ import { marginCssType, marginToCss, marginType } from '../utils/margin';
 import { theme } from '../style';
 import { Icon, IconType } from './Icon';
 
-type inputType = 'text' | 'password' | 'number' | 'tel';
+type inputType = 'text' | 'password' | 'number' | 'tel' | 'veteransNumber';
 
 export interface InputType extends marginCssType, InputHTMLAttributes<HTMLInputElement> {
     className?: string;
@@ -34,11 +34,21 @@ export const Input: React.FC<InputType> = ({
 }) => {
     const [isOpen, setIsOpen] = useState<boolean>(false);
     const [telephoneNumber, setTelephoneNumber] = useState<string>('');
+    const [veteransNumber, setVeteransNumber] = useState<string>('');
     useEffect(() => {
         setTelephoneNumber(
             String(value)
+                .slice(0, 13)
                 .replace(/[^0-9]/g, '')
                 .replace(/^(\d{2,3})(\d{3,4})(\d{4})$/, `$1-$2-$3`),
+        );
+    }, [value]);
+    useEffect(() => {
+        setVeteransNumber(
+            String(value)
+                .slice(0, 9)
+                .replace(/[^0-9]/g, '')
+                .replace(/^(\d{2})(\d{6})$/, '$1-$2'),
         );
     }, [value]);
     return (
@@ -49,8 +59,19 @@ export const Input: React.FC<InputType> = ({
                     <InputBox
                         unit={unit}
                         icon={icon}
-                        value={type === 'tel' ? telephoneNumber : value}
-                        type={(type === 'tel' && 'text') || (isOpen && 'text') || type}
+                        value={
+                            type === 'tel'
+                                ? telephoneNumber
+                                : type === 'veteransNumber'
+                                  ? veteransNumber
+                                  : value
+                        }
+                        type={
+                            (type === 'tel' && 'text') ||
+                            (isOpen && 'text') ||
+                            (type === 'veteransNumber' && 'text') ||
+                            type
+                        }
                         {...props}
                     />
                     {type === 'password' && (

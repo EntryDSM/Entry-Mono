@@ -21,7 +21,7 @@ const ApplicationContent = ({
   placeholder,
   bottomPlaceholder,
   children,
-  gap,
+  // gap,
 }: ApplicationContentProps) => {
   return (
     <_ApplicationContent width={width}>

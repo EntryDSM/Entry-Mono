@@ -1,7 +1,7 @@
 import { useOpenPopUp } from '@/apis/popup';
 import { AUTH_URL } from '@/constant/env';
 import styled from '@emotion/styled';
-import { Button, Text } from '@entrydsm/design-system';
+import { Button, Text } from '@team-entry/design_system';
 
 interface Props {
   text: string;
@@ -9,13 +9,14 @@ interface Props {
 
 export const GoToAuthorization = ({ text }: Props) => {
   const { openPopUp } = useOpenPopUp();
+
   const goToAuthorization = () => {
-    openPopUp.mutate(`${AUTH_URL}/verify`);
+    openPopUp.mutate(`${AUTH_URL}/sign-up/verify`);
   };
 
   return (
-    <>
-      <Text color="#000000" size="18" align="center" margin={['top', 33]}>
+    <_Box>
+      <Text color="#000000" size="body2" align="center" margin={['top', 32]}>
         {text}
       </Text>
       <_Button
@@ -26,11 +27,17 @@ export const GoToAuthorization = ({ text }: Props) => {
       >
         본인 인증
       </_Button>
-    </>
+    </_Box>
   );
 };
 
 const _Button = styled(Button)`
+  width: 100% !important;
+`;
+
+const _Box = styled.div`
   width: 100%;
-  margin-top: 33px;
+  gap: 24px;
+  display: flex;
+  flex-direction: column;
 `;

@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 import Bg from '../assets/bg.png';
 import AdminBg from '../assets/adminBg.png';
+import { theme } from '@team-entry/design_system';
 
 interface PropsType {
   children: React.ReactNode;
@@ -71,14 +72,14 @@ const _Image = styled.img`
 `;
 
 const _Title = styled.h1`
-  ${({ theme }) => theme.font.header2};
+  ${theme.font.header2};
   text-align: center;
 `;
 
 const _Divider = styled.hr<{ isAdmin: boolean }>`
   width: 50px;
   height: 2px;
-  background-color: ${({ theme, isAdmin }) =>
-    (isAdmin ? theme.color.green300 : theme.color.orange300)};
+  background-color: ${({ isAdmin }) =>
+    isAdmin ? theme.color.green300 : theme.color.orange300};
   margin: 20px auto 0 auto;
 `;

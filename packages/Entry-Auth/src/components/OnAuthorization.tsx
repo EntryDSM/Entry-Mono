@@ -1,6 +1,6 @@
 import { useToken } from '@/hooks/useToken';
 import styled from '@emotion/styled';
-import { Button, Text } from '@entrydsm/design-system';
+import { Button, Text } from '@team-entry/design_system';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router';
 

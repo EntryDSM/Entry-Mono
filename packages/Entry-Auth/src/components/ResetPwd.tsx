@@ -1,6 +1,6 @@
 import { useResetPwd } from '@/apis/resetPwd';
 import { useForm } from '@/hooks/useForm';
-import { Button, Input, Text } from '@entrydsm/design-system';
+import { Button, Input, Text } from '@team-entry/design_system';
 import { SubmitForm } from './SubmitForm';
 import styled from '@emotion/styled';
 import { useEffect } from 'react';
@@ -64,8 +64,7 @@ export const ReSetPwd = ({ phoneNumber }: Props) => {
           resetPwd.mutate({
             phoneNumber,
             newPassword: state.newPassword,
-          })
-        }
+          })}
         margin={['top', 33]}
         disabled={state.check_password !== state.newPassword}
       >

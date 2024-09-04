@@ -17,9 +17,9 @@ const ApplicationFooter = ({
       <Button
         color="black"
         kind="outlined"
-        disabled={current === 0}
+        disabled={current === 0 || isDisabled}
         onClick={() => {
-          !!prevClick && prevClick();
+          !!prevClick && prevClick('Before');
         }}
       >
         이전
@@ -34,7 +34,7 @@ const ApplicationFooter = ({
           color="orange"
           kind="contained"
           onClick={() => {
-            !!nextClick && nextClick();
+            !!nextClick && nextClick('After');
           }}
           disabled={isDisabled}
         >

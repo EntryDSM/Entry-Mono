@@ -72,18 +72,18 @@ const WriteBlackExam = ({
           placeholder="검정고시 점수"
           value={writeGradeElement.scienceGrade}
           onChange={changeWriteGradeElement}
-          unit="점수"
+          unit="점"
         />
       </GradeWraper>
       <GradeWraper title="선택 과목">
         <Input
           type="number"
           width={230}
-          name="electives"
+          name="optGrade"
           placeholder="검정고시 점수"
-          value={writeGradeElement.electivesGrade}
+          value={writeGradeElement.optGrade}
           onChange={changeWriteGradeElement}
-          unit="점수"
+          unit="점"
         />
       </GradeWraper>
     </>

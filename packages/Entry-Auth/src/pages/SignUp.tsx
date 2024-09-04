@@ -3,7 +3,6 @@ import { useVerifyUserInfo } from '@/apis/verify';
 import { AuthTemplate } from '@/components/AuthTemplate';
 import DivideSignup from '@/components/DivideSignup';
 import { InsertUserInfo } from '@/components/InsertUserInfo';
-import { OnAuthorization } from '@/components/OnAuthorization';
 import { useToken } from '@/hooks/useToken';
 import { removeLocalStorageItem } from '@/utils/localstorage';
 import { useEffect, useMemo, useState } from 'react';
@@ -19,7 +18,7 @@ export const SignUp = ({ redirectURL }: RedirectURL) => {
 
   const RenderedComponent = useMemo(() => {
     let component;
-    if (getUserData.data?.data) {
+    if (getUserData.data) {
       component = (
         <InsertUserInfo isStudent={isStudent} redirectURL={redirectURL} />
       );
@@ -31,7 +30,6 @@ export const SignUp = ({ redirectURL }: RedirectURL) => {
       component = <DivideSignup setIsStudent={setIsStudent} />;
     }
     return component;
-  }, [redirectURL, getUserData.data?.data, token.mdl_tkn, isStudent]);
-
+  }, [redirectURL, token.mdl_tkn, isStudent, getUserData.data]);
   return <AuthTemplate title="회원가입">{RenderedComponent}</AuthTemplate>;
 };

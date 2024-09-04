@@ -1,0 +1,8 @@
+{
+  "Skeleton Component": {
+    "scope": "javascript,typescript,javascriptreact,typescriptreact",
+    "prefix": "skeleton",
+    "body": ["{$1 ? <Skeleton width={$2} height={$3} isLoaded={$4} /> : $5}"],
+    "description": "Conditional Skeleton component with width, height, and isLoaded props",
+  },
+}

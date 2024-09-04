@@ -2,8 +2,10 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
+      "@entrydsm/main": ["./packages/Entry-LTS/src/index.tsx"],
+      "@entrydsm/admin": ["./packages/Admission-Admin-LTS/src/index.tsx"],
       "@entrydsm/admission": ["./packages/Entry-Auth/src/index.tsx"],
-      "@entrydsm/auth": ["./packages/Entry-Auth/src/index.tsx"],
+      // "@entrydsm/auth": ["./packages/Entry-Auth/src/index.tsx"],
       "@entrydsm/design-system": ["./packages/EntryDesignSystem"]
     },
     "target": "es5",

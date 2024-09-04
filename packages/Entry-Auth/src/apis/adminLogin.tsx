@@ -4,7 +4,7 @@ import { setCookies, setTokens } from '@/utils/cookies';
 import { AuthResponse } from './login';
 import { ADMIN_URL, COOKIE_DOMAIN, MAIN_URL } from '@/constant/env';
 import { AxiosError } from 'axios';
-import { Toast } from '@entrydsm/design-system';
+import { Toast } from '@team-entry/design_system';
 import { checkLocalPort } from '@/utils/checkLocalPort';
 
 interface AdminLoginProps {

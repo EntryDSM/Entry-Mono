@@ -17,6 +17,7 @@ export type ApplicationRemark =
   | 'PRIVILEGED_ADMISSION'
   | 'NATIONAL_MERIT'
   | 'PROTECTED_CHILDREN'
+  | 'NOTTING'
   | '';
 
 export interface IGetUSerType {
@@ -26,6 +27,7 @@ export interface IGetUSerType {
   isDaejeon: boolean;
   isOutOfHeadcount: boolean;
   graduatedDate: string;
+  veteransNumber: number;
 }
 
 export interface IPatchUserType {
@@ -33,6 +35,7 @@ export interface IPatchUserType {
   isDaejeon: string | undefined;
   applicationRemark: ApplicationRemark | null;
   isOutOfHeadcount: boolean;
+  veteransNumber?: number;
 }
 
 export interface IPatchGraduationType {

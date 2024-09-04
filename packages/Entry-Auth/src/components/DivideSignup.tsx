@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from '@emotion/styled';
 import DivideSignupCard from './DivideSignupCard';
-import { Button, HStack, Stack, Text } from '@entrydsm/design-system';
+import { Button, HStack, Stack, Text } from '@team-entry/design_system';
 import { GoToAuthorization } from './GoToAuthorization';
 import { useModal } from '@/hooks/useModal';
 
