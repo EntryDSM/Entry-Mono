@@ -71,7 +71,31 @@ const Main2 = () => {
               </Button>
             </_SubmitBox>
           </_Box>
+          <_SubmitMobileBox>
+            <Text size={'header1'} color={'realWhite'}>
+              {documentInfo?.isSubmitted
+                ? '최종제출이 완료된 상태입니다'
+                : scheduleStatusCalculater(data?.currentStatus)}
+            </Text>
+          </_SubmitMobileBox>
+
           <Schedule />
+          <_MobileButtonBox>
+            <Button
+              color={authorityColor}
+              isBig={true}
+              onClick={() => {
+                if (!isOpen()) {
+                  window.location.href = `${APPLY_URL}`;
+                }
+              }}
+              disabled={
+                isOpen() || isAdmin || !accessToken || documentInfo?.isSubmitted
+              }
+            >
+              지원하기
+            </Button>
+          </_MobileButtonBox>
         </_TopContainer>
       </_TopContainerWrapper>
       <_FaqWrapper>
@@ -117,6 +141,10 @@ const _TopContainer = styled.div`
     justify-content: start;
     align-items: start;
   }
+  @media (max-width: 699px) {
+    padding-top: 24px;
+    justify-content: start;
+  }
 `;
 
 const _Title = styled.div`
@@ -138,10 +166,14 @@ const _Line = styled.div`
 `;
 
 const _Box = styled.div`
-  width: 100;
+  width: 100%;
   display: flex;
   flex-direction: column;
   gap: 64px;
+
+  @media (max-width: 699px) {
+    display: none !important;
+  }
 `;
 
 const _SubmitBox = styled.div`
@@ -155,6 +187,9 @@ const _FaqWrapper = styled.div`
   display: flex;
   padding: 120px 32px;
   justify-content: center;
+  @media (max-width: 699px) {
+    display: none;
+  }
 `;
 
 const _MainContainer = styled.div`
@@ -163,4 +198,27 @@ const _MainContainer = styled.div`
   width: 100%;
   max-width: 1200px;
   flex-direction: column;
+`;
+
+const _SubmitMobileBox = styled.div`
+  width: 100%;
+  display: none;
+  padding: 24px;
+  @media (max-width: 699px) {
+    display: flex;
+  }
+`;
+
+const _MobileButtonBox = styled.div`
+  position: fixed;
+  display: none;
+  bottom: 0px;
+  width: 100vw;
+  padding: 24px;
+  @media (max-width: 699px) {
+    display: flex;
+    button {
+      width: 100%;
+    }
+  }
 `;
