@@ -141,7 +141,7 @@ const _CirclePingAnimation = styled.div<{ opacity: boolean }>`
   width: 20px;
   height: 20px;
   border-radius: 100%;
-  background-color: ${theme.color.orange300};
+  background-color: ${theme.color.orange800};
   opacity: ${({ opacity }) => (opacity ? '100%' : '60%')};
 `;
 
