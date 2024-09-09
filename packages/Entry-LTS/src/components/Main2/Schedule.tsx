@@ -52,7 +52,7 @@ const Schedule = () => {
           return (
             <div key={index}>
               {schedule.scheduleName}
-              <span>{schedule.scheduleTime}</span>
+              <span>{schedule.scheduleTime.split(' ')[0]}</span>
             </div>
           );
         })}
