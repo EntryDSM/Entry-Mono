@@ -171,7 +171,11 @@ const Header = () => {
                     </>
                   ) : (
                     <>
-                      <_._MenuElement color="black" onClick={onClick}>
+                      <_._MenuElement
+                        color="black"
+                        onClick={!isLoginOpen() && onClick}
+                        disabled={isLoginOpen()}
+                      >
                         로그인
                       </_._MenuElement>
                     </>
