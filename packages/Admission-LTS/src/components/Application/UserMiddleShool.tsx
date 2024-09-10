@@ -28,14 +28,17 @@ import {
   IUserMiddleSchool,
   InputType,
 } from '@/interface/type';
+import { useMiddleSchoolStore } from '@/store/useApplicationStore';
 
 const UserMiddleSchool = ({ current, setCurrent }: ICurrnettype) => {
+  const {
+    userMiddleSchoolState,
+    setUserMiddleSchoolState,
+    clearUserMiddleSchoolState,
+  } = useMiddleSchoolStore();
   const { form: userMiddleSchool, setForm: setUserMiddleSchool } =
     useInput<IUserMiddleSchool>({
-      studentNumber: ['', '', ''],
-      schoolCode: '',
-      teacherName: '',
-      teacherTel: '',
+      ...userMiddleSchoolState,
     });
   const { form: schoolName, setForm: setSchoolName } = useInput('');
 
@@ -145,7 +148,7 @@ const UserMiddleSchool = ({ current, setCurrent }: ICurrnettype) => {
     Object.values(userMiddleSchool).some((item) => !!item === false) ||
     userMiddleSchool.studentNumber.some((item) => !!item === false);
 
-  const onNextClick = (mode: 'Before' | 'After') => {
+  const onNextClick = () => {
     combinedMutations(
       [
         () =>
@@ -157,7 +160,7 @@ const UserMiddleSchool = ({ current, setCurrent }: ICurrnettype) => {
             teacherTel: userMiddleSchool.teacherTel.replace(/-/g, ''),
           }),
       ],
-      () => setCurrent(mode === 'Before' ? current - 1 : current + 1),
+      () => setCurrent(current + 1),
     );
   };
 

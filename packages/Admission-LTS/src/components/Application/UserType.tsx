@@ -14,6 +14,10 @@ import { useCombineMutation } from '@/hooks/useCombineMutation';
 import { generateNumberArray } from '@/utils/GenerateNumberArray';
 import { ICurrnettype, IUserTypeParams } from '@/interface/type';
 import { EducationalStatus } from '@/apis/application/types';
+import {
+  useUserInfoStore,
+  useUserTypeStore,
+} from '@/store/useApplicationStore';
 
 interface ICurrentTypePageProps extends ICurrnettype {
   handlerFunction: () => void;
@@ -85,7 +89,6 @@ const UserType = ({
   };
 
   const { veteransNumber, isOutOfHeadcount, ...requireType } = userType;
-  console.log(requireType);
   const isDisabled = Object.values(requireType).some(
     (item) => !!item === false,
   );

@@ -185,7 +185,7 @@ const Program = ({ current, setCurrent }: ICurrnettype) => {
     }
   }, [userGraduation, userBlackExam]);
 
-  const onNextClick = (mode: 'Before' | 'After') => {
+  const onNextClick = () => {
     combinedMutations(
       [
         () => {
@@ -244,13 +244,11 @@ const Program = ({ current, setCurrent }: ICurrnettype) => {
       ],
       () =>
         setCurrent(
-          mode === 'Before'
-            ? current - 1
-            : !isGraduate && gradeCurrent === 3
-              ? current + 2
-              : isBlackExam && gradeCurrent === 0
-                ? current + 5
-                : current + 1,
+          !isGraduate && gradeCurrent === 3
+            ? current + 2
+            : isBlackExam && gradeCurrent === 0
+              ? current + 5
+              : current + 1,
         ),
     );
   };
