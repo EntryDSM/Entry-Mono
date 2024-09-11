@@ -101,7 +101,7 @@ const UserMiddleSchool = ({ current, setCurrent }: ICurrnettype) => {
         );
         const data = response.data;
         setSchoolList(data?.content);
-      }, 500),
+      }, 1500),
     );
     setTimer(newTimer);
   }, [form]);
@@ -159,6 +159,26 @@ const UserMiddleSchool = ({ current, setCurrent }: ICurrnettype) => {
       ],
       () => setCurrent(mode === 'Before' ? current - 1 : current + 1),
     );
+  };
+
+  const onBeforeClick = () => {
+    if (isDisabled) {
+      setUserMiddleSchoolState(userMiddleSchool);
+      setCurrent(current - 1);
+    } else {
+      combinedMutations([
+        () =>
+          mutateAsync({
+            ...userMiddleSchool,
+            gradeNumber: parseInt(userMiddleSchool.studentNumber[0]),
+            classNumber: parseInt(userMiddleSchool.studentNumber[1]),
+            studentNumber: userMiddleSchool.studentNumber[2],
+            teacherTel: userMiddleSchool.teacherTel.replace(/-/g, ''),
+          }),
+      ]);
+      clearUserMiddleSchoolState();
+      setCurrent(current - 1);
+    }
   };
 
   return (
@@ -304,7 +324,7 @@ const UserMiddleSchool = ({ current, setCurrent }: ICurrnettype) => {
       <ApplicationFooter
         current={current}
         isDisabled={isDisabled}
-        prevClick={onNextClick}
+        prevClick={onBeforeClick}
         nextClick={onNextClick}
       />
     </>
