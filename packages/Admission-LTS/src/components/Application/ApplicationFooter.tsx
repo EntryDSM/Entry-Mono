@@ -29,7 +29,7 @@ const ApplicationFooter = ({
           bgColor={theme.color.realWhite}
           color={theme.color.realBlack}
         >
-          이전 버튼을 누르면 작성한 내용을 잃어버릴 수도 있습니다
+          이전 버튼을 누르면 저장되지 않은 내용을 잃어버릴 수도 있습니다
         </_Tooltip>
         <Button
           color="black"
