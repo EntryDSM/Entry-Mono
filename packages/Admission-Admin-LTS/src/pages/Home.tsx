@@ -42,7 +42,7 @@ const Home = () => {
     daejeonMeister +
     daejeonSocial;
 
-  const allCommon = 50;
+  const allCommon = 160;
   const allMeister = 12;
   const allSocial = 2;
 
@@ -66,7 +66,7 @@ const Home = () => {
         <ProgressBar />
       </Stack>
 
-      <_GraphWrapper>
+      {/* <_GraphWrapper>
         <Text width={80} align="start" size="body1" color="black900">
           일반
         </Text>
@@ -118,9 +118,9 @@ const Home = () => {
         <Text width={80} align="start" size="body1" color="black900">
           {socialPercent} : 1
         </Text>
-      </_GraphWrapper>
+      </_GraphWrapper> */}
 
-      <_GraphWrapper>
+      {/* <_GraphWrapper>
         <Text width={80} align="start" size="body1" color="black900">
           총
         </Text>
@@ -138,7 +138,34 @@ const Home = () => {
         <Text width={80} align="start" size="body1" color="black900">
           {(allReception / (allCommon + allMeister + allSocial)).toFixed(2)} : 1
         </Text>
-      </_GraphWrapper>
+      </_GraphWrapper> */}
+
+      <div style={{ width: '100%' }}>
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            marginBottom: '20px',
+            gap: '36px',
+          }}
+        >
+          <Text color="black900" size="header2">
+            신입생 지원률
+          </Text>
+          <Text color="black900" size="title2">
+            {allReception}명 / 총 {allCommon}명
+          </Text>
+        </div>
+        <_Application percent={commonPercent * 100}>
+          <_ApplicationText
+            margin={[0, 0, 0, 12]}
+            color="realWhite"
+            size="body1"
+          >
+            {`${allReception}명`}
+          </_ApplicationText>
+        </_Application>
+      </div>
 
       <div
         style={{
@@ -194,20 +221,14 @@ const Home = () => {
         <CommonScoreCard
           title="일반 전형"
           ranges={[
-            '170+ ',
-            '161~170',
-            '151~160',
-            '141~150',
-            '131~140',
-            '121~130',
-            '111~120',
-            '101~110',
-            '91~100',
-            '81~90',
-            '71~80',
-            '61~70',
-            '51~60',
-            '0~50',
+            '156~173 ',
+            '142~155',
+            '128~141',
+            '114~127',
+            '100~113',
+            '86~99',
+            '72~85',
+            '71점 이하',
           ]}
           daejeonData={staticsScoreData?.[0]}
           nationWideData={staticsScoreData?.[1]}
@@ -215,15 +236,14 @@ const Home = () => {
         <SpecialScoreCard
           title="마이스터 전형"
           ranges={[
-            '110+ ',
-            '101-110',
-            '91-100',
-            '81-90',
-            '71-80',
-            '61-70',
-            '51-60',
-            '41-50',
-            '0~40',
+            '102~119',
+            '94-101',
+            '86-93',
+            '78-85',
+            '70-77',
+            '62-69',
+            '54-61',
+            '53점 이하',
           ]}
           daejeonData={staticsScoreData?.[2]}
           nationWideData={staticsScoreData?.[3]}
@@ -231,15 +251,14 @@ const Home = () => {
         <SpecialScoreCard
           title="사회통합 전형"
           ranges={[
-            '110+ ',
-            '101-110',
-            '91-100',
-            '81-90',
-            '71-80',
-            '61-70',
-            '51-60',
-            '41-50',
-            '0~40',
+            '102~119',
+            '94-101',
+            '86-93',
+            '78-85',
+            '70-77',
+            '62-69',
+            '54-61',
+            '53점 이하',
           ]}
           daejeonData={staticsScoreData?.[4]}
           nationWideData={staticsScoreData?.[5]}
@@ -274,7 +293,7 @@ const _Application = styled.div<{ percent: number }>`
   position: relative;
   display: flex;
   align-items: center;
-  width: 80%;
+  width: 100%;
   height: 45px;
   background-color: ${theme.color.green100};
   border-radius: 8px;

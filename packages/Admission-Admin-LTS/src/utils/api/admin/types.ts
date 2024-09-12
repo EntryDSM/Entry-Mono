@@ -41,6 +41,10 @@ export interface IApplicationCountRequest {
   count: number;
 }
 
+export interface IApplicationLocationRequest {
+  [key: string]: number;
+}
+
 export interface IApplicationDetailResponse {
   status: {
     isPrintedArrived: boolean;

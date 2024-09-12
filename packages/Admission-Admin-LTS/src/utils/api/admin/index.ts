@@ -8,6 +8,7 @@ import {
   IApplicationListResponse,
   IGetScoreStatisticsResponse,
   IGetPdfApplicatnsInfoResponse,
+  IApplicationLocationRequest,
 } from './types';
 import fileSaver from 'file-saver';
 
@@ -114,6 +115,15 @@ export const getStaticCounts = () => {
     return data;
   };
   return useQuery<IApplicationCountRequest[]>(['staticCount'], response);
+};
+
+/** 접수 현황 집계(지역별) */
+export const getStaticLocation = () => {
+  const response = async () => {
+    const { data } = await instance.get(`${router}/application/region-status`);
+    return data;
+  };
+  return useQuery<IApplicationLocationRequest>(['staticLocation'], response);
 };
 
 /** 지원자 목록 엑셀 출력 */
