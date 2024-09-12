@@ -117,6 +117,7 @@ const UserInfo = ({ current, setCurrent }: ICurrnettype) => {
 
   useEffect(() => {
     getUserInfo &&
+      getUserInfo.birthDate &&
       setUserInfo({
         applicantName: getUserInfo.applicantName,
         parentName: getUserInfo.parentName,
