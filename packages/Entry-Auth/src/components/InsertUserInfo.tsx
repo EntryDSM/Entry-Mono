@@ -8,10 +8,10 @@ import styled from '@emotion/styled';
 import { RedirectURL } from '@/apis/login';
 
 interface IInsertUserInfo extends RedirectURL {
-  isStudent: boolean;
+  isParent: boolean;
 }
 
-export const InsertUserInfo = ({ isStudent, redirectURL }: IInsertUserInfo) => {
+export const InsertUserInfo = ({ isParent, redirectURL }: IInsertUserInfo) => {
   const { token } = useToken();
   const { getUserData } = useVerifyUserInfo(token.mdl_tkn);
 
@@ -83,7 +83,7 @@ export const InsertUserInfo = ({ isStudent, redirectURL }: IInsertUserInfo) => {
           signUp.mutate({
             phoneNumber,
             password: state.password,
-            is_student: isStudent,
+            isParent: isParent,
           });
         }}
         color="orange"

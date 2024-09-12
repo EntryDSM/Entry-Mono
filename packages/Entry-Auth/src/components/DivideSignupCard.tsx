@@ -4,11 +4,11 @@ import styled from '@emotion/styled';
 import { Text, Button, VStack } from '@team-entry/design_system';
 
 interface IDivideSignupCard {
-  setIsStudent: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsParent: React.Dispatch<React.SetStateAction<boolean>>;
   setIsClick: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const DivideSignupCard = ({ setIsStudent, setIsClick }: IDivideSignupCard) => {
+const DivideSignupCard = ({ setIsParent, setIsClick }: IDivideSignupCard) => {
   return (
     <_Wrapper>
       <Text size="body2" color="black600" align="center">
@@ -19,7 +19,7 @@ const DivideSignupCard = ({ setIsStudent, setIsClick }: IDivideSignupCard) => {
           color="orange"
           onClick={() => {
             setIsClick(true);
-            setIsStudent(true);
+            setIsParent(false);
           }}
         >
           가입
