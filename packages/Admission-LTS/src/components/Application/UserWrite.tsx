@@ -34,7 +34,7 @@ const UserWrite = ({ current, setCurrent }: ICurrnettype) => {
     GetUserStudyPlan();
   const { data: getUserType } = GetUserType();
 
-  // const isBlackExam = getUserType?.educationalStatus == 'QUALIFICATION_EXAM';
+  const isBlackExam = getUserType?.educationalStatus == 'QUALIFICATION_EXAM';
 
   useEffect(() => {
     getUserIntroduce &&
@@ -103,7 +103,7 @@ const UserWrite = ({ current, setCurrent }: ICurrnettype) => {
       <ApplicationFooter
         current={current}
         isDisabled={!userWrite.userPlan || !userWrite.userIntroduce}
-        prevClick={() => setCurrent(current - 1)}
+        prevClick={() => setCurrent(isBlackExam ? current - 2 : current - 1)}
         nextClick={onNextClick}
       />
     </>

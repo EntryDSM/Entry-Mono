@@ -366,7 +366,7 @@ const Program = ({ current, setCurrent }: ICurrnettype) => {
       <ApplicationFooter
         current={current}
         isDisabled={false}
-        prevClick={onNextClick}
+        prevClick={() => setCurrent(current - 1)}
         nextClick={onNextClick}
       />
     </>
