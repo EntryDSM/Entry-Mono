@@ -28,17 +28,14 @@ import {
   IUserMiddleSchool,
   InputType,
 } from '@/interface/type';
-import { useMiddleSchoolStore } from '@/store/useApplicationStore';
 
 const UserMiddleSchool = ({ current, setCurrent }: ICurrnettype) => {
-  const {
-    userMiddleSchoolState,
-    setUserMiddleSchoolState,
-    clearUserMiddleSchoolState,
-  } = useMiddleSchoolStore();
   const { form: userMiddleSchool, setForm: setUserMiddleSchool } =
     useInput<IUserMiddleSchool>({
-      ...userMiddleSchoolState,
+      studentNumber: ['', '', ''],
+      schoolCode: '',
+      teacherName: '',
+      teacherTel: '',
     });
   const { form: schoolName, setForm: setSchoolName } = useInput('');
 
@@ -307,7 +304,7 @@ const UserMiddleSchool = ({ current, setCurrent }: ICurrnettype) => {
       <ApplicationFooter
         current={current}
         isDisabled={isDisabled}
-        prevClick={onNextClick}
+        prevClick={() => setCurrent(current - 1)}
         nextClick={onNextClick}
       />
     </>
