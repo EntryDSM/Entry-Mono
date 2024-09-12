@@ -200,9 +200,9 @@ const UserType = ({
           <Radio
             label="해당없음"
             name="applicationRemark"
-            value="NOTTHING"
+            value="NOTHING"
             onClick={changeUserType}
-            checked={userType.applicationRemark === 'NOTTHING'}
+            checked={userType.applicationRemark === 'NOTHING'}
           />
           <Radio
             label="국가 유공자"
