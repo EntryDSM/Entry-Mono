@@ -161,26 +161,6 @@ const UserMiddleSchool = ({ current, setCurrent }: ICurrnettype) => {
     );
   };
 
-  const onBeforeClick = () => {
-    if (isDisabled) {
-      setUserMiddleSchoolState(userMiddleSchool);
-      setCurrent(current - 1);
-    } else {
-      combinedMutations([
-        () =>
-          mutateAsync({
-            ...userMiddleSchool,
-            gradeNumber: parseInt(userMiddleSchool.studentNumber[0]),
-            classNumber: parseInt(userMiddleSchool.studentNumber[1]),
-            studentNumber: userMiddleSchool.studentNumber[2],
-            teacherTel: userMiddleSchool.teacherTel.replace(/-/g, ''),
-          }),
-      ]);
-      clearUserMiddleSchoolState();
-      setCurrent(current - 1);
-    }
-  };
-
   return (
     <>
       <_ApplicationWrapper>
