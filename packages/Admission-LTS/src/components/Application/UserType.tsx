@@ -67,21 +67,24 @@ const UserType = ({
   const { combinedMutations } = useCombineMutation();
 
   const onNextClick = () => {
-    combinedMutations([
-      () =>
-        editUserType({
-          applicationType: userType.applicationType,
-          isDaejeon: userType.isDaejeon,
-          isOutOfHeadcount: false,
-          applicationRemark: userType.applicationRemark || null,
-          veteransNumber: userType.veteransNumber,
-        }),
-      () =>
-        editGraduationType({
-          educationalStatus: userType.educationalStatus as EducationalStatus,
-          graduateDate: userType.graduateDate.join('-'),
-        }),
-    ]).then(() => setCurrent(current + 1));
+    combinedMutations(
+      [
+        () =>
+          editUserType({
+            applicationType: userType.applicationType,
+            isDaejeon: userType.isDaejeon,
+            isOutOfHeadcount: false,
+            applicationRemark: userType.applicationRemark || null,
+            veteransNumber: userType.veteransNumber,
+          }),
+        () =>
+          editGraduationType({
+            educationalStatus: userType.educationalStatus as EducationalStatus,
+            graduateDate: userType.graduateDate.join('-'),
+          }),
+      ],
+      () => setCurrent(current - 1),
+    );
   };
 
   const { veteransNumber, isOutOfHeadcount, ...requireType } = userType;
