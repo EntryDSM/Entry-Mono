@@ -103,7 +103,10 @@ export const _Menu = styled.div<{ visibility: boolean }>`
   animation: ${({ visibility }) => (visibility ? MenuDown : MenuUp)} 0.5s;
 `;
 
-export const _MenuElement = styled.div<{ color?: 'red' | 'black' }>`
+export const _MenuElement = styled.div<{
+  color?: 'red' | 'black';
+  disabled?: boolean;
+}>`
   width: 100%;
   height: 7vh;
   padding: 10px;
@@ -111,8 +114,12 @@ export const _MenuElement = styled.div<{ color?: 'red' | 'black' }>`
   justify-content: flex-start;
   align-items: center;
   border-top: 1px solid ${theme.color.black100};
-  color: ${({ color }) =>
-    color === 'red' ? theme.color.error : theme.color.black700};
+  color: ${({ color, disabled }) =>
+    disabled
+      ? theme.color.black200
+      : color === 'red'
+        ? theme.color.error
+        : theme.color.black700};
   ${theme.font.body3};
 `;
 

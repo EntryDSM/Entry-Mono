@@ -32,7 +32,9 @@ const GradeFooter = ({
   dsmAlgorithmScore,
   qualificationExamScore,
 }: IGradeFooterProps) => {
-  const { Modal, modalState, setModalState, open } = useModal({ useBlur: false });
+  const { Modal, modalState, setModalState, open } = useModal({
+    useBlur: false,
+  });
 
   const clickEvent = () => {
     if (onClick) {
@@ -82,11 +84,17 @@ const GradeFooter = ({
               <_ScoreBox>
                 <Text size="header3" color="orange900">
                   {gradeStatus === 'qualificationExam'
-                    ? ((qualificationExamScore * 34) + dsmAlgorithmScore).toFixed(3)
-                    : ((gradeScore * 175) / 100 + maxScore + dsmAlgorithmScore).toFixed(3)}
+                    ? (qualificationExamScore * 34 + dsmAlgorithmScore).toFixed(
+                        3,
+                      )
+                    : (
+                        (gradeScore * 175) / 100 +
+                        maxScore +
+                        dsmAlgorithmScore
+                      ).toFixed(3)}
                 </Text>
                 <Text color="black400" size="title3">
-                  /170
+                  /173
                 </Text>
               </_ScoreBox>
             </_DIV>
@@ -97,11 +105,20 @@ const GradeFooter = ({
               <_ScoreBox>
                 <Text size="header3" color="orange900">
                   {gradeStatus === 'qualificationExam'
-                    ? ((qualificationExamScore * 22) + dsmAlgorithmScore + certificateScore).toFixed(3)
-                    : (gradeScore + maxScore + dsmAlgorithmScore + certificateScore).toFixed(3)}
+                    ? (
+                        qualificationExamScore * 22 +
+                        dsmAlgorithmScore +
+                        certificateScore
+                      ).toFixed(3)
+                    : (
+                        gradeScore +
+                        maxScore +
+                        dsmAlgorithmScore +
+                        certificateScore
+                      ).toFixed(3)}
                 </Text>
                 <Text color="black400" size="title3">
-                  /110
+                  /119
                 </Text>
               </_ScoreBox>
             </_DIV>
@@ -112,11 +129,20 @@ const GradeFooter = ({
               <_ScoreBox>
                 <Text size="header3" color="orange900">
                   {gradeStatus === 'qualificationExam'
-                    ? ((qualificationExamScore * 22) + dsmAlgorithmScore + certificateScore).toFixed(3)
-                    : (gradeScore + maxScore + dsmAlgorithmScore + certificateScore).toFixed(3)}
+                    ? (
+                        qualificationExamScore * 22 +
+                        dsmAlgorithmScore +
+                        certificateScore
+                      ).toFixed(3)
+                    : (
+                        gradeScore +
+                        maxScore +
+                        dsmAlgorithmScore +
+                        certificateScore
+                      ).toFixed(3)}
                 </Text>
                 <Text color="black400" size="title3">
-                  /110
+                  /119
                 </Text>
               </_ScoreBox>
             </_DIV>

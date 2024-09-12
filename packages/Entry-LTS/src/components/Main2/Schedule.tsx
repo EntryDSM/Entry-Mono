@@ -4,6 +4,7 @@ import { timeformatter } from '@/utils/timeFormatter';
 import styled from '@emotion/styled';
 import { theme } from '@entrydsm/design-system';
 import React, { useEffect, useState } from 'react';
+import MobileSchedule from './MobileSchedule';
 
 type ScheduleType = {
   scheduleName: string;
@@ -52,16 +53,15 @@ const Schedule = () => {
           return (
             <div key={index}>
               {schedule.scheduleName}
-              <span>{schedule.scheduleTime}</span>
+              <span>{schedule.scheduleTime.split(' ')[0]}</span>
             </div>
           );
         })}
       </_TextProvider>
-      <_MobileText>
-        원서제출 기간은
+      {/* 원서제출 기간은
         <br />
-        10/14 ~ 10/17입니다.
-      </_MobileText>
+        10/14 ~ 10/17입니다. */}
+      <MobileSchedule />
     </_Wrapper>
   );
 };

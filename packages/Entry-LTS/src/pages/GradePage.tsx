@@ -1,7 +1,7 @@
 import { Button, Icon, IconType, Text, theme } from '@entrydsm/design-system';
 import styled from '@emotion/styled';
 import { Link, useNavigate } from 'react-router-dom';
-import { Pc } from '@/hooks/useResponsive';
+import { Mobile, Pc } from '@/hooks/useResponsive';
 import { AuthorityColorType, useAuthority } from '@/hooks/useAuthority';
 
 interface IGradeListProps {
@@ -38,6 +38,15 @@ const GradePage = () => {
 
   return (
     <_Container>
+      <Mobile>
+        <div style={{ padding: '20px' }}>
+          <Text margin={['top', 300]} color={'black700'} size={'title2'}>
+            성적 산출 기능은 모바일에서
+            <br />
+            지원하지 않습니다.
+          </Text>
+        </div>
+      </Mobile>
       <Pc>
         <_Wrapper>
           <Text color="black900" size="header1">
@@ -106,7 +115,8 @@ const _Wrapper = styled.div`
 const _Line = styled.div<{ authorityColor: AuthorityColorType }>`
   width: 4rem;
   height: 2px;
-  background-color: ${({ authorityColor }) => theme.color[`${authorityColor}500`]};
+  background-color: ${({ authorityColor }) =>
+    theme.color[`${authorityColor}500`]};
   margin: 2rem;
 `;
 
@@ -135,7 +145,8 @@ const _IconBackground = styled.div<{ authorityColor: AuthorityColorType }>`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: ${({ authorityColor }) => theme.color[`${authorityColor}500`]};
+  background-color: ${({ authorityColor }) =>
+    theme.color[`${authorityColor}500`]};
   border: 1px solid ${theme.color.black100};
   width: 90px;
   height: 90px;

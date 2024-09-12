@@ -83,7 +83,7 @@ const UserType = ({
             graduateDate: userType.graduateDate.join('-'),
           }),
       ],
-      () => setCurrent(current - 1),
+      () => setCurrent(current + 1),
     );
   };
 
@@ -200,9 +200,9 @@ const UserType = ({
           <Radio
             label="해당없음"
             name="applicationRemark"
-            value="NOTTING"
+            value="NOTTHING"
             onClick={changeUserType}
-            checked={userType.applicationRemark === 'NOTTING'}
+            checked={userType.applicationRemark === 'NOTTHING'}
           />
           <Radio
             label="국가 유공자"
@@ -243,16 +243,6 @@ const UserType = ({
 };
 
 export default UserType;
-
-const _ApplicationWrapper = styled.div`
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  width: 60rem;
-  border-top: 1px solid ${theme.color.black600};
-  border-bottom: 1px solid ${theme.color.black600};
-  margin-top: 49px;
-`;
 
 const _RadioWrapper = styled.div`
   display: flex;

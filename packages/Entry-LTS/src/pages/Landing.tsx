@@ -4,8 +4,18 @@ import Third from '@/components/landing/ThirdContainer';
 import Fourth from '@/components/landing/FourthContainer';
 import Fifth from '@/components/landing/FifthContainer';
 import Sixth from '@/components/landing/SixthContainer';
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Landing = () => {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (window.innerWidth < 700) {
+      navigate('/main');
+    }
+  }, []);
+
   return (
     <>
       {/* 가장 상단에 있는 콘테이너 */}
