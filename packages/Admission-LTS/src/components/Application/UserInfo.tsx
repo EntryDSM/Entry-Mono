@@ -28,22 +28,28 @@ import { useCombineMutation } from '@/hooks/useCombineMutation';
 import { generateNumberArray } from '@/utils/GenerateNumberArray';
 import { ICurrnettype, IUserInfo, IUserPhoto } from '@/interface/type';
 import { dataURLtoFile } from '@/utils/dataURLtoFile';
-import { useFileStore, useUserInfoStore } from '@/store/useApplicationStore';
 
 const UserInfo = ({ current, setCurrent }: ICurrnettype) => {
   const date = new Date();
-  const { userInfoState, setUserInfoState, clearUserInfoState } =
-    useUserInfoStore();
-  const { userFileState, setUserFile, clearUserFile } = useFileStore();
   const {
     form: userInfo,
     setForm: setUserInfo,
     onChange: changeUserInfo,
   } = useInput<IUserInfo>({
-    ...userInfoState,
+    applicantName: '',
+    applicantTel: '',
+    sex: '',
+    birthDate: [(new Date().getFullYear() - 15).toString(), '01', '01'],
+    parentName: '',
+    parentTel: '',
+    parentRelation: '',
+    streetAddress: '',
+    detailAddress: '',
+    postalCode: '',
   });
   const { form: userPhoto, setForm: setUserPhoto } = useInput<IUserPhoto>({
-    ...userFileState,
+    photo: '',
+    photoFileName: '',
   });
 
   const { data: userProfile, isLoading: isUserProfileLoading } =
@@ -109,50 +115,25 @@ const UserInfo = ({ current, setCurrent }: ICurrnettype) => {
     }));
   }, [userProfile]);
 
-  useEffect(
-    () => console.log(userInfo.applicantName),
-    [userInfo.applicantName],
-  );
-
   useEffect(() => {
     getUserInfo &&
       setUserInfo({
-        applicantName: !!userInfo.applicantName
-          ? userInfo.applicantName
-          : getUserInfo.applicantName,
-        parentName: !!userInfo.parentName
-          ? userInfo.parentName
-          : getUserInfo.parentName,
-        parentTel: !!userInfo.parentTel
-          ? userInfo.parentTel
-          : getUserInfo.parentTel,
-        parentRelation: !!userInfo.parentRelation
-          ? userInfo.parentRelation
-          : getUserInfo.parentRelation,
-        postalCode: !!userInfo.postalCode
-          ? userInfo.postalCode
-          : getUserInfo.postalCode,
-        detailAddress: !!userInfo.detailAddress
-          ? userInfo.detailAddress
-          : getUserInfo.detailAddress,
-        sex: !!userInfo.sex ? userInfo.sex : getUserInfo.sex,
-        streetAddress: !!userInfo.streetAddress
-          ? userInfo.streetAddress
-          : getUserInfo.streetAddress,
-        applicantTel: !!userInfo.applicantTel
-          ? userInfo.applicantTel
-          : getUserInfo.applicantTel,
-        birthDate: !getUserInfo.birthDate
-          ? userInfo.birthDate
-          : getUserInfo.birthDate.split('-'),
+        applicantName: getUserInfo.applicantName,
+        parentName: getUserInfo.parentName,
+        parentTel: getUserInfo.parentTel,
+        parentRelation: getUserInfo.parentRelation,
+        postalCode: getUserInfo.postalCode,
+        detailAddress: getUserInfo.detailAddress,
+        sex: getUserInfo.sex,
+        streetAddress: getUserInfo.streetAddress,
+        applicantTel: getUserInfo.applicantTel,
+        birthDate: getUserInfo.birthDate.split('-'),
       });
     getUserInfo &&
       getUserInfo!.photoPath &&
       setUserPhoto({
-        photo: !!userPhoto.photo ? userPhoto.photo : getUserInfo.photoPath,
-        photoFileName: !!userPhoto.photoFileName
-          ? userPhoto.photoFileName
-          : imgFile!,
+        photo: getUserInfo.photoPath,
+        photoFileName: imgFile!,
       });
   }, [getUserInfo, imgFile]);
 
@@ -176,30 +157,6 @@ const UserInfo = ({ current, setCurrent }: ICurrnettype) => {
         setCurrent(current + 1);
       },
     );
-    clearUserInfoState(), clearUserFile();
-  };
-
-  const onBeforeClick = () => {
-    if (isDisabled) {
-      setUserInfoState(userInfo);
-      setUserFile(userPhoto);
-    } else {
-      combinedMutations(
-        [
-          () =>
-            patchUserInfo({
-              ...userInfo,
-              applicantTel: userInfo.applicantTel.replace(/-/g, ''),
-              birthDate: userInfo.birthDate.join('-'),
-              parentTel: userInfo.parentTel.replace(/-/g, ''),
-            }),
-          () => patchUserPhoto({ photo: userPhoto.photoFileName as File }),
-        ],
-        () => {},
-      );
-    }
-    setCurrent(current - 1);
-    clearUserInfoState(), clearUserFile();
   };
 
   const formatPhoneNumber = (value: string) => {
@@ -505,7 +462,7 @@ const UserInfo = ({ current, setCurrent }: ICurrnettype) => {
       <ApplicationFooter
         current={current}
         isDisabled={isDisabled}
-        prevClick={onBeforeClick}
+        prevClick={() => setCurrent(current - 1)}
         nextClick={onNextClick}
       />
     </>
