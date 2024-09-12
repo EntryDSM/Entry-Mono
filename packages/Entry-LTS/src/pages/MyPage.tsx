@@ -18,7 +18,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import DefaultModal from '@/components/Modal/DefaultModal';
 import { getSchedule } from '@/utils/api/schedule';
 import { getDocumentInfo, getUserInfo } from '@/utils/api/application';
-import { removeCookies, removeTokens, setCookies } from '@/utils/cookies';
+import { removeCookies, setCookies } from '@/utils/cookies';
 import { useState } from 'react';
 
 const MyPage = () => {
@@ -108,7 +108,6 @@ const MyPage = () => {
                       removeCookies('accessToken'),
                       removeCookies('refreshToken'),
                       removeCookies('authority'),
-                      removeTokens(),
                     ]).then(() => {
                       navigate('/main');
                     });
