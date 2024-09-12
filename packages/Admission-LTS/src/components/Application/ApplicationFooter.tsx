@@ -2,6 +2,7 @@ import styled from '@emotion/styled';
 import { Button, theme } from '@entrydsm/design-system';
 import { useModal } from '@/hooks/useModal';
 import { IApplicationFooterProps } from '@/interface/type';
+import { useEffect, useState } from 'react';
 
 const ApplicationFooter = ({
   current,
@@ -11,11 +12,23 @@ const ApplicationFooter = ({
 }: IApplicationFooterProps) => {
   const progress = [[0], [1], [2], [3], [4, 5, 6, 7, 8], [9]];
   const { setModalState } = useModal();
+  const [tooltip, setTooltip] = useState<'' | 'before' | 'after'>('');
+
+  useEffect(() => {
+    console.log(tooltip);
+  }, [tooltip]);
 
   return (
     <_Footer>
-      <_ButtonWrapper>
-        <_Tooltip visible={1}>
+      <_ButtonWrapper
+        onMouseOver={() => setTooltip('before')}
+        onMouseLeave={() => setTooltip('')}
+      >
+        <_Tooltip
+          visible={tooltip === 'before' ? 1 : 0}
+          bgColor={theme.color.realWhite}
+          color={theme.color.realBlack}
+        >
           이전 버튼을 누르면 작성한 내용을 잃어버릴 수도 있습니다
         </_Tooltip>
         <Button
@@ -34,7 +47,17 @@ const ApplicationFooter = ({
           <_ProgressStep key={step[0]} isStep={step.includes(current)} />
         ))}
       </_Progress>
-      <_ButtonWrapper>
+      <_ButtonWrapper
+        onMouseOver={() => setTooltip('after')}
+        onMouseLeave={() => setTooltip('')}
+      >
+        <_Tooltip
+          visible={tooltip === 'after' ? 1 : 0}
+          bgColor={theme.color.orange400}
+          color={theme.color.realWhite}
+        >
+          다음 버튼을 누르면 진행 상황이 저장됩니다
+        </_Tooltip>
         {current !== 9 ? (
           <Button
             color="orange"
@@ -90,17 +113,21 @@ const _ButtonWrapper = styled.div`
   position: relative;
 `;
 
-const _Tooltip = styled.div<{ visible: number }>`
+const _Tooltip = styled.div<{
+  visible: number;
+  bgColor: string;
+  color: string;
+}>`
   position: absolute;
   bottom: 125%;
   left: 50%;
   transform: translateX(-50%);
-  background-color: #333;
-  color: #fff;
+  background-color: ${({ bgColor }) => bgColor};
+  color: ${({ color }) => color};
   text-align: center;
   border-radius: 6px;
   padding: 10px;
-  width: 200px;
+  width: max-content;
   visibility: ${(props) => (props.visible ? 'visible' : 'hidden')};
   opacity: ${(props) => (props.visible ? 1 : 0)};
   transition: opacity 0.3s;
@@ -114,6 +141,7 @@ const _Tooltip = styled.div<{ visible: number }>`
     margin-left: -5px;
     border-width: 5px;
     border-style: solid;
-    border-color: #333 transparent transparent transparent;
+    border-color: ${({ bgColor }) => bgColor} transparent transparent
+      transparent;
   }
 `;
