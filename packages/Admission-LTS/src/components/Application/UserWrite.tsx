@@ -46,13 +46,7 @@ const UserWrite = ({ current, setCurrent }: ICurrnettype) => {
       setUserWrite((prev) => ({ ...prev, userPlan: getUserStudyPlan.content }));
   }, [getUserIntroduce, getUserStudyPlan]);
 
-  const nextCurrentGenerator = (mode: 'Before' | 'After') => {
-    if (mode === 'Before') {
-      getUserType?.educationalStatus === 'QUALIFICATION_EXAM'
-        ? setCurrent(current - 2)
-        : setCurrent(current - 1);
-      return;
-    }
+  const nextCurrentGenerator = () => {
     switch (getUserType?.educationalStatus) {
       case 'PROSPECTIVE_GRADUATE':
         setCurrent(current + 1);
@@ -66,13 +60,13 @@ const UserWrite = ({ current, setCurrent }: ICurrnettype) => {
     }
   };
 
-  const onNextClick = (mode: 'Before' | 'After') => {
+  const onNextClick = () => {
     combinedMutations(
       [
         () => editUserIntroduce({ content: userWrite.userIntroduce }),
         () => editUserPlan({ content: userWrite.userPlan }),
       ],
-      () => nextCurrentGenerator(mode),
+      () => nextCurrentGenerator(),
     );
   };
 
@@ -109,7 +103,7 @@ const UserWrite = ({ current, setCurrent }: ICurrnettype) => {
       <ApplicationFooter
         current={current}
         isDisabled={!userWrite.userPlan || !userWrite.userIntroduce}
-        prevClick={onNextClick}
+        prevClick={() => setCurrent(current - 1)}
         nextClick={onNextClick}
       />
     </>

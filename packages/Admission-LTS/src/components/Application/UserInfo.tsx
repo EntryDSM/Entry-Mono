@@ -37,9 +37,9 @@ const UserInfo = ({ current, setCurrent }: ICurrnettype) => {
     onChange: changeUserInfo,
   } = useInput<IUserInfo>({
     applicantName: '',
-    applicantTel: '00000000000',
+    applicantTel: '',
     sex: '',
-    birthDate: [(date.getFullYear() - 15).toString(), '01', '01'],
+    birthDate: [(new Date().getFullYear() - 15).toString(), '01', '01'],
     parentName: '',
     parentTel: '',
     parentRelation: '',
@@ -106,18 +106,17 @@ const UserInfo = ({ current, setCurrent }: ICurrnettype) => {
   };
 
   useEffect(() => {
-    setUserInfo({
+    setUserInfo((userInfo) => ({
       ...userInfo,
       [userProfile?.isParent ? 'parentName' : 'applicantName']:
         userProfile?.name,
       [userProfile?.isParent ? 'parentTel' : 'applicantTel']:
         userProfile?.phoneNumber.replace(/-/g, ''),
-    });
+    }));
   }, [userProfile]);
 
   useEffect(() => {
     getUserInfo &&
-      getUserInfo!.birthDate &&
       setUserInfo({
         applicantName: getUserInfo.applicantName,
         parentName: getUserInfo.parentName,
@@ -142,7 +141,7 @@ const UserInfo = ({ current, setCurrent }: ICurrnettype) => {
     Object.values(userInfo).some((item) => !!item === false) ||
     userPhoto.photo === '';
 
-  const onNextClick = (mode: 'Before' | 'After') => {
+  const onNextClick = () => {
     combinedMutations(
       [
         () =>
@@ -154,7 +153,9 @@ const UserInfo = ({ current, setCurrent }: ICurrnettype) => {
           }),
         () => patchUserPhoto({ photo: userPhoto.photoFileName as File }),
       ],
-      () => setCurrent(mode === 'Before' ? current - 1 : current + 1),
+      () => {
+        setCurrent(current + 1);
+      },
     );
   };
 
@@ -461,7 +462,7 @@ const UserInfo = ({ current, setCurrent }: ICurrnettype) => {
       <ApplicationFooter
         current={current}
         isDisabled={isDisabled}
-        prevClick={onNextClick}
+        prevClick={() => setCurrent(current - 1)}
         nextClick={onNextClick}
       />
     </>

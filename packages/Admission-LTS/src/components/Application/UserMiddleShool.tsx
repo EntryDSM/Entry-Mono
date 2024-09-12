@@ -145,7 +145,7 @@ const UserMiddleSchool = ({ current, setCurrent }: ICurrnettype) => {
     Object.values(userMiddleSchool).some((item) => !!item === false) ||
     userMiddleSchool.studentNumber.some((item) => !!item === false);
 
-  const onNextClick = (mode: 'Before' | 'After') => {
+  const onNextClick = () => {
     combinedMutations(
       [
         () =>
@@ -157,28 +157,8 @@ const UserMiddleSchool = ({ current, setCurrent }: ICurrnettype) => {
             teacherTel: userMiddleSchool.teacherTel.replace(/-/g, ''),
           }),
       ],
-      () => setCurrent(mode === 'Before' ? current - 1 : current + 1),
+      () => setCurrent(current + 1),
     );
-  };
-
-  const onBeforeClick = () => {
-    if (isDisabled) {
-      setUserMiddleSchoolState(userMiddleSchool);
-      setCurrent(current - 1);
-    } else {
-      combinedMutations([
-        () =>
-          mutateAsync({
-            ...userMiddleSchool,
-            gradeNumber: parseInt(userMiddleSchool.studentNumber[0]),
-            classNumber: parseInt(userMiddleSchool.studentNumber[1]),
-            studentNumber: userMiddleSchool.studentNumber[2],
-            teacherTel: userMiddleSchool.teacherTel.replace(/-/g, ''),
-          }),
-      ]);
-      clearUserMiddleSchoolState();
-      setCurrent(current - 1);
-    }
   };
 
   return (
@@ -324,7 +304,7 @@ const UserMiddleSchool = ({ current, setCurrent }: ICurrnettype) => {
       <ApplicationFooter
         current={current}
         isDisabled={isDisabled}
-        prevClick={onBeforeClick}
+        prevClick={() => setCurrent(current - 1)}
         nextClick={onNextClick}
       />
     </>
