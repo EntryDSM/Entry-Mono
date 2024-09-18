@@ -214,6 +214,7 @@ const UserMiddleSchool = ({ current, setCurrent }: ICurrnettype) => {
               value={userMiddleSchool.teacherTel}
               width={230}
               onChange={onChangeTeacherTel}
+              maxLength={13}
             />
           )}
         </ApplicationContent>
