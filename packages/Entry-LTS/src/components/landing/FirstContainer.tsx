@@ -23,7 +23,7 @@ const First = () => {
             <_Button>함께하기</_Button>
           </Link>
         </_TitleBox>
-        <Scroll src={ArrowDoubleDown} />
+        <Scroll alt="arrow_double_down" src={ArrowDoubleDown} />
       </_Wrapper>
     </WrapperWithBackground>
   );
