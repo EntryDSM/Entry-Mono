@@ -9,7 +9,7 @@ import {
   DeleteUserInfo,
   DeleteUserPdf,
 } from '@/utils/api/user';
-import { AUTH_URL } from '@/constant/env';
+import { AUTH_URL, COOKIE_DOMAIN } from '@/constant/env';
 import { DownloadPdf } from '@/utils/api/pdf';
 import { GetFirstRoundPass, GetSecondRoundPass } from '@/utils/api/pass';
 import BoardHeader from '@/components/Board/BoardHeader';
@@ -18,7 +18,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import DefaultModal from '@/components/Modal/DefaultModal';
 import { getSchedule } from '@/utils/api/schedule';
 import { getDocumentInfo, getUserInfo } from '@/utils/api/application';
-import { removeCookies, setCookies } from '@/utils/cookies';
+import { removeCookies, removeTokens, setCookies } from '@/utils/cookies';
 import { useState } from 'react';
 
 const MyPage = () => {
@@ -54,20 +54,27 @@ const MyPage = () => {
   const handleLogout = async () => {
     console.log('로그아웃 시도');
     try {
-      await Promise.all([
-        removeCookies('accessToken', {
-          path: '/',
-          domain: window.location.hostname,
-        }),
-        removeCookies('refreshToken', {
-          path: '/',
-          domain: window.location.hostname,
-        }),
-        removeCookies('authority', {
-          path: '/',
-          domain: window.location.hostname,
-        }),
-      ]);
+      removeTokens();
+      removeCookies('authority', {
+        path: '/',
+        secure: true,
+        sameSite: 'none',
+        domain: COOKIE_DOMAIN,
+      });
+      // await Promise.all([
+      //   removeCookies('accessToken', {
+      //     path: '/',
+      //     domain: window.location.hostname,
+      //   }),
+      //   removeCookies('refreshToken', {
+      //     path: '/',
+      //     domain: window.location.hostname,
+      //   }),
+      //   removeCookies('authority', {
+      //     path: '/',
+      //     domain: window.location.hostname,
+      //   }),
+      // ]);
       console.log('로그아웃 성공');
       navigate('/main');
     } catch (err) {
