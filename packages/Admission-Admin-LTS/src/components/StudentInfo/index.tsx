@@ -1,6 +1,9 @@
 import { getApplicantDetail } from '@/utils/api/admin';
 import { regex } from '@/utils/regex';
-import { applicationTypeToKorean, educationStatusTypeToKorean } from '@/utils/translate';
+import {
+  applicationTypeToKorean,
+  educationStatusTypeToKorean,
+} from '@/utils/translate';
 import styled from '@emotion/styled';
 import { Button, HStack, Text, theme, VStack } from '@entrydsm/design-system';
 import { useState } from 'react';
@@ -63,7 +66,11 @@ export const StudentInfo = ({ receiptCode }: IPropsType) => {
                   졸업 상태
                 </Text>
                 <Text color="black900" size="body2">
-                  {educationStatusTypeToKorean[applciation_detail?.moreInformation.educationalStatus]}
+                  {
+                    educationStatusTypeToKorean[
+                      applciation_detail?.moreInformation.educationalStatus
+                    ]
+                  }
                 </Text>
               </HStack>
               <HStack align="center" gap={20}>
@@ -71,7 +78,11 @@ export const StudentInfo = ({ receiptCode }: IPropsType) => {
                   전형
                 </Text>
                 <Text color="black900" size="body2">
-                  {applicationTypeToKorean[applciation_detail?.moreInformation.applicationType]}
+                  {
+                    applicationTypeToKorean[
+                      applciation_detail?.moreInformation.applicationType
+                    ]
+                  }
                 </Text>
               </HStack>
               <HR />
@@ -181,9 +192,20 @@ export const StudentInfo = ({ receiptCode }: IPropsType) => {
               학업 계획서
             </Button>
           </HStack>
-          <Text color="black900" size="body2">
-            {isIntroduce ? applciation_detail?.evaluation.selfIntroduce : applciation_detail?.evaluation.studyPlan}
-          </Text>
+          {/* <Text color="black900" size="body2"></Text> */}
+          <div
+            style={{
+              color: '#141414',
+              fontSize: '18px',
+              fontWeight: '400',
+              textWrap: 'wrap',
+              wordBreak: 'break-all',
+            }}
+          >
+            {isIntroduce
+              ? applciation_detail?.evaluation.selfIntroduce
+              : applciation_detail?.evaluation.studyPlan}
+          </div>
         </VStack>
       ) : (
         <>
@@ -212,7 +234,9 @@ export const StudentInfo = ({ receiptCode }: IPropsType) => {
                 학생 본인 연락처
               </Text>
               <Text color="black900" size="body3">
-                {phone_number(String(applciation_detail?.commonInformation.telephoneNumber))}
+                {phone_number(
+                  String(applciation_detail?.commonInformation.telephoneNumber),
+                )}
               </Text>
             </HStack>
             <HStack gap={20} align="center">
@@ -220,7 +244,9 @@ export const StudentInfo = ({ receiptCode }: IPropsType) => {
                 부모님 연락처
               </Text>
               <Text color="black900" size="body3">
-                {phone_number(String(applciation_detail?.commonInformation.parentTel))}
+                {phone_number(
+                  String(applciation_detail?.commonInformation.parentTel),
+                )}
               </Text>
             </HStack>
             <HStack gap={20} align="center">
@@ -228,7 +254,9 @@ export const StudentInfo = ({ receiptCode }: IPropsType) => {
                 학교 전화번호
               </Text>
               <Text color="black900" size="body3">
-                {phone_number(String(applciation_detail?.commonInformation.schoolTel))}
+                {phone_number(
+                  String(applciation_detail?.commonInformation.schoolTel),
+                )}
               </Text>
             </HStack>
           </VStack>
