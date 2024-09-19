@@ -36,7 +36,7 @@ export const removeTokens = () => {
     path: '/',
     secure: true,
     sameSite: 'none',
-    domain: window.location.hostname,
+    domain: COOKIE_DOMAIN,
   });
 };
 

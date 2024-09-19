@@ -59,7 +59,7 @@ const MyPage = () => {
         path: '/',
         secure: true,
         sameSite: 'none',
-        domain: window.location.hostname,
+        domain: COOKIE_DOMAIN,
       });
       // await Promise.all([
       //   removeCookies('accessToken', {

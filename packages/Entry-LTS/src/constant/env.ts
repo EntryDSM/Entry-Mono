@@ -3,7 +3,9 @@ import process from 'process';
 const isLocalhost = window.location.href.includes('localhost');
 const isStag = window.location.href.includes('stag');
 
-export const COOKIE_DOMAIN = process.env.NODE_ENV === 'development' ? 'localhost' : 'entrydsm.hs.kr';
+export const COOKIE_DOMAIN = window.location.href.includes('localhost')
+  ? 'localhost'
+  : 'entrydsm.hs.kr';
 
 export const MAIN_URL = import.meta.env.VITE_MAIN_URL;
 
