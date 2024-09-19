@@ -52,6 +52,7 @@ const MyPage = () => {
   const currentDate = new Date();
 
   const handleLogout = async () => {
+    console.log('로그아웃 시도');
     try {
       await Promise.all([
         removeCookies('accessToken', {
@@ -67,7 +68,7 @@ const MyPage = () => {
           domain: window.location.hostname,
         }),
       ]);
-      console.log('성공');
+      console.log('로그아웃 성공');
       navigate('/main');
     } catch (err) {
       console.error('로그아웃 실패:', err);
