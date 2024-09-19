@@ -100,5 +100,5 @@ export const InsertUserInfo = ({ isParent, redirectURL }: IInsertUserInfo) => {
 };
 
 const _Button = styled(Button)`
-  width: 100%;
+  width: 100% !important;
 `;

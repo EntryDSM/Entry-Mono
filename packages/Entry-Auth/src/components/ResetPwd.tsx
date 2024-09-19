@@ -64,7 +64,8 @@ export const ReSetPwd = ({ phoneNumber }: Props) => {
           resetPwd.mutate({
             phoneNumber,
             newPassword: state.newPassword,
-          })}
+          })
+        }
         margin={['top', 33]}
         disabled={state.check_password !== state.newPassword}
       >
@@ -75,5 +76,5 @@ export const ReSetPwd = ({ phoneNumber }: Props) => {
 };
 
 const _Button = styled(Button)`
-  width: 100%;
+  width: 100% !important;
 `;
