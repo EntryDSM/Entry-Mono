@@ -62,7 +62,7 @@ const MobileSchedule = () => {
               </_CirclePingAnimation>
 
               {index !== schedules.length - 1 && (
-                <_Line opacity={getNextScheduleIndex() >= index} />
+                <_Line opacity={getNextScheduleIndex() > index} />
               )}
             </React.Fragment>
           );
