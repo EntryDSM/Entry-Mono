@@ -67,6 +67,7 @@ const MyPage = () => {
           domain: window.location.hostname,
         }),
       ]);
+      console.log('성공');
       navigate('/main');
     } catch (err) {
       console.error('로그아웃 실패:', err);
