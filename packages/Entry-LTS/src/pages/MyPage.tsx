@@ -51,6 +51,28 @@ const MyPage = () => {
   const secondAnnouncementDate = new Date(schedule?.schedules[3]?.date ?? '');
   const currentDate = new Date();
 
+  const handleLogout = async () => {
+    try {
+      await Promise.all([
+        removeCookies('accessToken', {
+          path: '/',
+          domain: window.location.hostname,
+        }),
+        removeCookies('refreshToken', {
+          path: '/',
+          domain: window.location.hostname,
+        }),
+        removeCookies('authority', {
+          path: '/',
+          domain: window.location.hostname,
+        }),
+      ]);
+      navigate('/main');
+    } catch (err) {
+      console.error('로그아웃 실패:', err);
+    }
+  };
+
   return (
     <_Container>
       <_Wrapper>
@@ -103,15 +125,7 @@ const MyPage = () => {
                   title="로그아웃"
                   subTitle="정말 로그아웃 하시겠습니까?"
                   button={<div style={{ width: 200 }}>로그아웃</div>}
-                  onClick={() => {
-                    Promise.allSettled([
-                      removeCookies('accessToken'),
-                      removeCookies('refreshToken'),
-                      removeCookies('authority'),
-                    ]).then(() => {
-                      navigate('/main');
-                    });
-                  }}
+                  onClick={handleLogout}
                 />
               </Modal>
             )}
