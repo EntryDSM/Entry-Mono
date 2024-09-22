@@ -25,8 +25,8 @@ jobs:
           config_file_path: packages/Entry-Auth/.xquare/config.yaml
           buildargs: |
             BRANCH=main
-            VITE_MAIN_URL=${{ secrets.STAG_VITE_MAIN_URL }}
-            VITE_AUTH_URL=${{ secrets.STAG_VITE_AUTH_URL }}
-            VITE_APPLY_URL=${{ secrets.STAG_VITE_APPLY_URL }}
-            VITE_ADMIN_URL=${{ secrets.STAG_VITE_ADMIN_URL }}
-            VITE_SERVER_URL=${{ secrets.STAG_VITE_SERVER_URL }}
+            VITE_MAIN_URL=${{ secrets.PROD_VITE_MAIN_URL }}
+            VITE_AUTH_URL=${{ secrets.PROD_VITE_AUTH_URL }}
+            VITE_APPLY_URL=${{ secrets.PROD_VITE_APPLY_URL }}
+            VITE_ADMIN_URL=${{ secrets.PROD_VITE_ADMIN_URL }}
+            VITE_SERVER_URL=${{ secrets.PROD_VITE_SERVER_URL }}

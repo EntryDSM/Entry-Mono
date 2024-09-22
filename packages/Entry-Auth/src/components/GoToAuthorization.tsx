@@ -11,8 +11,6 @@ export const GoToAuthorization = ({ text }: Props) => {
   const { openPopUp } = useOpenPopUp();
 
   const goToAuthorization = () => {
-    console.log(AUTH_URL);
-
     openPopUp.mutate(`${AUTH_URL}/sign-up/verify`);
   };
 
