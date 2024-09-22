@@ -1,4 +1,4 @@
-# Admission-LTS
+# Admission-LTS 
 
 엔트리 Admission-LTS는 입학 원서 접수를 위한 웹페이지입니다. <br/>
 웹페이지의 양식에 맞게 입력한 뒤 자신의 입학 원서 pdf를 확인할 수 있습니다.
