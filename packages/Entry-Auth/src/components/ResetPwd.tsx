@@ -2,7 +2,6 @@ import { useResetPwd } from '@/apis/resetPwd';
 import { useForm } from '@/hooks/useForm';
 import { Button, Input, Text } from '@team-entry/design_system';
 import { SubmitForm } from './SubmitForm';
-import styled from '@emotion/styled';
 import { useEffect } from 'react';
 import { removeLocalStorageItem } from '@/utils/localstorage';
 import { useNavigate } from 'react-router';
@@ -57,23 +56,22 @@ export const ReSetPwd = ({ phoneNumber }: Props) => {
         margin={['top', 33]}
         maxLength={32}
       />
-      <_Button
-        kind="contained"
-        color="orange"
-        onClick={() =>
-          resetPwd.mutate({
-            phoneNumber,
-            newPassword: state.newPassword,
-          })}
-        margin={['top', 33]}
-        disabled={state.check_password !== state.newPassword}
-      >
-        확인
-      </_Button>
+      <div style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
+        <Button
+          kind="contained"
+          color="orange"
+          onClick={() =>
+            resetPwd.mutate({
+              phoneNumber,
+              newPassword: state.newPassword,
+            })
+          }
+          margin={['top', 33]}
+          disabled={state.check_password !== state.newPassword}
+        >
+          확인
+        </Button>
+      </div>
     </SubmitForm>
   );
 };
-
-const _Button = styled(Button)`
-  width: 100%;
-`;

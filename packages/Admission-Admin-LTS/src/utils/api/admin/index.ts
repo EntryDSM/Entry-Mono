@@ -8,6 +8,7 @@ import {
   IApplicationListResponse,
   IGetScoreStatisticsResponse,
   IGetPdfApplicatnsInfoResponse,
+  IApplicationLocationRequest,
 } from './types';
 import fileSaver from 'file-saver';
 
@@ -104,7 +105,7 @@ export const getStaticsScore = () => {
     return data;
   };
 
-  return useQuery<IGetScoreStatisticsResponse>(['staticsScore'], response);
+  return useQuery<IGetScoreStatisticsResponse[]>(['staticsScore'], response);
 };
 
 /** 접수 현황 집계(지원자) */
@@ -116,12 +117,24 @@ export const getStaticCounts = () => {
   return useQuery<IApplicationCountRequest[]>(['staticCount'], response);
 };
 
+/** 접수 현황 집계(지역별) */
+export const getStaticLocation = () => {
+  const response = async () => {
+    const { data } = await instance.get(`${router}/application/region-status`);
+    return data;
+  };
+  return useQuery<IApplicationLocationRequest>(['staticLocation'], response);
+};
+
 /** 지원자 목록 엑셀 출력 */
 export const getApplicationListExcel = () => {
   const response = async () => {
-    const { data } = await instance.get(`${router}/excel/applicants`, {
-      responseType: 'blob',
-    });
+    const { data } = await instance.get(
+      `${router}/application/excel/applicants`,
+      {
+        responseType: 'blob',
+      },
+    );
     return data;
   };
 
@@ -196,9 +209,12 @@ export const getAdmissionTicket = () => {
 /** 지원자 검증 목록 엑셀 출력 */
 export const getApplicantsCheck = () => {
   const response = async () => {
-    const { data } = await instance.get(`${router}/excel/applicants/check`, {
-      responseType: 'blob',
-    });
+    const { data } = await instance.get(
+      `${router}/application/excel/applicants/check-list`,
+      {
+        responseType: 'blob',
+      },
+    );
     return data;
   };
 

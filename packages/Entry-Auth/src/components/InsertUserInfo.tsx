@@ -4,14 +4,13 @@ import { SubmitForm } from './SubmitForm';
 import { Button, Input, Text } from '@team-entry/design_system';
 import { useForm } from '@/hooks/useForm';
 import { useSignUp } from '@/apis/signup';
-import styled from '@emotion/styled';
 import { RedirectURL } from '@/apis/login';
 
 interface IInsertUserInfo extends RedirectURL {
-  isStudent: boolean;
+  isParent: boolean;
 }
 
-export const InsertUserInfo = ({ isStudent, redirectURL }: IInsertUserInfo) => {
+export const InsertUserInfo = ({ isParent, redirectURL }: IInsertUserInfo) => {
   const { token } = useToken();
   const { getUserData } = useVerifyUserInfo(token.mdl_tkn);
 
@@ -77,28 +76,26 @@ export const InsertUserInfo = ({ isStudent, redirectURL }: IInsertUserInfo) => {
         onChange={onChangeInputValue}
         maxLength={32}
       />
-      <_Button
-        margin={['top', 32]}
-        onClick={() => {
-          signUp.mutate({
-            phoneNumber,
-            password: state.password,
-            is_student: isStudent,
-          });
-        }}
-        color="orange"
-        disabled={
-          state.rePassword !== state.password ||
-          !state.rePassword ||
-          !state.password
-        }
-      >
-        회원가입
-      </_Button>
+      <div style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
+        <Button
+          margin={['top', 32]}
+          onClick={() => {
+            signUp.mutate({
+              phoneNumber,
+              password: state.password,
+              isParent: isParent,
+            });
+          }}
+          color="orange"
+          disabled={
+            state.rePassword !== state.password ||
+            !state.rePassword ||
+            !state.password
+          }
+        >
+          회원가입
+        </Button>
+      </div>
     </SubmitForm>
   );
 };
-
-const _Button = styled(Button)`
-  width: 100%;
-`;

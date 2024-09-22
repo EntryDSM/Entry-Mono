@@ -15,7 +15,15 @@ import { generateNumberArray } from '@/utils/GenerateNumberArray';
 import { ICurrnettype, IUserTypeParams } from '@/interface/type';
 import { EducationalStatus } from '@/apis/application/types';
 
-const UserType = ({ current, setCurrent }: ICurrnettype) => {
+interface ICurrentTypePageProps extends ICurrnettype {
+  handlerFunction: () => void;
+}
+
+const UserType = ({
+  current,
+  setCurrent,
+  handlerFunction,
+}: ICurrentTypePageProps) => {
   const date = new Date();
   const {
     form: userType,
@@ -31,9 +39,15 @@ const UserType = ({ current, setCurrent }: ICurrnettype) => {
     veteransNumber: undefined,
   });
 
-  const { data } = GetUserType();
+  const { data, isLoading } = GetUserType();
   const { mutateAsync: editUserType } = EditUserType();
   const { mutateAsync: editGraduationType } = PatchGraduationType();
+
+  useEffect(() => {
+    if (!isLoading) {
+      handlerFunction();
+    }
+  }, [isLoading]);
 
   useEffect(() => {
     data &&
@@ -72,6 +86,11 @@ const UserType = ({ current, setCurrent }: ICurrnettype) => {
       () => setCurrent(current + 1),
     );
   };
+
+  const { veteransNumber, isOutOfHeadcount, ...requireType } = userType;
+  const isDisabled = Object.values(requireType).some(
+    (item) => !!item === false,
+  );
 
   return (
     <>
@@ -147,7 +166,7 @@ const UserType = ({ current, setCurrent }: ICurrnettype) => {
           title={
             (userType.educationalStatus &&
               applicationTypeDateText[userType.educationalStatus]) ||
-            ''
+            '졸업/졸업예정 연월'
           }
         >
           <Dropdown
@@ -181,9 +200,9 @@ const UserType = ({ current, setCurrent }: ICurrnettype) => {
           <Radio
             label="해당없음"
             name="applicationRemark"
-            value=""
+            value="NOTHING"
             onClick={changeUserType}
-            checked={userType.applicationRemark === ''}
+            checked={userType.applicationRemark === 'NOTHING'}
           />
           <Radio
             label="국가 유공자"
@@ -216,7 +235,7 @@ const UserType = ({ current, setCurrent }: ICurrnettype) => {
       </_ApplicationWrapper>
       <ApplicationFooter
         current={current}
-        isDisabled={false}
+        isDisabled={isDisabled}
         nextClick={onNextClick}
       />
     </>

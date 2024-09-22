@@ -31,6 +31,7 @@ export const Login = ({ redirectURL, isAdmin = false }: ILogin) => {
         isAdmin={isAdmin}
       >
         <Input
+          autoComplete="on"
           margin={['top', 20]}
           width="100%"
           unit=""
@@ -43,6 +44,7 @@ export const Login = ({ redirectURL, isAdmin = false }: ILogin) => {
           maxLength={13}
         />
         <Input
+          autoComplete="on"
           margin={['top', 35]}
           width="100%"
           unit=""

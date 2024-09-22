@@ -36,7 +36,8 @@ instance.interceptors.response.use(
       if (
         error.response.data.message === 'Invalid Token' ||
         error.response.data.message === 'Expired Token' ||
-        error.response.data.message === 'User Not Found'
+        error.response.data.message === 'User Not Found' ||
+        error.response.status === 403
       ) {
         const originalRequest = config;
 
@@ -46,18 +47,24 @@ instance.interceptors.response.use(
               cookie.set('accessToken', res.accessToken, { path: '/' });
               cookie.set('refreshToken', res.refreshToken, { path: '/' });
               if (originalRequest) {
-                if (originalRequest.headers) originalRequest.headers['Authorization'] = `Bearer ${res.accessToken}`;
+                if (originalRequest.headers)
+                  originalRequest.headers['Authorization'] =
+                    `Bearer ${res.accessToken}`;
                 return axios(originalRequest);
               }
             })
             .catch(() => {
               cookie.remove('accessToken');
               cookie.remove('refreshToken');
-              window.location.replace(`${AUTH_URL}/admin-login?redirect_url=${ADMIN_URL}`);
+              window.location.replace(
+                `${AUTH_URL}/admin-login?redirect_url=${ADMIN_URL}`,
+              );
             });
         } else {
           alert('로그인 후 이용해주세요');
-          window.location.replace(`${AUTH_URL}/admin-login?redirect_url=${ADMIN_URL}`);
+          window.location.replace(
+            `${AUTH_URL}/admin-login?redirect_url=${ADMIN_URL}`,
+          );
         }
       } else return Promise.reject(error);
     }

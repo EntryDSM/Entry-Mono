@@ -10,7 +10,7 @@ import { useEffect, useMemo, useState } from 'react';
 export const SignUp = ({ redirectURL }: RedirectURL) => {
   const { token } = useToken();
   const { getUserData } = useVerifyUserInfo(token.mdl_tkn);
-  const [isStudent, setIsStudent] = useState(false);
+  const [isParent, setIsParent] = useState(true);
 
   useEffect(() => {
     removeLocalStorageItem('isVerified');
@@ -20,16 +20,16 @@ export const SignUp = ({ redirectURL }: RedirectURL) => {
     let component;
     if (getUserData.data) {
       component = (
-        <InsertUserInfo isStudent={isStudent} redirectURL={redirectURL} />
+        <InsertUserInfo isParent={isParent} redirectURL={redirectURL} />
       );
     }
     //  else if (token.mdl_tkn) {
     //   component = <OnAuthorization />;
     // }
     else {
-      component = <DivideSignup setIsStudent={setIsStudent} />;
+      component = <DivideSignup setIsParent={setIsParent} />;
     }
     return component;
-  }, [redirectURL, token.mdl_tkn, isStudent, getUserData.data]);
+  }, [redirectURL, token.mdl_tkn, isParent, getUserData.data]);
   return <AuthTemplate title="회원가입">{RenderedComponent}</AuthTemplate>;
 };

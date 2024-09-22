@@ -36,7 +36,16 @@ const Router = createBrowserRouter([
         children: [
           { index: true, element: <NoticePage /> },
           { path: ':id', element: <NoticeDetailPage /> },
-          { path: 'write', element: <WriteNoticePage /> },
+          {
+            path: 'write',
+            element: <WriteNoticePage />,
+            children: [
+              {
+                path: ':id',
+                element: <WriteNoticePage />,
+              },
+            ],
+          },
         ],
       },
       {

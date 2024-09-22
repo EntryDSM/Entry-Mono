@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import styled from '@emotion/styled';
-import { Text } from '@entrydsm/design-system';
+import { Text, Spinner } from '@entrydsm/design-system';
 import { GetUserType } from '@/apis/application';
 import {
   EditUserBlackExam,
@@ -24,6 +24,7 @@ import { useInput } from '@/hooks/useInput';
 import { useCombineMutation } from '@/hooks/useCombineMutation';
 import { ICurrnettype } from '@/interface/type';
 import WriteBlackExam from './WriteInfo/WriteBlackExam';
+import { Background } from '../Common/Background';
 
 const Program = ({ current, setCurrent }: ICurrnettype) => {
   const { form: selectGradeElement, setForm: setSelectGradeElement } =
@@ -63,11 +64,11 @@ const Program = ({ current, setCurrent }: ICurrnettype) => {
     englishGrade: 0,
     mathGrade: 0,
     scienceGrade: 0,
-    electivesGrade: 0,
+    optGrade: 0,
   });
 
   const { data: userType } = GetUserType();
-  const { data: userGraduation } = GetUserGraduation();
+  const { data: userGraduation, isLoading } = GetUserGraduation();
   const { combinedMutations } = useCombineMutation();
   const { mutateAsync } = EditUserGraduation();
   const isBlackExam = userType?.educationalStatus === 'QUALIFICATION_EXAM';
@@ -133,7 +134,7 @@ const Program = ({ current, setCurrent }: ICurrnettype) => {
           mathGrade: userBlackExam.mathGrade,
           socialGrade: userBlackExam.socialGrade,
           scienceGrade: userBlackExam.scienceGrade,
-          electivesGrade: userBlackExam.electivesGrade,
+          optGrade: userBlackExam.optGrade,
           englishGrade: userBlackExam.englishGrade,
         });
       userBlackExam &&
@@ -182,7 +183,7 @@ const Program = ({ current, setCurrent }: ICurrnettype) => {
             : userGraduation.techAndHomeGrade.split('').slice(1),
         }));
     }
-  }, [userGraduation]);
+  }, [userGraduation, userBlackExam]);
 
   const onNextClick = () => {
     combinedMutations(
@@ -195,7 +196,7 @@ const Program = ({ current, setCurrent }: ICurrnettype) => {
               mathGrade: blackExamGradeElement.mathGrade,
               socialGrade: blackExamGradeElement.socialGrade,
               scienceGrade: blackExamGradeElement.scienceGrade,
-              electivesGrade: blackExamGradeElement.electivesGrade,
+              optGrade: blackExamGradeElement.optGrade,
               extraScore: {
                 hasCertificate: writeGradeElement?.extraScore.hasCertificate,
                 hasCompetitionPrize:
@@ -254,6 +255,11 @@ const Program = ({ current, setCurrent }: ICurrnettype) => {
 
   return (
     <>
+      {isLoading && (
+        <Background>
+          <Spinner color="orange" />
+        </Background>
+      )}
       <_Wrapper>
         <Header>
           <Title>

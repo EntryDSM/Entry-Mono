@@ -17,7 +17,13 @@ import projectLogo3 from '../../assets/projectLogo3.png';
 import projectLogo4 from '../../assets/projectLogo4.png';
 import projectLogo5 from '../../assets/projectLogo5.png';
 
-const logos = [projectLogo, projectLogo2, projectLogo3, projectLogo4, projectLogo5];
+const logos = [
+  projectLogo,
+  projectLogo2,
+  projectLogo3,
+  projectLogo4,
+  projectLogo5,
+];
 const images = [projectImg, projectImg2, projectImg3, projectImg4, projectImg5];
 const titles = ['자비스', 'DMS', 'PiCK', 'Removal', '마음가짐'];
 const details = [
@@ -60,11 +66,17 @@ const Second = () => {
     width: 580px;
     animation: ${slideAnimation} 0.5s ease-in-out;
     box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.25);
+    border-radius: 8px;
   `;
 
   const ImageCard = ({ arrNum }) => {
     return (
-      <_ImgCard style={{ backgroundImage: `url(${images[arrNum]})`, backgroundSize: '580px 320px' }}>
+      <_ImgCard
+        style={{
+          backgroundImage: `url(${images[arrNum]})`,
+          backgroundSize: '580px 320px',
+        }}
+      >
         <_ImageBox>
           <_ImgTitleBox>
             <_Logo src={logos[arrNum]} />
@@ -194,6 +206,7 @@ const _Logo = styled.img`
 `;
 
 const _ImageBox = styled.div`
+  overflow: hidden;
   display: flex;
   width: 580px;
   height: 320px;

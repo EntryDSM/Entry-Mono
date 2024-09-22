@@ -42,7 +42,7 @@ const Home = () => {
     daejeonMeister +
     daejeonSocial;
 
-  const allCommon = 50;
+  const allCommon = 160;
   const allMeister = 12;
   const allSocial = 2;
 
@@ -66,7 +66,7 @@ const Home = () => {
         <ProgressBar />
       </Stack>
 
-      <_GraphWrapper>
+      {/* <_GraphWrapper>
         <Text width={80} align="start" size="body1" color="black900">
           일반
         </Text>
@@ -118,9 +118,9 @@ const Home = () => {
         <Text width={80} align="start" size="body1" color="black900">
           {socialPercent} : 1
         </Text>
-      </_GraphWrapper>
+      </_GraphWrapper> */}
 
-      <_GraphWrapper>
+      {/* <_GraphWrapper>
         <Text width={80} align="start" size="body1" color="black900">
           총
         </Text>
@@ -138,7 +138,34 @@ const Home = () => {
         <Text width={80} align="start" size="body1" color="black900">
           {(allReception / (allCommon + allMeister + allSocial)).toFixed(2)} : 1
         </Text>
-      </_GraphWrapper>
+      </_GraphWrapper> */}
+
+      <div style={{ width: '100%' }}>
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            marginBottom: '20px',
+            gap: '36px',
+          }}
+        >
+          <Text color="black900" size="header2">
+            신입생 지원률
+          </Text>
+          <Text color="black900" size="title2">
+            {allReception}명 / 총 {allCommon}명
+          </Text>
+        </div>
+        <_Application percent={commonPercent * 100}>
+          <_ApplicationText
+            margin={[0, 0, 0, 12]}
+            color="realWhite"
+            size="body1"
+          >
+            {`${allReception}명`}
+          </_ApplicationText>
+        </_Application>
+      </div>
 
       <div
         style={{
@@ -191,51 +218,50 @@ const Home = () => {
         전형 및 지역별 점수 현황
       </Text>
       <div style={{ display: 'flex', gap: 20, width: '100%' }}>
-        {/* 170~160 , 159 ~ 150 , 149~140 , 139~130, 129~120, 119~110, 109~100, 99~90, 89~80, 79~70, 70~ */}
         <CommonScoreCard
           title="일반 전형"
           ranges={[
-            '158~170',
-            '145~157',
-            '132~144',
-            '119~131',
-            '106~118',
-            '93-105',
-            '80-92',
-            '-70',
+            '156~173 ',
+            '142~155',
+            '128~141',
+            '114~127',
+            '100~113',
+            '86~99',
+            '72~85',
+            '71점 이하',
           ]}
-          daejeonRanges={staticsScoreData?.[0]}
-          nationWideRanges={staticsScoreData?.[1]}
+          daejeonData={staticsScoreData?.[0]}
+          nationWideData={staticsScoreData?.[1]}
         />
         <SpecialScoreCard
           title="마이스터 전형"
           ranges={[
-            '98-110',
-            '85-97',
-            '72-84',
-            '59-71',
-            '46-58',
-            '33-45',
-            '20-32',
-            '-19',
+            '102~119',
+            '94-101',
+            '86-93',
+            '78-85',
+            '70-77',
+            '62-69',
+            '54-61',
+            '53점 이하',
           ]}
-          daejeonRanges={staticsScoreData?.[2]}
-          nationWideRanges={staticsScoreData?.[3]}
+          daejeonData={staticsScoreData?.[2]}
+          nationWideData={staticsScoreData?.[3]}
         />
         <SpecialScoreCard
           title="사회통합 전형"
           ranges={[
-            '98-110',
-            '85-97',
-            '72-84',
-            '59-71',
-            '46-58',
-            '33-45',
-            '20-32',
-            '-19',
+            '102~119',
+            '94-101',
+            '86-93',
+            '78-85',
+            '70-77',
+            '62-69',
+            '54-61',
+            '53점 이하',
           ]}
-          daejeonRanges={staticsScoreData?.[4]}
-          nationWideRanges={staticsScoreData?.[5]}
+          daejeonData={staticsScoreData?.[4]}
+          nationWideData={staticsScoreData?.[5]}
         />
       </div>
     </_Wrapper>
@@ -267,7 +293,7 @@ const _Application = styled.div<{ percent: number }>`
   position: relative;
   display: flex;
   align-items: center;
-  width: 80%;
+  width: 100%;
   height: 45px;
   background-color: ${theme.color.green100};
   border-radius: 8px;

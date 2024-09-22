@@ -16,7 +16,11 @@ const name = [
   '4차 입학설명회',
 ];
 const dates = ['2024.05.11', '2024.07.13', '2024.08.24', '2024.09.28'];
-const urls = ['', 'https://www.youtube.com/watch?v=frqGg4d7fXk'];
+const urls = [
+  '',
+  'https://www.youtube.com/watch?v=frqGg4d7fXk',
+  'https://www.youtube.com/watch?v=th-ZWFYhsVg',
+];
 const BriefingSessionLink =
   'https://docs.google.com/forms/d/e/1FAIpQLSdCH6JcgX9vpDQAnvwEjkEdAtOTwJ4w7KlXIke3wl5uP8vARA/viewform';
 
@@ -280,7 +284,7 @@ const _NoticeContainer = styled.div`
   flex-direction: column;
   gap: 36px;
   width: 100%;
-  min-width: 480px;
+  min-width: 400px;
 `;
 
 const _NoticeBox = styled.div`

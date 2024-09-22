@@ -10,6 +10,7 @@ import { useAuthority } from '@/hooks/useAuthority';
 import { getCookies, removeCookies, removeTokens } from '@/utils/cookies';
 import { ADMIN_URL, AUTH_URL, COOKIE_DOMAIN } from '@/constant/env';
 import { getUserInfo } from '@/utils/api/application';
+import { getSchedule } from '@/utils/api/schedule';
 
 type THeader =
   | '문의사항'
@@ -42,7 +43,7 @@ const menuList: IHeaderList[] = [
   { name: '전형요강', url: '/admission' },
   { name: '공지사항', url: '/notice' },
   { name: '자주묻는질문', url: '/customer' },
-  // { name: '성적산출', url: '/grade' },
+  { name: '성적산출', url: '/grade' },
 ];
 
 const Header = () => {
@@ -58,7 +59,16 @@ const Header = () => {
   const navigate = useNavigate();
   const authority = getCookies('authority');
   const { data } = getUserInfo(isLogin && authority != 'admin');
+  const { data: scheduleData } = getSchedule();
   const [scrollY, setScrollY] = useState<number>(window.scrollY);
+
+  const isLoginOpen = () => {
+    const currentDate = new Date();
+    const startDate = new Date(scheduleData?.schedules[0]?.date ?? '');
+    const endDate = new Date(scheduleData?.schedules[4]?.date ?? '');
+
+    return !(currentDate >= startDate && currentDate <= endDate);
+  };
 
   useEffect(() => {
     const handleScrollEvent = () => {
@@ -95,19 +105,19 @@ const Header = () => {
     }
   };
 
-  const Logout = () => {
-    removeCookies('authority', {
-      path: '/',
-      secure: true,
-      sameSite: 'none',
-      domain: COOKIE_DOMAIN,
-    });
-    removeTokens();
-    setIsLogin(false);
-    alert('로그아웃 되었습니다');
-    navigate('/');
-    setIsOpen(false);
-  };
+  // const Logout = () => {
+  //   removeCookies('authority', {
+  //     path: '/',
+  //     secure: true,
+  //     sameSite: 'none',
+  //     domain: COOKIE_DOMAIN,
+  //   });
+  //   removeTokens();
+  //   setIsLogin(false);
+  //   alert('로그아웃 되었습니다');
+  //   navigate('/');
+  //   setIsOpen(false);
+  // };
 
   useEffect(() => {
     setIsLogin(!!getCookies('accessToken'));
@@ -148,24 +158,28 @@ const Header = () => {
                       </Link>
                     );
                   })}
-                  {/* {isLogin ? (
+                  {isLogin ? (
                     <>
                       <Link to="/mypage">
                         <_._MenuElement color="black">
                           마이페이지
                         </_._MenuElement>
                       </Link>
-                      <_._MenuElement color="red" onClick={Logout}>
+                      {/* <_._MenuElement color="red" onClick={Logout}>
                         로그아웃
-                      </_._MenuElement>
+                      </_._MenuElement> */}
                     </>
                   ) : (
                     <>
-                      <_._MenuElement color="black" onClick={onClick}>
+                      <_._MenuElement
+                        color="black"
+                        onClick={!isLoginOpen() && onClick}
+                        disabled={isLoginOpen()}
+                      >
                         로그인
                       </_._MenuElement>
                     </>
-                  )} */}
+                  )}
                 </_._Menu>
               </_._Background>
             )}
@@ -270,8 +284,8 @@ const Header = () => {
                         onMouseOver={() => setIsDropdownHover(true)}
                         onMouseLeave={() => setIsDropdownHover(false)}
                       >
-                        <_._DropdownMenu>
-                          <Link to="/about">
+                        <Link to="/about" style={{ width: '100%' }}>
+                          <_._DropdownMenu>
                             <Text
                               size="body1"
                               color="inherit"
@@ -279,10 +293,10 @@ const Header = () => {
                             >
                               팀 소개
                             </Text>
-                          </Link>
-                        </_._DropdownMenu>
-                        <_._DropdownMenu>
-                          <Link to="/">
+                          </_._DropdownMenu>
+                        </Link>
+                        <Link to="/" style={{ width: '100%' }}>
+                          <_._DropdownMenu>
                             <Text
                               size="body1"
                               color="inherit"
@@ -290,8 +304,8 @@ const Header = () => {
                             >
                               학교 소개
                             </Text>
-                          </Link>
-                        </_._DropdownMenu>
+                          </_._DropdownMenu>
+                        </Link>
                       </_._DropdownMenus>
                     )}
                   </_._DropdownWrapper>
@@ -374,8 +388,8 @@ const Header = () => {
                         onMouseOver={() => setIsDropdownHover(true)}
                         onMouseLeave={() => setIsDropdownHover(false)}
                       >
-                        <_._DropdownMenu>
-                          <Link to="/about">
+                        <Link to="/about">
+                          <_._DropdownMenu>
                             <Text
                               size="body1"
                               color="inherit"
@@ -383,10 +397,10 @@ const Header = () => {
                             >
                               팀 소개
                             </Text>
-                          </Link>
-                        </_._DropdownMenu>
-                        <_._DropdownMenu>
-                          <Link to="/">
+                          </_._DropdownMenu>
+                        </Link>
+                        <Link to="/">
+                          <_._DropdownMenu>
                             <Text
                               size="body1"
                               color="inherit"
@@ -394,8 +408,8 @@ const Header = () => {
                             >
                               학교 소개
                             </Text>
-                          </Link>
-                        </_._DropdownMenu>
+                          </_._DropdownMenu>
+                        </Link>
                       </_._DropdownMenus>
                     )}
                   </_._DropdownWrapper>
@@ -403,7 +417,7 @@ const Header = () => {
                     color={authorityColor}
                     kind="contained"
                     onClick={onClick}
-                    disabled
+                    disabled={isLoginOpen()}
                   >
                     로그인
                   </Button>

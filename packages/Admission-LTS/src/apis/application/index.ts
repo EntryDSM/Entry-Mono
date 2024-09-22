@@ -44,7 +44,12 @@ export const PatchGraduationType = () => {
   const response = async (param: IPatchGraduationType) => {
     return instance.patch(`${router}/graduation/type`, param);
   };
-  return useMutation(response);
+  const queryClient = useQueryClient();
+  return useMutation(response, {
+    onSuccess: () => {
+      queryClient.invalidateQueries(['userType']);
+    },
+  });
 };
 
 /** 전형 구분 조회 */
@@ -104,6 +109,7 @@ export const EditUserPhoto = () => {
       },
     });
   };
+  const queryClient = useQueryClient();
   return useMutation(response, {
     onError: (e) => {
       let message = '증명사진 업로드에 실패하였습니다.';
@@ -111,6 +117,9 @@ export const EditUserPhoto = () => {
         message = '증명사진을 입력해주세요.';
       }
       Toast(message, { type: 'error' });
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries(['userInfos']);
     },
   });
 };

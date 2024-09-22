@@ -1,4 +1,4 @@
-import { ApplicationType, EducationStatusType, HeadCountType } from '@/interface/type';
+import { ApplicationType, EducationStatusType } from '@/interface/type';
 
 export interface IApplicationListRequest {
   size: number;
@@ -39,6 +39,10 @@ export interface IApplicationCountRequest {
   applicationType: ApplicationType;
   isDaejeon: boolean;
   count: number;
+}
+
+export interface IApplicationLocationRequest {
+  [key: string]: number;
 }
 
 export interface IApplicationDetailResponse {
@@ -121,12 +125,9 @@ export interface ICommonScoreDistribution {
 }
 
 export interface IGetScoreStatisticsResponse {
-  0: ICommonScoreDistribution;
-  1: ICommonScoreDistribution;
-  2: ISpecialScoreDistribution;
-  3: ISpecialScoreDistribution;
-  4: ISpecialScoreDistribution;
-  5: ISpecialScoreDistribution;
+  isDaejeon: boolean;
+  applicationType: 'COMMON' | 'MEISTER' | 'SOCIAL';
+  totalScore: number[];
 }
 
 export type IGetPdfApplicatnsInfoResponse = {

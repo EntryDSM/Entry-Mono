@@ -6,10 +6,10 @@ import { GoToAuthorization } from './GoToAuthorization';
 import { useModal } from '@/hooks/useModal';
 
 interface IDivideSignup {
-  setIsStudent: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsParent: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const DivideSignup = ({ setIsStudent }: IDivideSignup) => {
+const DivideSignup = ({ setIsParent }: IDivideSignup) => {
   const [isClick, setIsClick] = useState(false);
   const { render, close } = useModal();
 
@@ -18,7 +18,7 @@ const DivideSignup = ({ setIsStudent }: IDivideSignup) => {
   return (
     <>
       <Wrapper>
-        <DivideSignupCard setIsStudent={setIsStudent} setIsClick={setIsClick} />
+        <DivideSignupCard setIsParent={setIsParent} setIsClick={setIsClick} />
       </Wrapper>
       <Stack justify="center" gap={12} margin={[0, 'auto']}>
         <Text color="black600" size="body1">
@@ -38,7 +38,7 @@ const DivideSignup = ({ setIsStudent }: IDivideSignup) => {
                     onClick={() => {
                       close();
                       setIsClick(true);
-                      setIsStudent(false);
+                      setIsParent(true);
                     }}
                   >
                     진행

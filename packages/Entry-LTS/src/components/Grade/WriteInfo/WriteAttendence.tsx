@@ -11,7 +11,9 @@ interface WriteAttendenceProps {
   changeBlackexam: (e: React.ChangeEvent<HTMLInputElement>) => void;
   writeGradeElement: IWriteGradeElement;
   changeWriteGradeElement: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  setWriteGradeElement: React.Dispatch<React.SetStateAction<IWriteGradeElement>>;
+  setWriteGradeElement: React.Dispatch<
+    React.SetStateAction<IWriteGradeElement>
+  >;
 }
 
 const WriteAttendence = ({
@@ -189,12 +191,18 @@ const WriteAttendence = ({
               <_Button onClick={() => setChecked2(1)} isClick={checked2 === 1}>
                 O
               </_Button>
-              <_Button onClick={() => setChecked2(0)} isClick={!(checked2 === 1)}>
+              <_Button
+                onClick={() => setChecked2(0)}
+                isClick={!(checked2 === 1)}
+              >
                 X
               </_Button>
             </_ButtonBox>
           </GradeWraper>
-          <_ReferenceText>* 정보처리기능사 자격증 취득여부 가산점은 일반전형일 경우 들어가지 않습니다.</_ReferenceText>
+          <_ReferenceText>
+            * 정보처리기능사 자격증 취득여부 가산점은 일반전형일 경우 들어가지
+            않습니다.
+          </_ReferenceText>
         </>
       )}
     </_ReferenceBox>
@@ -217,8 +225,10 @@ const _Button = styled.div<{ isClick?: boolean }>`
   border-radius: 50px;
   ${theme.font.title2};
   border: 1px solid ${theme.color.orange500};
-  color: ${({ isClick }) => (isClick ? theme.color.realWhite : theme.color.orange500)};
-  background-color: ${({ isClick }) => (isClick ? theme.color.orange500 : theme.color.realWhite)};
+  color: ${({ isClick }) =>
+    isClick ? theme.color.realWhite : theme.color.orange500};
+  background-color: ${({ isClick }) =>
+    isClick ? theme.color.orange500 : theme.color.realWhite};
   cursor: pointer;
 `;
 

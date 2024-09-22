@@ -12,6 +12,7 @@ import UserMiddleSchool from '@/components/Application/UserMiddleShool';
 import Modal from '@/components/Modal/Modal';
 import DefaultModal from '@/components/Modal/DefaultModal';
 import { useModal } from '@/hooks/useModal';
+import { Spinner } from '@entrydsm/design-system';
 
 const titles = [
   '지원자 전형 구분',
@@ -27,6 +28,7 @@ const titles = [
 ];
 
 const Application = () => {
+  const [isLoaded, setIsLoaded] = useState<boolean>(true);
   const [current, setCurrent] = useState<number>(0);
   const { close, modalState, setModalState } = useModal();
   const { mutate } = PostUserEntry();
@@ -34,8 +36,16 @@ const Application = () => {
   const refresh_token = cookie.get('refreshToken');
   useEffect(() => setModalState('ADMISSION'), []);
 
+  const handlerEndedLoad = () => {
+    setIsLoaded(false);
+  };
+
   const elements = [
-    <UserType current={current} setCurrent={setCurrent} />,
+    <UserType
+      current={current}
+      setCurrent={setCurrent}
+      handlerFunction={handlerEndedLoad}
+    />,
     <UserInfo current={current} setCurrent={setCurrent} />,
     <UserMiddleSchool current={current} setCurrent={setCurrent} />,
     <UserWrite current={current} setCurrent={setCurrent} />,
@@ -55,16 +65,19 @@ const Application = () => {
       </_Wrapper>
       {modalState === 'ADMISSION' && !!refresh_token && (
         <Modal onClose={() => {}}>
-          <DefaultModal
-            color="black900"
-            title="대덕SW마이스터고등학교"
-            subTitle={'입학 원서 접수를 시작하시겠습니까?'}
-            button="원서 접수 시작"
-            onClick={() => {
-              mutate();
-              close();
-            }}
-          />
+          {isLoaded && <Spinner color="orange" />}
+          {!isLoaded && (
+            <DefaultModal
+              color="black900"
+              title="대덕SW마이스터고등학교"
+              subTitle={'입학 원서 접수를 시작하시겠습니까?'}
+              button="원서 접수 시작"
+              onClick={() => {
+                mutate();
+                close();
+              }}
+            />
+          )}
         </Modal>
       )}
     </_Container>

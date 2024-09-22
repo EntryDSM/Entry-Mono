@@ -9,15 +9,17 @@ import {
   DeleteUserInfo,
   DeleteUserPdf,
 } from '@/utils/api/user';
-import { AUTH_URL } from '@/constant/env';
+import { AUTH_URL, COOKIE_DOMAIN } from '@/constant/env';
 import { DownloadPdf } from '@/utils/api/pdf';
 import { GetFirstRoundPass, GetSecondRoundPass } from '@/utils/api/pass';
 import BoardHeader from '@/components/Board/BoardHeader';
 // import { GetMyQna } from '@/utils/api/qna';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import DefaultModal from '@/components/Modal/DefaultModal';
 import { getSchedule } from '@/utils/api/schedule';
 import { getDocumentInfo, getUserInfo } from '@/utils/api/application';
+import { removeCookies, removeTokens, setCookies } from '@/utils/cookies';
+import { useState } from 'react';
 
 const MyPage = () => {
   const { Modal, open, close, setModalState, modalState } = useModal();
@@ -25,7 +27,11 @@ const MyPage = () => {
   const { data } = ApplyInfoStatus();
   const { data: documentInfo } = getDocumentInfo();
   const { mutate: deleteUserPdf } = DeleteUserPdf(data?.receipt_code);
-  const onDownloadPdf = DownloadPdf();
+  const { onDownloadPdf, isLoading: isPdfDownloadLoading } = DownloadPdf();
+
+  const [isLogout, setIsLogout] = useState<boolean>();
+
+  const navigate = useNavigate();
 
   const { mutate: getFirstRound } = GetFirstRoundPass({ setModalState, open });
   const { mutate: getSecondRound } = GetSecondRoundPass({
@@ -41,8 +47,40 @@ const MyPage = () => {
 
   // 발표일
   const { data: schedule, isLoading } = getSchedule();
-  const secondAnnouncementDate = new Date(schedule?.schedules[4]?.date ?? '');
+
+  const secondAnnouncementDate = new Date(schedule?.schedules[3]?.date ?? '');
   const currentDate = new Date();
+
+  const handleLogout = async () => {
+    console.log('로그아웃 시도');
+    try {
+      removeTokens();
+      removeCookies('authority', {
+        path: '/',
+        secure: true,
+        sameSite: 'none',
+        domain: COOKIE_DOMAIN,
+      });
+      // await Promise.all([
+      //   removeCookies('accessToken', {
+      //     path: '/',
+      //     domain: window.location.hostname,
+      //   }),
+      //   removeCookies('refreshToken', {
+      //     path: '/',
+      //     domain: window.location.hostname,
+      //   }),
+      //   removeCookies('authority', {
+      //     path: '/',
+      //     domain: window.location.hostname,
+      //   }),
+      // ]);
+      console.log('로그아웃 성공');
+      navigate('/main');
+    } catch (err) {
+      console.error('로그아웃 실패:', err);
+    }
+  };
 
   return (
     <_Container>
@@ -80,9 +118,26 @@ const MyPage = () => {
             >
               비밀번호 변경
             </Button>
-            {/* <Button color="delete" kind="delete" onClick={openSignOutModal}>
-              회원 탈퇴
-            </Button> */}
+            <Button
+              color="delete"
+              kind="contained"
+              onClick={() => {
+                setModalState('LOGOUT');
+                open();
+              }}
+            >
+              로그아웃
+            </Button>
+            {modalState === 'LOGOUT' && (
+              <Modal>
+                <CancelModal
+                  title="로그아웃"
+                  subTitle="정말 로그아웃 하시겠습니까?"
+                  button={<div style={{ width: 200 }}>로그아웃</div>}
+                  onClick={handleLogout}
+                />
+              </Modal>
+            )}
           </_UserButtons>
         </_User>
 
@@ -110,19 +165,29 @@ const MyPage = () => {
           </Text>
           <_ApplyButtons>
             <Pc>
-              <Button onClick={onDownloadPdf}>원서 다운로드</Button>
+              <Button
+                onClick={onDownloadPdf}
+                disabled={isPdfDownloadLoading || !documentInfo?.isSubmitted}
+              >
+                {isPdfDownloadLoading ? '원서 다운로드 중...' : '원서 다운로드'}
+              </Button>
               <Button
                 disabled={currentDate < secondAnnouncementDate}
                 onClick={getSecondRound}
               >
                 발표 결과 확인
               </Button>
-              {/* <Button color="delete" kind="delete" onClick={openCancelSubmitModal}>
-                원서 최종제출 취소
-              </Button> */}
             </Pc>
             <Mobile>
-              <Button onClick={getSecondRound}>발표 결과 확인</Button>
+              <Button onClick={onDownloadPdf} disabled={isPdfDownloadLoading}>
+                {isPdfDownloadLoading ? '원서 다운로드 중...' : '원서 다운로드'}
+              </Button>
+              <Button
+                disabled={currentDate < secondAnnouncementDate}
+                onClick={getSecondRound}
+              >
+                발표 결과 확인
+              </Button>
             </Mobile>
           </_ApplyButtons>
         </_Apply>

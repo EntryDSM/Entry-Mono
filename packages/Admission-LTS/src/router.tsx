@@ -5,23 +5,25 @@ import NotFound from './pages/NotFound';
 import ApplicationPage from './pages/Application';
 import { APPLY_URL, AUTH_URL, MAIN_URL } from './constant/env';
 import { Cookies } from 'react-cookie';
+import { getSchedule } from './apis/schedule';
 
 export const Router = () => {
-  useEffect(() => {
-    if (
-      window.location.href === 'https://apply-stag.entrydsm.hs.kr/' ||
-      window.location.href === 'https://apply-stag.entrydsm.hs.kr'
-    )
-      return;
+  const { data: date } = getSchedule();
 
-    if (
-      !window.location.hostname.includes('stag') &&
-      !window.location.hostname.includes('localhost')
-    ) {
+  const isOpen = () => {
+    const currentDate = new Date();
+    const startDate = new Date(date?.schedules[0]?.date ?? '');
+    const endDate = new Date(date?.schedules[4]?.date ?? '');
+
+    return currentDate >= startDate && currentDate <= endDate;
+  };
+
+  useEffect(() => {
+    if (date && !isOpen()) {
       alert('원서접수가 마감되었습니다.');
       window.location.href = `${MAIN_URL}`;
     }
-  }, []);
+  }, [date]);
 
   const cookie = new Cookies();
   const refreshToken = cookie.get('refreshToken');

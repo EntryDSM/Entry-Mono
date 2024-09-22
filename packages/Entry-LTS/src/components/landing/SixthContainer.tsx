@@ -11,9 +11,11 @@ const Sixth = () => {
           <_Title>우리가 도와드려요</_Title>
         </div>
         <_Description>
-          개발 학습을 위한 노트북 제공, 기숙사 무료운영, 학업증진을 위한 방과후 운영 등
+          개발 학습을 위한 노트북 제공, 기숙사 무료운영, 학업증진을 위한 방과후
+          운영 등
           <br />
-          이외에도 여러가지 지원을 통해 학생이 학교에 적응하고 성장할 수 있는 최적의 환경을 제공합니다.
+          이외에도 여러가지 지원을 통해 학생이 학교에 적응하고 성장할 수 있는
+          최적의 환경을 제공합니다.
         </_Description>
       </_TopContainer>
       <_BottomContainer>
@@ -24,17 +26,19 @@ const Sixth = () => {
           부담 가지지 마시고 언제든지 편하게 이용해 주세요! */}
           아래 버튼을 클릭해 학교 홈페이지로 이동하여 입학 상담을 진행해보세요!
         </_Description>
-        <Button
-          color="orange"
-          kind="contained"
-          isBig={true}
-          onClick={() => {
-            // ChannelService.openChat();
-            window.open('https://dsmhs.djsch.kr/boardCnts/list.do?boardID=76196&m=0605&s=dsmhs#contents', '_blank');
-          }}
+        <a
+          target="_blank"
+          href="https://dsmhs.djsch.kr/boardCnts/list.do?boardID=76196&m=0605&s=dsmhs#contents"
         >
-          학교 홈페이지로 이동하기
-        </Button>
+          <Button
+            color="orange"
+            kind="contained"
+            isBig={true}
+            onClick={() => {}}
+          >
+            학교 홈페이지로 이동하기
+          </Button>
+        </a>
       </_BottomContainer>
     </_Wrapper>
   );

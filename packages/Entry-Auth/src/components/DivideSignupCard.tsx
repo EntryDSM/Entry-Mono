@@ -4,23 +4,22 @@ import styled from '@emotion/styled';
 import { Text, Button, VStack } from '@team-entry/design_system';
 
 interface IDivideSignupCard {
-  setIsStudent: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsParent: React.Dispatch<React.SetStateAction<boolean>>;
   setIsClick: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const DivideSignupCard = ({ setIsStudent, setIsClick }: IDivideSignupCard) => {
+const DivideSignupCard = ({ setIsParent, setIsClick }: IDivideSignupCard) => {
   return (
     <_Wrapper>
       <Text size="body2" color="black600" align="center">
-        {'학생 본인 명의로 '}
-        Entry에 가입합니다
+        학생 본인 명의로 Entry에 가입합니다
       </Text>
       <VStack width={300}>
         <Button
           color="orange"
           onClick={() => {
             setIsClick(true);
-            setIsStudent(true);
+            setIsParent(false);
           }}
         >
           가입

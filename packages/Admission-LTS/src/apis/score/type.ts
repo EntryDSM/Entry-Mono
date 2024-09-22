@@ -4,7 +4,7 @@ export interface IPatchUserBlackExam {
   englishGrade: number;
   mathGrade: number;
   scienceGrade: number;
-  electivesGrade: number;
+  optGrade: number;
   extraScore: ExtraScore;
 }
 
@@ -14,7 +14,7 @@ export interface IGetUserBlackExam {
   englishGrade: number;
   mathGrade: number;
   scienceGrade: number;
-  electivesGrade: number;
+  optGrade: number;
   extraScore: ExtraScore;
 }
 
@@ -62,7 +62,7 @@ export interface IBlackExamGradeElement {
   englishGrade: number;
   mathGrade: number;
   scienceGrade: number;
-  electivesGrade: number;
+  optGrade: number;
 }
 
 export type ExtraScore = {

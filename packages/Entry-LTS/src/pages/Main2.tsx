@@ -8,9 +8,17 @@ import { getSchedule } from '@/utils/api/schedule';
 import { scheduleStatusCalculater } from '@/utils/scheduleCalculater';
 import { useNavigate } from 'react-router-dom';
 import { APPLY_URL } from '@/constant/env';
+import { useAuthority } from '@/hooks/useAuthority';
+import { getCookies } from '@/utils/cookies';
+import { getDocumentInfo } from '@/utils/api/application';
+import { useEffect, useState } from 'react';
 
 const Main2 = () => {
   const { data } = getSchedule();
+  const { isAdmin, authorityColor } = useAuthority();
+  const accessToken = getCookies('accessToken');
+  const [isLogin, setIsLogin] = useState(!!getCookies('accessToken'));
+  const { data: documentInfo } = getDocumentInfo(isLogin);
 
   const navigate = useNavigate();
 
@@ -22,11 +30,15 @@ const Main2 = () => {
     return !(currentDate >= startDate && currentDate <= endDate);
   };
 
+  useEffect(() => {
+    setIsLogin(!!getCookies('accessToken'));
+  }, [getCookies('accessToken')]);
+
   return (
     <_Wrapper>
       <_TopContainerWrapper>
         <_TopContainer>
-          <div>
+          <_Box>
             <_Title>
               <span style={{ color: '#FF9900' }}>대덕소프트웨어마이스터고</span>
               는 지금,
@@ -34,23 +46,56 @@ const Main2 = () => {
               IT 업계를 선도할 미래 인재를 모집하고 있어요
             </_Title>
             <_Line />
+            <_SubmitBox>
+              <Text size={'header1'} color={'realWhite'}>
+                {documentInfo?.isSubmitted
+                  ? '최종제출이 완료된 상태입니다'
+                  : scheduleStatusCalculater(data?.currentStatus)}
+              </Text>
+              <Button
+                color={authorityColor}
+                isBig={true}
+                onClick={() => {
+                  if (!isOpen()) {
+                    window.location.href = `${APPLY_URL}`;
+                  }
+                }}
+                disabled={
+                  isOpen() ||
+                  isAdmin ||
+                  !accessToken ||
+                  documentInfo?.isSubmitted
+                }
+              >
+                지원하기
+              </Button>
+            </_SubmitBox>
+          </_Box>
+          <_SubmitMobileBox>
             <Text size={'header1'} color={'realWhite'}>
-              {scheduleStatusCalculater(data?.currentStatus)}
+              {documentInfo?.isSubmitted
+                ? '최종제출이 완료된 상태입니다'
+                : scheduleStatusCalculater(data?.currentStatus)}
             </Text>
+          </_SubmitMobileBox>
+
+          <Schedule />
+          <_MobileButtonBox>
             <Button
-              color="orange"
+              color={authorityColor}
               isBig={true}
               onClick={() => {
-                if (isOpen()) {
+                if (!isOpen()) {
                   window.location.href = `${APPLY_URL}`;
                 }
               }}
-              disabled={isOpen()}
+              disabled={
+                isOpen() || isAdmin || !accessToken || documentInfo?.isSubmitted
+              }
             >
               지원하기
             </Button>
-          </div>
-          <Schedule />
+          </_MobileButtonBox>
         </_TopContainer>
       </_TopContainerWrapper>
       <_FaqWrapper>
@@ -73,18 +118,20 @@ const _TopContainerWrapper = styled.div`
   background-position: center;
   width: 100%;
   height: 100vh;
+  display: flex;
+  padding: 64px 0;
 `;
 
 const _TopContainer = styled.div`
   width: 100%;
   height: 100%;
   padding-top: 70px;
-  background-color: rgba(0, 0, 0, 0.8);
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 166px;
+  justify-content: space-between;
+  gap: 24px;
   > div:nth-of-type(1) {
     width: 94%;
     max-width: 1180px;
@@ -93,6 +140,10 @@ const _TopContainer = styled.div`
     flex-direction: column;
     justify-content: start;
     align-items: start;
+  }
+  @media (max-width: 699px) {
+    padding-top: 24px;
+    justify-content: start;
   }
 `;
 
@@ -109,9 +160,26 @@ const _Title = styled.div`
 `;
 
 const _Line = styled.div`
-  width: 400px;
+  width: 30%;
   height: 1px;
   background-color: white;
+`;
+
+const _Box = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 64px;
+
+  @media (max-width: 699px) {
+    display: none !important;
+  }
+`;
+
+const _SubmitBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 `;
 
 const _FaqWrapper = styled.div`
@@ -119,6 +187,9 @@ const _FaqWrapper = styled.div`
   display: flex;
   padding: 120px 32px;
   justify-content: center;
+  @media (max-width: 699px) {
+    display: none;
+  }
 `;
 
 const _MainContainer = styled.div`
@@ -127,4 +198,27 @@ const _MainContainer = styled.div`
   width: 100%;
   max-width: 1200px;
   flex-direction: column;
+`;
+
+const _SubmitMobileBox = styled.div`
+  width: 100%;
+  display: none;
+  padding: 24px;
+  @media (max-width: 699px) {
+    display: flex;
+  }
+`;
+
+const _MobileButtonBox = styled.div`
+  position: fixed;
+  display: none;
+  bottom: 0px;
+  width: 100vw;
+  padding: 24px;
+  @media (max-width: 699px) {
+    display: flex;
+    button {
+      width: 100%;
+    }
+  }
 `;

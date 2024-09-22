@@ -13,7 +13,7 @@ export const useSignUp = (redirectURL: string) => {
   const navigate = useNavigate();
 
   const signUp = useMutation(
-    (body: { phoneNumber: string; password: string; is_student: boolean }) =>
+    (body: { phoneNumber: string; password: string; isParent: boolean }) =>
       instance.post<AuthResponse>('/user', body),
     {
       onError: (res: AxiosError<AxiosError>) => {
