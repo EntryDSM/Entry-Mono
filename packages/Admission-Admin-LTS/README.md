@@ -1,4 +1,4 @@
-# Admission-Admin-LTS 
+# Admission-Admin-LTS
 
 엔트리 Admission-Admin-LTS는 접수 및 일정을 관리하는 관리자 웹페이지입니다.
 
