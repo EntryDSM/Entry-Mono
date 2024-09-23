@@ -18,14 +18,22 @@ import { Link, useNavigate } from 'react-router-dom';
 import DefaultModal from '@/components/Modal/DefaultModal';
 import { getSchedule } from '@/utils/api/schedule';
 import { getDocumentInfo, getUserInfo } from '@/utils/api/application';
-import { removeCookies, removeTokens, setCookies } from '@/utils/cookies';
+import {
+  getCookies,
+  removeCookies,
+  removeTokens,
+  setCookies,
+} from '@/utils/cookies';
 import { useState } from 'react';
 
 const MyPage = () => {
+  const [isLogin, _] = useState(!!getCookies('accessToken'));
+  const authority = getCookies('authority');
   const { Modal, open, close, setModalState, modalState } = useModal();
   const { mutate: deleteUserInfo } = DeleteUserInfo();
   const { data } = ApplyInfoStatus();
   const { data: documentInfo } = getDocumentInfo();
+  const { data: userInfo } = getUserInfo(isLogin && authority != 'admin');
   const { mutate: deleteUserPdf } = DeleteUserPdf(data?.receipt_code);
   const { onDownloadPdf, isLoading: isPdfDownloadLoading } = DownloadPdf();
 
@@ -91,10 +99,10 @@ const MyPage = () => {
           <_UserInfo>
             <Pc>
               <Text color="realBlack" size="header1">
-                {documentInfo?.name} 지원자님
+                {userInfo?.name} 지원자님
               </Text>
               <Text color="black500" size="body1">
-                {documentInfo?.phoneNumber.replace(
+                {userInfo?.phoneNumber.replace(
                   /^(\d{2,3})(\d{3,4})(\d{4})$/,
                   `$1-$2-$3`,
                 )}
@@ -102,10 +110,10 @@ const MyPage = () => {
             </Pc>
             <Mobile>
               <Text color="realBlack" size="body3">
-                {documentInfo?.name} 지원자님
+                {userInfo?.name} 지원자님
               </Text>
               <Text color="black500" size="body3">
-                {documentInfo?.phoneNumber.replace(
+                {userInfo?.phoneNumber.replace(
                   /^(\d{2,3})(\d{3,4})(\d{4})$/,
                   `$1-$2-$3`,
                 )}
