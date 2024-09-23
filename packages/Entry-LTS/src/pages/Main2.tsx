@@ -49,26 +49,28 @@ const Main2 = () => {
             <_SubmitBox>
               <Text size={'header1'} color={'realWhite'}>
                 {documentInfo?.isSubmitted
-                  ? '최종제출이 완료된 상태입니다'
+                  ? '최종제출이 완료된 상태입니다 (현재 제출한 원서는 9월 27일 이후 삭제됩니다)'
                   : scheduleStatusCalculater(data?.currentStatus)}
               </Text>
-              <Button
-                color={authorityColor}
-                isBig={true}
-                onClick={() => {
-                  if (!isOpen()) {
-                    window.location.href = `${APPLY_URL}`;
+              <div style={{ width: '240px' }}>
+                <Button
+                  color={authorityColor}
+                  isBig={true}
+                  onClick={() => {
+                    if (!isOpen()) {
+                      window.location.href = `${APPLY_URL}`;
+                    }
+                  }}
+                  disabled={
+                    isOpen() ||
+                    isAdmin ||
+                    !accessToken ||
+                    documentInfo?.isSubmitted
                   }
-                }}
-                disabled={
-                  isOpen() ||
-                  isAdmin ||
-                  !accessToken ||
-                  documentInfo?.isSubmitted
-                }
-              >
-                지원하기
-              </Button>
+                >
+                  지원하기
+                </Button>
+              </div>
             </_SubmitBox>
           </_Box>
           <_SubmitMobileBox>
