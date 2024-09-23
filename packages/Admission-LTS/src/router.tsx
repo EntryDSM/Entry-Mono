@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Header from './components/Header';
 import NotFound from './pages/NotFound';
 import ApplicationPage from './pages/Application';
-import { APPLY_URL, AUTH_URL, MAIN_URL } from './constant/env';
+import { APPLY_URL, AUTH_URL } from './constant/env';
 import { Cookies } from 'react-cookie';
 import { getSchedule } from './apis/schedule';
 
