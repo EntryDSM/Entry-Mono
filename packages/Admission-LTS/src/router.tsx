@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Header from './components/Header';
 import NotFound from './pages/NotFound';
 import ApplicationPage from './pages/Application';
-import { APPLY_URL, AUTH_URL } from './constant/env';
+import { APPLY_URL, AUTH_URL, MAIN_URL } from './constant/env';
 import { Cookies } from 'react-cookie';
 import { getSchedule } from './apis/schedule';
 
@@ -21,7 +21,7 @@ export const Router = () => {
   useEffect(() => {
     if (date && !isOpen()) {
       alert('원서접수가 마감되었습니다.');
-      // window.location.href = `${MAIN_URL}`;
+      window.location.href = `${MAIN_URL}`;
     }
   }, [date]);
 

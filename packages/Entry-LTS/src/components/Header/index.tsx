@@ -67,8 +67,6 @@ const Header = () => {
     const startDate = new Date(scheduleData?.schedules[0]?.date ?? '');
     const endDate = new Date(scheduleData?.schedules[4]?.date ?? '');
 
-    console.log(startDate, endDate, currentDate);
-
     return !(currentDate >= startDate && currentDate <= endDate);
   };
 
