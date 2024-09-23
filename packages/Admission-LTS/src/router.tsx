@@ -21,7 +21,7 @@ export const Router = () => {
   useEffect(() => {
     if (date && !isOpen()) {
       alert('원서접수가 마감되었습니다.');
-      window.location.href = `${MAIN_URL}`;
+      // window.location.href = `${MAIN_URL}`;
     }
   }, [date]);
 
