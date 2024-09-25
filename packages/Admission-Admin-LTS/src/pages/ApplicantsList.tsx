@@ -44,7 +44,7 @@ const headText = [
 const ApplicantsList = () => {
   const [filter, setFilter] = useState<IApplicationListRequest>({
     size: 10,
-    offset: 0,
+    page: 0,
     isDaejeon: false,
     isNationwide: false,
     isSubmitted: false,
