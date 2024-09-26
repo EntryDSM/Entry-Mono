@@ -19,7 +19,8 @@ const Main2 = () => {
   const { isAdmin, authorityColor } = useAuthority();
   const accessToken = getCookies('accessToken');
   const [isLogin, setIsLogin] = useState(!!getCookies('accessToken'));
-  const { data: documentInfo } = getDocumentInfo(isLogin);
+  const { data: documentInfo, isLoading: documentInfoLoading } =
+    getDocumentInfo(isLogin);
   const {
     Modal,
     isOpen: isModalOpened,
@@ -110,7 +111,8 @@ const Main2 = () => {
                       isOpen() ||
                       isAdmin ||
                       !accessToken ||
-                      documentInfo?.isSubmitted
+                      documentInfo?.isSubmitted ||
+                      documentInfoLoading
                     }
                   >
                     지원하기
