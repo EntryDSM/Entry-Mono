@@ -37,75 +37,53 @@ const Schedule = () => {
   }, [data]);
 
   return (
-    <_Wrapper>
-      <_ProgressProvider>
-        {schedules?.map((_, index) => {
-          return (
-            <React.Fragment key={index}>
-              <_ScheduleCircle />
-              {index !== schedules.length - 1 && <_ScheduleLine />}
-            </React.Fragment>
-          );
-        })}
-      </_ProgressProvider>
-      <_TextProvider>
-        {schedules?.map((schedule, index) => {
-          return (
-            <div key={index}>
-              {schedule.scheduleName}
-              <span>{schedule.scheduleTime.split(' ')[0]}</span>
-            </div>
-          );
-        })}
-      </_TextProvider>
-      {/* 원서제출 기간은
-        <br />
-        10/14 ~ 10/17입니다. */}
-      <MobileSchedule />
-    </_Wrapper>
+    <_Wrap>
+      <_Wrapper>
+        <_ProgressProvider>
+          {schedules?.map((schedule, index) => {
+            return (
+              <React.Fragment key={index}>
+                <_ScheduleCircle>
+                  <_ScheduleTitle>
+                    {schedule.scheduleName}
+                    <_ScheduleDate>{schedule.scheduleTime}</_ScheduleDate>
+                  </_ScheduleTitle>
+                </_ScheduleCircle>
+                {index !== schedules.length - 1 && <_ScheduleLine />}
+              </React.Fragment>
+            );
+          })}
+        </_ProgressProvider>
+        <MobileSchedule />
+      </_Wrapper>
+    </_Wrap>
   );
 };
 
 export default Schedule;
 
-const _Wrapper = styled.div`
+const _Wrap = styled.div`
   width: 100%;
-  max-width: 94%;
+  max-width: 1180px;
+  display: flex;
+  justify-content: flex-start;
+  padding: 0 24px;
+`;
+
+const _Wrapper = styled.div`
+  width: 80%;
+
   display: flex;
   flex-direction: column;
-  align-items: center;
   gap: 20px;
-  align-self: center;
 `;
 
 const _ProgressProvider = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-
-  @media (max-width: 699px) {
-    display: none;
-  }
-`;
-
-const _TextProvider = styled.div`
-  display: flex;
-  justify-content: center;
-  gap: 13.3vw;
-  div {
-    flex: none;
-    width: 104px;
-    color: white;
-    text-align: center;
-    word-wrap: nowrap;
-    font-size: 28px;
-    font-weight: 500;
-    span {
-      font-size: 18px;
-      font-weight: 500;
-      color: ${theme.color.black300};
-    }
-  }
+  width: 100%;
+  padding-bottom: 80px;
 
   @media (max-width: 699px) {
     display: none;
@@ -113,27 +91,34 @@ const _TextProvider = styled.div`
 `;
 
 const _ScheduleCircle = styled.div`
-  width: 20px;
-  height: 20px;
+  position: relative;
+  min-width: 20px;
+  min-height: 20px;
   background-color: ${theme.color.orange800};
-  border-radius: 50%;
+  border-radius: 100px;
 `;
 
 const _ScheduleLine = styled.div`
-  width: 15.625vw;
+  width: 100%;
   height: 1px;
   background-color: ${theme.color.orange800};
-  margin: 0 20px;
 `;
 
-const _MobileText = styled.div`
-  display: none;
+const _ScheduleTitle = styled.div`
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  top: 180%;
+  white-space: nowrap;
   color: white;
-  font-size: 24px;
-  font-weight: 700;
-  width: 100%;
+  text-align: center;
+  word-wrap: nowrap;
+  font-size: 28px;
+  font-weight: 500;
+`;
 
-  @media (max-width: 699px) {
-    display: block;
-  }
+const _ScheduleDate = styled.p`
+  font-size: 18px;
+  font-weight: 500;
+  color: ${theme.color.black300};
 `;
