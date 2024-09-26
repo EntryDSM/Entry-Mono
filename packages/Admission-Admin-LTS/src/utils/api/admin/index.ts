@@ -33,7 +33,7 @@ export const getApplicationList = ({
 }: IApplicationListRequest) => {
   const response = async () => {
     const { data } = await instance.get(
-      `${router}/application/applicants?pageSize=${1 + (size - 1) * 10}&offset=${page * 10}&isDaejeon=${isDaejeon}&isNationwide=${isNationwide}&isSubmitted=${isSubmitted}&isNotSubmitted=${isNotSubmitted}&inOfHeadcount=${inOfHeadcount}&outOfHeadcount=${outOfHeadcount}&isCommon=${isCommon}&isMeister=${isMeister}&isSocial=${isSocial}&receiptCode=${receiptCode}&schoolName=${schoolName}&name=${name}`,
+      `${router}/application/applicants?pageSize=${size}&offset=${1 + (size - 1) * 10}&isDaejeon=${isDaejeon}&isNationwide=${isNationwide}&isSubmitted=${isSubmitted}&isNotSubmitted=${isNotSubmitted}&inOfHeadcount=${inOfHeadcount}&outOfHeadcount=${outOfHeadcount}&isCommon=${isCommon}&isMeister=${isMeister}&isSocial=${isSocial}&receiptCode=${receiptCode}&schoolName=${schoolName}&name=${name}`,
     );
     return data;
   };
