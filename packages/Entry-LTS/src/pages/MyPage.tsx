@@ -179,7 +179,7 @@ const MyPage = () => {
                 {isPdfDownloadLoading ? '원서 다운로드 중...' : '원서 다운로드'}
               </Button>
               <Button
-                disabled={true && currentDate < secondAnnouncementDate}
+                disabled={isLoading || currentDate < secondAnnouncementDate}
                 onClick={getSecondRound}
               >
                 발표 결과 확인
@@ -190,7 +190,7 @@ const MyPage = () => {
                 {isPdfDownloadLoading ? '원서 다운로드 중...' : '원서 다운로드'}
               </Button>
               <Button
-                disabled={true && currentDate < secondAnnouncementDate}
+                disabled={isLoading || currentDate < secondAnnouncementDate}
                 onClick={getSecondRound}
               >
                 발표 결과 확인
