@@ -38,59 +38,41 @@ const GradePage = () => {
 
   return (
     <_Container>
-      <Mobile>
-        <div style={{ padding: '20px' }}>
-          <Text margin={['top', 300]} color={'black700'} size={'title2'}>
-            성적 산출 기능은 모바일에서
-            <br />
-            지원하지 않습니다.
-          </Text>
-        </div>
-      </Mobile>
-      <Pc>
-        <_Wrapper>
-          <Text color="black900" size="header1">
-            성적 산출 유형 선택
-          </Text>
-          <_Line authorityColor={authorityColor} />
-          <_Cards>
-            {list.map((res, index) => {
-              const { icon, text, title, type } = res;
-              return (
-                <_Card key={index}>
-                  <_TitleBox>
-                    <_IconBackground authorityColor={authorityColor}>
-                      <Icon icon={icon} size={46} />
-                    </_IconBackground>
-                    <_Title>
-                      <Text color="black900" size="title2">
-                        {title}
-                      </Text>
-                      <Text align="center" color="black600" size="body2">
-                        {text}
-                      </Text>
-                    </_Title>
-                  </_TitleBox>
-                  <Button
-                    onClick={() => {
-                      navigate(`/gradeProgram?gradeStatus=${type}`);
-                    }}
-                    color={authorityColor}
-                    kind="rounded"
-                  >
-                    선택
-                  </Button>
-                </_Card>
-              );
-            })}
-          </_Cards>
-          {/* <Text color="black500" size="body3" style={{ marginTop: '10%', maxWidth: 750, width: '100%' }}>
-            * 상급학교조기입학대상자, 중학교 졸업학력 검정고시 합격자 등 3학년 1학기의 교과성적이 없는 경우 2025년도
-            대전광역시 고등학교 입학전형 기본계획에 의거 입학전형위원회에서 결정하여 반영할 예정이므로 성적을 산출할 수
-            없습니다.
-          </Text> */}
-        </_Wrapper>
-      </Pc>
+      <_Wrapper>
+        <Text color="black900" size="header1">
+          성적 산출 유형 선택
+        </Text>
+        <_Line authorityColor={authorityColor} />
+        <_Cards>
+          {list.map((res, index) => {
+            const { icon, text, title, type } = res;
+            return (
+              <_Card key={index} index={index}>
+                <_TitleBox>
+                  <_IconBackground authorityColor={authorityColor}>
+                    <Icon icon={icon} size={46} />
+                  </_IconBackground>
+                  <_Title>
+                    <Text color="black900" size="title2">
+                      {title}
+                    </Text>
+                    <_Text>{text}</_Text>
+                  </_Title>
+                </_TitleBox>
+                <Button
+                  onClick={() => {
+                    navigate(`/gradeProgram?gradeStatus=${type}`);
+                  }}
+                  color={authorityColor}
+                  kind="rounded"
+                >
+                  선택
+                </Button>
+              </_Card>
+            );
+          })}
+        </_Cards>
+      </_Wrapper>
     </_Container>
   );
 };
@@ -101,15 +83,16 @@ const _Container = styled.div`
   display: flex;
   justify-content: center;
   width: 100vw;
-  height: 100vh;
 `;
 
 const _Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 60rem;
+  max-width: 60rem;
+  width: 100%;
   margin-top: 10rem;
+  transition: all 0.5s ease-in;
 `;
 
 const _Line = styled.div<{ authorityColor: AuthorityColorType }>`
@@ -124,10 +107,15 @@ const _Cards = styled.div`
   display: flex;
   justify-content: center;
   width: 100%;
-  gap: 2rem;
+  gap: 20px;
+  padding: 24px;
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: center;
+  }
 `;
 
-const _Card = styled.div`
+const _Card = styled.div<{ index: number }>`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -135,10 +123,33 @@ const _Card = styled.div`
   max-width: 344px;
   width: 100%;
   height: 440px;
-  padding: 50px 20px;
+  padding: 24px 20px;
   background: #ffffff;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
   border-radius: 10px;
+  gap: 20px;
+  opacity: 0;
+  transform: translateY(50px);
+  animation: fadeUp 0.4s ease-in-out forwards;
+  animation-delay: ${({ index }) => index * 0.2}s;
+
+  @keyframes fadeUp {
+    from {
+      opacity: 0;
+      transform: translateY(50px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @media (max-width: 768px) {
+    flex-direction: row;
+    align-items: center;
+    height: auto;
+    max-width: 800px;
+  }
 `;
 
 const _IconBackground = styled.div<{ authorityColor: AuthorityColorType }>`
@@ -148,7 +159,7 @@ const _IconBackground = styled.div<{ authorityColor: AuthorityColorType }>`
   background-color: ${({ authorityColor }) =>
     theme.color[`${authorityColor}500`]};
   border: 1px solid ${theme.color.black100};
-  width: 90px;
+  min-width: 90px;
   height: 90px;
   border-radius: 50px;
   box-sizing: border-box;
@@ -159,6 +170,11 @@ const _TitleBox = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 40px;
+  @media (max-width: 768px) {
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+  }
 `;
 
 const _Title = styled.div`
@@ -166,4 +182,17 @@ const _Title = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 14px;
+  @media (max-width: 768px) {
+    align-items: flex-start;
+  }
+`;
+
+const _Text = styled.p`
+  text-align: center;
+  color: #5f5f5f;
+  font-size: 18px;
+  font-weight: 400;
+  @media (max-width: 768px) {
+    text-align: start;
+  }
 `;
