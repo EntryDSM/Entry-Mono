@@ -18,7 +18,7 @@ export interface IApplicationListRequest {
 }
 
 export interface IApplicationListResponse {
-  // total_elements: number;
+  totalSize: number;
   hasNextPage: boolean;
   applicants: IApplicant[];
 }

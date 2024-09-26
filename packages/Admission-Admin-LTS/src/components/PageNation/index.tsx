@@ -3,12 +3,18 @@ import styled from '@emotion/styled';
 import React, { useState } from 'react';
 
 interface PageNationProps {
+  totalPage: number;
   hasNextPage: boolean;
   current: number;
   setCurrent: React.Dispatch<React.SetStateAction<number>>;
 }
 
-const PageNation = ({ hasNextPage, current, setCurrent }: PageNationProps) => {
+const PageNation = ({
+  hasNextPage,
+  current,
+  setCurrent,
+  totalPage,
+}: PageNationProps) => {
   const [hover, setHover] = useState({ left: false, right: false });
 
   return (
@@ -32,7 +38,7 @@ const PageNation = ({ hasNextPage, current, setCurrent }: PageNationProps) => {
           size={24}
         />
       </_Button>
-      {[...Array(2)].map((_, idx) => (
+      {[...Array(totalPage)].map((_, idx) => (
         <_Button clicked={current === idx} onClick={() => setCurrent(idx)}>
           {idx + 1}
         </_Button>
