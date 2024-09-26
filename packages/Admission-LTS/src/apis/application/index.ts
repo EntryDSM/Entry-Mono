@@ -13,6 +13,7 @@ import {
   IPatchUserPlan,
   IPatchUserType,
   IUserMiddleSchool,
+  IGetDocumentInfo,
 } from './types';
 import { IPatchUserMiddleSchool } from '@/interface/type';
 
@@ -223,4 +224,13 @@ export const SubmitPdf = () => {
       Toast(message, { type: 'error' });
     },
   });
+};
+
+/** 지원자 정보 조회 */
+export const getDocumentInfo = () => {
+  const response = async () => {
+    const { data } = await instance.get<IGetDocumentInfo>(`${router}/status`);
+    return data;
+  };
+  return useQuery(['getDocument'], response);
 };
