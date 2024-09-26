@@ -11,10 +11,13 @@ EntryDesignSystem은 EntryDSM안에서의 컴포넌트 일관성을 위해 탄�
 `React`, `typescript`,`@storybook`, `@emotion`, `react-toastify`, `eslint`, `prettier`, `webpack`, `chromatic`
 
 ## 설치하기
+
 > 아래 명령어로 설치하세요.
+
 ```
 npm install @team-entry/design-system
 ```
+
 ```
 yarn add @team-entry/design-system
 ```

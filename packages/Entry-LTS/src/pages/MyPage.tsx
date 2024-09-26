@@ -28,13 +28,15 @@ import {
 import { useEffect, useState } from 'react';
 
 const MyPage = () => {
+  const [isLogin, _] = useState(!!getCookies('accessToken'));
+  const authority = getCookies('authority');
   const { Modal, open, close, setModalState, modalState } = useModal();
   const { mutate: deleteUserInfo } = DeleteUserInfo();
   const { data } = ApplyInfoStatus();
   const { data: documentInfo } = getDocumentInfo();
+  const { data: userInfo } = getUserInfo(isLogin && authority != 'admin');
   const { mutate: deleteUserPdf } = DeleteUserPdf(data?.receipt_code);
   const { onDownloadPdf, isLoading: isPdfDownloadLoading } = DownloadPdf();
-  const { deleteUser, isSuccess: userDeleteSuccess } = DeleteUser();
   const [isLogout, setIsLogout] = useState<boolean>();
 
   const navigate = useNavigate();
@@ -111,10 +113,10 @@ const MyPage = () => {
           <_UserInfo>
             <Pc>
               <Text color="realBlack" size="header1">
-                {documentInfo?.name} 지원자님
+                {userInfo?.name} 지원자님
               </Text>
               <Text color="black500" size="body1">
-                {documentInfo?.phoneNumber.replace(
+                {userInfo?.phoneNumber.replace(
                   /^(\d{2,3})(\d{3,4})(\d{4})$/,
                   `$1-$2-$3`,
                 )}
@@ -122,10 +124,10 @@ const MyPage = () => {
             </Pc>
             <Mobile>
               <Text color="realBlack" size="body3">
-                {documentInfo?.name} 지원자님
+                {userInfo?.name} 지원자님
               </Text>
               <Text color="black500" size="body3">
-                {documentInfo?.phoneNumber.replace(
+                {userInfo?.phoneNumber.replace(
                   /^(\d{2,3})(\d{3,4})(\d{4})$/,
                   `$1-$2-$3`,
                 )}
@@ -204,7 +206,7 @@ const MyPage = () => {
                 {isPdfDownloadLoading ? '원서 다운로드 중...' : '원서 다운로드'}
               </Button>
               <Button
-                disabled={currentDate < secondAnnouncementDate}
+                disabled={isLoading || currentDate < secondAnnouncementDate}
                 onClick={getSecondRound}
               >
                 발표 결과 확인
@@ -215,7 +217,7 @@ const MyPage = () => {
                 {isPdfDownloadLoading ? '원서 다운로드 중...' : '원서 다운로드'}
               </Button>
               <Button
-                disabled={currentDate < secondAnnouncementDate}
+                disabled={isLoading || currentDate < secondAnnouncementDate}
                 onClick={getSecondRound}
               >
                 발표 결과 확인

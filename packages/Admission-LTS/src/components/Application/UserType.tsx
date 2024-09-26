@@ -3,6 +3,7 @@ import styled from '@emotion/styled';
 import { Radio, theme, Dropdown, Input } from '@entrydsm/design-system';
 import {
   EditUserType,
+  getDocumentInfo,
   GetUserType,
   PatchGraduationType,
 } from '@/apis/application';
@@ -14,6 +15,7 @@ import { useCombineMutation } from '@/hooks/useCombineMutation';
 import { generateNumberArray } from '@/utils/GenerateNumberArray';
 import { ICurrnettype, IUserTypeParams } from '@/interface/type';
 import { EducationalStatus } from '@/apis/application/types';
+import { MAIN_URL } from '@/constant/env';
 
 interface ICurrentTypePageProps extends ICurrnettype {
   handlerFunction: () => void;
@@ -40,14 +42,22 @@ const UserType = ({
   });
 
   const { data, isLoading } = GetUserType();
+  const { data: userData, isLoading: userDataLoading } = getDocumentInfo();
   const { mutateAsync: editUserType } = EditUserType();
   const { mutateAsync: editGraduationType } = PatchGraduationType();
 
   useEffect(() => {
-    if (!isLoading) {
+    if (!isLoading && !userDataLoading) {
       handlerFunction();
     }
-  }, [isLoading]);
+  }, [isLoading, userDataLoading]);
+
+  useEffect(() => {
+    if (userData && userData.isSubmitted) {
+      alert('최종제출이 완료된 상태입니다.');
+      window.location.href = `${MAIN_URL}`;
+    }
+  }, [userData]);
 
   useEffect(() => {
     data &&

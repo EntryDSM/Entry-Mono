@@ -12,13 +12,20 @@ import { useAuthority } from '@/hooks/useAuthority';
 import { getCookies } from '@/utils/cookies';
 import { getDocumentInfo } from '@/utils/api/application';
 import { useEffect, useState } from 'react';
+import { useModal } from '@/hooks/useModal';
 
 const Main2 = () => {
   const { data } = getSchedule();
   const { isAdmin, authorityColor } = useAuthority();
   const accessToken = getCookies('accessToken');
   const [isLogin, setIsLogin] = useState(!!getCookies('accessToken'));
-  const { data: documentInfo } = getDocumentInfo(isLogin);
+  const { data: documentInfo, isLoading: documentInfoLoading } =
+    getDocumentInfo(isLogin);
+  const {
+    Modal,
+    isOpen: isModalOpened,
+    close,
+  } = useModal({ defaultState: true });
 
   const navigate = useNavigate();
 
@@ -35,23 +42,94 @@ const Main2 = () => {
   }, [getCookies('accessToken')]);
 
   return (
-    <_Wrapper>
-      <_TopContainerWrapper>
-        <_TopContainer>
-          <_Box>
-            <_Title>
-              <span style={{ color: '#FF9900' }}>대덕소프트웨어마이스터고</span>
-              는 지금,
+    <>
+      {isModalOpened && (
+        <Modal>
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+          >
+            <div
+              style={{
+                fontSize: '24px',
+                marginBottom: '16px',
+                textAlign: 'center',
+              }}
+            >
+              모의 접수에 참여해 주셔서 감사합니다.
+            </div>
+            <div
+              style={{
+                fontSize: '20px',
+                marginBottom: '24px',
+                textAlign: 'center',
+              }}
+            >
+              접수 과정에서 문제가 발생하면
               <br />
-              IT 업계를 선도할 미래 인재를 모집하고 있어요
-            </_Title>
-            <_Line />
-            <_SubmitBox>
+              아래 번호로 전화주시기 바랍니다.
+              <br />
+              042-866-8811, 8822, 8814
+            </div>
+            <Button onClick={close}>닫기</Button>
+          </div>
+        </Modal>
+      )}
+      <_Wrapper>
+        <_TopContainerWrapper>
+          <_TopContainer>
+            <_Box>
+              <_Title>
+                <span style={{ color: '#FF9900' }}>
+                  대덕소프트웨어마이스터고
+                </span>
+                는 지금,
+                <br />
+                IT 업계를 선도할 미래 인재를 모집하고 있어요
+              </_Title>
+              <_Line />
+              <_SubmitBox>
+                <Text size={'header1'} color={'realWhite'}>
+                  {documentInfo?.isSubmitted
+                    ? '최종제출이 완료된 상태입니다 (현재 제출한 원서는 9월 27일 이후 삭제됩니다)'
+                    : scheduleStatusCalculater(data?.currentStatus)}
+                </Text>
+                <div style={{ width: '240px' }}>
+                  <Button
+                    color={authorityColor}
+                    isBig={true}
+                    onClick={() => {
+                      if (!isOpen()) {
+                        window.location.href = `${APPLY_URL}`;
+                      }
+                    }}
+                    disabled={
+                      isOpen() ||
+                      isAdmin ||
+                      !accessToken ||
+                      documentInfo?.isSubmitted ||
+                      documentInfoLoading
+                    }
+                  >
+                    지원하기
+                  </Button>
+                </div>
+              </_SubmitBox>
+            </_Box>
+            <_SubmitMobileBox>
               <Text size={'header1'} color={'realWhite'}>
                 {documentInfo?.isSubmitted
                   ? '최종제출이 완료된 상태입니다'
                   : scheduleStatusCalculater(data?.currentStatus)}
               </Text>
+            </_SubmitMobileBox>
+
+            <Schedule />
+            <_MobileButtonBox>
               <Button
                 color={authorityColor}
                 isBig={true}
@@ -69,42 +147,17 @@ const Main2 = () => {
               >
                 지원하기
               </Button>
-            </_SubmitBox>
-          </_Box>
-          <_SubmitMobileBox>
-            <Text size={'header1'} color={'realWhite'}>
-              {documentInfo?.isSubmitted
-                ? '최종제출이 완료된 상태입니다'
-                : scheduleStatusCalculater(data?.currentStatus)}
-            </Text>
-          </_SubmitMobileBox>
-
-          <Schedule />
-          <_MobileButtonBox>
-            <Button
-              color={authorityColor}
-              isBig={true}
-              onClick={() => {
-                if (!isOpen()) {
-                  window.location.href = `${APPLY_URL}`;
-                }
-              }}
-              disabled={
-                isOpen() || isAdmin || !accessToken || documentInfo?.isSubmitted
-              }
-            >
-              지원하기
-            </Button>
-          </_MobileButtonBox>
-        </_TopContainer>
-      </_TopContainerWrapper>
-      <_FaqWrapper>
-        <_MainContainer>
-          <ApplyandNotice />
-          <Faq />
-        </_MainContainer>
-      </_FaqWrapper>
-    </_Wrapper>
+            </_MobileButtonBox>
+          </_TopContainer>
+        </_TopContainerWrapper>
+        <_FaqWrapper>
+          <_MainContainer>
+            <ApplyandNotice />
+            <Faq />
+          </_MainContainer>
+        </_FaqWrapper>
+      </_Wrapper>
+    </>
   );
 };
 
