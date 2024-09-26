@@ -44,7 +44,7 @@ const headText = [
 const ApplicantsList = () => {
   const [filter, setFilter] = useState<IApplicationListRequest>({
     size: 10,
-    offset: 0,
+    page: 0,
     isDaejeon: false,
     isNationwide: false,
     isSubmitted: false,
@@ -280,7 +280,7 @@ const ApplicantsList = () => {
       </SideBar>
       {!isLoading && (
         <PageNation
-          pageNum={application_list?.total_pages || 0}
+          hasNextPage={application_list?.hasNextPage || false}
           current={page}
           setCurrent={setPage}
         />

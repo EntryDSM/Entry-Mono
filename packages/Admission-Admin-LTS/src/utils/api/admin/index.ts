@@ -17,7 +17,7 @@ const router = 'admin';
 /** 지원자 목록 */
 export const getApplicationList = ({
   size,
-  offset,
+  page,
   isDaejeon,
   isNationwide,
   isSubmitted,
@@ -33,7 +33,7 @@ export const getApplicationList = ({
 }: IApplicationListRequest) => {
   const response = async () => {
     const { data } = await instance.get(
-      `${router}/application/applicants?size=${size}&offset=${offset}&isDaejeon=${isDaejeon}&isNationwide=${isNationwide}&isSubmitted=${isSubmitted}&isNotSubmitted=${isNotSubmitted}&inOfHeadcount=${inOfHeadcount}&outOfHeadcount=${outOfHeadcount}&isCommon=${isCommon}&isMeister=${isMeister}&isSocial=${isSocial}&receiptCode=${receiptCode}&schoolName=${schoolName}&name=${name}`,
+      `${router}/application/applicants?size=${size}&page=${page}&isDaejeon=${isDaejeon}&isNationwide=${isNationwide}&isSubmitted=${isSubmitted}&isNotSubmitted=${isNotSubmitted}&inOfHeadcount=${inOfHeadcount}&outOfHeadcount=${outOfHeadcount}&isCommon=${isCommon}&isMeister=${isMeister}&isSocial=${isSocial}&receiptCode=${receiptCode}&schoolName=${schoolName}&name=${name}`,
     );
     return data;
   };
@@ -41,7 +41,7 @@ export const getApplicationList = ({
     [
       'applicationList',
       size,
-      offset,
+      page,
       isDaejeon,
       isNationwide,
       isSubmitted,
