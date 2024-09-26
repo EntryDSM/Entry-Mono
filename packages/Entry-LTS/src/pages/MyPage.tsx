@@ -38,6 +38,7 @@ const MyPage = () => {
   const { mutate: deleteUserPdf } = DeleteUserPdf(data?.receipt_code);
   const { onDownloadPdf, isLoading: isPdfDownloadLoading } = DownloadPdf();
   const [isLogout, setIsLogout] = useState<boolean>();
+  const { deleteUser, isSuccess: userDeleteSuccess } = DeleteUser();
 
   const navigate = useNavigate();
 
