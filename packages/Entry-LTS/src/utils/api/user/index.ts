@@ -7,18 +7,24 @@ import { MAIN_URL } from '@/constant/env';
 const router = 'user';
 
 export const ReissueToken = async (refreshToken: string) => {
-  const response = await instance.put<IAuthorizationResponse>(`${router}/auth`, null, {
-    headers: {
-      'X-Refresh-Token': `${refreshToken}`,
+  const response = await instance.put<IAuthorizationResponse>(
+    `${router}/auth`,
+    null,
+    {
+      headers: {
+        'X-Refresh-Token': `${refreshToken}`,
+      },
     },
-  });
+  );
 
   return response.data;
 };
 
 export const ApplyInfoStatus = (isLogin?: boolean) => {
   const response = async () => {
-    const { data } = await instance.get<IApplyInfoStatusResponse>(`${router}/info`);
+    const { data } = await instance.get<IApplyInfoStatusResponse>(
+      `${router}/info`,
+    );
     return data;
   };
   return useQuery(['applyInfoStatus'], response, {
@@ -46,6 +52,28 @@ export const DeleteUserPdf = (param: number) => {
     await instance.delete(`${router + '/' + param}`);
   };
   return useMutation(response, {
-    onSuccess: () => Toast('원서제출 취소에 성공하였습니다.', { type: 'success' }),
+    onSuccess: () =>
+      Toast('원서제출 취소에 성공하였습니다.', { type: 'success' }),
   });
+};
+
+export const DeleteUser = () => {
+  const response = async () => {
+    await instance.delete(`${router}`);
+  };
+
+  const mutation = useMutation(response, {
+    onError: () => {
+      Toast('회원탈퇴에 실패하였습니다.', { type: 'error' });
+    },
+    onSuccess: () => {
+      Toast('회원탈퇴가 완료되었습니다.', { type: 'success' });
+    },
+  });
+
+  return {
+    deleteUser: mutation.mutate,
+    isLoading: mutation.isLoading,
+    isSuccess: mutation.isSuccess,
+  };
 };
