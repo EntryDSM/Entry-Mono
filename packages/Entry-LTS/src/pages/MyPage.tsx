@@ -6,6 +6,7 @@ import { useModal } from '@/hooks/useModal';
 import CancelModal from '@/components/Modal/CancelModal';
 import {
   ApplyInfoStatus,
+  DeleteUser,
   DeleteUserInfo,
   DeleteUserPdf,
 } from '@/utils/api/user';
@@ -18,8 +19,13 @@ import { Link, useNavigate } from 'react-router-dom';
 import DefaultModal from '@/components/Modal/DefaultModal';
 import { getSchedule } from '@/utils/api/schedule';
 import { getDocumentInfo, getUserInfo } from '@/utils/api/application';
-import { removeCookies, removeTokens, setCookies } from '@/utils/cookies';
-import { useState } from 'react';
+import {
+  getCookies,
+  removeCookies,
+  removeTokens,
+  setCookies,
+} from '@/utils/cookies';
+import { useEffect, useState } from 'react';
 
 const MyPage = () => {
   const { Modal, open, close, setModalState, modalState } = useModal();
@@ -28,7 +34,7 @@ const MyPage = () => {
   const { data: documentInfo } = getDocumentInfo();
   const { mutate: deleteUserPdf } = DeleteUserPdf(data?.receipt_code);
   const { onDownloadPdf, isLoading: isPdfDownloadLoading } = DownloadPdf();
-
+  const { deleteUser, isSuccess: userDeleteSuccess } = DeleteUser();
   const [isLogout, setIsLogout] = useState<boolean>();
 
   const navigate = useNavigate();
@@ -82,6 +88,22 @@ const MyPage = () => {
     }
   };
 
+  useEffect(() => {
+    if (userDeleteSuccess) {
+      try {
+        removeTokens();
+        removeCookies('authority', {
+          path: '/',
+          secure: true,
+          sameSite: 'none',
+          domain: COOKIE_DOMAIN,
+        });
+      } finally {
+        navigate('/main');
+      }
+    }
+  }, [userDeleteSuccess]);
+
   return (
     <_Container>
       <_Wrapper>
@@ -127,6 +149,16 @@ const MyPage = () => {
               }}
             >
               로그아웃
+            </Button>
+            <Button
+              color="delete"
+              kind="contained"
+              onClick={() => {
+                setModalState('USER_DELETE');
+                open();
+              }}
+            >
+              회원탈퇴
             </Button>
             {modalState === 'LOGOUT' && (
               <Modal>
@@ -233,30 +265,33 @@ const MyPage = () => {
           })}
         </div> */}
       </_Wrapper>
-
-      {modalState === 'CANCEL_SUBMIT' && (
+      {modalState === 'USER_DELETE' && (
         <Modal>
-          <CancelModal
-            title="최종제출 취소"
-            subTitle="정말 최종제출을 취소하시겠습니까?"
-            button={<div style={{ width: 200 }}>최종제출 취소</div>}
+          <DefaultModal
+            color="error"
+            title="회원탈퇴"
+            titleSize="header2"
+            subTitle={
+              <>
+                <div style={{ color: 'red' }}>
+                  ⚠ 회원탈퇴 시에 모든 정보가 삭제됩니다
+                </div>
+                <div>
+                  <br />
+                  사용자 정보 및 제출된 원서 또한 삭제됩니다.
+                  <br />
+                  <br />
+                  '확인했습니다'를 입력하고 회원탈퇴 버튼을 눌러주세요.
+                </div>
+              </>
+            }
+            isInput={true}
+            button="회원탈퇴"
             onClick={() => {
               close();
-              deleteUserPdf();
+              deleteUser();
             }}
-          />
-        </Modal>
-      )}
-      {modalState === 'SIGN_OUT' && (
-        <Modal>
-          <CancelModal
-            title="회원 탈퇴"
-            subTitle="정말 탈퇴하시겠습니까?"
-            button={<div style={{ width: 200 }}>회원 탈퇴</div>}
-            onClick={() => {
-              close();
-              deleteUserInfo();
-            }}
+            isWarningStyle
           />
         </Modal>
       )}
