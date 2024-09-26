@@ -280,7 +280,7 @@ const ApplicantsList = () => {
       </SideBar>
       {!isLoading && (
         <PageNation
-          pageNum={application_list?.total_pages || 0}
+          hasNextPage={application_list?.hasNextPage || false}
           current={page}
           setCurrent={setPage}
         />

@@ -18,8 +18,8 @@ export interface IApplicationListRequest {
 }
 
 export interface IApplicationListResponse {
-  total_elements: number;
-  total_pages: number;
+  // total_elements: number;
+  hasNextPage: boolean;
   applicants: IApplicant[];
 }
 
