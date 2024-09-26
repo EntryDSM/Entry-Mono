@@ -7,11 +7,19 @@ interface ISelectGrade {
   title: string;
   gradesKey: keyof ISelectGradeElement;
   selectGradeElement: ISelectGradeElement;
-  setSelectGradeElement: React.Dispatch<React.SetStateAction<ISelectGradeElement>>;
+  setSelectGradeElement: React.Dispatch<
+    React.SetStateAction<ISelectGradeElement>
+  >;
   current: number;
 }
 
-const SelectGrade = ({ title, gradesKey, selectGradeElement, setSelectGradeElement, current }: ISelectGrade) => {
+const SelectGrade = ({
+  title,
+  gradesKey,
+  selectGradeElement,
+  setSelectGradeElement,
+  current,
+}: ISelectGrade) => {
   const onClick = (grade: GradeType) => {
     const oldArray = selectGradeElement[gradesKey];
     oldArray[current] = grade;
@@ -20,7 +28,7 @@ const SelectGrade = ({ title, gradesKey, selectGradeElement, setSelectGradeEleme
   return (
     <_Wrapper>
       <_Texts>
-        <Text color="black900" size="title1">
+        <Text style={{ whiteSpace: 'nowrap' }} color="black900" size="title1">
           {title}
         </Text>
       </_Texts>
@@ -33,6 +41,9 @@ const SelectGrade = ({ title, gradesKey, selectGradeElement, setSelectGradeEleme
             }}
             isClick={grade === selectGradeElement[gradesKey][current]}
           >
+            <_ClickButton
+              click={grade === selectGradeElement[gradesKey][current]}
+            />
             {grade}
           </_Button>
         ))}
@@ -47,18 +58,25 @@ const _Wrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 4.5rem;
   width: 100%;
+  gap: 48px;
   border-top: 1px solid ${theme.color.black100};
-  padding: 25px 10px;
+  padding: 12px 0;
   &:last-child {
     border-bottom: 1px solid ${theme.color.black100};
+  }
+  @media (max-width: 560px) {
+    flex-direction: column;
+    align-items: start;
+    gap: 20px;
   }
 `;
 
 const _Buttons = styled.div`
-  width: 60%;
   display: flex;
+  max-width: 36rem;
+  width: 100%;
+  gap: 16px;
   justify-content: space-between;
   align-items: center;
 `;
@@ -67,17 +85,30 @@ const _Button = styled.div<{ isClick?: boolean }>`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 2.8rem;
-  height: 2.8rem;
+  min-width: 2.8rem;
+  min-height: 2.8rem;
   border-radius: 50px;
   ${theme.font.title2};
   border: 1px solid ${theme.color.orange500};
-  color: ${({ isClick }) => (isClick ? theme.color.realWhite : theme.color.orange500)};
-  background-color: ${({ isClick }) => (isClick ? theme.color.orange500 : theme.color.realWhite)};
+  color: ${({ isClick }) =>
+    isClick ? theme.color.realWhite : theme.color.orange500};
+  /* background-color: ${({ isClick }) =>
+    isClick ? theme.color.orange500 : theme.color.realWhite}; */
   cursor: pointer;
 `;
 
 const _Texts = styled.div`
   display: flex;
   align-items: center;
+`;
+
+const _ClickButton = styled.div<{ click?: boolean }>`
+  position: absolute;
+  width: ${({ click }) => (click ? 2.8 : 0)}rem;
+  height: ${({ click }) => (click ? 2.8 : 0)}rem;
+  border-radius: 50px;
+  background-color: ${({ click }) =>
+    click ? theme.color.orange500 : theme.color.realWhite};
+  transition: all 0.1s ease-in;
+  z-index: -20;
 `;
