@@ -2,11 +2,12 @@ import { useMutation } from 'react-query';
 import { instance } from './axios';
 import { useModal } from '@/hooks/useModal';
 import { Button, Toast } from '@team-entry/design_system';
-import { setTokens } from '@/utils/cookies';
+import { setCookies, setTokens } from '@/utils/cookies';
 import { AuthResponse } from './login';
 import { SuccessIcon } from '@/assets/success';
 import { AxiosError } from 'axios';
 import { useNavigate } from 'react-router';
+import { COOKIE_DOMAIN } from '@/constant/env';
 
 export const useSignUp = (redirectURL: string) => {
   const { render } = useModal();
@@ -37,6 +38,12 @@ export const useSignUp = (redirectURL: string) => {
       },
       onSuccess: (res) => {
         setTokens(res.data.accessToken, res.data.refreshToken);
+        setCookies('authority', 'user', {
+          path: '/',
+          secure: true,
+          sameSite: 'none',
+          domain: COOKIE_DOMAIN,
+        });
         render({
           title: '회원가입',
           icon: <SuccessIcon />,
