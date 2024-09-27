@@ -95,7 +95,7 @@ const Main2 = () => {
               <_SubmitBox>
                 <Text size={'header1'} color={'realWhite'}>
                   {documentInfo?.isSubmitted
-                    ? '최종제출이 완료된 상태입니다 (현재 제출한 원서는 9월 28일 이후 삭제됩니다)'
+                    ? '최종제출이 완료된 상태입니다'
                     : scheduleStatusCalculater(data?.currentStatus)}
                 </Text>
                 <div style={{ width: '240px' }}>
@@ -123,7 +123,7 @@ const Main2 = () => {
             <_SubmitMobileBox>
               <Text size={'header1'} color={'realWhite'}>
                 {documentInfo?.isSubmitted
-                  ? '최종제출이 완료된 상태입니다 (현재 제출한 원서는 9월 28일 이후 삭제됩니다)'
+                  ? '최종제출이 완료된 상태입니다'
                   : scheduleStatusCalculater(data?.currentStatus)}
               </Text>
             </_SubmitMobileBox>
