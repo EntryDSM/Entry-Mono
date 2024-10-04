@@ -7,7 +7,7 @@ import { MAIN_URL } from '@/constant/env';
 import { useForm } from '@/hooks/useForm';
 import { isTruthValues } from '@/utils/isTruthValues';
 import styled from '@emotion/styled';
-import { Button, Input } from '@team-entry/design_system';
+import { Button, Input, Spinner } from '@team-entry/design_system';
 
 interface ILogin extends RedirectURL {
   isAdmin?: boolean;
@@ -19,8 +19,10 @@ export const Login = ({ redirectURL, isAdmin = false }: ILogin) => {
     password: '',
   });
 
-  const { mutate: userLogin } = useLogin(redirectURL);
-  const { mutate: adminLogin } = useAdminLogin();
+  const { mutate: userLogin, isLoading: isUserLoginLoading } =
+    useLogin(redirectURL);
+  const { mutate: adminLogin, isLoading: isAdminLoginLoading } =
+    useAdminLogin();
 
   return (
     <SubmitForm>
@@ -71,9 +73,20 @@ export const Login = ({ redirectURL, isAdmin = false }: ILogin) => {
           }
           margin={['top', 45]}
           color={isAdmin ? 'green' : 'orange'}
-          disabled={!isTruthValues([state.phoneNumber, state.password])}
+          disabled={
+            !isTruthValues([state.phoneNumber, state.password]) ||
+            isUserLoginLoading ||
+            isAdminLoginLoading
+          }
         >
           로그인
+          {(isUserLoginLoading || isAdminLoginLoading) && (
+            <Spinner
+              color={isAdmin ? 'green' : 'orange'}
+              size={18}
+              margin={['left', 20]}
+            />
+          )}
         </_Button>
         <AuthLinks isAdmin={isAdmin} />
         <_Button
