@@ -37,6 +37,19 @@ const Main2 = () => {
     return !(currentDate >= startDate && currentDate <= endDate);
   };
 
+  const finalMessage = () => {
+    const currentStatus = scheduleStatusCalculater(data?.currentStatus);
+
+    const message =
+      currentStatus === '지금은 원서 제출 기간입니다'
+        ? documentInfo?.isSubmitted
+          ? '최종제출이 완료된 상태입니다'
+          : currentStatus
+        : currentStatus;
+
+    return message;
+  };
+
   useEffect(() => {
     setIsLogin(!!getCookies('accessToken'));
   }, [getCookies('accessToken')]);
@@ -94,9 +107,7 @@ const Main2 = () => {
               <_Line />
               <_SubmitBox>
                 <Text size={'header1'} color={'realWhite'}>
-                  {documentInfo?.isSubmitted
-                    ? '최종제출이 완료된 상태입니다'
-                    : scheduleStatusCalculater(data?.currentStatus)}
+                  {finalMessage()}
                 </Text>
                 <div style={{ width: '240px' }}>
                   <Button
@@ -122,9 +133,7 @@ const Main2 = () => {
             </_Box>
             <_SubmitMobileBox>
               <Text size={'header1'} color={'realWhite'}>
-                {documentInfo?.isSubmitted
-                  ? '최종제출이 완료된 상태입니다'
-                  : scheduleStatusCalculater(data?.currentStatus)}
+                {finalMessage()}
               </Text>
             </_SubmitMobileBox>
 
