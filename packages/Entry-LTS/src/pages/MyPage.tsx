@@ -57,8 +57,24 @@ const MyPage = () => {
   // 발표일
   const { data: schedule, isLoading } = getSchedule();
 
-  const secondAnnouncementDate = new Date(schedule?.schedules[3]?.date ?? '');
-  const currentDate = new Date();
+  const disableDate = [
+    'NOT_APPLICATION_PERIOD',
+    'APPLICATION_PERIOD',
+    'BEFORE_FIRST_ANNOUNCEMENT',
+    'INTERVIEW',
+    'BEFORE_SECOND_ANNOUNCEMENT',
+  ];
+
+  const firstAnnouncementCheckDate = ['FIRST_ANNOUNCEMENT', 'BEFORE_INTERVIEW'];
+
+  const secondAnnouncementCheckDate = ['SECOND_ANNOUNCEMENT', 'END'];
+
+  const currentDate = schedule?.currentStatus;
+  // const currentDate2 = new Date(
+  //   schedule?.schedules.find(
+  //     (schedule) => schedule.type === 'FIRST_ANNOUNCEMENT',
+  //   ).date ?? '',
+  // );
 
   const handleLogout = async () => {
     console.log('로그아웃 시도');
@@ -207,8 +223,16 @@ const MyPage = () => {
                 {isPdfDownloadLoading ? '원서 다운로드 중...' : '원서 다운로드'}
               </Button>
               <Button
-                disabled={isLoading || currentDate < secondAnnouncementDate}
-                onClick={getSecondRound}
+                disabled={isLoading || disableDate.includes(currentDate)}
+                onClick={() => {
+                  firstAnnouncementCheckDate.includes(currentDate)
+                    ? getFirstRound()
+                    : secondAnnouncementCheckDate.includes(currentDate)
+                      ? getSecondRound()
+                      : alert(
+                          '오류가 일어났습니다.\n다시 시도해 보시고 만약 또 발생한다면\n학교에 문의해주세요.',
+                        );
+                }}
               >
                 발표 결과 확인
               </Button>
@@ -218,8 +242,16 @@ const MyPage = () => {
                 {isPdfDownloadLoading ? '원서 다운로드 중...' : '원서 다운로드'}
               </Button>
               <Button
-                disabled={isLoading || currentDate < secondAnnouncementDate}
-                onClick={getSecondRound}
+                disabled={isLoading || disableDate.includes(currentDate)}
+                onClick={() => {
+                  firstAnnouncementCheckDate.includes(currentDate)
+                    ? getFirstRound()
+                    : secondAnnouncementCheckDate.includes(currentDate)
+                      ? getSecondRound()
+                      : alert(
+                          '오류가 일어났습니다.\n다시 시도해 보시고 만약 또 발생한다면\n학교에 문의해주세요.',
+                        );
+                }}
               >
                 발표 결과 확인
               </Button>
@@ -298,37 +330,49 @@ const MyPage = () => {
           />
         </Modal>
       )}
-      {modalState === 'PASSED_ROUND' && (
-        // <Modal>
-        //   <DefaultModal
-        //     color="black900"
-        //     title="1차 발표 결과 확인"
-        //     subTitle={
-        //       <div style={{ lineHeight: '26px' }}>
-        //         축하드립니다!
-        //         <br />
-        //         <div style={{ textAlign: 'left' }}>
-        //           대덕소프트웨어마이스터고 <strong>1차 전형 합격</strong>입니다!
-        //           <br />
-        //           2차 전형 관련 안내 사항은 <strong>본교 홈페이지</strong>와
-        //           <br /> <strong>원서접수 사이트의 입학 공지사항</strong>을 확인하시기 바랍니다.
-        //         </div>
-        //       </div>
-        //     }
-        //     button="확인"
-        //     onClick={close}
-        //   />
-        // </Modal>
+      {modalState === 'PASSED_ROUND' &&
+      firstAnnouncementCheckDate.includes(currentDate) ? (
+        <Modal>
+          <DefaultModal
+            color="black900"
+            title="1차 발표 결과 확인"
+            subTitle={
+              <div style={{ lineHeight: '26px' }}>
+                축하드립니다.
+                <br />
+                <div style={{ textAlign: 'left' }}>
+                  2025학년도 대덕소프트웨어마이스터고
+                  <br />
+                  입학 <strong>1차 전형 결과 합격</strong>입니다!
+                  <br />
+                  2차 전형 관련 안내 사항은 <strong>본교 홈페이지</strong>와
+                  <br /> <strong>원서접수 사이트의 입학 공지사항</strong>을
+                  확인하시기 바랍니다.
+                </div>
+              </div>
+            }
+            button="확인"
+            onClick={close}
+          />
+        </Modal>
+      ) : (
         <Modal>
           <DefaultModal
             color="black900"
             title="2차 발표 결과 확인"
             subTitle={
               <div style={{ lineHeight: '26px' }}>
-                축하드립니다! <strong>최종합격</strong>하셨습니다!
+                축하드립니다! 2025학년도 대덕소프트웨어마이스터고
                 <br />
-                꼭, <strong>공지사항</strong>을 확인하고
-                <strong> 입학동의서</strong>를 제출해주세요!
+                신입생 입학전형 <strong>최종합격</strong>입니다!
+                <br />
+                예비 신입생 관련 안내 사항은 <strong>
+                  본교 홈페이지
+                </strong>와 <br />
+                <strong>원서접수 사이트의 입학 공지사항</strong>을 확인하시기
+                바랍니다.
+                {/* 꼭, <strong>공지사항</strong>을 확인하고
+                <strong> 입학동의서</strong>를 제출해주세요! */}
               </div>
             }
             button="확인"
@@ -336,32 +380,37 @@ const MyPage = () => {
           />
         </Modal>
       )}
-      {modalState === 'NOT_PASSED_ROUND' && (
-        // <Modal>
-        //   <DefaultModal
-        //     color="black900"
-        //     title="1차 발표 결과 확인"
-        //     subTitle={
-        //       <div style={{ lineHeight: '26px' }}>
-        //         지원해주셔서 감사합니다.
-        //         <br />
-        //         대덕소프트웨어마이스터고 1차 전형 결과 불합격입니다.
-        //       </div>
-
-        //     }
-        //     button="확인"
-        //     onClick={close}
-        //   />
-        // </Modal>
+      {modalState === 'NOT_PASSED_ROUND' &&
+      firstAnnouncementCheckDate.includes(currentDate) ? (
+        <Modal>
+          <DefaultModal
+            color="black900"
+            title="1차 발표 결과 확인"
+            subTitle={
+              <div style={{ lineHeight: '26px' }}>
+                지원해주셔서 감사합니다.
+                <br />
+                2025학년도 대덕소프트웨어마이스터고
+                <br />
+                1차 전형 결과 불합격입니다.
+              </div>
+            }
+            button="확인"
+            onClick={close}
+          />
+        </Modal>
+      ) : (
         <Modal>
           <DefaultModal
             color="black900"
             title="2차 발표 결과 확인"
             subTitle={
               <div style={{ lineHeight: '26px' }}>
-                2차 전형 결과 불합격입니다.
+                지원해주셔서 감사합니다.
                 <br />
-                본교에 지원에주셔서 감사합니다.
+                2025학년도 대덕소프트웨어마이스터고
+                <br />
+                2차 전형 결과 불합격입니다.
               </div>
             }
             button="확인"
