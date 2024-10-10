@@ -17,8 +17,6 @@ const PageNation = ({
 }: PageNationProps) => {
   const [hover, setHover] = useState({ left: false, right: false });
 
-  console.log(Array(totalPage), totalPage);
-
   return (
     <_Buttons>
       <_Button
