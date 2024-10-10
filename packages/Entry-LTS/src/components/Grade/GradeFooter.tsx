@@ -170,7 +170,8 @@ const _Footer = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-around;
-  width: 60rem;
+  max-width: 60rem;
+  width: 100%;
   margin-top: 45px;
   margin-bottom: 100px;
 `;
