@@ -47,7 +47,7 @@ const _Number = styled.p`
 const _FAQContainer = styled.div<T_Details>`
   background-color: ${({ isOpen }) => (isOpen ? '#fff1e9' : '#f8f8f8')};
   color: ${({ isOpen }) => (isOpen ? '#ff5f00' : '#969696')};
-  height: ${({ isOpen }) => (isOpen ? 180 : 80)}px;
+  height: ${({ isOpen }) => (isOpen ? 200 : 80)}px;
   font-size: 28px;
   font-weight: 800;
   display: flex;
