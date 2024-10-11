@@ -139,7 +139,7 @@ const Main2 = () => {
 
             <Schedule />
             <_MobileButtonBox>
-              <Button
+              {/* <Button
                 color={authorityColor}
                 isBig={true}
                 onClick={() => {
@@ -155,7 +155,7 @@ const Main2 = () => {
                 }
               >
                 지원하기
-              </Button>
+              </Button> */}
             </_MobileButtonBox>
           </_TopContainer>
         </_TopContainerWrapper>
