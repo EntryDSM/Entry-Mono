@@ -26,6 +26,7 @@ import {
   setCookies,
 } from '@/utils/cookies';
 import { useEffect, useState } from 'react';
+import { PageLoading } from '@/components/PageLoading';
 
 const MyPage = () => {
   const [isLogin, _] = useState(!!getCookies('accessToken'));
@@ -33,8 +34,11 @@ const MyPage = () => {
   const { Modal, open, close, setModalState, modalState } = useModal();
   const { mutate: deleteUserInfo } = DeleteUserInfo();
   const { data } = ApplyInfoStatus();
-  const { data: documentInfo } = getDocumentInfo();
-  const { data: userInfo } = getUserInfo(isLogin && authority != 'admin');
+  const { data: documentInfo, isLoading: documentInfoLoading } =
+    getDocumentInfo();
+  const { data: userInfo, isLoading: userInfoLoading } = getUserInfo(
+    isLogin && authority != 'admin',
+  );
   const { mutate: deleteUserPdf } = DeleteUserPdf(data?.receipt_code);
   const { onDownloadPdf, isLoading: isPdfDownloadLoading } = DownloadPdf();
   const [isLogout, setIsLogout] = useState<boolean>();
@@ -125,6 +129,9 @@ const MyPage = () => {
 
   return (
     <_Container>
+      <PageLoading
+        isVisible={documentInfoLoading || userInfoLoading || isLoading}
+      />
       <_Wrapper>
         <_User>
           <_UserInfo>

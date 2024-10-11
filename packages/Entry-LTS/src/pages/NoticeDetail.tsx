@@ -6,17 +6,19 @@ import { Mobile, Pc } from '..//hooks/useResponsive';
 import { useAuthority } from '@/hooks/useAuthority';
 import { DeleteNotice, GetNoticeDetail } from '@/utils/api/notice';
 import File from '@/components/File';
+import { PageLoading } from '@/components/PageLoading';
 
 const NoticeDetail = () => {
   const navigate = useNavigate();
   const { isAdmin } = useAuthority();
   const { id: noticeId } = useParams();
 
-  const { data } = GetNoticeDetail(noticeId);
+  const { data, isLoading } = GetNoticeDetail(noticeId);
   const { mutate: deleteNotice } = DeleteNotice();
 
   return (
     <_Container>
+      <PageLoading isVisible={isLoading} />
       <_Wrapper>
         <Pc>
           <Text color="black500" size="body1">
