@@ -347,15 +347,13 @@ const MyPage = () => {
                 <div style={{ lineHeight: '26px' }}>
                   축하드립니다.
                   <br />
-                  <div style={{ textAlign: 'left' }}>
-                    2025학년도 대덕소프트웨어마이스터고
-                    <br />
-                    입학 <strong>1차 전형 결과 합격</strong>입니다!
-                    <br />
-                    2차 전형 관련 안내 사항은 <strong>본교 홈페이지</strong>와
-                    <br /> <strong>원서접수 사이트의 입학 공지사항</strong>을
-                    확인하시기 바랍니다.
-                  </div>
+                  2025학년도 대덕소프트웨어마이스터고
+                  <br />
+                  입학 <strong>1차 전형 결과 합격</strong>입니다!
+                  <br />
+                  2차 전형 관련 안내 사항은 <strong>본교 홈페이지</strong>와
+                  <br /> <strong>원서접수 사이트의 입학 공지사항</strong>을
+                  확인하시기 바랍니다.
                 </div>
               }
               button="확인"
