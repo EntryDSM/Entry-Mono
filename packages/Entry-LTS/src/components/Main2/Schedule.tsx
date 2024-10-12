@@ -39,28 +39,29 @@ const Schedule = () => {
   return (
     <_Wrapper>
       <_ProgressProvider>
-        {schedules?.map((_, index) => {
+        {schedules?.map((schedule, index) => {
           return (
             <React.Fragment key={index}>
-              <_ScheduleCircle />
+              <_ScheduleCircle>
+                <_TextProvider>
+                  <div key={index}>
+                    {schedule.scheduleName}
+                    <span>{schedule.scheduleTime.split(' ')[0]}</span>
+                  </div>
+                </_TextProvider>
+              </_ScheduleCircle>
               {index !== schedules.length - 1 && <_ScheduleLine />}
             </React.Fragment>
           );
         })}
       </_ProgressProvider>
-      <_TextProvider>
+      {/* <_TextProvider>
         {schedules?.map((schedule, index) => {
           return (
-            <div key={index}>
-              {schedule.scheduleName}
-              <span>{schedule.scheduleTime.split(' ')[0]}</span>
-            </div>
+            
           );
         })}
-      </_TextProvider>
-      {/* 원서제출 기간은
-        <br />
-        10/14 ~ 10/17입니다. */}
+      </_TextProvider> */}
       <MobileSchedule />
     </_Wrapper>
   );
@@ -82,7 +83,7 @@ const _ProgressProvider = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-
+  padding-bottom: 80px;
   @media (max-width: 699px) {
     display: none;
   }
@@ -91,6 +92,10 @@ const _ProgressProvider = styled.div`
 const _TextProvider = styled.div`
   display: flex;
   justify-content: center;
+  top: 60px;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -50%);
   gap: 13.3vw;
   div {
     flex: none;
@@ -117,6 +122,7 @@ const _ScheduleCircle = styled.div`
   height: 20px;
   background-color: ${theme.color.orange800};
   border-radius: 50%;
+  position: relative;
 `;
 
 const _ScheduleLine = styled.div`
@@ -124,16 +130,4 @@ const _ScheduleLine = styled.div`
   height: 1px;
   background-color: ${theme.color.orange800};
   margin: 0 20px;
-`;
-
-const _MobileText = styled.div`
-  display: none;
-  color: white;
-  font-size: 24px;
-  font-weight: 700;
-  width: 100%;
-
-  @media (max-width: 699px) {
-    display: block;
-  }
 `;
