@@ -284,7 +284,7 @@ const _AnswerPart = styled.div`
   display: flex;
   align-items: center;
   background-color: ${theme.color.black50};
-  animation: ${fallingAnswer} 2s;
+  /* animation: ${fallingAnswer} 2s; */
   overflow: hidden;
 `;
 

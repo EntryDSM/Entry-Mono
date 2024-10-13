@@ -9,18 +9,21 @@ import { Link, useNavigate } from 'react-router-dom';
 import { GetAllNotice } from '@/utils/api/notice';
 import { INotice, NoticeType } from '@/utils/api/notice/types';
 
-const name = [
-  '1차 입학설명회',
-  '2차 입학설명회',
-  '3차 입학설명회',
-  '4차 입학설명회',
+const schoolInfoSession = [
+  { title: '1차 입학설명회', date: '2024.05.11', url: '' },
+  {
+    title: '2차 입학설명회',
+    date: '2024.07.13',
+    url: 'https://www.youtube.com/watch?v=frqGg4d7fXk',
+  },
+  {
+    title: '3차 입학설명회',
+    date: '2024.08.24',
+    url: 'https://www.youtube.com/watch?v=th-ZWFYhsVg',
+  },
+  { title: '4차 입학설명회', date: '2024.09.28', url: '' },
 ];
-const dates = ['2024.05.11', '2024.07.13', '2024.08.24', '2024.09.28'];
-const urls = [
-  '',
-  'https://www.youtube.com/watch?v=frqGg4d7fXk',
-  'https://www.youtube.com/watch?v=th-ZWFYhsVg',
-];
+
 const BriefingSessionLink =
   'https://docs.google.com/forms/d/e/1FAIpQLSdCH6JcgX9vpDQAnvwEjkEdAtOTwJ4w7KlXIke3wl5uP8vARA/viewform';
 
@@ -36,8 +39,8 @@ const ApplyandNotice = () => {
   useEffect(() => {
     let latestIndex: number = 0;
     const today = new Date();
-    for (let i = 0; i < dates.length; i++) {
-      const noticeDate = new Date(dates[i]);
+    for (let i = 0; i < schoolInfoSession.length; i++) {
+      const noticeDate = new Date(schoolInfoSession[i].date);
       if (noticeDate < today) {
         latestIndex = i;
       } else {
@@ -86,15 +89,17 @@ const ApplyandNotice = () => {
           </_ApplyButton>
         ) : latestNoticeIndex + 1 > current ? (
           <>
-            {urls[current] && urls[current] !== '' && (
-              <_VideoButton
-                onClick={() => {
-                  if (urls[current]) window.open(urls[current]);
-                }}
-              >
-                <_Img src={Youtube} />
-              </_VideoButton>
-            )}
+            {schoolInfoSession[current].url &&
+              schoolInfoSession[current].url !== '' && (
+                <_VideoButton
+                  onClick={() => {
+                    if (schoolInfoSession[current].url)
+                      window.open(schoolInfoSession[current].url);
+                  }}
+                >
+                  <_Img src={Youtube} />
+                </_VideoButton>
+              )}
           </>
         ) : (
           <></>
@@ -141,11 +146,11 @@ const ApplyandNotice = () => {
             />
           </_LineBox>
           <_DateContainer>
-            {name.map((i, j) => (
+            {schoolInfoSession.map(({ title, date }, j) => (
               <SessionBox
                 key={j}
-                date={dates[j]}
-                sessionName={i}
+                date={date}
+                sessionName={title}
                 current={j}
                 even={true}
               />
@@ -276,7 +281,7 @@ const _ApplyContainer = styled.div`
   flex-direction: column;
   gap: 36px;
   width: 100%;
-  max-width: 480px;
+  max-width: 80%;
 `;
 
 const _NoticeContainer = styled.div`

@@ -284,7 +284,7 @@ const Header = () => {
                         onMouseOver={() => setIsDropdownHover(true)}
                         onMouseLeave={() => setIsDropdownHover(false)}
                       >
-                        <Link to="/about" style={{ width: '100%' }}>
+                        <Link to="/about">
                           <_._DropdownMenu>
                             <Text
                               size="body1"
@@ -295,7 +295,7 @@ const Header = () => {
                             </Text>
                           </_._DropdownMenu>
                         </Link>
-                        <Link to="/" style={{ width: '100%' }}>
+                        <Link to="/">
                           <_._DropdownMenu>
                             <Text
                               size="body1"

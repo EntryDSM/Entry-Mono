@@ -10,7 +10,11 @@ interface IAllSelect {
   current: number;
 }
 
-const AllSelect = ({ selectGradeElement, setSelectGradeElement, current }: IAllSelect) => {
+const AllSelect = ({
+  selectGradeElement,
+  setSelectGradeElement,
+  current,
+}: IAllSelect) => {
   const [grade, setGrade] = useState<GradeType>('X');
 
   useEffect(() => {
@@ -41,7 +45,12 @@ const AllSelect = ({ selectGradeElement, setSelectGradeElement, current }: IAllS
             }}
             backgroundColor={isClick}
           >
-            <Text color={isClick ? 'realWhite' : 'black600'} size="body4">
+            <_ClickButton click={isClick} />
+            <Text
+              style={{ zIndex: 20 }}
+              color={isClick ? 'realWhite' : 'black600'}
+              size="body4"
+            >
               {item}
             </Text>
           </_Button>
@@ -67,6 +76,18 @@ const _Button = styled.div<{ backgroundColor?: boolean }>`
   border-radius: 50px;
   border: 1px solid ${theme.color.black600};
   margin-right: 15px;
-  background-color: ${({ backgroundColor }) => (backgroundColor ? theme.color.black600 : theme.color.realWhite)};
+  /* background-color: ${({ backgroundColor }) =>
+    backgroundColor ? theme.color.black600 : theme.color.realWhite}; */
   cursor: pointer;
+  position: relative;
+`;
+
+const _ClickButton = styled.div<{ click?: boolean }>`
+  position: absolute;
+  width: ${({ click }) => (click ? 30 : 0)}px;
+  height: ${({ click }) => (click ? 30 : 0)}px;
+  border-radius: 50px;
+  background-color: ${({ click }) =>
+    click ? theme.color.black600 : theme.color.realWhite};
+  transition: all 0.2s ease-in;
 `;

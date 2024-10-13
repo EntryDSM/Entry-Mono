@@ -30,12 +30,14 @@ export const Text = ({
     align,
     margin,
     width,
+    style,
     textOverflow,
     whiteSpace = 'pre-line',
     ...props
 }: TextProps) => {
     return (
         <Wrapper
+            style={style}
             display={display}
             color={color}
             className={className}

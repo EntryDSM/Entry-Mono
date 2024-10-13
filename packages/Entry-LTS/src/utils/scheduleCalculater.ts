@@ -23,7 +23,7 @@ export const scheduleStatusCalculater = (currentStatus: ScheduleStatusType) => {
       return '지금은 원서 제출 기간이 아닙니다';
     case 'APPLICATION_PERIOD':
       return '지금은 원서 제출 기간입니다';
-    // return '지금은 모의 원서 제출 기간입니다';
+      // return '지금은 모의 원서 제출 기간입니다';
     case 'FIRST_ANNOUNCEMENT':
     case 'BEFORE_INTERVIEW':
       return '지금은 1차 발표 기간입니다';

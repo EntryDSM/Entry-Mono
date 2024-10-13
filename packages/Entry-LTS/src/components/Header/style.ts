@@ -176,13 +176,14 @@ export const _DropdownMenu = styled.div`
   cursor: pointer;
   display: flex;
   align-items: center;
-  width: 100%;
+  justify-content: center;
+  width: 100px;
   background-color: ${theme.color.realWhite};
   z-index: 10;
   &:hover {
     background-color: ${theme.color.black200};
   }
-  padding: 10px 15px;
+  padding: 10px;
 `;
 
 export const _Line = styled.div`

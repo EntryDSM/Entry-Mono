@@ -294,13 +294,15 @@ const Container = styled.div`
   display: flex;
   justify-content: center;
   width: 100%;
+  padding: 24px;
 `;
 
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 64rem;
+  width: 100%;
+  max-width: 64rem;
   margin-top: 5rem;
 `;
 
@@ -324,6 +326,10 @@ const GradeWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  width: 100%;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding-bottom: 20px;
 `;
 
 const _Selects = styled.div`
