@@ -64,26 +64,6 @@ const Schedule = () => {
       </_TextProvider> */}
       <MobileSchedule />
     </_Wrapper>
-        {/*<_Wrap>
-      <_Wrapper>
-        <_ProgressProvider>
-          {schedules?.map((schedule, index) => {
-            return (
-              <React.Fragment key={index}>
-                <_ScheduleCircle>
-                  <_ScheduleTitle>
-                    {schedule.scheduleName}
-                    <_ScheduleDate>{schedule.scheduleTime}</_ScheduleDate>
-                  </_ScheduleTitle>
-                </_ScheduleCircle>
-                {index !== schedules.length - 1 && <_ScheduleLine />}
-              </React.Fragment>
-            );
-          })}
-        </_ProgressProvider>
-        <MobileSchedule />
-      </_Wrapper>
-    </_Wrap>*/}
   );
 };
 
@@ -99,13 +79,14 @@ const _Wrap = styled.div`
 
 const _Wrapper = styled.div`
   width: 80%;
-
+  max-width: 1180px;
   display: flex;
   flex-direction: column;
   gap: 20px;
 `;
 
 const _ProgressProvider = styled.div`
+  max-width: 1180px;
   display: flex;
   justify-content: center;
   align-items: center;
