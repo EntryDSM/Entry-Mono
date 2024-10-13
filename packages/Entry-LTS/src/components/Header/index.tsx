@@ -173,8 +173,9 @@ const Header = () => {
                     <>
                       <_._MenuElement
                         color="black"
-                        onClick={!isLoginOpen() && onClick}
-                        disabled={isLoginOpen()}
+                        onClick={onClick}
+                        // onClick={!isLoginOpen() && onClick}
+                        // disabled={isLoginOpen()}
                       >
                         로그인
                       </_._MenuElement>
@@ -417,7 +418,7 @@ const Header = () => {
                     color={authorityColor}
                     kind="contained"
                     onClick={onClick}
-                    disabled={isLoginOpen()}
+                    // disabled={isLoginOpen()}
                   >
                     로그인
                   </Button>
