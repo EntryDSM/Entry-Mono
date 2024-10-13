@@ -129,7 +129,6 @@ const _ScheduleCircle = styled.div`
   min-height: 20px;
   background-color: ${theme.color.orange800};
   border-radius: 50%;
-  position: relative;
 `;
 
 const _ScheduleLine = styled.div`
