@@ -38,7 +38,7 @@ const PageNation = ({
           size={24}
         />
       </_Button>
-      {[...Array(totalPage)].map((_, idx) => (
+      {Array(totalPage).map((_, idx) => (
         <_Button clicked={current === idx} onClick={() => setCurrent(idx)}>
           {idx + 1}
         </_Button>

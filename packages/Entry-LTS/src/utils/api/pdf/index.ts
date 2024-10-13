@@ -25,6 +25,7 @@ export const DownloadPdf = () => {
     async () => {
       const { data } = await instance.get(`${router}/preview`, {
         responseType: 'blob',
+        timeout: 0,
       });
       FileSaver.saveAs(data, `입학원서 미리보기.pdf`);
     },

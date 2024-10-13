@@ -11,6 +11,7 @@ import { AuthorityColorType, useAuthority } from '@/hooks/useAuthority';
 import { GetAllFaq } from '@/utils/api/faq';
 import PageNation from '@/components/PageNation';
 import { FaqType } from '@/utils/api/faq/types';
+import { PageLoading } from '@/components/PageLoading';
 
 const CustomerPage = () => {
   const [category, setCategory] = useState<FaqType>('');
@@ -50,6 +51,7 @@ const CustomerPage = () => {
 
   return (
     <_Container>
+      <PageLoading isVisible={faqLoading} />
       <_Wrapper>
         <BoardTitle
           // click={searchParams.get('type') === 'faq'}

@@ -6,6 +6,7 @@ import BoardTitle from '@/components/Board/BoardTitle';
 import { Link, useSearchParams } from 'react-router-dom';
 import { useAuthority } from '@/hooks/useAuthority';
 import { GetAllNotice } from '@/utils/api/notice';
+import { PageLoading } from '@/components/PageLoading';
 
 const NoticePage = () => {
   const { isAdmin } = useAuthority();
@@ -14,16 +15,21 @@ const NoticePage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const setType = (current: boolean) => {
-    current ? searchParams.set('type', 'GUIDE') : searchParams.set('type', 'NOTICE');
+    current
+      ? searchParams.set('type', 'GUIDE')
+      : searchParams.set('type', 'NOTICE');
     setCurrent(0);
 
     setSearchParams(searchParams);
   };
 
-  const { data } = GetAllNotice(searchParams.get('type') === 'GUIDE' ? 'GUIDE' : 'NOTICE');
+  const { data, isLoading } = GetAllNotice(
+    searchParams.get('type') === 'GUIDE' ? 'GUIDE' : 'NOTICE',
+  );
 
   return (
     <_Container>
+      <PageLoading isVisible={isLoading} />
       <_Wrapper>
         <BoardTitle
           click={searchParams.get('type') === 'GUIDE'}
@@ -36,7 +42,13 @@ const NoticePage = () => {
           isCustomer={false}
           link="write"
         />
-        <BoardHeader isNumber={true} isTopBorder={false} isComment={false} isWriteDay={true} isWriter={false} />
+        <BoardHeader
+          isNumber={true}
+          isTopBorder={false}
+          isComment={false}
+          isWriteDay={true}
+          isWriter={false}
+        />
         {data?.notices.map((notice, idx) => {
           return (
             <Link to={`/notice/${notice.id}`}>

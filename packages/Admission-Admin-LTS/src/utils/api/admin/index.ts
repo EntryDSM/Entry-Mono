@@ -33,7 +33,7 @@ export const getApplicationList = ({
 }: IApplicationListRequest) => {
   const response = async () => {
     const { data } = await instance.get(
-      `${router}/application/applicants?pageSize=${size}&offset=${1 + (page) * 10}&isDaejeon=${isDaejeon}&isNationwide=${isNationwide}&isSubmitted=${isSubmitted}&isNotSubmitted=${isNotSubmitted}&inOfHeadcount=${inOfHeadcount}&outOfHeadcount=${outOfHeadcount}&isCommon=${isCommon}&isMeister=${isMeister}&isSocial=${isSocial}&receiptCode=${receiptCode}&schoolName=${schoolName}&name=${name}`,
+      `${router}/application/applicants?pageSize=${size}&offset=${page * 10}&isDaejeon=${isDaejeon}&isNationwide=${isNationwide}&isSubmitted=${isSubmitted}&isNotSubmitted=${isNotSubmitted}&inOfHeadcount=${inOfHeadcount}&outOfHeadcount=${outOfHeadcount}&isCommon=${isCommon}&isMeister=${isMeister}&isSocial=${isSocial}&receiptCode=${receiptCode}&schoolName=${schoolName}&name=${name}`,
     );
     return data;
   };
@@ -133,6 +133,7 @@ export const getApplicationListExcel = () => {
       `${router}/application/excel/applicants`,
       {
         responseType: 'blob',
+        timeout: 0,
       },
     );
     return data;
@@ -185,7 +186,7 @@ export const getAdmissionTicket = () => {
       `${router}/application/excel/admission-ticket`,
       {
         responseType: 'blob',
-        timeout: 40000,
+        timeout: 0,
       },
     );
     return data;
@@ -213,6 +214,7 @@ export const getApplicantsCheck = () => {
       `${router}/application/excel/applicants/check-list`,
       {
         responseType: 'blob',
+        timeout: 0,
       },
     );
     return data;
@@ -245,6 +247,7 @@ export const getApplicantsCodeExecl = () => {
       `${router}/application/excel/applicants/code`,
       {
         responseType: 'blob',
+        timeout: 0,
       },
     );
     return data;

@@ -37,26 +37,33 @@ const Schedule = () => {
   }, [data]);
 
   return (
-    <_Wrap>
-      <_Wrapper>
-        <_ProgressProvider>
-          {schedules?.map((schedule, index) => {
-            return (
-              <React.Fragment key={index}>
-                <_ScheduleCircle>
-                  <_ScheduleTitle>
+    <_Wrapper>
+      <_ProgressProvider>
+        {schedules?.map((schedule, index) => {
+          return (
+            <React.Fragment key={index}>
+              <_ScheduleCircle>
+                <_TextProvider>
+                  <div key={index}>
                     {schedule.scheduleName}
-                    <_ScheduleDate>{schedule.scheduleTime}</_ScheduleDate>
-                  </_ScheduleTitle>
-                </_ScheduleCircle>
-                {index !== schedules.length - 1 && <_ScheduleLine />}
-              </React.Fragment>
-            );
-          })}
-        </_ProgressProvider>
-        <MobileSchedule />
-      </_Wrapper>
-    </_Wrap>
+                    <span>{schedule.scheduleTime.split(' ')[0]}</span>
+                  </div>
+                </_TextProvider>
+              </_ScheduleCircle>
+              {index !== schedules.length - 1 && <_ScheduleLine />}
+            </React.Fragment>
+          );
+        })}
+      </_ProgressProvider>
+      {/* <_TextProvider>
+        {schedules?.map((schedule, index) => {
+          return (
+            
+          );
+        })}
+      </_TextProvider> */}
+      <MobileSchedule />
+    </_Wrapper>
   );
 };
 
@@ -72,19 +79,45 @@ const _Wrap = styled.div`
 
 const _Wrapper = styled.div`
   width: 80%;
-
+  max-width: 1180px;
   display: flex;
   flex-direction: column;
   gap: 20px;
 `;
 
 const _ProgressProvider = styled.div`
+  max-width: 1180px;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
   padding-bottom: 80px;
+  @media (max-width: 699px) {
+    display: none;
+  }
+`;
 
+const _TextProvider = styled.div`
+  display: flex;
+  justify-content: center;
+  top: 60px;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  gap: 13.3vw;
+  div {
+    flex: none;
+    width: 104px;
+    color: white;
+    text-align: center;
+    word-wrap: nowrap;
+    font-size: 28px;
+    font-weight: 500;
+    span {
+      font-size: 18px;
+      font-weight: 500;
+      color: ${theme.color.black300};
+    }
+  }
   @media (max-width: 699px) {
     display: none;
   }
@@ -95,7 +128,7 @@ const _ScheduleCircle = styled.div`
   min-width: 20px;
   min-height: 20px;
   background-color: ${theme.color.orange800};
-  border-radius: 100px;
+  border-radius: 50%;
 `;
 
 const _ScheduleLine = styled.div`
