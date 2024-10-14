@@ -17,8 +17,6 @@ const PageNation = ({
 }: PageNationProps) => {
   const [hover, setHover] = useState({ left: false, right: false });
 
-  console.log(totalPage);
-
   return (
     <_Buttons>
       <_Button
@@ -40,11 +38,16 @@ const PageNation = ({
           size={24}
         />
       </_Button>
-      {Array({ length: totalPage }).map((_, idx) => (
-        <_Button clicked={current === idx} onClick={() => setCurrent(idx)}>
+      {[...Array(totalPage)].map((_, idx) => (
+        <_Button
+          key={idx}
+          clicked={current === idx}
+          onClick={() => setCurrent(idx)}
+        >
           {idx + 1}
         </_Button>
       ))}
+
       <_Button
         onMouseOver={() =>
           setHover((prev) => {
