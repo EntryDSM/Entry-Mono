@@ -6,7 +6,7 @@ import {
 } from '@/utils/translate';
 import styled from '@emotion/styled';
 import { Button, HStack, Text, theme, VStack } from '@entrydsm/design-system';
-import { useState } from 'react';
+import React, { useState } from 'react';
 
 interface IPropsType {
   receiptCode: string;
@@ -202,9 +202,19 @@ export const StudentInfo = ({ receiptCode }: IPropsType) => {
               wordBreak: 'break-all',
             }}
           >
-            {isIntroduce
-              ? applciation_detail?.evaluation.selfIntroduce
-              : applciation_detail?.evaluation.studyPlan}
+            {(isIntroduce
+              ? (applciation_detail?.evaluation.selfIntroduce ?? '')
+              : (applciation_detail?.evaluation.studyPlan ?? '')
+            )
+              .split('\n')
+              .map((str, index) => {
+                return (
+                  <React.Fragment key={index}>
+                    {str}
+                    <br />
+                  </React.Fragment>
+                );
+              })}
           </div>
         </VStack>
       ) : (
