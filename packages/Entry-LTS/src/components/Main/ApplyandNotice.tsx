@@ -137,6 +137,7 @@ const ApplyandNotice = () => {
           <_LineBox>
             <_Line />
             <_Point
+              opacity={latestNoticeIndex === null || latestNoticeIndex <= 3}
               style={{
                 top:
                   latestNoticeIndex !== null && latestNoticeIndex < 3
@@ -209,13 +210,14 @@ const _LineBox = styled.div`
   position: relative;
 `;
 
-const _Point = styled.div`
+const _Point = styled.div<{ opacity: boolean }>`
   position: absolute;
   background-color: #ffa26e;
   border-radius: 100%;
   width: 12px;
   height: 12px;
   outline: 6px solid #ffcdb1;
+  opacity: ${({ opacity }) => (opacity ? 0 : 100)}%;
 `;
 
 const _TitleBox = styled.div`

@@ -17,9 +17,8 @@ const MobileSchedule = () => {
   const today = new Date();
   const { data } = getSchedule();
 
-  const getNextScheduleIndex = () => {
-    if (!schedules) return -1;
-    return schedules.findIndex(({ startDate }) => startDate > today);
+  const isTodayInSchedule = (startDate: Date, endDate: Date) => {
+    return today >= startDate && today <= endDate;
   };
 
   useEffect(() => {
@@ -47,8 +46,12 @@ const MobileSchedule = () => {
     }
   }, [data]);
 
-  const isTodayInSchedule = (startDate: Date, endDate: Date) => {
-    return today >= startDate && today <= endDate;
+  const getCurrentOrNextScheduleIndex = () => {
+    if (!schedules) return -1;
+    return schedules.findIndex(
+      ({ startDate, endDate }) =>
+        isTodayInSchedule(startDate, endDate) || startDate > today,
+    );
   };
 
   return (
@@ -57,12 +60,14 @@ const MobileSchedule = () => {
         {schedules?.map((_, index) => {
           return (
             <React.Fragment key={index}>
-              <_CirclePingAnimation opacity={getNextScheduleIndex() >= index}>
-                <_Circle ping={getNextScheduleIndex() === index} />
+              <_CirclePingAnimation
+                opacity={getCurrentOrNextScheduleIndex() >= index}
+              >
+                <_Circle ping={getCurrentOrNextScheduleIndex() === index} />
               </_CirclePingAnimation>
 
               {index !== schedules.length - 1 && (
-                <_Line opacity={getNextScheduleIndex() > index} />
+                <_Line opacity={getCurrentOrNextScheduleIndex() > index} />
               )}
             </React.Fragment>
           );
@@ -72,11 +77,11 @@ const MobileSchedule = () => {
         {schedules?.map(
           ({ scheduleName, scheduleTime, startDate, endDate }, index) => {
             const isActive = isTodayInSchedule(startDate, endDate);
-            const nextScheduleIndex = getNextScheduleIndex();
+            const currentOrNextScheduleIndex = getCurrentOrNextScheduleIndex();
             return (
               <_Schedule
                 key={index}
-                opacity={isActive || nextScheduleIndex === index}
+                opacity={isActive || currentOrNextScheduleIndex === index}
               >
                 <Text color="realWhite" size="title1">
                   {scheduleName}
