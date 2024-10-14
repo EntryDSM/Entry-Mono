@@ -132,7 +132,7 @@ const Main2 = () => {
               </_SubmitBox>
             </_Box>
             <_SubmitMobileBox>
-              <Text size={'header1'} color={'realWhite'}>
+              <Text size={'header3'} color={'realWhite'}>
                 {finalMessage()}
               </Text>
             </_SubmitMobileBox>
