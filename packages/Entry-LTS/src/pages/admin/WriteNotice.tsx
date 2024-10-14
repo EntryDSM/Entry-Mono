@@ -41,7 +41,7 @@ const WriteNotice = () => {
   const { mutate: createNotice } = CreateNotice();
   const { mutate: updateNotice } = UpdateNotice(noticeId);
   const { mutate: uploadNoticeImage } = UploadNoticeImage();
-  const { mutate: uploadAttachFile } = UploadAttachFile();
+  const { mutate: uploadAttachFile } = UploadAttachFile(mode);
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
   const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
   const inputImageRef = useRef<HTMLInputElement>();
