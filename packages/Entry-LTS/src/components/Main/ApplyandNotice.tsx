@@ -132,32 +132,49 @@ const ApplyandNotice = () => {
   return (
     <_Wrapper>
       <_ApplyContainer>
-        <_Title>입학설명회 참석 예약</_Title>
-        <_ApplyBox>
-          <_LineBox>
-            <_Line />
-            <_Point
-              opacity={latestNoticeIndex === null || latestNoticeIndex <= 3}
-              style={{
-                top:
-                  latestNoticeIndex !== null && latestNoticeIndex < 3
-                    ? 48 + (latestNoticeIndex + 1) * 104
-                    : 48,
-              }}
-            />
-          </_LineBox>
-          <_DateContainer>
-            {schoolInfoSession.map(({ title, date }, j) => (
-              <SessionBox
-                key={j}
-                date={date}
-                sessionName={title}
-                current={j}
-                even={true}
+        <_Title>
+          {latestNoticeIndex === null || latestNoticeIndex >= 3
+            ? '원서 접수 시연 영상'
+            : '입학설명회 참석 예약'}
+        </_Title>
+        {latestNoticeIndex === null || latestNoticeIndex >= 3 ? (
+          <YoutubeIframe
+            width="448"
+            height="252"
+            src="https://www.youtube.com/embed/d70Snj2wTmY?si=1_TsnwVfsuOlRm3P"
+            title="YouTube video player"
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerPolicy="strict-origin-when-cross-origin"
+            allowFullScreen
+          />
+        ) : (
+          <_ApplyBox>
+            <_LineBox>
+              <_Line />
+              <_Point
+                opacity={latestNoticeIndex === null || latestNoticeIndex >= 3}
+                style={{
+                  top:
+                    latestNoticeIndex !== null && latestNoticeIndex < 3
+                      ? 48 + (latestNoticeIndex + 1) * 104
+                      : 48,
+                }}
               />
-            ))}
-          </_DateContainer>
-        </_ApplyBox>
+            </_LineBox>
+            <_DateContainer>
+              {schoolInfoSession.map(({ title, date }, j) => (
+                <SessionBox
+                  key={j}
+                  date={date}
+                  sessionName={title}
+                  current={j}
+                  even={true}
+                />
+              ))}
+            </_DateContainer>
+          </_ApplyBox>
+        )}
       </_ApplyContainer>
       <_NoticeContainer>
         <_Title2>
@@ -429,4 +446,11 @@ const _Notice = styled.div`
       transform: translateX(8px);
     }
   }
+`;
+
+const YoutubeIframe = styled.iframe`
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  aspect-ratio: 16/9;
 `;
