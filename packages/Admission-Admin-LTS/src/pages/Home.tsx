@@ -16,6 +16,7 @@ import {
 import { SpecialScoreCard } from '@/components/SpecialScoreCard';
 import { CommonScoreCard } from '@/components/CommonScoreCard';
 import { Link } from 'react-router-dom';
+import { useEffect } from 'react';
 
 interface IShotcutType {
   id: number;
@@ -26,7 +27,7 @@ interface IShotcutType {
 
 const Home = () => {
   const { data: staticsScoreData } = getStaticsScore();
-  const { data: staticCountsData } = getStaticCounts();
+  const { data: staticCountsData, refetch } = getStaticCounts();
 
   const everyCommon = staticCountsData?.[0].count ?? 0;
   const daejeonCommon = staticCountsData?.[1].count ?? 0;
@@ -52,6 +53,15 @@ const Home = () => {
     allMeister
   ).toFixed(2);
   const socialPercent = +((everySocial + daejeonSocial) / allSocial).toFixed(2);
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      refetch();
+    }, 60000);
+
+    return () => clearInterval(intervalId);
+  }, []);
+
   return (
     <_Wrapper>
       <Stack margin={[0, 'auto']}>
