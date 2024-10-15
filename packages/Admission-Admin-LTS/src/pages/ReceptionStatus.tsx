@@ -101,7 +101,7 @@ function ReceptionStatus() {
               }}
             >
               <Text color="black900" size="title3">
-                일반전형: {+(daejeonCommon / 25).toFixed(2)} : 1
+                일반전형: {+(daejeonCommon / 15).toFixed(2)} : 1
               </Text>
               <Text color="black900" size="title3">
                 {`( ${daejeonCommon}명 : 0명 )`}
@@ -151,7 +151,7 @@ function ReceptionStatus() {
               }}
             >
               <Text color="black900" size="title3">
-                일반전형: {+(everyCommon / 25).toFixed(2)} : 1
+                일반전형: {+(everyCommon / 15).toFixed(2)} : 1
               </Text>
               <Text color="black900" size="title3">
                 {`( ${everyCommon}명 : 0명 )`}
