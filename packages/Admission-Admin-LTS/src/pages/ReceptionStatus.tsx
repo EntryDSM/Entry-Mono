@@ -104,7 +104,7 @@ function ReceptionStatus() {
                 일반전형: {+(daejeonCommon / 15).toFixed(2)} : 1
               </Text>
               <Text color="black900" size="title3">
-                {`( ${daejeonCommon}명 : 0명 )`}
+                {`( ${daejeonCommon}명 : 15명 )`}
               </Text>
             </div>
 
@@ -119,7 +119,7 @@ function ReceptionStatus() {
                 마이스터 전형: {+(daejeonMeister / 6).toFixed(2)} : 1
               </Text>
               <Text color="black900" size="title3">
-                {`( ${daejeonMeister}명 : 0명 )`}
+                {`( ${daejeonMeister}명 : 6명 )`}
               </Text>
             </div>
 
@@ -134,7 +134,7 @@ function ReceptionStatus() {
                 사회통합 전형: {+(daejeonSocial / 1).toFixed(2)} : 1
               </Text>
               <Text color="black900" size="title3">
-                {`( ${daejeonSocial}명 : 0명 )`}
+                {`( ${daejeonSocial}명 : 1명 )`}
               </Text>
             </div>
           </_CompetitionRate>
@@ -154,7 +154,7 @@ function ReceptionStatus() {
                 일반전형: {+(everyCommon / 15).toFixed(2)} : 1
               </Text>
               <Text color="black900" size="title3">
-                {`( ${everyCommon}명 : 0명 )`}
+                {`( ${everyCommon}명 : 15명 )`}
               </Text>
             </div>
 
@@ -169,7 +169,7 @@ function ReceptionStatus() {
                 마이스터 전형: {+(everyMeister / 6).toFixed(2)} : 1
               </Text>
               <Text color="black900" size="title3">
-                {`( ${everyMeister}명 : 0명 )`}
+                {`( ${everyMeister}명 : 6명 )`}
               </Text>
             </div>
 
@@ -184,7 +184,7 @@ function ReceptionStatus() {
                 사회통합 전형: {+(everySocial / 1).toFixed(2)} : 1
               </Text>
               <Text color="black900" size="title3">
-                {`( ${everySocial}명 : 0명 )`}
+                {`( ${everySocial}명 : 1명 )`}
               </Text>
             </div>
           </_CompetitionRate>
