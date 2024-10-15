@@ -54,7 +54,7 @@ function ReceptionStatus() {
           총 경쟁률:
         </Text>
         <Text color="black900" size="title1">
-          {(allReception / (allCommon + allMeister + allSocial)).toFixed(2)} : 1
+          {(allReception / 64).toFixed(2)} : 1
         </Text>
       </_StatusCount>
       <div style={{ width: '100%' }}>

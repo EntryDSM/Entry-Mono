@@ -7,7 +7,6 @@ export const UploadAttachFile = () => {
     console.log(params);
     const form = new FormData();
     params.forEach((param) => form.append('attach_file', param));
-    console.log(form.get('attach-file'));
 
     return instance.post(`/attach-file`, form);
   };
