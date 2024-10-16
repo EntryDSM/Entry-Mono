@@ -1,8 +1,19 @@
 import styled from '@emotion/styled';
 import { ReactNode } from 'react';
 import { Icon, theme } from '@entrydsm/design-system';
+import ConfettiComponent from './MyPage/Confetti';
 
-const Modal = ({ children, onClose, close = true }: { children: ReactNode; onClose: () => void; close?: boolean }) => {
+const Modal = ({
+  children,
+  onClose,
+  close = true,
+  isConfetti = false,
+}: {
+  children: ReactNode;
+  onClose: () => void;
+  close?: boolean;
+  isConfetti: boolean;
+}) => {
   return (
     <Background onClick={onClose}>
       <ModalContainer onClick={(e) => e.stopPropagation()}>
@@ -17,6 +28,7 @@ const Modal = ({ children, onClose, close = true }: { children: ReactNode; onClo
         )}
         {children}
       </ModalContainer>
+      {isConfetti && <ConfettiComponent />}
     </Background>
   );
 };
@@ -46,7 +58,7 @@ const _CloseIcon = styled(Icon)`
 `;
 
 const ModalContainer = styled.div`
-  position: relative;
+  position: absolute;
   display: flex;
   flex-direction: column;
   align-items: center;

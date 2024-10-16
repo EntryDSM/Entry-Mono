@@ -34,14 +34,26 @@ export const useModal = ({
     setModalState('');
   }, []);
 
+  const ModalComponent = ({
+    children,
+    isConfetti = false,
+  }: {
+    children: React.ReactNode;
+    isConfetti?: boolean;
+  }) => {
+    return isOpen ? (
+      <Modal
+        close={false}
+        onClose={useBlur ? close : undefined}
+        isConfetti={isConfetti}
+      >
+        {children}
+      </Modal>
+    ) : null;
+  };
+
   return {
-    Modal: isOpen
-      ? ({ children }) => (
-          <Modal close={false} onClose={useBlur ? close : undefined}>
-            {children}
-          </Modal>
-        )
-      : () => null,
+    Modal: ModalComponent,
     open,
     close,
     isOpen,
