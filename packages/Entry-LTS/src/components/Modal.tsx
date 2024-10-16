@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 import { ReactNode } from 'react';
 import { Icon, theme } from '@entrydsm/design-system';
-import ConfettiComponent from './MyPage/Confetti';
+import ConfettiComponent from './Effects/Confetti';
 
 const Modal = ({
   children,
