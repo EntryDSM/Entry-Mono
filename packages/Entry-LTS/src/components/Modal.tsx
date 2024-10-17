@@ -29,7 +29,7 @@ const Modal = ({
         )}
         {children}
       </ModalContainer>
-      {isConfetti && <FireworksApp />}
+      {isConfetti && <ConfettiComponent />}
     </Background>
   );
 };
