@@ -43,8 +43,6 @@ const Home = () => {
     daejeonMeister +
     daejeonSocial;
 
-  console.log(allReception, ((allReception ?? 0) / 160) * 100);
-
   const allCommon = 160;
   const allMeister = 12;
   const allSocial = 2;
