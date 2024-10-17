@@ -73,7 +73,7 @@ function ReceptionStatus() {
             {allReception}명 / 총 {allCommon}명
           </Text>
         </div>
-        <_Application percent={commonPercent * 100}>
+        <_Application percent={((allReception ?? 0) / 160) * 100}>
           <_ApplicationText
             margin={[0, 0, 0, 12]}
             color="realWhite"
