@@ -2,6 +2,7 @@ import styled from '@emotion/styled';
 import { ReactNode } from 'react';
 import { Icon, theme } from '@entrydsm/design-system';
 import ConfettiComponent from './Effects/Confetti';
+import FireworksApp from './Effects/Firework';
 
 const Modal = ({
   children,
@@ -28,7 +29,7 @@ const Modal = ({
         )}
         {children}
       </ModalContainer>
-      {isConfetti && <ConfettiComponent />}
+      {isConfetti && <FireworksApp />}
     </Background>
   );
 };
