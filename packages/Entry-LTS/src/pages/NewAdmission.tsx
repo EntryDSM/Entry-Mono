@@ -32,8 +32,8 @@ const NewAdmissionPage = () => {
     },
     {
       title: '2차 전형(심층면접 등)',
-      schedule: '2024.10.25.(금) 09:00',
-      location: '본교 내 지정장소',
+      schedule: '2024.10.25.(금)',
+      location: '본교 내 지정장소\n세부 운영 시간은 별도 안내',
     },
     {
       title: '최종 합격자 발표',
