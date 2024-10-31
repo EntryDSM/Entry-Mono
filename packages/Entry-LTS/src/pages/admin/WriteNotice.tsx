@@ -261,7 +261,7 @@ const WriteNotice = () => {
               name="file"
               onChange={handleFileUpload}
               ref={inputFileRef}
-              accept="image/*,application/*"
+              accept="image/*,application/*, .hwp"
               multiple
             />
           </_ButtonFooter>
